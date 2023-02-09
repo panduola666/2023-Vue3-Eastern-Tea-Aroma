@@ -1,0 +1,39 @@
+{
+  "name": "vue-project",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "json-server": "json-server db.json -m ./node_modules/json-server-auth",
+    "start": "concurrently \"npm run json-server\" \"npm run dev\""
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.7.8",
+    "axios": "^1.2.3",
+    "concurrently": "^7.6.0",
+    "pinia": "^2.0.28",
+    "swiper": "^8.4.6",
+    "v-calendar": "^3.0.0-alpha.8",
+    "vue": "^3.2.45",
+    "vue-axios": "^3.5.2",
+    "vue-router": "^4.1.6",
+    "vue-sweetalert2": "^5.0.5"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.1.4",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/eslint-config-prettier": "^7.0.0",
+    "autoprefixer": "^10.4.13",
+    "eslint": "^8.22.0",
+    "eslint-plugin-vue": "^9.3.0",
+    "json-server": "^0.17.1",
+    "json-server-auth": "^2.1.0",
+    "postcss": "^8.4.21",
+    "prettier": "^2.7.1",
+    "tailwindcss": "^3.2.4",
+    "vite": "^4.0.0"
+  }
+}
