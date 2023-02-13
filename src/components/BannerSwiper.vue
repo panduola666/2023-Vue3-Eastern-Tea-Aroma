@@ -133,10 +133,9 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 
 import "swiper/css/pagination";
-import "swiper/css/navigation";
 
 // import required modules
-import { Autoplay, Pagination, Navigation } from "swiper";
+import { Autoplay, Pagination } from "swiper";
 
 export default {
   components: {
@@ -145,7 +144,7 @@ export default {
   },
   setup() {
     return {
-      modules: [Autoplay, Pagination, Navigation],
+      modules: [Autoplay, Pagination],
     };
   },
 };
@@ -180,10 +179,7 @@ export default {
   height: 520px;
   object-fit: cover;
 }
-.swiper-button-prev,
-.swiper-button-next {
-  display: none;
-}
+
 .swiper-horizontal .swiper-pagination-bullet,
 .swiper-pagination-bullet-active {
   height: 4px;

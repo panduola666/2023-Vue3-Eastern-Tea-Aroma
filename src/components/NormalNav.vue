@@ -125,7 +125,7 @@
           >
           <!-- 已登入 -->
           <div class="relative group">
-            <router-link :to="`${userHref('user')}/home`">
+            <router-link to="user">
               <img
                 src="../assets/Property 1=account.png"
                 alt="會員專區"
@@ -137,28 +137,28 @@
             >
               <li>
                 <router-link
-                  :to="`${userHref('user')}/home`"
+                  to="user"
                   class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                   >會員專區</router-link
                 >
               </li>
               <li>
                 <router-link
-                  :to="`${userHref('user')}/reserve`"
+                  :to="{name: '會員預約'}"
                   class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                   >課程預約</router-link
                 >
               </li>
               <li>
                 <router-link
-                  :to="`${userHref('user')}/orders`"
+                :to="{name: '會員訂單'}"
                   class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                   >訂單詳情</router-link
                 >
               </li>
               <li>
                 <router-link
-                  :to="`${userHref('admin')}/home`"
+                  to="/admin"
                   class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                   >後台管理</router-link
                 >
@@ -174,7 +174,7 @@
           </div>
         </section>
         <section class="flex mb-[10px] mt-[18px]">
-          <router-link :to="`${userHref('shopCart')}/list`" class="relative"
+          <router-link to="shopCart" class="relative"
             ><img
               src="../assets/Property 1=cart@2x.png"
               alt="購物車"

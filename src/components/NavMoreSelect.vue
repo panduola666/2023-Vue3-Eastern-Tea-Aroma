@@ -191,28 +191,28 @@
         >
           <li>
             <router-link
-              :to="`${toHref('user')}/home`"
+              to="/user"
               class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
               >會員專區
             </router-link>
           </li>
           <li>
             <router-link
-              :to="`${toHref('user')}/reserve`"
+              :to="{name: '會員預約'}"
               class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
               >課程預約</router-link
             >
           </li>
           <li>
             <router-link
-              :to="`${toHref('user')}/orders`"
+              :to="{name: '會員訂單'}"
               class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
               >訂單詳情</router-link
             >
           </li>
           <li>
             <router-link
-              to=""
+              to="/admin"
               class="block p-4 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
               >後台管理</router-link
             >
@@ -239,7 +239,7 @@
 </template>
 <script>
 export default {
-  props: ["open", "toHref"],
+  props: ["open"],
   data() {
     return {
       choose: [],

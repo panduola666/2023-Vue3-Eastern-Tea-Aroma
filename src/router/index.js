@@ -6,93 +6,98 @@ const router = createRouter({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: () => import("../views/indexView.vue"),
-    },
-    {
-      path: "/login",
-      name: "login",
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import("../views/loginView.vue"),
-    },
-    {
-      path: "/user/:id",
+      component: () => import("../views/frontLayout.vue"),
       children: [
         {
-          path: "home",
-          name: "userHome",
-          component: () => import("../views/userView.vue"),
+          path: "",
+          component: () => import("../views/indexView.vue"),
         },
         {
-          path: "orders",
-          name: "orders",
-          component: () => import("../views/ordersView.vue"),
+          path: "login",
+          component: () => import("../views/loginView.vue"),
         },
         {
-          path: "collects",
-          name: "collects",
-          component: () => import("../views/collectsView.vue"),
+          path: "user",
+          children: [
+            {
+              path: "",
+              name: "會員首頁",
+              component: () => import("../views/userView.vue"),
+            },
+            {
+              path: "orders",
+              name: "會員訂單",
+              component: () => import("../views/ordersView.vue"),
+            },
+            {
+              path: "collects",
+              name: "會員收藏",
+              component: () => import("../views/collectsView.vue"),
+            },
+            {
+              path: "reserve",
+              name: "會員預約",
+              component: () => import("../views/reserveView.vue"),
+            },
+          ],
         },
         {
-          path: "reserve",
-          name: "reserve",
-          component: () => import("../views/reserveView.vue"),
+          path: "courses",
+          component: () => import("../views/coursesView.vue"),
+        },
+        {
+          path: "course/:id",
+          component: () => import("../views/courseView.vue"),
+        },
+        {
+          path: "shoppingMall",
+          name: "shoppingMall",
+          component: () => import("../views/shoppingMallView.vue"),
+        },
+        {
+          path: "product/:id",
+          component: () => import("../views/productView.vue"),
+        },
+        {
+          path: "shopCart",
+          children: [
+            {
+              path: "",
+              component: () => import("../views/shopCartView.vue"),
+            },
+            {
+              path: "info",
+              name: "buyerInfo",
+              component: () => import("../views/buyerInfoView.vue"),
+            },
+          ],
+        },
+        {
+          path: "knowledge",
+          component: () => import("../views/knowledgeView.vue"),
         },
       ],
     },
     {
-      path: "/admin/:id",
+      path: "/admin",
+      component: () => import("../views/admin/backstageLayout.vue"),
       children: [
         {
-          path: "home",
-          name: "adminHome",
-          component: () => import("../views/admin-coursesView.vue"),
+          path: "",
+          name: "課程列表",
+          component: () => import("../views/admin/admin-coursesView.vue"),
+        },
+        {
+          path: "discount",
+          name: "折扣碼",
+          component: () => import("../views/admin/admin-discountsView.vue"),
         },
         {
           path: "manage",
-          name: "adminManage",
-          component: () => import("../views/admin-manageView.vue"),
-        }
-      ],
-    },
-    {
-      path: "/courses",
-      name: "courses",
-      component: () => import("../views/coursesView.vue"),
-    },
-    {
-      path: "/course/:id",
-      component: () => import("../views/courseView.vue"),
-    },
-    {
-      path: "/shoppingMall",
-      name: "shoppingMall",
-      component: () => import("../views/shoppingMallView.vue"),
-    },
-    {
-      path: "/product/:id",
-      component: () => import("../views/productView.vue"),
-    },
-    {
-      path: "/shopCart/:id",
-      children: [
-        {
-          path: "list",
-          component: () => import("../views/shopCartView.vue"),
-        },
-        {
-          path: "info",
-          name: "buyerInfo",
-          component: () => import("../views/buyerInfoView.vue"),
+          name: "管理項目",
+          component: () => import("../views/admin/admin-manageView.vue"),
         },
       ],
-    },
-    {
-      path: "/knowledge",
-      name: "knowledge",
-      component: () => import("../views/knowledgeView.vue"),
     },
   ],
 });

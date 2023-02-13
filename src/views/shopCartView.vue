@@ -2,7 +2,7 @@
   <main>
     <div class="wrap">
       <h2 class="text-3xl font-black font-GenRyuMin text-brand-02">購買商品</h2>
-      <total-price class="mb-4"></total-price>
+      <TotalPrice class="mb-4"></TotalPrice>
       <ul class="grid gap-5">
         <li class="grid lg:grid-cols-3 bg-white hover:shadow-lg">
           <div class="w-full lg:h-full h-48 relative">

@@ -43,13 +43,13 @@
           價格：3500 元<span class="text-gray-02 text-base">剩餘: 51</span>
         </p>
         <button type="button" class="btn-primary">加入購物車</button>
-        <!-- <button
+        <button
           type="button"
           class="btn-primary disabled:bg-gray-03 border-gray-03 text-gray-02 hover:text-gray-02 hover:border-gray-03 active:outline-0"
           disabled
         >
           預約已滿 / 已結束
-        </button> -->
+        </button>
       </section>
     </div>
     <p

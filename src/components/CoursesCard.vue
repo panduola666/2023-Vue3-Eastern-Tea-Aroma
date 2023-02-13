@@ -1,14 +1,14 @@
 <template>
   <div
-    class="bg-white bg-opacity-100 text-brand-05 font-semibold lg:flex gap-3 hover:shadow-xl group min-h-max"
+    class="bg-white bg-opacity-100 text-brand-05 font-semibold lg:grid grid-cols-3 gap-3 hover:shadow-xl group min-h-max w-full overflow-hidden"
   >
-    <div class="lg:w-1/3 h-64 overflow-hidden">
+    <div class="w-full lg:h-full h-64 overflow-hidden">
       <slot name="image">圖片</slot>
     </div>
-    <article class="flex flex-col justify-between flex-grow p-3">
+    <article class="flex flex-col justify-between col-span-2 p-3">
       <section class="flex-grow mb-3 flex flex-col justify-around">
         <h1
-          class="md:text-2xl text-xl font-GenRyuMin border-b-2 border-line flex flex-wrap justify-between items-center gap-1"
+          class="md:text-2xl truncate text-xl font-GenRyuMin border-b-2 border-line flex flex-wrap justify-between items-center gap-1"
         >
           <slot name="card-header">
             標題

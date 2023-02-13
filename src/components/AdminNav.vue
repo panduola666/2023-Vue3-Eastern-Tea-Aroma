@@ -4,13 +4,16 @@
       <router-link to="/" class="pb-[10px] pt-[18px]">
         <img src="../assets/logo.png" alt="東方茶香logo" />
       </router-link>
-      <ul class="hidden items-center text-brand-02 gap-7 xl:gap-14 lg:flex">
+      <ul class="hidden items-center text-brand-02 gap-5 xl:gap-10 lg:flex">
         <li class="text-xl leading-[30px] pb-[10px] pt-[18px]">
-          <router-link :to="{ name: 'adminHome' }">課程列表</router-link>
+          <router-link :to="{ name: '課程列表' }">課程列表</router-link>
+        </li>
+        <li class="text-xl leading-[30px] pb-[10px] pt-[18px]">
+          <router-link :to="{ name: '折扣碼' }">折扣碼</router-link>
         </li>
         <li class="group relative">
           <router-link
-            :to="{name : 'adminManage'}"
+            to="/admin/manage?current=商品管理"
             class="flex transition-all group-hover:text-brand-01 text-xl leading-[30px] pb-[10px] pt-[18px]"
           >
             管理項目
@@ -25,28 +28,28 @@
           >
             <li>
               <router-link
-                to=""
+                to="/admin/manage?current=商品管理"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 >商品管理</router-link
               >
             </li>
             <li>
               <router-link
-                to=""
+                to="/admin/manage?current=訂單管理"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 >訂單管理</router-link
               >
             </li>
             <li>
               <router-link
-                to=""
+                to="/admin/manage?current=文章管理"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 >文章管理</router-link
               >
             </li>
             <li>
               <router-link
-                to=""
+                to="/admin/manage?current=活動管理"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 >活動管理</router-link
               >
@@ -87,33 +90,38 @@
       </ul>
       <div class="flex items-center">
         <div class="relative group mr-8 mb-[10px] mt-[18px]">
-          <router-link :to="{ name: 'userHome' }">
-            <img
-              src="../assets/Property 1=account.png"
-              alt="會員專區"
-              class="object-contain h-9 max-w-[30px]"
-            />
-          </router-link>
+          <img
+            src="../assets/Property 1=account.png"
+            alt="會員"
+            class="object-contain h-9 max-w-[30px]"
+          />
           <ul
             class="absolute bg-white min-w-[216px] button-0 group-hover:block hidden text-gray-01 z-10 shadow-lg"
           >
             <li>
               <router-link
-                :to="{ name: 'userHome' }"
+                to="/user"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 >會員專區</router-link
               >
             </li>
             <li>
               <router-link
-                :to="{ name: 'adminHome' }"
+                to="/admin"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
-                >課程管理</router-link
+                >課程列表</router-link
               >
             </li>
             <li>
               <router-link
-                to=""
+                to="/admin/discount"
+                class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
+                >折扣碼</router-link
+              >
+            </li>
+            <li>
+              <router-link
+                to="/admin/manage?current=商品管理"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 >管理項目</router-link
               >

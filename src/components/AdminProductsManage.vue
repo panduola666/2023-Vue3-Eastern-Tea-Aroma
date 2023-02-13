@@ -1,8 +1,13 @@
 <template>
   <section>
     <h1></h1>
-    <div class="flex justify-between items-center">
-      <select name="" id="" class="lg:min-w-[300px] py-2 shadow" aria-label="請選擇商品分類">
+    <div class="flex gap-10 justify-between items-start md:items-center">
+      <select
+        name=""
+        id=""
+        class="flex-grow py-2 shadow max-w-[400px]"
+        aria-label="請選擇商品分類"
+      >
         <option value="" selected>全部</option>
         <option value="茶葉">茶葉</option>
         <option value="茶壺">茶壺</option>
@@ -10,18 +15,19 @@
         <option value="茶具組">茶具組</option>
         <option value="品茶小物">品茶小物</option>
       </select>
-      <PostProductsModal>
-        <template #btn-content>
-          <button type="button" class="btn-primary lg:px-10">新增商品</button>
-        </template>
-      </PostProductsModal>
+      <div class="flex gap-3 flex-col-reverse md:flex-row">
+        <button type="button" class="btn-outline py-2" disabled>
+          全部套用
+        </button>
+        <PostProductsModal>
+          <template #btn-content>
+            <button type="button" class="btn-primary lg:px-10">新增商品</button>
+          </template>
+        </PostProductsModal>
+      </div>
     </div>
-    <DiscountInfo>
-      <template #scale>200 元</template>
-      <template #code>dqw213</template>
-      <template #endDate>2013-01-23 23:59:59</template>
-    </DiscountInfo>
-    <ul class="grid gap-3">
+
+    <ul class="grid gap-3 mt-3">
       <li is="vue:CoursesCard">
         <template #image>
           <img
@@ -31,7 +37,16 @@
           />
         </template>
         <template #card-header>
-          <h1>阿里山烏龍茶</h1>
+          <section
+            class="w-full flex flex-col lg:flex-row lg:justify-between gap-3"
+          >
+            <h1 class="lg:w-4/5 overflow-hidden truncate">
+              阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶
+            </h1>
+            <DiscountToggle
+              class="text-sm self-end lg:self-center mb-1 lg:mb-0"
+            ></DiscountToggle>
+          </section>
         </template>
         <template #card-body>
           <p>分類：茶葉</p>
@@ -54,14 +69,14 @@
 </template>
 <script>
 import PostProductsModal from "./PostProductsModal.vue";
-import DiscountInfo from "../components/DiscountInfo.vue";
 import CoursesCard from "../components/CoursesCard.vue";
+import DiscountToggle from "./DiscountToggle.vue";
 
 export default {
   components: {
     CoursesCard,
-    DiscountInfo,
     PostProductsModal,
+    DiscountToggle,
   },
 };
 </script>

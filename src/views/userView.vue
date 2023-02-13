@@ -56,7 +56,7 @@
       >
         <li>
           <router-link
-            :to="{ name: 'reserve' }"
+            to=""
             class="block p-4 hover:bg-brand-03 hover:bg-opacity-20 cursor-pointer text-brand-02 text-xl lg:text-3xl"
           >
             課程預約
@@ -64,7 +64,7 @@
         </li>
         <li>
           <router-link
-            :to="{ name: 'orders' }"
+            to=""
             class="block p-4 hover:bg-brand-03 hover:bg-opacity-20 cursor-pointer text-brand-02 text-xl lg:text-3xl"
           >
             訂單詳情
@@ -72,7 +72,7 @@
         </li>
         <li>
           <router-link
-            :to="{ name: 'collects' }"
+            to=""
             class="block p-4 hover:bg-brand-03 hover:bg-opacity-20 cursor-pointer text-brand-02 text-xl lg:text-3xl"
           >
             收藏項目
@@ -178,7 +178,7 @@
 <script>
 export default {
   mounted() {
-    console.log(this.$route.params.id);
+    // console.log(this.$route.params.id);
   },
 };
 </script>

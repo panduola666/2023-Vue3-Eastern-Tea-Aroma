@@ -1,5 +1,4 @@
 <!-- eslint-disable prettier/prettier -->
-<!--  lg:w-[70%] w-[90%] -->
 <template>
   <div class="lg:mb-[120px]">
     <!-- BANNER -->
