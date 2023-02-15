@@ -16,12 +16,12 @@
               name=""
               id=""
               placeholder="請輸入折扣碼..."
-              class="border border-gray-01 p-2"
+              class="border border-gray-01 p-2 shadow-lg"
             />
           </div>
           <div class="flex flex-col">
             <label for="" class="">* 折扣方式</label>
-            <select name="" id="" class="border border-gray-01 p-2">
+            <select name="" id="" class="border border-gray-01 p-2 shadow-lg">
               <option value="" selected disabled hidden>請選擇折扣方式</option>
               <option value="百分比">百分比</option>
               <option value="實際金額">實際金額</option>
@@ -29,15 +29,35 @@
           </div>
           <div class="grid grid-cols-2 gap-6">
             <div class="flex flex-col">
-              <label for="" class="">* 有效期間</label>
-              <select name="" id="" class="border border-gray-01 p-2">
-                <option value="" selected disabled hidden>
-                  請選擇折扣有效期間
-                </option>
-                <option value="3">3 天</option>
-                <option value="7">7 天</option>
-                <option value="14">14 天</option>
-              </select>
+              <label for="" class="">* 截止日期</label>
+
+              <v-date-picker class="inline-block h-full" v-model="date">
+                <template v-slot="{ inputValue, togglePopover }">
+                  <div
+                    class="flex items-center border border-gray-01 shadow-lg"
+                  >
+                    <button
+                      class="p-2 bg-blue-100 border border-gray hover:bg-blue-200 text-blue-600 focus:bg-blue-500 focus:text-white focus:border-blue-500 focus:outline-none"
+                      @click="togglePopover()"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        class="w-4 h-4 fill-current"
+                      >
+                        <path
+                          d="M1 4c0-1.1.9-2 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4zm2 2v12h14V6H3zm2-6h2v2H5V0zm8 0h2v2h-2V0zM5 9h2v2H5V9zm0 4h2v2H5v-2zm4-4h2v2H9V9zm0 4h2v2H9v-2zm4-4h2v2h-2V9zm0 4h2v2h-2v-2z"
+                        ></path>
+                      </svg>
+                    </button>
+                    <input
+                      :value="inputValue"
+                      class="bg-white text-gray-700 border w-full py-1 px-2 appearance-none focus:outline-none"
+                      readonly
+                    />
+                  </div>
+                </template>
+              </v-date-picker>
             </div>
             <div class="flex flex-col">
               <label for="">* 折扣額度</label>
@@ -46,10 +66,11 @@
                 name=""
                 id=""
                 placeholder="請輸入金額..."
-                class="border border-gray-01 p-2"
+                class="border border-gray-01 p-2 shadow-lg"
               />
             </div>
-            <div class="flex flex-col">
+
+            <!-- <div class="flex flex-col">
               <label for="">* 折扣額度</label>
               <select name="" id="" class="border border-gray-01 p-2">
                 <option value="" selected disabled hidden>
@@ -61,7 +82,36 @@
                 <option value="8 折">8 折</option>
                 <option value="75 折">75 折</option>
               </select>
-            </div>
+            </div> -->
+          </div>
+          <div class="bg-brand-03 bg-opacity-30 py-10 px-3 m-10">
+            <table class="w-full text-center">
+              <caption class="text-xl">
+                優惠資訊
+              </caption>
+              <tr class="border-b border-b-gray-01">
+                <th class="p-2">折扣碼</th>
+                <th>折扣方式</th>
+                <th>截止日期</th>
+                <th>折扣額度</th>
+              </tr>
+              <tr class="text-2xl">
+                <td class="p-2">adasd</td>
+                <td>百分比</td>
+                <td :class="{ 'text-red-500': date < new Date().getTime() }">
+                  {{
+                    new Date(date).toLocaleDateString().replace(/\//g, " - ")
+                  }}
+                </td>
+                <td>92 折</td>
+              </tr>
+            </table>
+            <p
+              v-if="date < new Date().getTime()"
+              class="text-red-500 mt-5 text-xl font-bold text-end"
+            >
+              * 截止日期不可小於今日
+            </p>
           </div>
         </div>
       </template>
@@ -71,6 +121,18 @@
 <script>
 import DialogModal from "./DialogModal.vue";
 export default {
+  data() {
+    return {
+      date: new Date(),
+    };
+  },
+  computed: {
+    endDate() {
+      const dateArr = new Date(this.date).toLocaleDateString().split("/");
+      const date = new Date(...dateArr);
+      return date;
+    },
+  },
   components: {
     DialogModal,
   },

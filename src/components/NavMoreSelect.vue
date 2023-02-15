@@ -238,6 +238,7 @@
   </div>
 </template>
 <script>
+
 export default {
   props: ["open"],
   data() {
@@ -257,6 +258,7 @@ export default {
       this.choose.splice(index, 1);
     },
   },
+
 };
 </script>
 <style scoped>

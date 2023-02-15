@@ -8,7 +8,7 @@
       </router-link>
       <ul class="hidden items-center text-brand-02 gap-7 xl:gap-14 lg:flex">
         <li class="text-xl leading-[30px] pb-[10px] pt-[18px]">
-          <router-link to="/knowledge">茶學小知識</router-link>
+          <router-link to="/knowledge">茶學資訊</router-link>
         </li>
         <li class="group relative">
           <router-link
@@ -120,11 +120,12 @@
           <!-- 未登入 -->
           <router-link
             to="/login"
-            class="btn-primary xl:text-xl leading-6 font-medium text-base"
+            class="btn-primary xl:text-xl leading-6 font-medium text-base w-full"
+            v-if="!isLogin"
             >登入/註冊</router-link
           >
-          <!-- 已登入 -->
-          <div class="relative group">
+          <div class="relative group" v-else>
+            <!-- 已登入 -->
             <router-link to="user">
               <img
                 src="../assets/Property 1=account.png"
@@ -144,14 +145,14 @@
               </li>
               <li>
                 <router-link
-                  :to="{name: '會員預約'}"
+                  :to="{ name: '會員預約' }"
                   class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                   >課程預約</router-link
                 >
               </li>
               <li>
                 <router-link
-                :to="{name: '會員訂單'}"
+                  :to="{ name: '會員訂單' }"
                   class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                   >訂單詳情</router-link
                 >
@@ -166,9 +167,11 @@
               <li>
                 <router-link
                   to="/"
-                  class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20 text-gray-02"
-                  >登出</router-link
+                  class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20 text-gray-02 w-full"
+                  @click="signOut()"
                 >
+                  登出
+                </router-link>
               </li>
             </ul>
           </div>
@@ -220,20 +223,25 @@
 </template>
 <script>
 import navMoreSelect from "./NavMoreSelect.vue";
+import { mapState, mapActions } from "pinia";
+import { userStore } from "../stores/index.js";
+
 export default {
   data() {
     return {
       openMore: false,
-      id: 2,
     };
   },
+  computed: {
+    ...mapState(userStore, ["isLogin"]),
+  },
   methods: {
-    userHref(href) {
-      return `/${href}/${this.id}`;
-    },
+    ...mapActions(userStore, ["signOut"]),
   },
   components: {
     navMoreSelect,
+  },
+  mounted() {
   },
 };
 </script>
