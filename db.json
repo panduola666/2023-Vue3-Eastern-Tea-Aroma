@@ -2,7 +2,7 @@
   "users": [
     {
       "email": "admin@gmail.com",
-      "password": "$2a$10$hGNoc2Ne2T6v/qHu1obf7OkSk6ulT0sPmqKvarjIbVMC/3vX5ALp6",
+      "password": "$2a$10$UiqEPtBH9XtkaCxeonfL3.B6oxygD7U28J3lCKh31sJfGf/If8oPm",
       "name": "管理員",
       "avatarUrl": "",
       "tel": "",
@@ -17,10 +17,10 @@
     },
     {
       "email": "user@gmail.com",
-      "password": "$2a$10$W9lzCrxSvKXfE3fLEGa3AuGz6r/dR85l2w237w.PSCfNHg/otqMFG",
+      "password": "$2a$10$1NktAqc61akAxpYRtwwapuKt8xpVsvtgAE3A3uRPOj71WdwdPWPx.",
       "name": "客戶",
       "avatarUrl": "https://storage.googleapis.com/vue-course-api.appspot.com/panduola666/1676484286171.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=k7v6tv8avkxZT42KwGx6Y8slacnK939FpotsmuQ30Z%2BadaVv2WM7NaNnJCpvCIYcmy92v7x%2FhQMbD4yqIKr%2BZGTQca5F0L0iJgeVd38akOo7D0FHRLkQPnNCIPS3%2BHX8kT4YBb%2FZZN3Jj9nqpIi1UjFXTx9HJ3mptq7d%2F14qYSIb7GgGOyKGs9XAN79FKnUcQ7n47NhJ3bst%2FAdygxc7MjDpK%2BHJOj3Q%2BimjQZPwatg%2BPEzzfVJsrPRUHmHkktrxdxiDsDnQnZfKwefgEqZ7U%2FbvCk1kP3RaYiYmC9SXbsGzvi7ahNFXuFFwXH0QgRrfsSKrRmrXe%2BDWCAh0Sty%2FBg%3D%3D",
-      "tel": "",
+      "tel": "0911111111",
       "isAdmin": false,
       "amountSpent": 0,
       "level": 1,
@@ -74,7 +74,77 @@
       2
     ]
   },
-  "courses": [],
+  "courses": [
+    {
+      "id": 1,
+      "title": "茶葉的風味鑑賞學",
+      "coverUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8201.png?raw=true",
+      "imagesUrl": [],
+      "content": [
+        "認識主流茶葉的特性與風味",
+        "學習5種泡茶法，並實作其中2種，體驗茶葉在不同溫度、沖泡時間以及技巧下的變化",
+        "學習基本茶桌禮儀，讓你可以在生活中展現儀態加分",
+        "建立自己的品位，足夠的知識亦可在人際交流上擁有更多話題"
+      ],
+      "userId": 1,
+      "scores": [
+        {
+          "userId": 3,
+          "score": 3
+        },
+        {
+          "userId": 2,
+          "score": 4
+        }
+      ],
+      "price": 3000,
+      "dates": [
+        {
+          "start": 1675056600000,
+          "end": 1675063800000,
+          "total": 30,
+          "savedUsersId": [
+            1,
+            2
+          ],
+          "reservedUsersId": [
+            2
+          ]
+        },
+        {
+          "start": 1675056600000,
+          "end": 1675063800000,
+          "total": 10,
+          "savedUsersId": [],
+          "reservedUsersId": []
+        }
+      ]
+    },
+    {
+      "title": "茶葉的風味鑑賞學test",
+      "coverUrl": "https://storage.googleapis.com/vue-course-api.appspot.com/panduola666/1676484286171.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=k7v6tv8avkxZT42KwGx6Y8slacnK939FpotsmuQ30Z%2BadaVv2WM7NaNnJCpvCIYcmy92v7x%2FhQMbD4yqIKr%2BZGTQca5F0L0iJgeVd38akOo7D0FHRLkQPnNCIPS3%2BHX8kT4YBb%2FZZN3Jj9nqpIi1UjFXTx9HJ3mptq7d%2F14qYSIb7GgGOyKGs9XAN79FKnUcQ7n47NhJ3bst%2FAdygxc7MjDpK%2BHJOj3Q%2BimjQZPwatg%2BPEzzfVJsrPRUHmHkktrxdxiDsDnQnZfKwefgEqZ7U%2FbvCk1kP3RaYiYmC9SXbsGzvi7ahNFXuFFwXH0QgRrfsSKrRmrXe%2BDWCAh0Sty%2FBg%3D%3D",
+      "imagesUrl": [],
+      "content": [
+        "認識主流茶葉的特性與風味",
+        "學習5種泡茶法，並實作其中2種，體驗茶葉在不同溫度、沖泡時間以及技巧下的變化",
+        "學習基本茶桌禮儀，讓你可以在生活中展現儀態加分",
+        "建立自己的品位，足夠的知識亦可在人際交流上擁有更多話題"
+      ],
+      "userId": 1,
+      "scores": [],
+      "price": 1500,
+      "dates": [
+        {
+          "start": 1675056600000,
+          "end": 1675063800000,
+          "total": 10,
+          "savedUsersId": [],
+          "reservedUsersId": []
+        }
+      ],
+      "id": 2
+    }
+  ],
   "products": [
     {
       "id": 1,

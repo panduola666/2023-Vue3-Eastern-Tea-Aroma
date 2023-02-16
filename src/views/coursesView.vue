@@ -12,66 +12,25 @@
           id="keyWord"
           placeholder="請輸入關鍵字..."
           class="border border-brand-01 px-3 py-1 md:w-2/3 w-full"
+          v-model="search.input"
         />
       </p>
       <div>
         <p>上課時間 /</p>
         <div class="flex flex-wrap gap-3">
-          <label for="MON" class="cursor-pointer"
+          <label
+            :for="item"
+            class="cursor-pointer"
+            v-for="(item, index) in ['一', '二', '三', '四', '五', '六', '日']"
+            :key="item + index"
             ><input
               type="checkbox"
-              name="day"
-              id="MON"
+              :name="item"
+              :id="item"
               class="scale-125 mr-2"
-            />星期一</label
-          >
-          <label for="TUE" class="cursor-pointer"
-            ><input
-              type="checkbox"
-              name="day"
-              id="TUE"
-              class="scale-125 mr-2"
-            />星期二</label
-          >
-          <label for="WED" class="cursor-pointer"
-            ><input
-              type="checkbox"
-              name="day"
-              id="WED"
-              class="scale-125 mr-2"
-            />星期三</label
-          >
-          <label for="THU" class="cursor-pointer"
-            ><input
-              type="checkbox"
-              name="day"
-              id="THU"
-              class="scale-125 mr-2"
-            />星期四</label
-          >
-          <label for="FRI" class="cursor-pointer"
-            ><input
-              type="checkbox"
-              name="day"
-              id="FRI"
-              class="scale-125 mr-2"
-            />星期五</label
-          >
-          <label for="SAT" class="cursor-pointer"
-            ><input
-              type="checkbox"
-              name="day"
-              id="SAT"
-              class="scale-125 mr-2"
-            />星期六</label
-          >
-          <label for="SUN" class="cursor-pointer"
-            ><input
-              type="checkbox"
-              name="day"
-              id="SUN"
-              class="scale-125 mr-2"
-            />星期日</label
+              :value="item"
+              v-model="search.weeks"
+            />星期{{ item }}</label
           >
         </div>
       </div>
@@ -84,6 +43,8 @@
               name="time"
               id="afternoon"
               class="scale-125 mr-2"
+              v-model="search.moment"
+              value="AM"
             />下午</label
           >
           <label for="evening" class="cursor-pointer"
@@ -92,14 +53,18 @@
               name="time"
               id="evening"
               class="scale-125 mr-2"
+              value="PM"
+              v-model="search.moment"
             />晚上</label
           >
         </div>
       </div>
+      {{ search }}
       <div class="flex justify-end gap-5 md:flex-row flex-col md:mt-0 mt-5">
         <button
           type="button"
           class="text-gray-02 py-2 px-4 hover:text-gray-01 duration-500"
+          @click="searchReset()"
         >
           清空列表
         </button>
@@ -108,43 +73,117 @@
         </button>
       </div>
     </form>
+    <!-- {{ courses }} -->
     <ul class="flex flex-col gap-5 min-h-[5rem]">
-      <li class="text-2xl text-gray-01 md:tracking-widest text-center">
+      <li
+        class="text-2xl text-gray-01 md:tracking-widest text-center"
+        v-if="!courses.length"
+      >
         該時段暫無課程
       </li>
-      <li is="vue:CoursesCard">
-        <template #image>
-          <img
-            src="../assets/課堂04.png"
-            alt=""
-            class="h-full w-full object-cover"
-          />
-        </template>
-        <template #card-header>
-          茶葉的風味鑑賞學
-          <span class="text-brand-04 text-base self-center font-sans"
-            >2022-03-10</span
+      <template v-else>
+        <template v-for="course in courses" :key="course.id">
+          <template
+            v-for="(date, index) in course.dates"
+            :key="`第${index + 1}堂-${date}`"
           >
+            <li is="vue:CoursesCard">
+              <template #image>
+                <img
+                  :src="course.coverUrl"
+                  :alt="course.title"
+                  class="h-full w-full object-cover"
+                />
+              </template>
+              <template #card-header>
+                {{ course.title }}
+                <span class="text-brand-04 text-base self-center font-sans">{{
+                  $date(new Date(date.start).toLocaleDateString()).format(
+                    "YYYY-MM-DD"
+                  )
+                }}</span>
+              </template>
+              <template #card-body>
+                <p>
+                  時間：<span
+                    >星期{{ weekText(date.start) }} /
+                    {{ $dayjs(new Date(date.start)).hour() }}:{{
+                      $dayjs(new Date(date.start)).minute()
+                    }}~{{ $dayjs(new Date(date.end)).hour() }}:{{
+                      $dayjs(new Date(date.end)).minute()
+                    }}</span
+                  >
+                </p>
+                <h2>講師：{{ course.user.name }} 講師</h2>
+                <p>
+                  評分：{{
+                    conversionScore(
+                      course.scores.reduce(
+                        (score, item) => score + item.score,
+                        0
+                      ) / course.scores.length
+                    )
+                  }}
+                </p>
+                <p class="text-end text-lg">$ {{ course.price }}</p>
+              </template>
+              <template #card-footer>
+                <button type="button" class="btn-outline py-2 px-3">
+                  收藏課程
+                </button>
+                <router-link
+                  :to="`/course/${course.id}`"
+                  class="btn-primary py-2 px-3"
+                  >課程詳情</router-link
+                >
+              </template>
+            </li>
+          </template>
         </template>
-        <template #card-body>
-          <p class=" ">時間：<span>星期三 / 15:00~16:30</span></p>
-          <h2 class="">講師：李小花 講師</h2>
-          <p class="">評分：4.2 / 5.0</p>
-          <p class="text-end text-lg">$ 3500</p>
-        </template>
-        <template #card-footer>
-          <button type="button" class="btn-outline py-2 px-3">收藏課程</button>
-          <router-link to="" class="btn-primary py-2 px-3"
-            >課程詳情</router-link
-          >
-        </template>
-      </li>
+      </template>
     </ul>
   </main>
 </template>
 <script>
 import CoursesCard from "../components/CoursesCard.vue";
+import { coursesStore } from "../stores/index.js";
+import { mapState, mapActions } from "pinia";
+import { useDate } from "vue3-dayjs-plugin/useDate";
 export default {
+  data() {
+    return {
+      date: useDate(),
+      search: {
+        weeks: [],
+        moment: "",
+        input: "",
+      },
+    };
+  },
+  computed: {
+    ...mapState(coursesStore, ["courses"]),
+  },
+  methods: {
+    ...mapActions(coursesStore, ["getCoursesData"]),
+    weekText(timer) {
+      const text = ["日", "一", "二", "三", "四", "五", "六"];
+      return text[new Date(timer).getDay()];
+    },
+    conversionScore(score) {
+      return score ? `${Math.round(score * 10) / 10} / 5.0` : "尚未評分";
+    },
+    searchReset() {
+      console.log(this.$options?.data().search);
+      this.search = {
+        weeks: [],
+        moment: "",
+        input: "",
+      };
+    },
+  },
+  mounted() {
+    this.getCoursesData();
+  },
   components: {
     CoursesCard,
   },

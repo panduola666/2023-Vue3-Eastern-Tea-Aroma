@@ -16,6 +16,9 @@ import VCalendar from "v-calendar";
 import axios from "axios";
 import VueAxios from "vue-axios";
 
+// day.js
+import VueDayjs from 'vue3-dayjs-plugin'
+
 import App from "./App.vue";
 import router from "./router";
 
@@ -28,6 +31,7 @@ const app = createApp(App);
 app.use(VueAxios, axios);
 app.use(VueSweetalert2, options);
 app.use(VCalendar, {});
+app.use(VueDayjs)
 
 app.use(createPinia());
 app.use(router);

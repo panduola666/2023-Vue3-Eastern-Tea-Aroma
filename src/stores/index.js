@@ -1,2 +1,3 @@
 import userStore from "./userStore";
-export { userStore };
+import coursesStore from "./coursesStore";
+export { userStore, coursesStore };

@@ -12,6 +12,7 @@ export default defineStore("userDataStore", {
   }),
   actions: {
     getUserData() {
+      // 必登入情況
       axios.defaults.headers.common[
         "Authorization"
       ] = `Bearer ${sessionStorage.getItem("accessToken")}`;
@@ -27,14 +28,7 @@ export default defineStore("userDataStore", {
           console.log(`checkLogin 登入超時`);
           console.log(err.response);
           if (err.response.data === "jwt expired") {
-            Swal.fire({
-              icon: "error",
-              title: "登入超時",
-            }).then(() => {
-              sessionStorage.clear();
-              this.isLogin = false;
-              router.push("/login");
-            });
+            this.overLogin();
           }
         });
     },
@@ -94,11 +88,25 @@ export default defineStore("userDataStore", {
       }
     },
     checkLogin() {
-      if (!sessionStorage.getItem("accessToken")) {
+      if (
+        sessionStorage.getItem("accessToken") &&
+        sessionStorage.getItem("userId")
+      ) {
+        this.isLogin = true;
+        this.getUserData();
+      } else {
         this.isLogin = false;
-        return;
       }
-      this.getUserData();
+    },
+    overLogin() {
+      Swal.fire({
+        icon: "error",
+        title: "登入超時",
+      }).then(() => {
+        sessionStorage.clear();
+        this.isLogin = false;
+        router.push("/login");
+      });
     },
     register(userInput) {
       const { email, password, name: userName } = userInput;

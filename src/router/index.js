@@ -26,17 +26,17 @@ const router = createRouter({
             },
             {
               path: "orders",
-              name: "會員訂單",
+              name: "訂單詳情",
               component: () => import("../views/ordersView.vue"),
             },
             {
               path: "collects",
-              name: "會員收藏",
+              name: "收藏項目",
               component: () => import("../views/collectsView.vue"),
             },
             {
               path: "reserve",
-              name: "會員預約",
+              name: "課程預約",
               component: () => import("../views/reserveView.vue"),
             },
           ],
