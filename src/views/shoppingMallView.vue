@@ -2,7 +2,7 @@
   <main class="wrap grid lg:grid-cols-5 gap-4">
     {{ current }}
     <ol
-      class="flex flex-wrap lg:flex-col bg-brand-06 text-brand-05 font-black font-GenRyuMin text-xl h-max"
+      class="flex flex-wrap lg:flex-col bg-brand-06 text-brand-05 font-black font-self text-xl h-max"
     >
       <li class="relative">
         <input
@@ -45,7 +45,7 @@
     </ol>
     <div class="lg:col-span-4">
       <section class="flex justify-between">
-        <h2 class="text-2xl text-brand-05 font-black font-GenRyuMin">
+        <h2 class="text-2xl text-brand-05 font-black font-self">
           茶藝用品 / {{ chooseType }}
         </h2>
         <p class="text-lg text-gray-02">第 1 頁</p>
@@ -59,7 +59,7 @@
               class="w-full h-full object-cover group-hover:scale-110 duration-1000"
             />
             <h1
-              class="truncate bg-[rgba(0,52,22,.6)] absolute bottom-0 right-0 left-0 py-4 px-5 text-white text-xl font-GenRyuMin font-black"
+              class="truncate bg-[rgba(0,52,22,.6)] absolute bottom-0 right-0 left-0 py-4 px-5 text-white text-xl font-self font-black"
             >
               小金桔普洱茶
             </h1>
@@ -73,7 +73,7 @@
               class="w-full h-full object-cover group-hover:scale-110 duration-1000"
             />
             <h1
-              class="truncate bg-[rgba(0,52,22,.6)] absolute bottom-0 right-0 left-0 py-4 px-5 text-white text-xl font-GenRyuMin font-black"
+              class="truncate bg-[rgba(0,52,22,.6)] absolute bottom-0 right-0 left-0 py-4 px-5 text-white text-xl font-self font-black"
             >
               小金桔普洱茶
             </h1>
@@ -87,7 +87,7 @@
               class="w-full h-full object-cover group-hover:scale-110 duration-1000"
             />
             <h1
-              class="truncate bg-[rgba(0,52,22,.6)] absolute bottom-0 right-0 left-0 py-4 px-5 text-white text-xl font-GenRyuMin font-black"
+              class="truncate bg-[rgba(0,52,22,.6)] absolute bottom-0 right-0 left-0 py-4 px-5 text-white text-xl font-self font-black"
             >
               小金桔普洱茶
             </h1>
@@ -101,7 +101,7 @@
               class="w-full h-full object-cover group-hover:scale-110 duration-1000"
             />
             <h1
-              class="truncate bg-[rgba(0,52,22,.6)] absolute bottom-0 right-0 left-0 py-4 px-5 text-white text-xl font-GenRyuMin font-black"
+              class="truncate bg-[rgba(0,52,22,.6)] absolute bottom-0 right-0 left-0 py-4 px-5 text-white text-xl font-self font-black"
             >
               小金桔普洱茶
             </h1>

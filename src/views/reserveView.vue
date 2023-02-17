@@ -1,6 +1,6 @@
 <template>
   <main class="wrap">
-    <h1 class="text-3xl font-black font-GenRyuMin text-brand-02">課程預約</h1>
+    <h1 class="text-3xl font-black font-self text-brand-02">課程預約</h1>
     <ol class="grid gap-3 my-5">
       <li is="vue:CoursesCard">
         <template #image>
@@ -51,7 +51,12 @@
         </template>
         <template #card-footer>
           <p class="text-gray-03">課程前三天內取消需電話告知</p>
-          <button type="button" class="btn-outline py-2 px-3 disabled:bg-gray-03 disabled:border-gray-03 disabled:text-white" >取消預約</button>
+          <button
+            type="button"
+            class="btn-outline py-2 px-3 disabled:bg-gray-03 disabled:border-gray-03 disabled:text-white"
+          >
+            取消預約
+          </button>
           <router-link to="" class="btn-primary py-2 px-3"
             >課程詳情</router-link
           >
@@ -91,3 +96,8 @@ export default {
   },
 };
 </script>
+<style>
+.vc-weekday {
+  color: #727272;
+}
+</style>

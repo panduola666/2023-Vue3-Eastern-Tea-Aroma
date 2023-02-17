@@ -72,9 +72,7 @@
     </div>
     <!-- 會員資訊 -->
     <div class="text-xl my-10">
-      <h1
-        class="lg:text-3xl text-2xl text-brand-02 font-GenRyuMin lg:mb-6 mb-3"
-      >
+      <h1 class="lg:text-3xl text-2xl text-brand-02 font-self lg:mb-6 mb-3">
         會員資訊
       </h1>
       <form
@@ -86,7 +84,7 @@
             <span class="text-gray-01">{{ user.email }}</span>
             <span
               id="userLevel"
-              class="text-base text-end relative group cursor-default text-brand-01 font-medium font-GenRyuMin"
+              class="text-base text-end relative group cursor-default text-brand-01 font-medium font-self"
             >
               茶友
               <span
@@ -130,9 +128,7 @@
     </div>
     <!-- 修改密碼 -->
     <div class="text-xl my-10">
-      <h1
-        class="lg:text-3xl text-2xl text-brand-02 font-GenRyuMin lg:mb-6 mb-3"
-      >
+      <h1 class="lg:text-3xl text-2xl text-brand-02 font-self lg:mb-6 mb-3">
         修改密碼
       </h1>
       <form

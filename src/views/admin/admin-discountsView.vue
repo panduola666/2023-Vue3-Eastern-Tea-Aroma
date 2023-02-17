@@ -1,6 +1,6 @@
 <template>
   <div class="wrap min-h-[50vh]">
-    <h1 class="text-3xl font-black font-GenRyuMin text-brand-02">折扣專區</h1>
+    <h1 class="text-3xl font-black font-self text-brand-02">折扣專區</h1>
     <div class="text-end">
       <PostDiscountModal>
         <template #btn-content>
@@ -20,7 +20,7 @@
     </section>
     <table class="w-full my-5 divide-y divide-gray-01 border border-gray-01">
       <thead>
-        <tr class="bg-brand-01 bg-opacity-30">
+        <tr class="bg-brand-01 bg-opacity-50 text-xl">
           <th class="p-2">商品系列</th>
           <th>原價</th>
           <th>優惠價</th>

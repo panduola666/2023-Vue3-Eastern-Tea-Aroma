@@ -5,7 +5,7 @@
         <slot name="btn-content">按鈕</slot>
       </template>
       <template #modal-header>
-        <h3 class="text-xl font-GenRyuMin">新增折扣碼</h3>
+        <h3 class="text-xl font-self">新增折扣碼</h3>
       </template>
       <template #modal-body>
         <div class="flex flex-col gap-4">

@@ -28,7 +28,7 @@
 
     <ul class="grid md:grid-cols-3 gap-3 mt-5">
       <li
-        class="bg-white text-xl text-brand-05 font-GenRyuMin p-3 hover:shadow-lg"
+        class="bg-white text-xl text-brand-05 font-self p-3 hover:shadow-lg"
       >
         <h2 class="flex justify-between items-end">
           訂單編號: 2

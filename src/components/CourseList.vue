@@ -2,7 +2,7 @@
   <div>
     <section class="flex justify-between mb-2">
       <h2
-        class="text-brand-02 text-[32px] leading-[38px] font-black font-GenRyuMin self-center"
+        class="text-brand-02 text-[32px] leading-[38px] font-black font-self self-center"
       >
         茶藝課堂
       </h2>
@@ -38,7 +38,7 @@
             class="h-full w-full object-cover group-hover:scale-125 transition-all duration-[1.5s]"
           />
           <h1
-            class="absolute bg-[#003416] bg-opacity-60 text-white text-2xl leading-7 font-GenRyuMin py-4 px-2 truncate bottom-0 left-0 right-0 z-10"
+            class="absolute bg-[#003416] bg-opacity-60 text-white text-2xl leading-7 font-self py-4 px-2 truncate bottom-0 left-0 right-0 z-10"
           >
             茶的風味鑑賞學
           </h1>
@@ -56,7 +56,7 @@
             class="h-full w-full object-cover group-hover:scale-125 transition-all duration-[1.5s]"
           />
           <h1
-            class="absolute bg-[#003416] bg-opacity-60 text-white text-2xl leading-7 font-GenRyuMin py-4 px-2 truncate bottom-0 left-0 right-0 z-10"
+            class="absolute bg-[#003416] bg-opacity-60 text-white text-2xl leading-7 font-self py-4 px-2 truncate bottom-0 left-0 right-0 z-10"
           >
             茶席基礎入門
           </h1>
@@ -74,7 +74,7 @@
             class="h-full w-full object-cover group-hover:scale-125 transition-all duration-[1.5s]"
           />
           <h1
-            class="absolute bg-[#003416] bg-opacity-60 text-white text-2xl leading-7 font-GenRyuMin py-4 px-2 truncate bottom-0 left-0 right-0 z-10"
+            class="absolute bg-[#003416] bg-opacity-60 text-white text-2xl leading-7 font-self py-4 px-2 truncate bottom-0 left-0 right-0 z-10"
           >
             不一樣的台灣茶
           </h1>
@@ -92,7 +92,7 @@
             class="h-full w-full object-cover group-hover:scale-125 transition-all duration-[1.5s]"
           />
           <h1
-            class="absolute bg-[#003416] bg-opacity-60 text-white text-2xl leading-7 font-GenRyuMin py-4 px-2 truncate bottom-0 left-0 right-0 z-10"
+            class="absolute bg-[#003416] bg-opacity-60 text-white text-2xl leading-7 font-self py-4 px-2 truncate bottom-0 left-0 right-0 z-10"
           >
             鍋煮香料奶茶學
           </h1>

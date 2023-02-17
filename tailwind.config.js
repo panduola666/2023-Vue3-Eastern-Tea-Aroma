@@ -10,16 +10,16 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          "01": "#639D87",
+          "01": "#4c7866",
           "02": "#38415A",
           "03": "#A2BE95",
-          "04": "#AE9F2E",
+          "04": "#966010",
           "05": "#734705",
           "06": "#E6E4D9",
         },
         gray: {
           "01": "#1E1E1E",
-          "02": "#8A8B8A",
+          "02": "#727272",
           "03": "#BEC2BD",
           "04": "#FAFAFA",
         },
@@ -27,7 +27,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ["Noto Sans TC", "sans-serif"],
-        GenRyuMin: ["GenRyuMin JP"],
+        self: ["Noto Serif TC", "sans-serif"],
       },
       backgroundImage: {
         bgImage: "url(./src/assets/Background.png)",

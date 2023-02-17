@@ -1,7 +1,7 @@
 <template>
   <main class="wrap grid lg:grid-cols-5 gap-4">
     <ol
-      class="flex lg:flex-col bg-brand-06 text-brand-05 font-black font-GenRyuMin text-xl h-max"
+      class="flex lg:flex-col bg-brand-06 text-brand-05 font-black font-self text-xl h-max"
     >
       <li
         class="relative"
@@ -29,7 +29,7 @@
       v-if="currentChoose === '茶學演變'"
       class="bg-white bg-opacity-30 lg:col-span-4 p-4 text-gray-01 text-lg tracking-widest grid gap-4"
     >
-      <h1 class="text-3xl font-GenRyuMin">茶學演變</h1>
+      <h1 class="text-3xl font-self">茶學演變</h1>
       <p class="indent-8">
         古人何時開始飲茶，眾說紛紜，最廣為人知的起源莫過於傳說中神農氏嚐百草，發現以水煮葉後服用可解毒：「神農嚐百草，日遇七十二毒，得荼而解之」，到《晏子春秋》『晏相齊景公時，食脫粟之飯，炙三戈、五卵、茗菜而已』的食用，再到西漢王褒《僮約》『烹茶盡具』、『五都買茶』的飲用。
       </p>
@@ -47,23 +47,29 @@
     <form
       action=""
       v-else-if="currentChoose === '問題反饋'"
-      class="bg-white bg-opacity-30 lg:col-span-4 p-4 text-gray-01 text-lg tracking-widest grid gap-3"
+      class="bg-white bg-opacity-30 lg:col-span-4 p-4 text-gray-01 text-lg tracking-widest grid gap-8"
     >
-      <h1 class="text-3xl font-GenRyuMin">問題反饋</h1>
-      <label for="question" class="text-gray-02">問題</label>
-      <input type="text" name="question" id="question" class="p-2" required />
-      <label for="email" class="text-gray-02">聯絡信箱</label>
-      <input type="email" name="email" id="email" class="p-2" required />
-      <label for="detailed" class="text-gray-02">詳細情況</label>
-      <textarea
-        name="detailed"
-        id="detailed"
-        cols="30"
-        rows="10"
-        class="p-2"
-        required
-      ></textarea>
-      <button class="btn-outline">送出</button>
+      <h1 class="text-3xl font-self">問題反饋</h1>
+      <div class="flex flex-col gap-1">
+        <label for="question" class="text-gray-02">問題</label>
+        <input type="text" name="question" id="question" class="p-2" required />
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="email" class="text-gray-02">聯絡信箱</label>
+        <input type="email" name="email" id="email" class="p-2" required />
+      </div>
+      <div class="flex flex-col gap-1">
+        <label for="detailed" class="text-gray-02">詳細情況</label>
+        <textarea
+          name="detailed"
+          id="detailed"
+          cols="30"
+          rows="10"
+          class="p-2"
+          required
+        ></textarea>
+      </div>
+      <button class="btn-outline text-xl">送出</button>
     </form>
   </main>
 </template>

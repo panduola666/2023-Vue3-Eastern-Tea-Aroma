@@ -8,7 +8,7 @@
     <article class="flex flex-col justify-between col-span-2 p-3">
       <section class="flex-grow mb-3 flex flex-col justify-around">
         <h1
-          class="md:text-2xl truncate text-xl font-GenRyuMin border-b-2 border-line flex flex-wrap justify-between items-center gap-1"
+          class="md:text-2xl truncate text-xl font-self border-b-2 border-line flex flex-wrap justify-between items-center gap-1"
         >
           <slot name="card-header">
             標題

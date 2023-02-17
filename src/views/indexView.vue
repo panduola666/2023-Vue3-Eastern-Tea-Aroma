@@ -8,7 +8,7 @@
       @mouseleave="checked = false"
     >
       <section
-        class="text-brand-05 text-[28px] leading-8 font-black font-GenRyuMin m-auto w-1/2 px-12 scale-1 duration-1000"
+        class="text-brand-05 text-[28px] leading-8 font-black font-self m-auto w-1/2 px-12 scale-1 duration-1000"
         :class="{ 'scale-0': checked }"
       >
         <p class="mb-6">是否在腳步漸快的社會下生活下迷失了自我？</p>
@@ -33,7 +33,7 @@
         </button>
       </section>
       <section
-        class="text-brand-05 text-[28px] leading-8 font-black font-GenRyuMin m-auto w-1/2 px-12 duration-1000"
+        class="text-brand-05 text-[28px] leading-8 font-black font-self m-auto w-1/2 px-12 duration-1000"
       >
         <!-- :class="{ 'scale-1': checked, 'scale-0': !checked }" -->
         <p class="mb-6">古言道：茶者，一人得神、二人得趣、三人得味</p>
@@ -50,7 +50,7 @@
     </div>
     <div class="bg-brand-06 lg:hidden">
       <section
-        class="text-brand-05 text-2xl leading-7 font-black font-GenRyuMin py-8 px-4"
+        class="text-brand-05 text-2xl leading-7 font-black font-self py-8 px-4"
         v-if="!checked"
       >
         <p class="mb-4">是否在腳步漸快的社會下生活下迷失了自我？</p>
@@ -75,7 +75,7 @@
         </button>
       </section>
       <section
-        class="text-brand-05 text-2xl leading-7 font-black font-GenRyuMin py-8 px-4 cursor-pointer"
+        class="text-brand-05 text-2xl leading-7 font-black font-self py-8 px-4 cursor-pointer"
         v-else
         @click="checked = !checked"
       >

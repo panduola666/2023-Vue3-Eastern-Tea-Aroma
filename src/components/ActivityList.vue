@@ -2,7 +2,7 @@
   <div class="xl:w-[70%] lg:w-[80%] w-[90%] mx-auto">
     <section class="flex justify-between mt-14 mb-2">
       <h2
-        class="text-brand-02 text-[32px] leading-[38px] font-black font-GenRyuMin self-center"
+        class="text-brand-02 text-[32px] leading-[38px] font-black font-self self-center"
       >
         最新活動
       </h2>
@@ -43,7 +43,7 @@
             class="flex items-center justify-between lg:pb-4 pb-3 border-b-2 border-line"
           >
             <h1
-              class="lg:text-[28px] text-2xl lg:leading-8 leading-7 font-black font-GenRyuMin text-brand-05 truncate"
+              class="lg:text-[28px] text-2xl lg:leading-8 leading-7 font-black font-self text-brand-05 truncate"
             >
               521國際茶日
             </h1>
@@ -60,7 +60,7 @@
           </div>
           <a
             href=""
-            class="text-brand-01 lg:text-xl text-base lg:leading-6 leading-5 font-medium"
+            class="text-brand-02 lg:text-xl text-base lg:leading-6 leading-5 font-medium"
             >活動詳情 ></a
           >
         </article>
@@ -82,7 +82,7 @@
             class="flex items-center justify-between lg:pb-4 pb-3 border-b-2 border-line"
           >
             <h1
-              class="lg:text-[28px] text-2xl lg:leading-8 leading-7 font-black font-GenRyuMin text-brand-05 truncate"
+              class="lg:text-[28px] text-2xl lg:leading-8 leading-7 font-black font-self text-brand-05 truncate"
             >
               521國際茶日
             </h1>
@@ -101,7 +101,7 @@
           </div>
           <a
             href=""
-            class="text-brand-01 lg:text-xl text-base lg:leading-6 leading-5 font-medium"
+            class="text-brand-02 lg:text-xl text-base lg:leading-6 leading-5 font-medium"
             >活動詳情 ></a
           >
         </article>
@@ -123,7 +123,7 @@
             class="flex items-center justify-between lg:pb-4 pb-3 border-b-2 border-line"
           >
             <h1
-              class="lg:text-[28px] text-2xl lg:leading-8 leading-7 font-black font-GenRyuMin text-brand-05 truncate"
+              class="lg:text-[28px] text-2xl lg:leading-8 leading-7 font-black font-self text-brand-05 truncate"
             >
               521國際茶日
             </h1>
@@ -142,7 +142,7 @@
           </div>
           <a
             href=""
-            class="text-brand-01 lg:text-xl text-base lg:leading-6 leading-5 font-medium"
+            class="text-brand-02 lg:text-xl text-base lg:leading-6 leading-5 font-medium"
             >活動詳情 ></a
           >
         </article>

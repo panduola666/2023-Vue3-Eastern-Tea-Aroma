@@ -1,6 +1,6 @@
 <template>
   <main class="wrap">
-    <h1 class="text-3xl font-black font-GenRyuMin text-brand-02">課程列表</h1>
+    <h1 class="text-3xl font-black font-self text-brand-02">課程列表</h1>
     <div class="flex justify-end gap-5 mb-5">
       <button type="button" class="btn-outline">全部套用</button>
       <PostCourseModal>

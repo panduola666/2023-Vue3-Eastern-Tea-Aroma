@@ -21,7 +21,7 @@
         返回搜尋</router-link
       >
     </div>
-    <h1 class="text-3xl font-black font-GenRyuMin text-brand-02">
+    <h1 class="text-3xl font-black font-self text-brand-02">
       茶葉的風味鑑賞學
     </h1>
     <div class="grid lg:grid-cols-3 gap-3 mt-5">
@@ -43,17 +43,11 @@
           價格：3500 元<span class="text-gray-02 text-base">剩餘: 51</span>
         </p>
         <button type="button" class="btn-primary">加入購物車</button>
-        <button
-          type="button"
-          class="btn-primary disabled:bg-gray-03 border-gray-03 text-gray-02 hover:text-gray-02 hover:border-gray-03 active:outline-0"
-          disabled
-        >
-          預約已滿 / 已結束
-        </button>
+        <button type="button" class="btn-primary" disabled>預約已滿 / 已結束</button>
       </section>
     </div>
     <p
-      class="bg-brand-03 bg-opacity-20 px-5 py-8 text-xl text-gray-01 mt-5 font-GenRyuMin"
+      class="bg-brand-03 bg-opacity-20 px-5 py-8 text-xl text-gray-01 mt-5 font-self"
     >
       當前商品享活動優惠：全面
       <span class="text-2xl font-black">95 折</span>，優惠碼：<span
@@ -63,7 +57,7 @@
     <article
       class="text-brand-05 lg:text-lg font-medium leading-8 tracking-wider mt-10"
     >
-      <p class="font-GenRyuMin text-2xl font-black">課程簡介</p>
+      <p class="font-self text-2xl font-black">課程簡介</p>
       <ul class="grid gap-4 my-4">
         <li>認識主流茶葉的特性與風味</li>
         <li>
@@ -90,7 +84,7 @@
         />
       </div>
     </article>
-    <p class="font-GenRyuMin text-gray-01 mt-16">其他時段</p>
+    <p class="font-self text-gray-01 mt-16">其他時段</p>
     <ol class="list-disc list-inside">
       <li class="text-gray-02 py-2 px-1">
         <router-link

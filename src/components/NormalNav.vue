@@ -120,7 +120,7 @@
           <!-- 未登入 -->
           <router-link
             to="/login"
-            class="btn-primary xl:text-xl leading-6 font-medium text-base w-full"
+            class="btn-primary xl:text-xl leading-6 font-semibold text-base w-full"
             v-if="!isLogin"
             >登入/註冊</router-link
           >

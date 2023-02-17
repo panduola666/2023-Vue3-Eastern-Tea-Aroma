@@ -5,7 +5,7 @@
         <slot name="btn-content">按鈕</slot>
       </template>
       <template #modal-header>
-        <p class="text-xl font-black font-GenRyuMin text-brand-02">訂單詳情</p>
+        <p class="text-xl font-black font-self text-brand-02">訂單詳情</p>
       </template>
       <template #modal-body>
         <div class="flex justify-between text-lg">
@@ -31,7 +31,7 @@
               <td class="py-2">全手工紫砂壺</td>
               <td>八角壺</td>
               <td>1</td>
-              <td class="line-through text-gray-02">799</td>
+              <td class="">799</td>
               <td class="font-semibold text-lg">399</td>
             </tr>
             <tr

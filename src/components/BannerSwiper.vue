@@ -26,7 +26,7 @@
           class="object-bottom block lg:hidden"
         />
         <section
-          class="absolute font-GenRyuMin font-black text-gray-04 bg-[#003416] bg-opacity-40 flex flex-col justify-center lg:text-[32px] lg:leading-9 lg:top-[10%] lg:left-[16%] lg:w-[45%] lg:py-[102px] lg:pl-12 text-2xl leading-7 top-6 left-4 w-[90%] py-4 pl-6 text-start"
+          class="absolute font-self font-black text-gray-04 bg-[#003416] bg-opacity-40 flex flex-col justify-center lg:text-[32px] lg:leading-9 lg:top-[10%] lg:left-[16%] lg:w-[45%] lg:py-[102px] lg:pl-12 text-2xl leading-7 top-6 left-4 w-[90%] py-4 pl-6 text-start"
         >
           <h1>
             一飲一啄在茶中<br />
@@ -36,7 +36,7 @@
       </div>
     </swiper-slide>
 
-    <swiper-slide
+    <!-- <swiper-slide
       ><div class="relative h-[520px] w-full">
         <img
           src="../assets/BANNER-1.png"
@@ -49,7 +49,7 @@
           class="object-bottom block lg:hidden"
         />
         <section
-          class="absolute font-GenRyuMin font-black text-gray-04 bg-[#003416] bg-opacity-40 flex flex-col justify-center lg:text-[32px] lg:leading-9 lg:top-[10%] lg:left-[16%] lg:w-[45%] lg:py-[102px] lg:px-12 text-2xl leading-7 top-6 left-4 w-[90%] py-4 px-6 text-start"
+          class="absolute font-self font-black text-gray-04 bg-[#003416] bg-opacity-40 flex flex-col justify-center lg:text-[32px] lg:leading-9 lg:top-[10%] lg:left-[16%] lg:w-[45%] lg:py-[102px] lg:px-12 text-2xl leading-7 top-6 left-4 w-[90%] py-4 px-6 text-start"
         >
           <h1>關於我們</h1>
           <p
@@ -59,9 +59,9 @@
           </p>
         </section>
       </div>
-    </swiper-slide>
+    </swiper-slide> -->
 
-    <swiper-slide
+    <!-- <swiper-slide
       ><div class="relative h-[520px] w-full">
         <img
           src="../assets/BANNER-2.png"
@@ -74,7 +74,7 @@
           class="object-bottom block lg:hidden"
         />
         <section
-          class="absolute font-GenRyuMin font-black text-gray-04 bg-[#003416] bg-opacity-40 flex flex-col justify-center lg:text-[32px] lg:leading-9 lg:top-[10%] lg:left-[16%] lg:w-[45%] lg:py-[102px] lg:px-12 text-2xl leading-7 top-6 left-4 w-[90%] py-4 px-6 text-start"
+          class="absolute font-self font-black text-gray-04 bg-[#003416] bg-opacity-40 flex flex-col justify-center lg:text-[32px] lg:leading-9 lg:top-[10%] lg:left-[16%] lg:w-[45%] lg:py-[102px] lg:px-12 text-2xl leading-7 top-6 left-4 w-[90%] py-4 px-6 text-start"
         >
           <h1>君子四藝</h1>
           <p
@@ -84,10 +84,10 @@
           </p>
         </section>
       </div>
-    </swiper-slide>
+    </swiper-slide> -->
 
     <!-- 最新活動 要跟著變動 -->
-    <swiper-slide
+    <!-- <swiper-slide
       ><div class="relative h-[520px] w-full">
         <img
           src="../assets/BANNER-3.png"
@@ -100,7 +100,7 @@
           class="object-bottom block lg:hidden"
         />
         <section
-          class="absolute font-GenRyuMin font-black text-gray-04 bg-[#003416] bg-opacity-40 lg:text-[32px] lg:leading-9 lg:top-[10%] lg:left-[16%] lg:w-[45%] lg:py-[45px] lg:pl-12 text-2xl leading-7 top-6 left-4 w-[90%] py-4 px-6 text-start"
+          class="absolute font-self font-black text-gray-04 bg-[#003416] bg-opacity-40 lg:text-[32px] lg:leading-9 lg:top-[10%] lg:left-[16%] lg:w-[45%] lg:py-[45px] lg:pl-12 text-2xl leading-7 top-6 left-4 w-[90%] py-4 px-6 text-start"
         >
           <span
             class="bg-brand-01 text-white lg:absolute font-medium lg:text-xl text-base leading-5 font-sans lg:py-2 py-1 lg:px-3 px-2 lg:top-[12%] lg:-left-8"
@@ -122,7 +122,7 @@
           </button>
         </section>
       </div>
-    </swiper-slide>
+    </swiper-slide> -->
   </swiper>
 </template>
 <script>

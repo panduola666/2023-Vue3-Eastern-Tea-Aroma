@@ -1,6 +1,6 @@
 <template>
   <main class="wrap">
-    <h2 class="text-3xl font-black font-GenRyuMin text-brand-02">收藏項目</h2>
+    <h2 class="text-3xl font-black font-self text-brand-02">收藏項目</h2>
     <div class="flex justify-between gap-3 flex-col md:flex-row my-3">
       <div class="flex gap-3">
         <button type="button" class="btn-primary">講師</button>
@@ -14,7 +14,7 @@
     </div>
     <ol class="grid lg:grid-cols-2 gap-3">
       <li
-        class="bg-white bg-opacity-40 text-brand-05 font-GenRyuMin font-semibold lg:flex gap-3 shadow-md hover:shadow-lg hover:shadow-gray-02 group min-h-max"
+        class="bg-white bg-opacity-40 text-brand-05 font-self font-semibold lg:flex gap-3 shadow-md hover:shadow-lg hover:shadow-gray-02 group min-h-max"
       >
         <div class="lg:w-1/2 h-64 overflow-hidden">
           <img
@@ -39,7 +39,7 @@
         </div>
       </li>
       <li
-        class="bg-white bg-opacity-40 text-brand-05 font-GenRyuMin font-semibold lg:flex gap-3 shadow-md hover:shadow-lg hover:shadow-gray-02 group min-h-max"
+        class="bg-white bg-opacity-40 text-brand-05 font-self font-semibold lg:flex gap-3 shadow-md hover:shadow-lg hover:shadow-gray-02 group min-h-max"
       >
         <div class="lg:w-1/2 h-64 overflow-hidden">
           <img
@@ -64,7 +64,7 @@
         </div>
       </li>
       <li
-        class="bg-white bg-opacity-40 text-brand-05 font-GenRyuMin font-semibold lg:flex gap-3 shadow-md hover:shadow-lg hover:shadow-gray-02 group min-h-max"
+        class="bg-white bg-opacity-40 text-brand-05 font-self font-semibold lg:flex gap-3 shadow-md hover:shadow-lg hover:shadow-gray-02 group min-h-max"
       >
         <div class="lg:w-1/2 h-64 overflow-hidden">
           <img
@@ -89,7 +89,7 @@
         </div>
       </li>
       <li
-        class="bg-white bg-opacity-40 text-brand-05 font-GenRyuMin font-semibold lg:flex gap-3 shadow-md hover:shadow-lg hover:shadow-gray-02 group min-h-max"
+        class="bg-white bg-opacity-40 text-brand-05 font-self font-semibold lg:flex gap-3 shadow-md hover:shadow-lg hover:shadow-gray-02 group min-h-max"
       >
         <div class="lg:w-1/2 h-64 overflow-hidden">
           <img

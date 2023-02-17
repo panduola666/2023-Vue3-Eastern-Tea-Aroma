@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-brand-03 bg-opacity-20 px-5 py-8 text-xl text-gray-01 mt-5 font-GenRyuMin mb-5"
+    class="bg-brand-03 bg-opacity-20 px-5 py-8 text-xl text-gray-01 mt-5 font-self mb-5"
   >
     <p class="mb-2">
       當前商品已有生效中的折扣，折扣額度為：

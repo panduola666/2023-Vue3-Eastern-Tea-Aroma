@@ -5,10 +5,10 @@
     <div>
       <p>共 2 件商品</p>
       <div class="flex flex-wrap gap-x-2">
-        <p class="text-gray-02 flex flex-wrap gap-x-2">
+        <p class="text-gray-01 flex flex-wrap gap-x-2">
           折扣碼
           <span
-            class="underline underline-offset-2 cursor-pointer hover:text-gray-01"
+            class="underline underline-offset-2 cursor-pointer hover:text-brand-02 hover:font-bold"
             @click="inputPrompt"
             >{{ !discount ? "輸入折扣碼" : discount }}</span
           >
@@ -36,10 +36,10 @@
     </div>
     <div class="">
       <p class="flex flex-wrap gap-x-2 items-center">
-        總計<span class="line-through text-gray-02">$ 3,000</span
+        總計<del class="text-base text-gray-01">$ 3,000</del
         ><span class="text-xl">$ 1,999</span>
       </p>
-      <p class="text-gray-02">已節省 1,001 元</p>
+      <p class="text-gray-01">已節省 1,001 元</p>
     </div>
     <div>
       <button

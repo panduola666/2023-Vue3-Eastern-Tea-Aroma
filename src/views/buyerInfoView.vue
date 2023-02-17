@@ -1,13 +1,13 @@
 <template>
   <main>
     <div class="wrap">
-      <h1 class="text-3xl font-black font-GenRyuMin text-brand-02">
+      <h1 class="text-3xl font-black font-self text-brand-02">
         購買人資訊
       </h1>
       <form action="" class="flex flex-col text-lg">
         <label
           for=""
-          class="text-xl text-brand-02 font-GenRyuMin font-semibold mt-4"
+          class="text-xl text-brand-02 font-self font-semibold mt-4"
           >購買人</label
         >
         <input
@@ -20,7 +20,7 @@
         />
         <label
           for=""
-          class="text-xl text-brand-02 font-GenRyuMin font-semibold mt-4"
+          class="text-xl text-brand-02 font-self font-semibold mt-4"
           >手機號碼</label
         >
         <input
@@ -31,7 +31,7 @@
           placeholder="請輸入手機號碼..."
           required
         />
-        <p class="text-xl text-brand-02 font-GenRyuMin font-semibold mt-4">
+        <p class="text-xl text-brand-02 font-self font-semibold mt-4">
           取貨方式
         </p>
         <label for="自取"
@@ -50,7 +50,7 @@
             required
           />
         </form-box>
-        <p class="text-xl text-brand-02 font-GenRyuMin font-semibold mt-4">
+        <p class="text-xl text-brand-02 font-self font-semibold mt-4">
           付款方式
         </p>
         <label for="貨到付款"

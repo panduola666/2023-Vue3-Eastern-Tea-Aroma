@@ -5,7 +5,7 @@
         <slot name="btn-content">按鈕</slot>
       </template>
       <template #modal-header>
-        <h2 class="text-xl font-black font-GenRyuMin text-brand-02">
+        <h2 class="text-xl font-black font-self text-brand-02">
           新增商品/編輯商品
         </h2>
       </template>
@@ -75,10 +75,13 @@
                   -
                 </button>
               </p>
-              <p class="bg-brand-06 my-2 p-3">
-                <label for="" class=""
+              <p class="bg-brand-06 bg-opacity-40 my-2 p-3">
+                <label for=""
                   >新增系列
-                  <input type="text" class="p-2 w-full mt-3" />
+                  <input
+                    type="text"
+                    class="border border-gray-01 p-2 w-full mt-3"
+                  />
                 </label>
                 <span class="text-end block">
                   <button type="button" class="btn-outline py-1 mt-3 mr-3">
@@ -132,7 +135,7 @@
                 * 商品介紹
                 <button
                   type="button"
-                  class="text-brand-01 font-bold text-3xl float-right opacity-60 hover:opacity-100"
+                  class="text-brand-01 opacity-80 font-bold text-3xl float-right hover:text-brand-02"
                 >
                   +
                 </button>

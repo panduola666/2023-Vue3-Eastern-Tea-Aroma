@@ -1,7 +1,7 @@
 <template>
   <main>
     <div class="wrap">
-      <h2 class="text-3xl font-black font-GenRyuMin text-brand-02">購買商品</h2>
+      <h2 class="text-3xl font-black font-self text-brand-02">購買商品</h2>
       <TotalPrice class="mb-4"></TotalPrice>
       <ul class="grid gap-5">
         <li class="grid lg:grid-cols-3 bg-white hover:shadow-lg">
@@ -19,7 +19,7 @@
           <div class="lg:col-span-2 p-4 flex flex-col justify-between gap-3">
             <section class="grid gap-1">
               <h1
-                class="truncate text-brand-02 text-2xl font-GenRyuMin font-black"
+                class="truncate text-brand-02 text-2xl font-self font-black"
               >
                 全手工紫砂壺
               </h1>
@@ -81,7 +81,7 @@
           <div class="lg:col-span-2 p-4 flex flex-col justify-between gap-3">
             <section class="grid gap-1">
               <h1
-                class="truncate text-brand-02 text-2xl font-GenRyuMin font-black"
+                class="truncate text-brand-02 text-2xl font-self font-black"
               >
                 全手工紫砂壺
               </h1>

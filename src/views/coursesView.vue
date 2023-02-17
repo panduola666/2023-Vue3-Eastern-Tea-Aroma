@@ -1,8 +1,8 @@
 <template>
   <main class="wrap">
-    <h2 class="text-3xl font-black font-GenRyuMin text-brand-02">茶藝課堂</h2>
+    <h2 class="text-3xl font-black font-self text-brand-02">茶藝課堂</h2>
     <form
-      class="border-2 border-brand-01 border-opacity-50 shadow bg-gray-03 bg-opacity-20 mt-2 mb-6 text-xl p-3 grid gap-3"
+      class="shadow bg-white bg-opacity-20 border-2 border-brand-01 border-opacity-50 mt-2 mb-6 text-xl p-3 grid gap-3"
     >
       <p>
         <label for="keyWord" class="mr-3">課程關鍵字 /</label>
@@ -128,12 +128,24 @@
                 <p class="text-end text-lg">$ {{ course.price }}</p>
               </template>
               <template #card-footer>
-                <button type="button" class="btn-outline py-2 px-3">
-                  收藏課程
-                </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  aria-label="課程收藏"
+                  class="w-6 h-6 cursor-pointer stroke-brand-02 hover:fill-brand-02"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                  />
+                </svg>
                 <router-link
                   :to="`/course/${course.id}`"
-                  class="btn-primary py-2 px-3"
+                  class="btn-primary py-2 px-4"
                   >課程詳情</router-link
                 >
               </template>
@@ -173,7 +185,7 @@ export default {
       return score ? `${Math.round(score * 10) / 10} / 5.0` : "尚未評分";
     },
     searchReset() {
-      console.log(this.$options?.data().search);
+      console.log(this.$options.data().search);
       this.search = {
         weeks: [],
         moment: "",

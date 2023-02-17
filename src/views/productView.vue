@@ -1,6 +1,6 @@
 <template>
   <main class="wrap">
-    <h1 class="text-3xl font-black font-GenRyuMin text-brand-02">高山烏龍</h1>
+    <h1 class="text-3xl font-black font-self text-brand-02">高山烏龍</h1>
     <div
       class="grid lg:grid-cols-3 lg:grid-rows-1 grid-rows-2 grid-cols-1 gap-y-3 lg:gap-x-3"
     >
@@ -133,7 +133,7 @@
       </div>
     </div>
     <p
-      class="bg-brand-03 bg-opacity-20 px-5 py-8 text-xl text-gray-01 mt-5 font-GenRyuMin"
+      class="bg-brand-03 bg-opacity-20 px-5 py-8 text-xl text-gray-01 mt-5 font-self"
     >
       當前商品享活動優惠：全面
       <span class="text-2xl font-black">95 折</span>，優惠碼：<span
@@ -141,7 +141,7 @@
       >
     </p>
     <article class="text-brand-05 text-lg font-medium grid gap-4 mt-10">
-      <p class="text-2xl font-black font-GenRyuMin">介紹</p>
+      <p class="text-2xl font-black font-self">介紹</p>
       <p>
         高山烏龍茶，泛指種植、製造於海拔1000公尺以上茶區之茶葉，因高山茶葉生長較慢、茶葉中的苦澀成份降低，口感也會比較圓潤，近年來取代平地烏龍茶，高山烏龍茶漸漸成為台灣茶的主流。
       </p>
@@ -159,7 +159,7 @@
             class="w-full h-36 object-cover group-hover:scale-110 duration-1000"
           />
           <p
-            class="absolute bg-[rgba(0,52,22,.5)] text-white bottom-0 left-0 right-0 p-2 font-GenRyuMin font-semibold text-lg truncate"
+            class="absolute bg-[rgba(0,52,22,.5)] text-white bottom-0 left-0 right-0 p-2 font-self font-semibold text-lg truncate"
           >
             小金桔普洱茶
           </p>
@@ -173,7 +173,7 @@
             class="w-full h-36 object-cover group-hover:scale-110 duration-1000"
           />
           <p
-            class="absolute bg-[rgba(0,52,22,.5)] text-white bottom-0 left-0 right-0 p-2 font-GenRyuMin font-semibold text-lg truncate"
+            class="absolute bg-[rgba(0,52,22,.5)] text-white bottom-0 left-0 right-0 p-2 font-self font-semibold text-lg truncate"
           >
             小金桔普洱茶
           </p>
@@ -187,7 +187,7 @@
             class="w-full h-36 object-cover group-hover:scale-110 duration-1000"
           />
           <p
-            class="absolute bg-[rgba(0,52,22,.5)] text-white bottom-0 left-0 right-0 p-2 font-GenRyuMin font-semibold text-lg truncate"
+            class="absolute bg-[rgba(0,52,22,.5)] text-white bottom-0 left-0 right-0 p-2 font-self font-semibold text-lg truncate"
           >
             小金桔普洱茶
           </p>
@@ -201,7 +201,7 @@
             class="w-full h-36 object-cover group-hover:scale-110 duration-1000"
           />
           <p
-            class="absolute bg-[rgba(0,52,22,.5)] text-white bottom-0 left-0 right-0 p-2 font-GenRyuMin font-semibold text-lg truncate"
+            class="absolute bg-[rgba(0,52,22,.5)] text-white bottom-0 left-0 right-0 p-2 font-self font-semibold text-lg truncate"
           >
             小金桔普洱茶
           </p>

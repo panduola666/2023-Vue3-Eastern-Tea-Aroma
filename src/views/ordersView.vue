@@ -1,10 +1,11 @@
 <template>
   <main class="wrap">
-    <h2 class="text-3xl font-black font-GenRyuMin text-brand-02">訂單資訊</h2>
+    <h2 class="text-3xl font-black font-self text-brand-02">訂單資訊</h2>
+
     <table
       class="w-full table-fixed h-20 text-center border border-brand-05 overflow-scroll bg-white bg-opacity-20 my-4"
     >
-      <thead class="bg-[#003416] bg-opacity-30 font-GenRyuMin">
+      <thead class="bg-brand-01 bg-opacity-50 font-self">
         <tr>
           <th class="text-xs sm:text-base py-2">2022 - 11 - 23</th>
           <th class="py-2" colspan="2">
@@ -13,35 +14,35 @@
         </tr>
       </thead>
       <tbody class="block w-[300%] max-h-40 overflow-auto">
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-20">
+        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
           <td class="tracking-wider py-2">全手工紫砂壺</td>
           <td class="py-2">八角壺 * <span>1</span></td>
           <td class="sm:block flex flex-col py-2">
-            <span class="mx-2 text-gray-02 line-through">$ 799</span>
+            <del class="mx-2 text-base text-gray-01">$ 799</del>
             <span>$ 499</span>
           </td>
         </tr>
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-20">
+        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
           <td class="tracking-wider py-2">全手工紫砂壺</td>
           <td class="py-2">八角壺 * <span>1</span></td>
           <td class="sm:block flex flex-col py-2">
-            <span class="mx-2 text-gray-02 line-through">$ 799</span>
+            <del class="mx-2 text-base text-gray-01">$ 799</del>
             <span>$ 499</span>
           </td>
         </tr>
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-20">
+        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
           <td class="tracking-wider py-2">全手工紫砂壺</td>
           <td class="py-2">八角壺 * <span>1</span></td>
           <td class="sm:block flex flex-col py-2">
-            <span class="mx-2 text-gray-02 line-through">$ 799</span>
+            <del class="mx-2 text-base text-gray-01">$ 799</del>
             <span>$ 499</span>
           </td>
         </tr>
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-20">
+        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
           <td class="tracking-wider py-2">全手工紫砂壺</td>
           <td class="py-2">八角壺 * <span>1</span></td>
           <td class="sm:block flex flex-col py-2">
-            <span class="mx-2 text-gray-02 line-through">$ 799</span>
+            <del class="mx-2 text-base text-gray-01">$ 799</del>
             <span>$ 499</span>
           </td>
         </tr>
@@ -49,7 +50,7 @@
       <tfoot>
         <tr>
           <td class="pt-3">3件商品</td>
-          <td class="pt-3 font-bold text-gray-02">未出貨</td>
+          <td class="pt-3 font-bold text-brand-02">未出貨</td>
           <td class="flex justify-center pt-3">
             <p>價格</p>
             <div class="sm:block flex flex-col">
@@ -63,7 +64,7 @@
     <table
       class="w-full table-fixed h-20 text-center border border-brand-05 overflow-scroll bg-white bg-opacity-20 my-4"
     >
-      <thead class="bg-[#003416] bg-opacity-30 font-GenRyuMin">
+      <thead class="bg-brand-01 bg-opacity-50 font-self">
         <tr>
           <th class="text-xs sm:text-base py-2">2022 - 11 - 23</th>
           <th class="py-2" colspan="2">
@@ -72,35 +73,35 @@
         </tr>
       </thead>
       <tbody class="block w-[300%] max-h-40 overflow-auto">
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-20">
+        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
           <td class="tracking-wider py-2">全手工紫砂壺</td>
           <td class="py-2">八角壺 * <span>1</span></td>
           <td class="sm:block flex flex-col py-2">
-            <span class="mx-2 text-gray-02 line-through">$ 799</span>
+            <del class="mx-2 text-base text-gray-01">$ 799</del>
             <span>$ 499</span>
           </td>
         </tr>
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-20">
+        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
           <td class="tracking-wider py-2">全手工紫砂壺</td>
           <td class="py-2">八角壺 * <span>1</span></td>
           <td class="sm:block flex flex-col py-2">
-            <span class="mx-2 text-gray-02 line-through">$ 799</span>
+            <del class="mx-2 text-base text-gray-01">$ 799</del>
             <span>$ 499</span>
           </td>
         </tr>
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-20">
+        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
           <td class="tracking-wider py-2">全手工紫砂壺</td>
           <td class="py-2">八角壺 * <span>1</span></td>
           <td class="sm:block flex flex-col py-2">
-            <span class="mx-2 text-gray-02 line-through">$ 799</span>
+            <del class="mx-2 text-base text-gray-01">$ 799</del>
             <span>$ 499</span>
           </td>
         </tr>
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-20">
+        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
           <td class="tracking-wider py-2">全手工紫砂壺</td>
           <td class="py-2">八角壺 * <span>1</span></td>
           <td class="sm:block flex flex-col py-2">
-            <span class="mx-2 text-gray-02 line-through">$ 799</span>
+            <del class="mx-2 text-base text-gray-01">$ 799</del>
             <span>$ 499</span>
           </td>
         </tr>

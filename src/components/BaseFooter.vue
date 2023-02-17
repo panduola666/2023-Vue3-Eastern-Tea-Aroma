@@ -20,18 +20,16 @@
           <span class="text-brand-02 lg:text-xl lg:leading-[30px]"
             >聯絡我們</span
           >
-          <span class="text-gray-02">
-            營業時間 <span class="text-gray-01 ml-4">下午1:00 - 晚上10:00</span>
+          <span class="text-gray-01">
+            營業時間 <span class="ml-4">下午1:00 - 晚上10:00</span>
           </span>
-          <span class="text-gray-02">
+          <span class="text-gray-01">
             地址
-            <span class="text-gray-01 ml-4">100台北市中正區鄭州路8號</span>
+            <span class="ml-4">100台北市中正區鄭州路8號</span>
           </span>
-          <span class="text-gray-02">
+          <span class="text-gray-01">
             電話
-            <a href="tel:+886-2-12345678" class="text-gray-01 ml-4"
-              >(02)12345678</a
-            >
+            <a href="tel:+886-2-12345678" class="ml-4">(02)12345678</a>
           </span>
         </address>
         <iframe

@@ -3,14 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 @layer base {
-  @font-face {
-    font-family: GenRyuMin JP;
-    src: url(/源雲明體GenRyuMin TW TTF Medium.ttf);
-  }
 }
 @layer components {
   .btn-primary {
-    @apply lg:py-[14px] py-3 lg:px-6 px-5 border-2 border-brand-01 bg-brand-01 text-white text-center  hover:bg-brand-02 hover:text-white hover:border-brand-02 active:outline focus:outline-2 focus:outline outline-offset-2 outline-brand-01 disabled:bg-gray-03 disabled:border-gray-03 disabled:text-gray-02;
+    @apply lg:py-[14px] py-3 lg:px-6 px-5 border-2 border-brand-01 bg-brand-01 text-white text-center  hover:bg-brand-02 hover:text-white hover:border-brand-02 active:outline focus:outline-2 focus:outline outline-offset-2 outline-brand-01 disabled:bg-gray-03 disabled:border-gray-03 disabled:text-gray-01;
   }
   .btn-outline {
     @apply border-2 border-brand-01 text-brand-01 lg:py-[14px] py-3 lg:px-6 px-5 hover:bg-brand-02 hover:text-white hover:border-brand-02 active:outline focus:outline-2 focus:outline outline-offset-2 outline-brand-01 disabled:bg-gray-03 disabled:border-gray-03 disabled:text-gray-02;

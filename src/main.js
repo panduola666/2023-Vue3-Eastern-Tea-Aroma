@@ -5,8 +5,8 @@ import { createPinia } from "pinia";
 import VueSweetalert2 from "vue-sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
 const options = {
-  confirmButtonColor: "#639D87",
-  cancelButtonColor: "#BEC2BD",
+  confirmButtonColor: "#4c7866",
+  cancelButtonColor: "#727272",
 };
 
 // 日曆套件

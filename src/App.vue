@@ -5,5 +5,6 @@
     <router-view></router-view>
     <!-- <base-footer></base-footer> -->
   </div>
+  <input type="text" aria-label="" name="" id="">
 </template>
 <script></script>
