@@ -14,6 +14,7 @@
           <router-link
             to="/courses"
             class="flex transition-all group-hover:text-brand-01 text-xl leading-[30px] pb-[10px] pt-[18px]"
+            :class="{ 'font-semibold': this.$route.path === '/courses' }"
           >
             茶藝課堂
             <img
@@ -66,6 +67,7 @@
           <router-link
             to="/shoppingMall"
             class="flex transition-all group-hover:text-brand-01 text-xl leading-[30px] pb-[10px] pt-[18px]"
+            :class="{ 'font-semibold': this.$route.path === '/shoppingMall' }"
           >
             茶藝用品
             <img
@@ -241,7 +243,6 @@ export default {
   components: {
     navMoreSelect,
   },
-  mounted() {
-  },
+  mounted() {},
 };
 </script>

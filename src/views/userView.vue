@@ -3,24 +3,25 @@
     <div class="flex flex-col md:flex-row items-center gap-8">
       <div class="relative flex-shrink-0">
         <div class="absolute bottom-[1vw] right-[1vw] rounded-full group z-10">
-          <input
-            type="file"
-            name="userAvatar"
-            id="file"
-            aria-label="上傳頭像"
-            placeholder="請選擇頭像..."
-            accept=".jpg,.png"
-            class="bg-red-400 absolute w-full h-full rounded-full top-0 left-0 opacity-0 z-10"
-            @change="postAvatar($event)"
-            :disabled="postLogin"
-          />
+          <span class="w-full h-full overflow-hidden absolute">
+            <input
+              type="file"
+              name="userAvatar"
+              id="file"
+              aria-label="上傳頭像"
+              placeholder="請選擇頭像..."
+              accept=".jpg,.png"
+              class="absolute cursor-pointer w-full h-[200px] scale-200 rounded-full -top-1/2 left-0 opacity-70 z-10"
+              @change="postAvatar($event)"
+              :disabled="postLogin"
+          /></span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke-width="1.5"
             stroke="currentColor"
-            class="fill-white h-[50px] md:h-[60px] lg:h-20 opacity-75 group-hover:opacity-100 rounded-full stroke-gray-01 duration-300 group-hover:outline outline-1 outline-white"
+            class="fill-white rounded-full h-[50px] md:h-[60px] lg:h-20 opacity-75 group-hover:opacity-100 stroke-gray-01 transition-opacity duration-300 group-hover:outline outline-2 outline-white"
           >
             <path
               stroke-linecap="round"
@@ -43,7 +44,7 @@
               : 'https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/BANNER-3.png?raw=true'
           "
           alt=""
-          class="flex-shrink-0 rounded-full object-cover lg:w-[25vw] lg:h-[25vw] w-[30vw] h-[30vw] min-h-[170px] min-w-[170px]"
+          class="flex-shrink-0 rounded-full object-cover border border-brand-03 bg-brand-03 bg-opacity-20 lg:w-[25vw] lg:h-[25vw] w-[30vw] h-[30vw] min-h-[170px] min-w-[170px]"
         />
       </div>
       <ul
@@ -195,8 +196,8 @@
 <script>
 import axios from "axios";
 import { mapState, mapActions } from "pinia";
-import { userStore } from "../stores/index.js";
-const { VITE_BASEURL } = import.meta.env;
+import { userStore, updatedImgStore } from "../stores/index.js";
+const { VITE_BASEURL, VITE_IMGUR_ID, VITE_IMGUR_SECRET } = import.meta.env;
 export default {
   data() {
     return {
@@ -209,8 +210,11 @@ export default {
       },
     };
   },
+
   computed: {
     ...mapState(userStore, ["isLogin", "user", "postLogin"]),
+    ...mapState(updatedImgStore, ["access_token","first_token"]),
+
     userInfo() {
       return {
         name: this.user.name,
@@ -220,6 +224,8 @@ export default {
   },
   methods: {
     ...mapActions(userStore, ["checkLogin", "overLogin", "postAvatar"]),
+    ...mapActions(updatedImgStore, ["postAvatar", "getFirstToken"]),
+
     changeBtnText(e) {
       if (e.target.textContent.trim() === "編輯") {
         e.target.textContent = "確認";
@@ -333,6 +339,7 @@ export default {
     },
   },
   mounted() {
+    this.getFirstToken();
     this.checkLogin();
     if (!this.isLogin) {
       this.overLogin();

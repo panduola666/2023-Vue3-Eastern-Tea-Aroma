@@ -198,14 +198,14 @@
           </li>
           <li>
             <router-link
-              :to="{name: '會員預約'}"
+              :to="{name: '課程預約'}"
               class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
               >課程預約</router-link
             >
           </li>
           <li>
             <router-link
-              :to="{name: '會員訂單'}"
+              :to="{name: '訂單詳情'}"
               class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
               >訂單詳情</router-link
             >

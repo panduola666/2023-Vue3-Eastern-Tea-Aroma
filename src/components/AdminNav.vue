@@ -6,15 +6,24 @@
       </router-link>
       <ul class="hidden items-center text-brand-02 gap-5 xl:gap-10 lg:flex">
         <li class="text-xl leading-[30px] pb-[10px] pt-[18px]">
-          <router-link :to="{ name: '課程列表' }">課程列表</router-link>
+          <router-link
+            :to="{ name: '課程列表' }"
+            :class="{ 'font-semibold': this.$route.path === '/admin' }"
+            >課程列表</router-link
+          >
         </li>
         <li class="text-xl leading-[30px] pb-[10px] pt-[18px]">
-          <router-link :to="{ name: '折扣碼' }">折扣碼</router-link>
+          <router-link
+            :to="{ name: '折扣碼' }"
+            :class="{ 'font-semibold': this.$route.path === '/admin/discount' }"
+            >折扣碼</router-link
+          >
         </li>
         <li class="group relative">
           <router-link
             to="/admin/manage?current=商品管理"
             class="flex transition-all group-hover:text-brand-01 text-xl leading-[30px] pb-[10px] pt-[18px]"
+            :class="{ 'font-semibold': this.$route.path === '/admin/manage' }"
           >
             管理項目
             <img
@@ -30,6 +39,9 @@
               <router-link
                 to="/admin/manage?current=商品管理"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
+                :class="{
+                  'font-semibold': this.$route.query.current === '商品管理',
+                }"
                 >商品管理</router-link
               >
             </li>
@@ -37,6 +49,9 @@
               <router-link
                 to="/admin/manage?current=訂單管理"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
+                :class="{
+                  'font-semibold': this.$route.query.current === '訂單管理',
+                }"
                 >訂單管理</router-link
               >
             </li>
@@ -44,6 +59,9 @@
               <router-link
                 to="/admin/manage?current=文章管理"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
+                :class="{
+                  'font-semibold': this.$route.query.current === '文章管理',
+                }"
                 >文章管理</router-link
               >
             </li>
@@ -51,6 +69,9 @@
               <router-link
                 to="/admin/manage?current=活動管理"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
+                :class="{
+                  'font-semibold': this.$route.query.current === '活動管理',
+                }"
                 >活動管理</router-link
               >
             </li>
@@ -109,6 +130,7 @@
               <router-link
                 to="/admin"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
+                :class="{ 'font-semibold': this.$route.path === '/admin' }"
                 >課程列表</router-link
               >
             </li>
@@ -116,6 +138,9 @@
               <router-link
                 to="/admin/discount"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
+                :class="{
+                  'font-semibold': this.$route.path === '/admin/discount',
+                }"
                 >折扣碼</router-link
               >
             </li>
@@ -123,6 +148,9 @@
               <router-link
                 to="/admin/manage?current=商品管理"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
+                :class="{
+                  'font-semibold': this.$route.path === '/admin/manage',
+                }"
                 >管理項目</router-link
               >
             </li>
