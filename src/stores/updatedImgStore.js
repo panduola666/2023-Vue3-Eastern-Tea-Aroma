@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
 import { userStore } from "./index.js";
 import axios from "axios";
-import Swal from "sweetalert2";
-import router from "../router/index.js";
+// import Swal from "sweetalert2";
+// import router from "../router/index.js";
 const { VITE_BASEURL, VITE_IMGUR_ID, VITE_IMGUR_SECRET } = import.meta.env;
 export default defineStore("updatedImgStore", {
   state: () => ({
@@ -86,6 +86,7 @@ export default defineStore("updatedImgStore", {
       window.location.href = location.href.replace(`?code=${code}`, "");
     },
     exchangeCodeForToken(code) {
+      if (!code) return;
       const url = "https://api.imgur.com/oauth2/token";
       const data = {
         client_id: VITE_IMGUR_ID,

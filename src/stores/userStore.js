@@ -2,13 +2,7 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import Swal from "sweetalert2";
 import router from "../router";
-const {
-  VITE_BASEURL,
-  VITE_POSTIMG_URL,
-  VITE_POSTIMG_PATH,
-  VITE_IMGUR_ID,
-  VITE_IMGUR_SECRET,
-} = import.meta.env;
+const { VITE_BASEURL } = import.meta.env;
 
 export default defineStore("userDataStore", {
   state: () => ({

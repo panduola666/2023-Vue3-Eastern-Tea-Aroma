@@ -2,35 +2,6 @@
   <main class="wrap">
     <div class="flex flex-col md:flex-row items-center gap-8">
       <div class="relative flex-shrink-0">
-        <div class="absolute bottom-[1vw] right-[1vw] rounded-full group z-10">
-          <span class="w-full h-full overflow-hidden absolute">
-            <input
-              type="file"
-              name="userAvatar"
-              id="file"
-              aria-label="上傳頭像"
-              placeholder="請選擇頭像..."
-              accept=".jpg,.png"
-              class="absolute cursor-pointer w-full h-[200px] scale-200 rounded-full -top-1/2 left-0 opacity-70 z-10"
-              @change="postAvatar($event)"
-              :disabled="postLogin"
-          /></span>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="fill-white rounded-full h-[50px] md:h-[60px] lg:h-20 opacity-75 group-hover:opacity-100 stroke-gray-01 transition-opacity duration-300 group-hover:outline outline-2 outline-white"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z"
-            />
-          </svg>
-        </div>
-
         <img
           v-if="postLogin"
           src="../assets/loading.svg"
@@ -38,14 +9,16 @@
           class="absolute top-0 right-0 left-0 bottom-0 bg-white rounded-full bg-opacity-30"
         />
         <img
-          :src="
-            user.avatarUrl
-              ? user.avatarUrl
-              : 'https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/BANNER-3.png?raw=true'
-          "
-          alt=""
-          class="flex-shrink-0 rounded-full object-cover border border-brand-03 bg-brand-03 bg-opacity-20 lg:w-[25vw] lg:h-[25vw] w-[30vw] h-[30vw] min-h-[170px] min-w-[170px]"
+          src="../assets/avatar-2.png"
+          alt="用戶頭像"
+          class="flex-shrink-0 rounded-full object-cover border border-brand-02 bg-brand-01 bg-opacity-70 cursor-pointer hover:contrast-[0.8] lg:w-[25vw] lg:h-[25vw] w-[30vw] h-[30vw] min-h-[170px] min-w-[170px]"
+          @click="chooseAvatar"
         />
+        <p
+          class="absolute top-10 text-2xl left-1/2 -translate-x-1/2 pointer-events-none"
+        >
+          點擊選擇頭像
+        </p>
       </div>
       <ul
         class="md:w-2/3 w-full relative gap-3 flex flex-col text-center px-4 tracking-[.5rem]"
@@ -197,7 +170,7 @@
 import axios from "axios";
 import { mapState, mapActions } from "pinia";
 import { userStore, updatedImgStore } from "../stores/index.js";
-const { VITE_BASEURL, VITE_IMGUR_ID, VITE_IMGUR_SECRET } = import.meta.env;
+const { VITE_BASEURL } = import.meta.env;
 export default {
   data() {
     return {
@@ -213,7 +186,7 @@ export default {
 
   computed: {
     ...mapState(userStore, ["isLogin", "user", "postLogin"]),
-    ...mapState(updatedImgStore, ["access_token","first_token"]),
+    ...mapState(updatedImgStore, ["access_token", "first_token"]),
 
     userInfo() {
       return {
@@ -336,6 +309,16 @@ export default {
           });
         }
       }
+    },
+    async chooseAvatar() {
+      this.$swal.fire({
+        title: "Sweet!",
+        text: "Modal with a custom image.",
+        imageUrl: "https://unsplash.it/400/200",
+        imageWidth: 400,
+        imageHeight: 200,
+        imageAlt: "Custom image",
+      });
     },
   },
   mounted() {
