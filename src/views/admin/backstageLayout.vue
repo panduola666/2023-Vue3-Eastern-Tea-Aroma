@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import { RouterLink, RouterView } from "vue-router";
+// import { RouterLink, RouterView } from "vue-router";
 import AdminNav from "../../components/AdminNav.vue";
 import BaseFooter from "../../components/BaseFooter.vue";
 export default {

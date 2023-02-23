@@ -1,5 +1,5 @@
 <template>
-  <main class="wrap">
+  <main class="admin-wrap">
     <h1 class="text-3xl font-black font-self text-brand-02">課程列表</h1>
     <div class="flex justify-end gap-5 mb-5">
       <button type="button" class="btn-outline">全部套用</button>
@@ -38,9 +38,9 @@
           <p class="text-gray-02 text-end text-sm">剩餘：10</p>
         </template>
         <template #card-footer>
-          <div class="flex flex-grow gap-3 flex-col lg:flex-row justify-end">
+          <div class="flex flex-grow gap-3 flex-col md:flex-row justify-end">
             <DiscountToggle
-              class="justify-end my-3 lg:my-0 lg:justify-start flex-grow"
+              class="justify-end my-3 md:my-0 md:justify-start flex-grow"
             ></DiscountToggle>
             <div class="grid grid-cols-2 gap-3">
               <button typeof="button" class="btn-outline">刪除</button>
@@ -50,7 +50,7 @@
             </div>
             <OrderCourseModal>
               <template #btn-content>
-                <button typeof="button" class="btn-primary">預約管理</button>
+                <button typeof="button" class="btn-primary md:w-max w-full">預約詳情</button>
               </template>
             </OrderCourseModal>
           </div>

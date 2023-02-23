@@ -26,10 +26,12 @@ export default defineStore("userDataStore", {
         })
         .catch((err) => {
           console.log(`checkLogin 登入超時`);
+          sessionStorage.clear();
           console.log(err.response);
-          if (err.response.data === "jwt expired") {
-            this.overLogin();
-          }
+          this.isLogin = false;
+          // if (err.response.data === "jwt expired") {
+          //   this.overLogin();
+          // }
         });
     },
     login(userInput, identifyCode, AddIdentifyLetter) {
@@ -53,7 +55,7 @@ export default defineStore("userDataStore", {
               title: "登入成功",
             });
           })
-          .then(() => {
+          .then((res) => {
             this.isLogin = true;
             router.push("/user");
           })
@@ -104,8 +106,6 @@ export default defineStore("userDataStore", {
         icon: "error",
         title: "登入超時",
       }).then(() => {
-        sessionStorage.clear();
-        this.isLogin = false;
         router.push("/login");
       });
     },

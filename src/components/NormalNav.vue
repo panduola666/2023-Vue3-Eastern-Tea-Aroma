@@ -179,7 +179,7 @@
           </div>
         </section>
         <section class="flex mb-[10px] mt-[18px]">
-          <router-link to="shopCart" class="relative"
+          <router-link :to="{name:'shopCart'}" class="relative"
             ><img
               src="../assets/Property 1=cart@2x.png"
               alt="購物車"

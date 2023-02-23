@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap min-h-[50vh]">
+  <div class="admin-wrap min-h-[50vh]">
     <h1 class="text-3xl font-black font-self text-brand-02">折扣專區</h1>
     <div class="text-end">
       <PostDiscountModal>

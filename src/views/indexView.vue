@@ -98,11 +98,20 @@
 import bannerSwiper from "../components/BannerSwiper.vue";
 import courseList from "../components/CourseList.vue";
 import activityList from "../components/ActivityList.vue";
+import { mapActions } from "pinia";
+import { userStore } from "../stores/index.js";
+
 export default {
   data() {
     return {
       checked: false,
     };
+  },
+  methods: {
+    ...mapActions(userStore, ["checkLogin"]),
+  },
+  mounted() {
+    this.checkLogin();
   },
   components: {
     bannerSwiper,

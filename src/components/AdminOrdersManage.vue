@@ -1,7 +1,8 @@
 <template>
   <section>
     <h1></h1>
-    <div class="relative mt-3">
+    <label for="" class="mt-3">訂單查詢</label>
+    <div class="relative">
       <input
         type="text"
         name=""
@@ -27,9 +28,7 @@
     </div>
 
     <ul class="grid md:grid-cols-3 gap-3 mt-5">
-      <li
-        class="bg-white text-xl text-brand-05 font-self p-3 hover:shadow-lg"
-      >
+      <li class="bg-white text-xl text-brand-05 font-self p-3">
         <h2 class="flex justify-between items-end">
           訂單編號: 2
           <PostOrdersModal>
@@ -52,7 +51,7 @@
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              class="w-5 h-5 flex-shrink-0 cursor-pointer"
+              class="w-5 h-5 flex-shrink-0 cursor-pointer hover:-translate-y-1"
               @click="postTrackingNum"
             >
               <path
@@ -82,9 +81,10 @@ export default {
   methods: {
     async postTrackingNum() {
       const { value: trackingNumber } = await this.$swal.fire({
-        title: "請輸入物流查詢編號",
+        title: "物流查詢編號",
         input: "text",
         inputValue: "",
+        inputPlaceholder: "請輸入物流查詢編號",
         showCancelButton: true,
         cancelButtonText: "取消",
         confirmButtonText: "確認",
@@ -104,6 +104,9 @@ export default {
       const { value: choose } = await this.$swal.fire({
         title: "請選擇訂單狀態",
         input: "select",
+        customClass: {
+          input: "border-2 border-black",
+        },
         inputOptions: {
           cancel: "取消訂單",
           finish: "完成訂單",
@@ -114,12 +117,11 @@ export default {
         confirmButtonText: "確認",
         reverseButtons: true,
         inputValidator: (value) => {
-          return new Promise((resolve) => {
-            resolve();
-            if (value === "") {
-              resolve("You need to select oranges :)");
-            }
-          });
+          if (!value) {
+            return new Promise((resolve) => {
+              resolve("請選擇訂單狀態");
+            });
+          }
         },
       });
 

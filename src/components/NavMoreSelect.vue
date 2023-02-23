@@ -198,14 +198,14 @@
           </li>
           <li>
             <router-link
-              :to="{name: '課程預約'}"
+              :to="{ name: '課程預約' }"
               class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
               >課程預約</router-link
             >
           </li>
           <li>
             <router-link
-              :to="{name: '訂單詳情'}"
+              :to="{ name: '訂單詳情' }"
               class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
               >訂單詳情</router-link
             >
@@ -213,7 +213,7 @@
           <li>
             <router-link
               to="/admin"
-              class="block p-4 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
+              class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
               >後台管理</router-link
             >
           </li>
@@ -238,7 +238,6 @@
   </div>
 </template>
 <script>
-
 export default {
   props: ["open"],
   data() {
@@ -258,7 +257,6 @@ export default {
       this.choose.splice(index, 1);
     },
   },
-
 };
 </script>
 <style scoped>

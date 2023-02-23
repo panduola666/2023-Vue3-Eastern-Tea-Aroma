@@ -3,19 +3,19 @@
     <div class="flex flex-col md:flex-row items-center gap-8">
       <div class="relative flex-shrink-0">
         <img
-          v-if="postLogin"
+          v-if="postImg"
           src="../assets/loading.svg"
           alt="loadingSVG"
           class="absolute top-0 right-0 left-0 bottom-0 bg-white rounded-full bg-opacity-30"
         />
         <img
-          src="../assets/avatar-2.png"
+          :src="user.avatarUrl"
           alt="用戶頭像"
           class="flex-shrink-0 rounded-full object-cover border border-brand-02 bg-brand-01 bg-opacity-70 cursor-pointer hover:contrast-[0.8] lg:w-[25vw] lg:h-[25vw] w-[30vw] h-[30vw] min-h-[170px] min-w-[170px]"
           @click="chooseAvatar"
         />
         <p
-          class="absolute top-10 text-2xl left-1/2 -translate-x-1/2 pointer-events-none"
+          class="absolute top-8 text-[2vw] hidden md:block left-1/2 -translate-x-1/2 pointer-events-none"
         >
           點擊選擇頭像
         </p>
@@ -169,7 +169,7 @@
 <script>
 import axios from "axios";
 import { mapState, mapActions } from "pinia";
-import { userStore, updatedImgStore } from "../stores/index.js";
+import { userStore } from "../stores/index.js";
 const { VITE_BASEURL } = import.meta.env;
 export default {
   data() {
@@ -181,13 +181,12 @@ export default {
         newPassword: "",
         check: "",
       },
+      postImg: false,
     };
   },
 
   computed: {
-    ...mapState(userStore, ["isLogin", "user", "postLogin"]),
-    ...mapState(updatedImgStore, ["access_token", "first_token"]),
-
+    ...mapState(userStore, ["isLogin", "user"]),
     userInfo() {
       return {
         name: this.user.name,
@@ -196,8 +195,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(userStore, ["checkLogin", "overLogin", "postAvatar"]),
-    ...mapActions(updatedImgStore, ["postAvatar", "getFirstToken"]),
+    ...mapActions(userStore, ["checkLogin", "overLogin", "getUserData"]),
 
     changeBtnText(e) {
       if (e.target.textContent.trim() === "編輯") {
@@ -311,18 +309,35 @@ export default {
       }
     },
     async chooseAvatar() {
-      this.$swal.fire({
-        title: "Sweet!",
-        text: "Modal with a custom image.",
-        imageUrl: "https://unsplash.it/400/200",
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: "Custom image",
+      this.postImg = true;
+      const type = ["男孩", "女孩"];
+      const { value, isDismissed } = await this.$swal.fire({
+        title: "請選擇您的性別",
+        input: "radio",
+        inputOptions: type,
+        showCancelButton: true,
+        reverseButtons: true,
       });
+      if (isDismissed) {
+        this.postImg = false;
+      }
+      if (value) {
+        const avatar = await this.$http.get(`${VITE_BASEURL}/avatar`);
+        const index = avatar.data.findIndex(
+          (item) => item.type === type[value]
+        );
+        const res = await this.$http.patch(
+          `${VITE_BASEURL}/users/${sessionStorage.getItem("userId")}`,
+          {
+            avatarUrl: avatar.data[index].imgUrl,
+          }
+        );
+        this.postImg = false;
+        this.getUserData();
+      }
     },
   },
   mounted() {
-    this.getFirstToken();
     this.checkLogin();
     if (!this.isLogin) {
       this.overLogin();

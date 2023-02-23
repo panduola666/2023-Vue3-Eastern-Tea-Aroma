@@ -1,21 +1,30 @@
 <template>
   <section>
     <h1></h1>
-    <div class="flex gap-10 justify-between items-start md:items-center">
-      <select
-        name=""
-        id=""
-        class="flex-grow py-2 shadow max-w-[400px]"
-        aria-label="請選擇商品分類"
+    <div
+      class="flex lg:flex-row flex-col gap-5 justify-between lg:items-center"
+    >
+      <label
+        for=""
+        class="w-full flex lg:flex-row flex-col lg:items-center items-start lg:gap-3"
       >
-        <option value="" selected>全部</option>
-        <option value="茶葉">茶葉</option>
-        <option value="茶壺">茶壺</option>
-        <option value="茶罐">茶罐</option>
-        <option value="茶具組">茶具組</option>
-        <option value="品茶小物">品茶小物</option>
-      </select>
-      <div class="flex gap-3 flex-col-reverse md:flex-row">
+        <p class="flex-shrink-0">商品分類</p>
+        <select
+          name=""
+          id=""
+          class="py-2 shadow flex-grow w-full"
+          aria-label="請選擇商品分類"
+        >
+          <option value="" selected>全部</option>
+          <option value="茶葉">茶葉</option>
+          <option value="茶壺">茶壺</option>
+          <option value="茶罐">茶罐</option>
+          <option value="茶具組">茶具組</option>
+          <option value="品茶小物">品茶小物</option>
+        </select>
+      </label>
+
+      <div class="flex-shrink-0 flex justify-end gap-3">
         <button type="button" class="btn-outline py-2" disabled>
           全部套用
         </button>

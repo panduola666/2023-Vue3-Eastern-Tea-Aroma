@@ -63,6 +63,7 @@ const router = createRouter({
           children: [
             {
               path: "",
+              name: "shopCart",
               component: () => import("../views/shopCartView.vue"),
             },
             {

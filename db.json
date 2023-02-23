@@ -19,27 +19,39 @@
       "email": "user@gmail.com",
       "password": "$2a$10$1NktAqc61akAxpYRtwwapuKt8xpVsvtgAE3A3uRPOj71WdwdPWPx.",
       "name": "客戶",
-      "avatarUrl": "https://i.imgur.com/TrK37V6.png",
+      "avatarUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/avatar-2.png?raw=true",
       "tel": "0911111111",
       "isAdmin": false,
       "amountSpent": 0,
       "level": 1,
       "shoppingCart": {
         "discount": "",
-        "cart": [
-          {
-            "productId": 3,
-            "price": 200,
-            "number": 2,
-            "totalPrice": 400
-          },
-          {
-            "courseId": 1,
-            "price": 3000,
-            "number": 2,
-            "totalPrice": 6000
-          }
-        ]
+        "cart": {
+          "products": [
+            {
+              "productId": 3,
+              "price": 200,
+              "number": 2,
+              "totalPrice": 400
+            }
+          ],
+          "courses": [
+            {
+              "courseId": 1,
+              "dateIndex": 1,
+              "price": 3000,
+              "number": 15,
+              "totalPrice": 45000
+            },
+            {
+              "courseId": 2,
+              "dateIndex": 0,
+              "price": 1500,
+              "number": 2,
+              "totalPrice": 3000
+            }
+          ]
+        }
       },
       "id": 2
     },
@@ -54,7 +66,7 @@
       "level": 1,
       "shoppingCart": {
         "discount": "",
-        "cart": []
+        "cart": {}
       },
       "id": 3
     }
@@ -66,16 +78,24 @@
     "scale": 200,
     "start": 1675063800000,
     "end": 1677747600000,
-    "productId": [1, 3],
-    "coursesId": [2]
+    "productId": [
+      1,
+      3
+    ],
+    "coursesId": [
+      2
+    ]
   },
   "courses": [
     {
       "id": 1,
       "title": "茶葉的風味鑑賞學",
       "coverUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8201.png?raw=true",
-      "imagesUrl": [],
-      "content": [
+      "imagesUrl": [
+        "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8201.png?raw=true",
+        "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8201.png?raw=true"
+      ],
+      "contents": [
         "認識主流茶葉的特性與風味",
         "學習5種泡茶法，並實作其中2種，體驗茶葉在不同溫度、沖泡時間以及技巧下的變化",
         "學習基本茶桌禮儀，讓你可以在生活中展現儀態加分",
@@ -92,31 +112,13 @@
           "score": 4
         }
       ],
-      "price": 3000,
-      "dates": [
-        {
-          "start": 1675056600000,
-          "end": 1675063800000,
-          "total": 30,
-          "savedUsersId": [1, 2],
-          "reservedUsersId": [2],
-          "isDiscount": true
-        },
-        {
-          "start": 1675056600000,
-          "end": 1675063800000,
-          "total": 10,
-          "savedUsersId": [],
-          "reservedUsersId": [],
-          "isDiscount": false
-        }
-      ]
+      "price": 3000
     },
     {
       "title": "茶葉的風味鑑賞學test",
       "coverUrl": "https://storage.googleapis.com/vue-course-api.appspot.com/panduola666/1676484286171.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=k7v6tv8avkxZT42KwGx6Y8slacnK939FpotsmuQ30Z%2BadaVv2WM7NaNnJCpvCIYcmy92v7x%2FhQMbD4yqIKr%2BZGTQca5F0L0iJgeVd38akOo7D0FHRLkQPnNCIPS3%2BHX8kT4YBb%2FZZN3Jj9nqpIi1UjFXTx9HJ3mptq7d%2F14qYSIb7GgGOyKGs9XAN79FKnUcQ7n47NhJ3bst%2FAdygxc7MjDpK%2BHJOj3Q%2BimjQZPwatg%2BPEzzfVJsrPRUHmHkktrxdxiDsDnQnZfKwefgEqZ7U%2FbvCk1kP3RaYiYmC9SXbsGzvi7ahNFXuFFwXH0QgRrfsSKrRmrXe%2BDWCAh0Sty%2FBg%3D%3D",
       "imagesUrl": [],
-      "content": [
+      "contents": [
         "認識主流茶葉的特性與風味",
         "學習5種泡茶法，並實作其中2種，體驗茶葉在不同溫度、沖泡時間以及技巧下的變化",
         "學習基本茶桌禮儀，讓你可以在生活中展現儀態加分",
@@ -125,16 +127,40 @@
       "userId": 1,
       "scores": [],
       "price": 1500,
-      "dates": [
-        {
-          "start": 1675056600000,
-          "end": 1675063800000,
-          "total": 10,
-          "savedUsersId": [],
-          "reservedUsersId": []
-        }
-      ],
       "id": 2
+    }
+  ],
+  "courseDates": [
+    {
+      "id": 1,
+      "courseId": 1,
+      "start": 1675056600000,
+      "end": 1675063800000,
+      "total": 10,
+      "savedUsersId": [
+        2
+      ],
+      "isDiscount": false
+    },
+    {
+      "id": 2,
+      "courseId": 1,
+      "start": 1679479200000,
+      "end": 1679482800000,
+      "total": 30,
+      "savedUsersId": [
+        1
+      ],
+      "isDiscount": true
+    },
+    {
+      "id": 3,
+      "courseId": 2,
+      "start": 1679551200000,
+      "end": 1679558400000,
+      "total": 10,
+      "savedUsersId": [],
+      "isDiscount": true
     }
   ],
   "products": [
@@ -149,7 +175,7 @@
           "coverUrl": "",
           "totalNumber": 10,
           "soldNumber": 3,
-          "content": [],
+          "content": "",
           "isDiscount": false
         },
         {
@@ -158,7 +184,7 @@
           "coverUrl": "",
           "totalNumber": 30,
           "soldNumber": 18,
-          "content": [],
+          "content": "",
           "isDiscount": false
         }
       ]
@@ -169,39 +195,65 @@
       "id": 1,
       "title": "521國際茶日",
       "created": 1675063800000,
-      "content": [
-        "在2020年5月21日，聯合國首次確定＂國際茶日＂。 為表紀念每年521將推出全場商品 9 折活動為期 3 日，折扣碼：Tea521。"
+      "content": "在2020年5月21日，聯合國首次確定＂國際茶日＂。 為表紀念每年521將推出全場商品 9 折活動為期 3 日，折扣碼：Tea521。"
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "userId": 2,
+      "buyerInfo": {
+        "tel": "",
+        "address": "自取",
+        "payMethods": {
+          "choose": "信用卡",
+          "cardNumber": 4023123482949099,
+          "cardTime": [
+            1,
+            12
+          ],
+          "cardCode": 123
+        }
+      },
+      "discount": {
+        "code": "Tea123",
+        "type": "money",
+        "scale": 200
+      },
+      "products": [
+        {
+          "productId": 3,
+          "price": 200,
+          "number": 2,
+          "totalPrice": 400
+        }
+      ],
+      "courseDates": [
+        {
+          "courseDate": 1,
+          "price": 3000,
+          "number": 15,
+          "totalPrice": 45000
+        },
+        {
+          "courseDate": 2,
+          "price": 1500,
+          "number": 2,
+          "totalPrice": 3000
+        }
       ]
     }
   ],
-  "orders": {
-    "id": 1,
-    "userId": 2,
-    "buyerInfo": {
-      "tel": "",
-      "address": "自取",
-      "payMethods": {
-        "choose": "信用卡",
-        "cardNumber": 4023123482949099,
-        "cardTime": [1, 12],
-        "cardCode": 123
-      }
+  "avatar": [
+    {
+      "id": 1,
+      "type": "男孩",
+      "imgUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/avatar-1.png?raw=true"
     },
-    "discount": {
-      "code": "Tea123",
-      "type": "money",
-      "scale": 200
-    },
-    "cart": [
-      {
-        "name": "高山烏龍",
-        "totalPrice": 400,
-        "category": {
-          "name": "阿里山烏龍茶",
-          "price": 200,
-          "number": 2
-        }
-      }
-    ]
-  }
+    {
+      "id": 2,
+      "type": "女孩",
+      "imgUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/avatar-2.png?raw=true"
+    }
+  ]
 }
