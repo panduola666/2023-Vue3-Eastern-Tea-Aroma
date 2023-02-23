@@ -55,7 +55,7 @@ export default defineStore("userDataStore", {
               title: "登入成功",
             });
           })
-          .then((res) => {
+          .then(() => {
             this.isLogin = true;
             router.push("/user");
           })

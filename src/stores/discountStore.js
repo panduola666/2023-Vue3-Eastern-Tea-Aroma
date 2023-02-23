@@ -8,8 +8,9 @@ export default defineStore("discountStore", {
   }),
   actions: {
     getDiscountData() {
-      axios.get(`${VITE_BASEURL}/discount`)
-      .then(res => this.discountData = res.data);
+      axios
+        .get(`${VITE_BASEURL}/discount`)
+        .then((res) => (this.discountData = res.data));
     },
   },
 });
