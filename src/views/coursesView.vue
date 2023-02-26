@@ -119,7 +119,7 @@
                   aria-label="課程收藏"
                   class="w-6 h-6 cursor-pointer stroke-brand-02 hover:fill-brand-02"
                   v-if="isLogin"
-                  @click="($event) => patchSaved(date)"
+                  @click="() => patchSaved(date)"
                   :class="{ 'fill-brand-02': isUserSaved(date) }"
                 >
                   <path
