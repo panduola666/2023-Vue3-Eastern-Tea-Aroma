@@ -265,11 +265,10 @@ export default {
         course.title.match(this.search.input)
       )
       this.finalSearch = keyWordSearch.filter((item) => item.length !== 0)
-
       if (this.search.weeks.length) {
         const finalSearch = keyWordSearch.map((item) => {
           const weekFilter = item.courseDates.filter((date) =>
-            this.search.weeks.includes(this.weekText(date.start) ? date : '')
+            this.search.weeks.includes(this.weekText(date.start)) ? date : ''
           )
           item.courseDates = weekFilter
           return item
