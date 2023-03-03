@@ -180,51 +180,51 @@
   </main>
 </template>
 <script>
-import { mapActions, mapState } from "pinia";
-import TotalPrice from "../components/TotalPrice.vue";
-import FormBox from "../components/FormBox.vue";
+import { mapActions, mapState } from 'pinia'
+import TotalPrice from '../components/TotalPrice.vue'
+import FormBox from '../components/FormBox.vue'
 import {
   userStore,
   discountStore,
   coursesStore,
-  productsStore,
-} from "../stores/index";
+  productsStore
+} from '../stores/index'
 
-const { VITE_BASEURL } = import.meta.env;
+const { VITE_BASEURL } = import.meta.env
 export default {
   data() {
     return {
       buyerInfo: {
-        name: "",
-        tel: "",
-        method: "自取",
-        address: "",
+        name: '',
+        tel: '',
+        method: '自取',
+        address: '',
         payMethods: {
-          choose: "貨到付款",
-          cardNumber: "",
-          cardTime: ["", ""],
-          cardCode: "",
-        },
-      },
-    };
+          choose: '貨到付款',
+          cardNumber: '',
+          cardTime: ['', ''],
+          cardCode: ''
+        }
+      }
+    }
   },
   computed: {
-    ...mapState(userStore, ["user"]),
-    ...mapState(discountStore, ["discountData"]),
-    ...mapState(coursesStore, ["courses"]),
-    ...mapState(productsStore, ["allProducts"]),
+    ...mapState(userStore, ['user']),
+    ...mapState(discountStore, ['discountData']),
+    ...mapState(coursesStore, ['courses']),
+    ...mapState(productsStore, ['allProducts'])
   },
   methods: {
-    ...mapActions(coursesStore, ["getCoursesData"]),
-    ...mapActions(productsStore, ["getAllProducts"]),
+    ...mapActions(coursesStore, ['getCoursesData']),
+    ...mapActions(productsStore, ['getAllProducts']),
     // 點擊按鈕後把 discount 值傳到 pinia
     checkout() {
       // 結帳
-      const { cart } = this.user.shoppingCart;
-      let { discount } = this.user.shoppingCart;
-      const { code, type, scale } = this.discountData;
-      const orderCart = [];
-      const orderDiscount = { code: "", type: "", scale: "" };
+      const { cart } = this.user.shoppingCart
+      const { discount } = this.user.shoppingCart
+      const { code, type, scale } = this.discountData
+      const orderCart = []
+      const orderDiscount = { code: '', type: '', scale: '' }
       this.allProducts.forEach((product) => {
         cart.products.forEach((item) => {
           if (item.productId === product.id) {
@@ -235,12 +235,12 @@ export default {
               number: item.number,
               totalPrice: item.totalPrice,
               isDiscount: item.isDiscount,
-              productId: item.productId,
-            };
-            orderCart.push(data);
+              productId: item.productId
+            }
+            orderCart.push(data)
           }
-        });
-      });
+        })
+      })
       this.courses.forEach((course) => {
         course.courseDates.forEach((date) => {
           cart.courses.forEach((item) => {
@@ -253,86 +253,86 @@ export default {
                 number: item.number,
                 totalPrice: item.totalPrice,
                 isDiscount: item.isDiscount,
-                courseDateId: item.courseDateId,
-              };
-              orderCart.push(data);
+                courseDateId: item.courseDateId
+              }
+              orderCart.push(data)
             }
-          });
-        });
-      });
+          })
+        })
+      })
       if (!orderCart.length) {
         this.$swal
           .fire({
-            icon: "error",
-            title: "購物車沒有商品",
+            icon: 'error',
+            title: '購物車沒有商品',
             showCancelButton: true,
             reverseButtons: true,
-            confirmButtonText: "來去選購",
+            confirmButtonText: '來去選購'
           })
           .then((res) => {
             if (res.isConfirmed) {
-              this.$router.push("/courses");
+              this.$router.push('/courses')
             }
             if (res.isDismissed) {
-              this.$router.push("/");
+              this.$router.push('/')
             }
-          });
-        return;
+          })
+        return
       }
       if (discount === code) {
-        orderDiscount.code = code;
-        orderDiscount.type = type;
-        orderDiscount.scale = scale;
+        orderDiscount.code = code
+        orderDiscount.type = type
+        orderDiscount.scale = scale
       }
       const data = {
-        userId: +sessionStorage.getItem("userId"),
+        userId: +sessionStorage.getItem('userId'),
         buyerInfo: this.buyerInfo,
         discount: orderDiscount,
         cart: orderCart,
-        trackingNumber: "",
-        created: new Date().getTime(),
-      };
+        trackingNumber: '',
+        created: new Date().getTime()
+      }
 
-      cart.products.length = 0;
-      cart.courses.length = 0;
-      const { shoppingCart } = this.user;
-      shoppingCart.discount = "";
+      cart.products.length = 0
+      cart.courses.length = 0
+      const { shoppingCart } = this.user
+      shoppingCart.discount = ''
       this.$http
         .post(`${VITE_BASEURL}/orders`, data)
         .then((res) => {
-          console.log(res.data);
-          this.buyerInfo = this.$options.data().buyerInfo;
+          console.log(res.data)
+          this.buyerInfo = this.$options.data().buyerInfo
           // this.user.shoppingCart;
           return this.$http.patch(
-            `${VITE_BASEURL}/users/${sessionStorage.getItem("userId")}`,
+            `${VITE_BASEURL}/users/${sessionStorage.getItem('userId')}`,
             { shoppingCart }
-          );
+          )
         })
         .then(() => {
           this.$swal.fire({
-            icon: "success",
-            title: "訂單已成立",
+            icon: 'success',
+            title: '訂單已成立',
             showConfirmButton: false,
-            timer: 1500,
-          });
+            timer: 1500
+          })
         })
         .then((res) => {
-          if (res.isDismissed) this.$router.push("/");
-        });
+          if (res.isDismissed) this.$router.push('/')
+        })
     },
     onInvalidSubmit({ errors }) {
-      const firstError = Object.keys(errors)[0];
-      document.querySelector(".form")[firstError].focus();
-    },
+      const firstError = Object.keys(errors)[0]
+      document.querySelector('.form')[firstError].focus()
+    }
   },
   components: {
     TotalPrice,
-    FormBox,
+    FormBox
   },
   mounted() {
-    this.getCoursesData();
-    this.getAllProducts();
-  },
-};
+    this.getCoursesData()
+    this.getAllProducts()
+  }
+}
 </script>
 <style></style>

@@ -47,12 +47,12 @@
   </div>
 </template>
 <script>
-import PostDiscountModal from "../../components/PostDiscountModal.vue";
-import PagingComponent from "../../components/PagingComponent.vue";
+import PostDiscountModal from '../../components/PostDiscountModal.vue'
+import PagingComponent from '../../components/PagingComponent.vue'
 export default {
   components: {
     PostDiscountModal,
-    PagingComponent,
-  },
-};
+    PagingComponent
+  }
+}
 </script>

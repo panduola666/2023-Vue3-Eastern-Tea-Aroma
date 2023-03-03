@@ -157,8 +157,8 @@
                     </router-link>
                   </h1>
                   <p class="text-lg">
-                    時間：{{ $date(date.start).format("YYYY-MM-DD HH:mm") }} ~
-                    {{ $date(date.end).format("HH:mm") }}
+                    時間：{{ $date(date.start).format('YYYY-MM-DD HH:mm') }} ~
+                    {{ $date(date.end).format('HH:mm') }}
                   </p>
                   <div class="flex gap-5 flex-wrap items-center">
                     <label :for="course.title + 'courseNumber'">數量</label>
@@ -230,99 +230,99 @@
   </main>
 </template>
 <script>
-import TotalPrice from "../components/TotalPrice.vue";
-import { mapState, mapActions } from "pinia";
+import TotalPrice from '../components/TotalPrice.vue'
+import { mapState, mapActions } from 'pinia'
 import {
   userStore,
   productsStore,
   coursesStore,
-  discountStore,
-} from "../stores/index.js";
-const { VITE_BASEURL } = import.meta.env;
+  discountStore
+} from '../stores/index.js'
+const { VITE_BASEURL } = import.meta.env
 
 export default {
   computed: {
-    ...mapState(userStore, ["user"]),
-    ...mapState(productsStore, ["allProducts"]),
-    ...mapState(coursesStore, ["courses"]),
-    ...mapState(discountStore, ["discountData"]),
+    ...mapState(userStore, ['user']),
+    ...mapState(productsStore, ['allProducts']),
+    ...mapState(coursesStore, ['courses']),
+    ...mapState(discountStore, ['discountData']),
     totalPrice() {
       const productsTotal = this.user.shoppingCart?.cart.products.reduce(
         (num, product) => (num += product.totalPrice),
         0
-      );
+      )
       const coursesTotal = this.user.shoppingCart?.cart.courses.reduce(
         (num, course) => (num += course.totalPrice),
         0
-      );
-      return productsTotal + coursesTotal;
+      )
+      return productsTotal + coursesTotal
     },
     cartNumber() {
       return (
         this.user.shoppingCart?.cart.products.length +
         this.user.shoppingCart?.cart.courses.length
-      );
-    },
+      )
+    }
   },
   methods: {
-    ...mapActions(userStore, ["getUserData"]),
-    ...mapActions(productsStore, ["getAllProducts"]),
-    ...mapActions(coursesStore, ["getCoursesData", "coursePrice"]),
+    ...mapActions(userStore, ['getUserData']),
+    ...mapActions(productsStore, ['getAllProducts']),
+    ...mapActions(coursesStore, ['getCoursesData', 'coursePrice']),
     patchCartAJAX(shoppingCart) {
       this.$http
-        .patch(`${VITE_BASEURL}/users/${sessionStorage.getItem("userId")}`, {
-          shoppingCart,
+        .patch(`${VITE_BASEURL}/users/${sessionStorage.getItem('userId')}`, {
+          shoppingCart
         })
         .then(() => {
           this.$swal.fire({
-            icon: "success",
-            title: "修改成功",
+            icon: 'success',
+            title: '修改成功',
             showConfirmButton: false,
             timer: 1500,
-            allowOutsideClick: false,
-          });
-        });
+            allowOutsideClick: false
+          })
+        })
     },
     changeNumber(e, item) {
-      item.number = +e.target.value;
-      item.totalPrice = item.number * item.price;
-      this.patchCartAJAX(this.user.shoppingCart);
+      item.number = +e.target.value
+      item.totalPrice = item.number * item.price
+      this.patchCartAJAX(this.user.shoppingCart)
     },
     deleteCart(config, id, name) {
-      const { cart } = this.user.shoppingCart;
+      const { cart } = this.user.shoppingCart
       this.$swal
         .fire({
           html: `<p class="text-lg">是否刪除 <span class="text-brand-01 text-xl font-bold">${name}</span> ?</p>`,
           showCancelButton: true,
-          reverseButtons: true,
+          reverseButtons: true
         })
         .then((res) => {
           if (res.isConfirmed) {
-            if (config === "product") {
+            if (config === 'product') {
               const index = cart.products.findIndex(
                 (item) => item.productId === id
-              );
-              cart.products.splice(index, 1);
+              )
+              cart.products.splice(index, 1)
             }
-            if (config === "course") {
+            if (config === 'course') {
               const index = cart.courses.findIndex(
                 (item) => item.courseDateId === id
-              );
-              cart.courses.splice(index, 1);
+              )
+              cart.courses.splice(index, 1)
             }
-            this.patchCartAJAX(this.user.shoppingCart);
+            this.patchCartAJAX(this.user.shoppingCart)
           }
-        });
-    },
+        })
+    }
   },
   mounted() {
-    this.getUserData();
-    this.getAllProducts();
-    this.getCoursesData();
-    console.log(this.isLogin);
+    this.getUserData()
+    this.getAllProducts()
+    this.getCoursesData()
+    console.log(this.isLogin)
   },
   components: {
-    TotalPrice,
-  },
-};
+    TotalPrice
+  }
+}
 </script>

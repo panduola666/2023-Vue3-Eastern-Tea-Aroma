@@ -3,7 +3,7 @@
     <div
       class="lg:w-1/2 absolute lg:h-full text-center duration-1000 h-1/2 w-full"
       :class="{
-        'lg:translate-x-full lg:translate-y-0 translate-y-full': imgChange,
+        'lg:translate-x-full lg:translate-y-0 translate-y-full': imgChange
       }"
     >
       <img
@@ -21,7 +21,7 @@
         class="absolute bottom-10 -translate-x-1/2 btn-primary text-xl text-gray-01 duration-500 bg-white bg-opacity-30 hover:bg-brand-01 hover:bg-opacity-70"
         @click="inputReset('changeImg')"
       >
-        {{ imgChange ? "登入" : "註冊" }}
+        {{ imgChange ? '登入' : '註冊' }}
       </button>
     </div>
 
@@ -177,66 +177,66 @@
   </main>
 </template>
 <script>
-import identify from "../components/IdentifyLogin.vue";
-import { mapState, mapActions } from "pinia";
-import { userStore } from "../stores/index.js";
+import identify from '../components/IdentifyLogin.vue'
+import { mapState, mapActions } from 'pinia'
+import { userStore } from '../stores/index.js'
 export default {
   data() {
     return {
       userInput: {
-        name: "",
-        email: "",
-        password: "",
-        identify: "",
+        name: '',
+        email: '',
+        password: '',
+        identify: ''
       },
-      passwordType: "password",
+      passwordType: 'password',
       imgChange: false,
-      identifyCode: "", // 當前隨機驗證碼
-      identifyCodes: [],
-    };
+      identifyCode: '', // 當前隨機驗證碼
+      identifyCodes: []
+    }
   },
   computed: {
-    ...mapState(userStore, ["user"]),
+    ...mapState(userStore, ['user'])
   },
   methods: {
-    ...mapActions(userStore, ["getUserData", "login", "register", "signOut"]),
+    ...mapActions(userStore, ['getUserData', 'login', 'register', 'signOut']),
     inputReset(option) {
-      if (option === "login") {
-        this.login(this.userInput, this.identifyCode, this.AddIdentifyLetter);
-      } else if (option === "register") {
-        this.register(this.userInput);
-      } else if (option === "changeImg") {
-        this.imgChange = !this.imgChange;
+      if (option === 'login') {
+        this.login(this.userInput, this.identifyCode, this.AddIdentifyLetter)
+      } else if (option === 'register') {
+        this.register(this.userInput)
+      } else if (option === 'changeImg') {
+        this.imgChange = !this.imgChange
       }
-      this.userInput = this.$options.data().userInput;
-      this.identifyInput = "";
+      this.userInput = this.$options.data().userInput
+      this.identifyInput = ''
     },
     randomNum(min, max) {
-      return Math.floor(Math.random() * (max - min) + min);
+      return Math.floor(Math.random() * (max - min) + min)
     },
     refreshCode() {
-      this.identifyCode = "";
-      this.makeCode(this.identifyCodes, 4);
-      console.log("當前驗證碼==", this.identifyCode);
+      this.identifyCode = ''
+      this.makeCode(this.identifyCodes, 4)
+      console.log('當前驗證碼==', this.identifyCode)
     },
     makeCode(o, l) {
       for (let i = 0; i < l; i++) {
         this.identifyCode +=
-          this.identifyCodes[this.randomNum(0, this.identifyCodes.length)];
+          this.identifyCodes[this.randomNum(0, this.identifyCodes.length)]
       }
     },
     AddIdentifyLetter() {
       for (let i = 65; i <= 90; i++) {
-        this.identifyCodes.push(String.fromCharCode(i));
+        this.identifyCodes.push(String.fromCharCode(i))
       }
-      this.refreshCode();
-    },
+      this.refreshCode()
+    }
   },
   components: {
-    identify,
+    identify
   },
   mounted() {
-    this.AddIdentifyLetter();
-  },
-};
+    this.AddIdentifyLetter()
+  }
+}
 </script>

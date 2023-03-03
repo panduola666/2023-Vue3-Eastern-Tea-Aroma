@@ -15,7 +15,7 @@
               '-translate-y-[1px]': index === 1,
               '-translate-y-[2px]': index === 2,
               '-translate-y-[3px]': index === 3,
-              '-translate-y-[4px]': index === 4,
+              '-translate-y-[4px]': index === 4
             }"
             @click="
               this.$router.push(`${this.$route.path}?current=${item}管理`)
@@ -42,19 +42,19 @@
   </main>
 </template>
 <script>
-import PagingComponent from "../../components/PagingComponent.vue";
-import AdminProductsManage from "../../components/AdminProductsManage.vue";
-import AdminOrdersManage from "../../components/AdminOrdersManage.vue";
+import PagingComponent from '../../components/PagingComponent.vue'
+import AdminProductsManage from '../../components/AdminProductsManage.vue'
+import AdminOrdersManage from '../../components/AdminOrdersManage.vue'
 
 export default {
   data() {
-    return {};
+    return {}
   },
   components: {
     // CoursesCard,
     PagingComponent,
     AdminProductsManage,
-    AdminOrdersManage,
-  },
-};
+    AdminOrdersManage
+  }
+}
 </script>

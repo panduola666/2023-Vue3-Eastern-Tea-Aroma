@@ -77,10 +77,10 @@
 export default {
   data() {
     return {
-      chooseType: "",
-      currentChoose: "茶學演變",
-      productTypes: ["茶學演變","活動資訊", "文章分享", "相關證照", "問題反饋"],
-    };
-  },
-};
+      chooseType: '',
+      currentChoose: '茶學演變',
+      productTypes: ['茶學演變', '活動資訊', '文章分享', '相關證照', '問題反饋']
+    }
+  }
+}
 </script>

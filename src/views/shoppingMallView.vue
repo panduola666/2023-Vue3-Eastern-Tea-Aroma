@@ -113,33 +113,33 @@
   </main>
 </template>
 <script>
-import { productsStore } from "../stores/index.js";
-import { mapState, mapActions } from "pinia";
+import { productsStore } from '../stores/index.js'
+import { mapState, mapActions } from 'pinia'
 export default {
   data() {
     return {
-      chooseType: "",
-      currentChoose: "",
-      limit: 6, // 控制一頁顯示幾個
-    };
+      chooseType: '',
+      currentChoose: '',
+      limit: 6 // 控制一頁顯示幾個
+    }
   },
   computed: {
-    ...mapState(productsStore, ["products", "allProducts", "productTypes"]),
+    ...mapState(productsStore, ['products', 'allProducts', 'productTypes']),
     currentProducts() {
       return this.allProducts.filter((product) => {
         if (this.currentChoose) {
-          return product.group === this.currentChoose;
+          return product.group === this.currentChoose
         } else {
-          return product;
+          return product
         }
-      });
-    },
+      })
+    }
   },
   methods: {
-    ...mapActions(productsStore, ["getProductsData", "getAllProducts"]),
+    ...mapActions(productsStore, ['getProductsData', 'getAllProducts']),
     changePages(config, data) {
       if (
-        config === "pre" &&
+        config === 'pre' &&
         +this.$route.query.page <= Math.ceil(data.length / this.limit) &&
         +this.$route.query.page !== 1
       ) {
@@ -147,48 +147,48 @@ export default {
           `/shoppingMall?page=${+this.$route.query.page - 1}&search=${
             this.$route.query.search
           }`
-        );
+        )
       } else if (
-        config === "next" &&
+        config === 'next' &&
         this.$route.query.page < Math.ceil(data.length / this.limit)
       ) {
         this.$router.push(
           `/shoppingMall?page=${+this.$route.query.page + 1}&search=${
             this.$route.query.search
           }`
-        );
+        )
       }
-    },
+    }
   },
   watch: {
-    "$route.query.page"(page) {
+    '$route.query.page'(page) {
       this.getProductsData(
         this.currentChoose,
         this.$route.query.search
           ? `&_page=${page}&_limit=${this.limit}`
           : `?_page=${page}&_limit=${this.limit}`
-      );
+      )
     },
     currentChoose() {
-      this.$router.push(`/shoppingMall?page=1&search=${this.currentChoose}`);
+      this.$router.push(`/shoppingMall?page=1&search=${this.currentChoose}`)
       this.getProductsData(
         this.currentChoose,
         this.currentChoose
           ? `&_page=1&_limit=${this.limit}`
           : `?_page=1&_limit=${this.limit}`
-      );
-    },
+      )
+    }
   },
   mounted() {
-    const { page, search } = this.$route.query;
-    this.getAllProducts();
+    const { page, search } = this.$route.query
+    this.getAllProducts()
     this.getProductsData(
       search,
       search
         ? `&_page=${page}&_limit=${this.limit}`
         : `?_page=${page}&_limit=${this.limit}`
-    );
-    this.currentChoose = search;
-  },
-};
+    )
+    this.currentChoose = search
+  }
+}
 </script>

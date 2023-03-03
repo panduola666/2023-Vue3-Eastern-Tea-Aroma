@@ -30,7 +30,7 @@
                   fill="currentColor"
                   class="w-5 h-5 stroke-brand-02 fill-transparent cursor-pointer"
                   :class="{
-                    'fill-brand-02': i <= hoverScore || i <= score,
+                    'fill-brand-02': i <= hoverScore || i <= score
                   }"
                   v-for="i in 5"
                   :key="i"
@@ -67,34 +67,34 @@
   </main>
 </template>
 <script>
-import CoursesCard from "../components/CoursesCard.vue";
-import UserCalendar from "../components/UserCalendar.vue";
+import CoursesCard from '../components/CoursesCard.vue'
+import UserCalendar from '../components/UserCalendar.vue'
 export default {
   data() {
     return {
       score: 0,
-      hoverScore: "尚未評分",
+      hoverScore: '尚未評分',
       userReserve: [
         {
           dates: 1674692023970, // 每周五
-          description: "外部傳入的彈跳視窗說明文字",
+          description: '外部傳入的彈跳視窗說明文字'
         },
         {
           dates: 1675002323970, // 每周五
-          description: "茶葉的風味鑑賞學 15:00~16:30",
+          description: '茶葉的風味鑑賞學 15:00~16:30'
         },
         {
           dates: 1675002322170, // 每周五
-          description: "茶葉的風味 13:00~15:30",
-        },
-      ],
-    };
+          description: '茶葉的風味 13:00~15:30'
+        }
+      ]
+    }
   },
   components: {
     CoursesCard,
-    UserCalendar,
-  },
-};
+    UserCalendar
+  }
+}
 </script>
 <style>
 .vc-weekday {

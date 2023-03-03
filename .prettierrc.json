@@ -1,3 +1,6 @@
 {
-  
+  "singleQuote": true,
+  "trailingComma": "none",
+  "semi": false,
+  "space-before-function-paren": true
 }

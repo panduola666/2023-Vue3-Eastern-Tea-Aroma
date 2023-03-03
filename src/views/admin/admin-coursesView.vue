@@ -62,17 +62,17 @@
   </main>
 </template>
 <script>
-import CoursesCard from "../../components/CoursesCard.vue";
-import PostCourseModal from "../../components/PostCourseModal.vue";
-import OrderCourseModal from "../../components/OrderCourseModal.vue";
-import DiscountToggle from "../../components/DiscountToggle.vue";
+import CoursesCard from '../../components/CoursesCard.vue'
+import PostCourseModal from '../../components/PostCourseModal.vue'
+import OrderCourseModal from '../../components/OrderCourseModal.vue'
+import DiscountToggle from '../../components/DiscountToggle.vue'
 
 export default {
   components: {
     CoursesCard,
     PostCourseModal,
     OrderCourseModal,
-    DiscountToggle,
-  },
-};
+    DiscountToggle
+  }
+}
 </script>

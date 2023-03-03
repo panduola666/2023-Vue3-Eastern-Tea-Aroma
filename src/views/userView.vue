@@ -169,187 +169,185 @@
   </main>
 </template>
 <script>
-import axios from "axios";
-import { mapState, mapActions } from "pinia";
-import { userStore } from "../stores/index.js";
-const { VITE_BASEURL } = import.meta.env;
+import axios from 'axios'
+import { mapState, mapActions } from 'pinia'
+import { userStore } from '../stores/index.js'
+const { VITE_BASEURL } = import.meta.env
 export default {
   data() {
     return {
       isInfoEditor: false,
       isPasswordEditor: false,
       password: {
-        oldPassword: "",
-        newPassword: "",
-        check: "",
+        oldPassword: '',
+        newPassword: '',
+        check: ''
       },
-      postImg: false,
-    };
+      postImg: false
+    }
   },
 
   computed: {
-    ...mapState(userStore, ["isLogin", "user"]),
+    ...mapState(userStore, ['isLogin', 'user']),
     userInfo() {
       return {
         name: this.user.name,
-        tel: this.user.tel,
-      };
-    },
+        tel: this.user.tel
+      }
+    }
   },
   methods: {
-    ...mapActions(userStore, ["overLogin", "getUserData"]),
+    ...mapActions(userStore, ['overLogin', 'getUserData']),
 
     changeBtnText(e) {
-      if (e.target.textContent.trim() === "編輯") {
-        e.target.textContent = "確認";
-        e.target.classList.remove("btn-outline");
-        e.target.classList.add("btn-primary");
-        return "編輯";
-      } else if (e.target.textContent.trim() === "確認") {
-        e.target.textContent = "編輯";
-        e.target.classList.remove("btn-primary");
-        e.target.classList.add("btn-outline");
-        return "確認";
+      if (e.target.textContent.trim() === '編輯') {
+        e.target.textContent = '確認'
+        e.target.classList.remove('btn-outline')
+        e.target.classList.add('btn-primary')
+        return '編輯'
+      } else if (e.target.textContent.trim() === '確認') {
+        e.target.textContent = '編輯'
+        e.target.classList.remove('btn-primary')
+        e.target.classList.add('btn-outline')
+        return '確認'
       }
     },
     editor(area, e) {
-      const flag = this.changeBtnText(e);
-      if (area === "會員資訊") {
-        this.isInfoEditor = flag === "編輯";
+      const flag = this.changeBtnText(e)
+      if (area === '會員資訊') {
+        this.isInfoEditor = flag === '編輯'
         if (!this.isInfoEditor) {
           if (!this.userInfo.name) {
-            this.userInfo.name = this.user.name;
-            return;
+            this.userInfo.name = this.user.name
+            return
           }
           if (
             this.userInfo.name === this.user.name &&
             this.userInfo.tel === this.user.tel
           ) {
-            return;
+            return
           }
           const data = {
             name: this.userInfo.name,
-            tel: this.userInfo.tel,
-          };
-          this.user.name = this.userInfo.name;
+            tel: this.userInfo.tel
+          }
+          this.user.name = this.userInfo.name
           this.$http
             .patch(
-              `${VITE_BASEURL}/660/users/${sessionStorage.getItem("userId")}`,
+              `${VITE_BASEURL}/660/users/${sessionStorage.getItem('userId')}`,
               data
             )
             .then(() => {
               this.$swal.fire({
-                icon: "success",
-                title: "更改成功",
+                icon: 'success',
+                title: '更改成功',
                 showConfirmButton: false,
-                timer: 1500,
-              });
-            });
+                timer: 1500
+              })
+            })
         }
-      } else if (area === "修改密碼") {
-        this.isPasswordEditor = flag === "編輯";
+      } else if (area === '修改密碼') {
+        this.isPasswordEditor = flag === '編輯'
         if (
           !this.isPasswordEditor &&
           this.password.check &&
           this.password.newPassword &&
           this.password.oldPassword
         ) {
-          this.patchPassword();
+          this.patchPassword()
         }
-        this.password = this.$options.data().password;
+        this.password = this.$options.data().password
       }
     },
     async patchPassword() {
-      const password = this.password.newPassword;
+      const password = this.password.newPassword
       if (
         this.password.newPassword.length < 6 ||
         this.password.check.length < 6
       ) {
         this.$swal.fire({
-          icon: "error",
-          title: "密碼至少 6 位數",
+          icon: 'error',
+          title: '密碼至少 6 位數',
           showConfirmButton: false,
-          timer: 1500,
-        });
-        return;
+          timer: 1500
+        })
+        return
       }
       if (this.password.newPassword !== this.password.check) {
         this.$swal.fire({
-          icon: "error",
-          title: "兩次密碼不一致",
+          icon: 'error',
+          title: '兩次密碼不一致',
           showConfirmButton: false,
-          timer: 1500,
-        });
-        return;
+          timer: 1500
+        })
+        return
       }
 
       try {
         const loginState = await axios.post(`${VITE_BASEURL}/login`, {
           email: this.user.email,
-          password: this.password.oldPassword,
-        });
+          password: this.password.oldPassword
+        })
 
         if (loginState.status >= 200 && loginState.status < 300) {
           await axios.patch(
-            `${VITE_BASEURL}/660/users/${sessionStorage.getItem("userId")}`,
+            `${VITE_BASEURL}/660/users/${sessionStorage.getItem('userId')}`,
             { password }
-          );
+          )
           this.$swal
             .fire({
-              icon: "success",
-              title: "修改完成，請重新登入",
+              icon: 'success',
+              title: '修改完成，請重新登入'
             })
             .then(() => {
-              this.$router.push("/login");
-              sessionStorage.clear();
-            });
+              this.$router.push('/login')
+              sessionStorage.clear()
+            })
         }
       } catch (err) {
-        console.log(err);
-        if (err.response.data === "Incorrect password") {
+        console.log(err)
+        if (err.response.data === 'Incorrect password') {
           this.$swal.fire({
-            icon: "error",
-            title: "密碼輸入錯誤",
+            icon: 'error',
+            title: '密碼輸入錯誤',
             showConfirmButton: false,
-            timer: 1500,
-          });
+            timer: 1500
+          })
         }
       }
     },
     async chooseAvatar() {
-      this.postImg = true;
-      const type = ["男孩", "女孩"];
+      this.postImg = true
+      const type = ['男孩', '女孩']
       const { value, isDismissed } = await this.$swal.fire({
-        title: "請選擇您的性別",
-        input: "radio",
+        title: '請選擇您的性別',
+        input: 'radio',
         inputOptions: type,
         showCancelButton: true,
-        reverseButtons: true,
-      });
+        reverseButtons: true
+      })
       if (isDismissed) {
-        this.postImg = false;
+        this.postImg = false
       }
       if (value) {
-        const avatar = await this.$http.get(`${VITE_BASEURL}/avatar`);
-        const index = avatar.data.findIndex(
-          (item) => item.type === type[value]
-        );
+        const avatar = await this.$http.get(`${VITE_BASEURL}/avatar`)
+        const index = avatar.data.findIndex((item) => item.type === type[value])
         await this.$http.patch(
-          `${VITE_BASEURL}/users/${sessionStorage.getItem("userId")}`,
+          `${VITE_BASEURL}/users/${sessionStorage.getItem('userId')}`,
           {
-            avatarUrl: avatar.data[index].imgUrl,
+            avatarUrl: avatar.data[index].imgUrl
           }
-        );
-        this.postImg = false;
-        this.getUserData();
+        )
+        this.postImg = false
+        this.getUserData()
       }
-    },
-  },
-};
+    }
+  }
+}
 </script>
 <style scoped>
 #userChoose::after {
-  content: "";
+  content: '';
   background-color: #38415a;
   opacity: 0.4;
   width: 100%;
@@ -360,7 +358,7 @@ export default {
   left: -10px;
 }
 #userChoose::before {
-  content: "";
+  content: '';
   background-color: #38415a;
   opacity: 0.4;
   width: 2px;

@@ -95,22 +95,22 @@
   </div>
 </template>
 <script>
-import bannerSwiper from "../components/BannerSwiper.vue";
-import courseList from "../components/CourseList.vue";
-import activityList from "../components/ActivityList.vue";
-import { mapActions } from "pinia";
-import { userStore } from "../stores/index.js";
+import bannerSwiper from '../components/BannerSwiper.vue'
+import courseList from '../components/CourseList.vue'
+import activityList from '../components/ActivityList.vue'
+// import { mapActions } from 'pinia'
+// import { userStore } from '../stores/index.js'
 
 export default {
   data() {
     return {
-      checked: false,
-    };
+      checked: false
+    }
   },
   components: {
     bannerSwiper,
     courseList,
-    activityList,
-  },
-};
+    activityList
+  }
+}
 </script>

@@ -92,7 +92,7 @@
             @click="() => addToCart('products', currentProduct, shoppingNumber)"
           >
             {{
-              currentProduct.totalNumber - soldNumber ? "加入購物車" : "已售完"
+              currentProduct.totalNumber - soldNumber ? '加入購物車' : '已售完'
             }}
           </button>
         </div>
@@ -127,116 +127,116 @@
   </main>
 </template>
 <script>
-import DiscountInfo from "../components/DiscountInfo.vue";
-import { mapState, mapActions } from "pinia";
+import DiscountInfo from '../components/DiscountInfo.vue'
+import { mapState, mapActions } from 'pinia'
 import {
   productsStore,
   ordersStore,
   toThousand,
-  userStore,
-} from "../stores/index.js";
+  userStore
+} from '../stores/index.js'
 export default {
   data() {
     return {
-      shoppingNumber: 1,
-    };
+      shoppingNumber: 1
+    }
   },
   computed: {
-    ...mapState(userStore, ["isLogin"]),
-    ...mapState(productsStore, ["allProducts"]),
-    ...mapState(ordersStore, ["orders"]),
+    ...mapState(userStore, ['isLogin']),
+    ...mapState(productsStore, ['allProducts']),
+    ...mapState(ordersStore, ['orders']),
     currentProduct() {
       const index = this.allProducts.findIndex(
         (product) => product.id === +this.$route.params.id
-      );
+      )
       if (this.allProducts.length && index === -1) {
-        this.notFound();
+        this.notFound()
       }
-      return this.allProducts[index];
+      return this.allProducts[index]
     },
     soldNumber() {
-      const totalProductsOrder = [];
+      const totalProductsOrder = []
       this.orders.forEach((item) => {
-        totalProductsOrder.push(item.cart);
-      });
-      let soldNumber = 0;
+        totalProductsOrder.push(item.cart)
+      })
+      let soldNumber = 0
       // console.log(totalProductsOrder);
       totalProductsOrder.forEach((cart) => {
         cart.forEach((order) => {
-          console.log(order.productId);
+          console.log(order.productId)
           if (order.productId && order.productId === +this.$route.params.id) {
-            soldNumber += order.number;
+            soldNumber += order.number
           }
-        });
-      });
-      return soldNumber;
-    },
+        })
+      })
+      return soldNumber
+    }
   },
   methods: {
-    ...mapActions(productsStore, ["getAllProducts"]),
-    ...mapActions(ordersStore, ["getOrdersData"]),
-    ...mapActions(userStore, ["addToCart"]),
+    ...mapActions(productsStore, ['getAllProducts']),
+    ...mapActions(ordersStore, ['getOrdersData']),
+    ...mapActions(userStore, ['addToCart']),
     notFound() {
       this.$swal
         .fire({
-          icon: "warning",
-          title: "查無此產品",
+          icon: 'warning',
+          title: '查無此產品',
           showConfirmButton: false,
-          timer: 1500,
+          timer: 1500
         })
         .then(() => {
-          this.$router.push("/404");
-        });
+          this.$router.push('/404')
+        })
     },
     productPrice(money) {
-      return toThousand(money);
+      return toThousand(money)
     },
     setProductsHistory(id) {
-      if (localStorage.getItem("productsHistory")) {
-        const historyArr = localStorage.getItem("productsHistory").split(",");
+      if (localStorage.getItem('productsHistory')) {
+        const historyArr = localStorage.getItem('productsHistory').split(',')
         if (!historyArr.includes(id)) {
-          historyArr.unshift(id);
-          if (historyArr.length > 4) historyArr.pop();
-          localStorage.setItem("productsHistory", historyArr);
+          historyArr.unshift(id)
+          if (historyArr.length > 4) historyArr.pop()
+          localStorage.setItem('productsHistory', historyArr)
         } else {
-          const index = historyArr.findIndex((item) => item === id);
-          historyArr.splice(index, 1);
-          historyArr.unshift(id);
-          localStorage.setItem("productsHistory", historyArr);
+          const index = historyArr.findIndex((item) => item === id)
+          historyArr.splice(index, 1)
+          historyArr.unshift(id)
+          localStorage.setItem('productsHistory', historyArr)
         }
       } else {
-        localStorage.setItem("productsHistory", id);
+        localStorage.setItem('productsHistory', id)
       }
     },
     historyData() {
-      const ids = localStorage.getItem("productsHistory").split(",");
-      const filterProducts = [];
+      const ids = localStorage.getItem('productsHistory').split(',')
+      const filterProducts = []
       this.allProducts.forEach((product) => {
         ids.forEach((id) => {
-          if (product.id === +id) filterProducts.push(product);
-        });
-      });
-      this.history = filterProducts;
+          if (product.id === +id) filterProducts.push(product)
+        })
+      })
+      this.history = filterProducts
     },
     productsIdHistory() {
-      return localStorage.getItem("productsHistory").split(",");
-    },
+      return localStorage.getItem('productsHistory').split(',')
+    }
   },
   watch: {
-    "$route.params.id"(id) {
-      const index = this.allProducts.findIndex((product) => product.id === +id);
+    '$route.params.id'(id) {
+      const index = this.allProducts.findIndex((product) => product.id === +id)
       if (index !== -1) {
-        this.setProductsHistory(id);
+        this.setProductsHistory(id)
       }
-    },
+    }
   },
   components: {
-    DiscountInfo,
+    DiscountInfo
   },
   mounted() {
-    this.getAllProducts();
-    this.getOrdersData();
-    this.setProductsHistory(this.$route.params.id);
-  },
-};
+    this.getAllProducts()
+    this.getOrdersData()
+    this.setProductsHistory(this.$route.params.id)
+  }
+}
 </script>

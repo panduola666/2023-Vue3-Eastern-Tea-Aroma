@@ -9,7 +9,7 @@
       <thead class="bg-brand-01 bg-opacity-50 font-self">
         <tr>
           <th class="text-xs sm:text-base py-2">
-            成立日期: {{ $date(order.created).format("YYYY-MM-DD") }}
+            成立日期: {{ $date(order.created).format('YYYY-MM-DD') }}
           </th>
           <th class="py-2" colspan="2">
             物流查詢編號：<span class="sm:text-xl">{{
@@ -38,7 +38,7 @@
               </p>
               <p>
                 {{
-                  order.discount.type === "money"
+                  order.discount.type === 'money'
                     ? product.totalPrice - order.discount.scale
                     : product.totalPrice * order.discount.scale
                 }}
@@ -50,7 +50,7 @@
           <template v-if="product.courseDateId">
             <td class="tracking-wider py-2 w-1/3">{{ product.name }}</td>
             <td class="py-2 w-1/3">
-              {{ $date(product.start).format("YYYY-MM-DD HH:mm") }}
+              {{ $date(product.start).format('YYYY-MM-DD HH:mm') }}
             </td>
             <td
               class="py-2 w-1/3"
@@ -61,7 +61,7 @@
               </p>
               <p>
                 {{
-                  order.discount.type === "money"
+                  order.discount.type === 'money'
                     ? product.totalPrice - order.discount.scale
                     : product.totalPrice * order.discount.scale
                 }}
@@ -76,7 +76,7 @@
         <tr>
           <td class="pt-3">{{ order.cart.length }}件商品</td>
           <td class="pt-3 font-bold text-brand-02">
-            {{ order.trackingNumber ? "已出貨" : "未出貨" }}
+            {{ order.trackingNumber ? '已出貨' : '未出貨' }}
           </td>
           <td class="flex justify-center pt-3">
             <span
@@ -95,43 +95,43 @@
   </main>
 </template>
 <script>
-import { mapState, mapActions } from "pinia";
-import { ordersStore } from "../stores/index.js";
+import { mapState, mapActions } from 'pinia'
+import { ordersStore } from '../stores/index.js'
 export default {
   computed: {
-    ...mapState(ordersStore, ["orders"]),
+    ...mapState(ordersStore, ['orders'])
   },
   methods: {
-    ...mapActions(ordersStore, ["getOrdersData"]),
+    ...mapActions(ordersStore, ['getOrdersData']),
     totalPrice(id) {
-      const index = this.orders.findIndex((order) => order.id === id);
+      const index = this.orders.findIndex((order) => order.id === id)
       return this.orders[index].cart.reduce((price, item) => {
-        price += item.totalPrice;
-        return price;
-      }, 0);
+        price += item.totalPrice
+        return price
+      }, 0)
     },
     discountPrice(id) {
-      const index = this.orders.findIndex((order) => order.id === id);
-      let price = 0;
+      const index = this.orders.findIndex((order) => order.id === id)
+      let price = 0
       this.orders[index].cart.forEach((item) => {
         if (item.isDiscount) {
-          if (this.orders[index].discount.type === "money") {
-            price += item.totalPrice - this.orders[index].discount.scale;
+          if (this.orders[index].discount.type === 'money') {
+            price += item.totalPrice - this.orders[index].discount.scale
           } else {
-            price += item.totalPrice * this.orders[index].discount.scale;
+            price += item.totalPrice * this.orders[index].discount.scale
           }
         } else {
-          console.log("mu");
-          price += item.totalPrice;
+          console.log('mu')
+          price += item.totalPrice
         }
-      });
-      return price;
-    },
+      })
+      return price
+    }
   },
   mounted() {
-    this.getOrdersData();
-  },
-};
+    this.getOrdersData()
+  }
+}
 </script>
 <style scoped>
 ::-webkit-scrollbar {

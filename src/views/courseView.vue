@@ -31,8 +31,8 @@
         class="lg:col-span-2 flex flex-col justify-between gap-3 lg:text-xl"
       >
         <h3 class="flex justify-between items-center">
-          時間：{{ $date(currentCourse.start).format("YYYY-MM-DD HH:mm") }}~{{
-            $date(currentCourse.end).format("HH:mm")
+          時間：{{ $date(currentCourse.start).format('YYYY-MM-DD HH:mm') }}~{{
+            $date(currentCourse.end).format('HH:mm')
           }}
           <button
             type="button"
@@ -40,7 +40,7 @@
             @click="() => patchSaved(currentCourse)"
             v-if="isLogin"
           >
-            {{ isSaved ? "取消收藏" : "收藏課程" }}
+            {{ isSaved ? '取消收藏' : '收藏課程' }}
           </button>
         </h3>
         <h2>講師：{{ currentCourse.user?.name }} 講師</h2>
@@ -64,8 +64,8 @@
           {{
             currentCourse.total - remainingNumber <= 0 ||
             currentCourse.start < new Date()
-              ? "預約已滿 / 已結束"
-              : "加入購物車"
+              ? '預約已滿 / 已結束'
+              : '加入購物車'
           }}
         </button>
       </section>
@@ -86,7 +86,7 @@
       <div
         class="grid sm:grid-cols-3 gap-3 my-4"
         :class="{
-          'sm:grid-cols-2': currentCourse.course.imagesUrl.length <= 2,
+          'sm:grid-cols-2': currentCourse.course.imagesUrl.length <= 2
         }"
         v-if="currentCourse.course"
       >
@@ -122,13 +122,13 @@
               class="hover:text-gray-01 underline underline-offset-2 hover:bg-brand-03 hover:bg-opacity-20"
             >
               <span
-                >{{ $date(courseDate.start).format("YYYY-MM-DD") }} /星期{{
-                  ["日", "一", "二", "三", "四", "五", "六"][
+                >{{ $date(courseDate.start).format('YYYY-MM-DD') }} /星期{{
+                  ['日', '一', '二', '三', '四', '五', '六'][
                     $date(courseDate.start).day()
                   ]
                 }}
-                - {{ $date(courseDate.start).format("HH:mm") }}~{{
-                  $date(courseDate.end).format("HH:mm")
+                - {{ $date(courseDate.start).format('HH:mm') }}~{{
+                  $date(courseDate.end).format('HH:mm')
                 }}
                 ／ 價格: {{ coursePrice(course.price) }} 元</span
               >
@@ -141,69 +141,69 @@
   </main>
 </template>
 <script>
-import CourseList from "../components/CourseList.vue";
-import DiscountInfo from "../components/DiscountInfo.vue";
-import { userStore, coursesStore, ordersStore } from "../stores/index.js";
-import { mapState, mapActions } from "pinia";
+import CourseList from '../components/CourseList.vue'
+import DiscountInfo from '../components/DiscountInfo.vue'
+import { userStore, coursesStore, ordersStore } from '../stores/index.js'
+import { mapState, mapActions } from 'pinia'
 
 export default {
   computed: {
-    ...mapState(coursesStore, ["currentCourse", "courses"]),
-    ...mapState(ordersStore, ["orders"]),
-    ...mapState(userStore, ["isLogin"]),
+    ...mapState(coursesStore, ['currentCourse', 'courses']),
+    ...mapState(ordersStore, ['orders']),
+    ...mapState(userStore, ['isLogin']),
     remainingNumber() {
-      const reserveDates = [];
-      this.orders.map((order) => {
+      const reserveDates = []
+      this.orders.forEach((order) => {
         order.cart.forEach((item) => {
           if (item.courseDateId) {
             reserveDates.push({
               courseDateId: item.courseDateId,
-              number: item.number,
-            });
+              number: item.number
+            })
           }
-        });
-      });
-      let reserveNum = 0;
+        })
+      })
+      let reserveNum = 0
       reserveDates.forEach((item) => {
         if (item.courseDateId === +this.$route.params.id) {
-          reserveNum += item.number;
+          reserveNum += item.number
         }
-      });
-      return reserveNum;
+      })
+      return reserveNum
     },
     isSaved() {
       return (
         this.currentCourse.savedUsersId &&
         this.currentCourse.savedUsersId.includes(
-          +sessionStorage.getItem("userId")
+          +sessionStorage.getItem('userId')
         )
-      );
-    },
+      )
+    }
   },
   methods: {
     ...mapActions(coursesStore, [
-      "getCurrent",
-      "getCoursesData",
-      "patchSaved",
-      "coursePrice",
+      'getCurrent',
+      'getCoursesData',
+      'patchSaved',
+      'coursePrice'
     ]),
-    ...mapActions(ordersStore, ["getOrdersData"]),
-    ...mapActions(userStore, ["addToCart"]),
+    ...mapActions(ordersStore, ['getOrdersData']),
+    ...mapActions(userStore, ['addToCart'])
   },
   watch: {
-    "$route.params.id"(id) {
-      if (id) this.getCurrent(id);
-    },
+    '$route.params.id'(id) {
+      if (id) this.getCurrent(id)
+    }
   },
   mounted() {
-    const { id } = this.$route.params;
-    this.getCurrent(id);
-    this.getOrdersData();
-    this.getCoursesData();
+    const { id } = this.$route.params
+    this.getCurrent(id)
+    this.getOrdersData()
+    this.getCoursesData()
   },
   components: {
     CourseList,
-    DiscountInfo,
-  },
-};
+    DiscountInfo
+  }
+}
 </script>

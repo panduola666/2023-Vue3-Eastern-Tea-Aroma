@@ -84,7 +84,7 @@
                 {{ course.title }}
                 <span class="text-brand-04 text-base self-center font-sans">{{
                   $date(new Date(date.start).toLocaleDateString()).format(
-                    "YYYY-MM-DD"
+                    'YYYY-MM-DD'
                   )
                 }}</span>
               </template>
@@ -92,8 +92,8 @@
                 <p>
                   時間：<span
                     >星期{{ weekText(date.start) }} /
-                    {{ $dayjs(new Date(date.start)).format("HH:mm") }}~{{
-                      $dayjs(new Date(date.end)).format("HH:mm")
+                    {{ $dayjs(new Date(date.start)).format('HH:mm') }}~{{
+                      $dayjs(new Date(date.end)).format('HH:mm')
                     }}</span
                   >
                 </p>
@@ -162,7 +162,7 @@
               {{ course.title }}
               <span class="text-brand-04 text-base self-center font-sans">{{
                 $date(new Date(date.start).toLocaleDateString()).format(
-                  "YYYY-MM-DD"
+                  'YYYY-MM-DD'
                 )
               }}</span>
             </template>
@@ -170,8 +170,8 @@
               <p>
                 時間：<span
                   >星期{{ weekText(date.start) }} /
-                  {{ $dayjs(new Date(date.start)).format("HH:mm") }}~{{
-                    $dayjs(new Date(date.end)).format("HH:mm")
+                  {{ $dayjs(new Date(date.start)).format('HH:mm') }}~{{
+                    $dayjs(new Date(date.end)).format('HH:mm')
                   }}</span
                 >
               </p>
@@ -220,73 +220,69 @@
   </main>
 </template>
 <script>
-import CoursesCard from "../components/CoursesCard.vue";
-import { coursesStore, userStore } from "../stores/index.js";
-import { mapState, mapActions } from "pinia";
+import CoursesCard from '../components/CoursesCard.vue'
+import { coursesStore, userStore } from '../stores/index.js'
+import { mapState, mapActions } from 'pinia'
 export default {
   data() {
     return {
       search: {
         weeks: [],
-        input: "",
+        input: ''
       },
       isUserSearch: false,
-      finalSearch: [],
-    };
+      finalSearch: []
+    }
   },
   computed: {
-    ...mapState(coursesStore, ["courses"]),
-    ...mapState(userStore, ["isLogin"]),
+    ...mapState(coursesStore, ['courses']),
+    ...mapState(userStore, ['isLogin'])
   },
   methods: {
     ...mapActions(coursesStore, [
-      "getCoursesData",
-      "patchSaved",
-      "coursePrice",
+      'getCoursesData',
+      'patchSaved',
+      'coursePrice'
     ]),
     weekText(timer) {
-      const text = ["日", "一", "二", "三", "四", "五", "六"];
-      return text[this.$date(timer).day()];
+      const text = ['日', '一', '二', '三', '四', '五', '六']
+      return text[this.$date(timer).day()]
     },
     conversionScore(score) {
-      return score ? `${Math.round(score * 10) / 10} / 5.0` : "尚未評分";
+      return score ? `${Math.round(score * 10) / 10} / 5.0` : '尚未評分'
     },
     clearSearch() {
-      this.search = this.$options.data().search;
-      this.isUserSearch = false;
+      this.search = this.$options.data().search
+      this.isUserSearch = false
     },
     isUserSaved(courseDate) {
-      return courseDate.savedUsersId.includes(
-        +sessionStorage.getItem("userId")
-      );
+      return courseDate.savedUsersId.includes(+sessionStorage.getItem('userId'))
     },
     userSearch() {
-      this.isUserSearch = true;
-      const courses = JSON.parse(JSON.stringify(this.courses));
+      this.isUserSearch = true
+      const courses = JSON.parse(JSON.stringify(this.courses))
       const keyWordSearch = courses.filter((course) =>
         course.title.match(this.search.input)
-      );
-      this.finalSearch = keyWordSearch.filter((item) => item.length !== 0);
+      )
+      this.finalSearch = keyWordSearch.filter((item) => item.length !== 0)
 
       if (this.search.weeks.length) {
         const finalSearch = keyWordSearch.map((item) => {
-          const weekFilter = item.courseDates.filter((date) => {
-            if (this.search.weeks.includes(this.weekText(date.start))) {
-              return date;
-            }
-          });
-          item.courseDates = weekFilter;
-          return item;
-        });
-        this.finalSearch = finalSearch.filter((item) => item.length !== 0);
+          const weekFilter = item.courseDates.filter((date) =>
+            this.search.weeks.includes(this.weekText(date.start) ? date : '')
+          )
+          item.courseDates = weekFilter
+          return item
+        })
+        this.finalSearch = finalSearch.filter((item) => item.length !== 0)
       }
-    },
+    }
   },
   mounted() {
-    this.getCoursesData();
+    this.getCoursesData()
   },
   components: {
-    CoursesCard,
-  },
-};
+    CoursesCard
+  }
+}
 </script>
