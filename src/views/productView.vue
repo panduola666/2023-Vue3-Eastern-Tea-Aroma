@@ -160,10 +160,8 @@ export default {
         totalProductsOrder.push(item.cart)
       })
       let soldNumber = 0
-      // console.log(totalProductsOrder);
       totalProductsOrder.forEach((cart) => {
         cart.forEach((order) => {
-          console.log(order.productId)
           if (order.productId && order.productId === +this.$route.params.id) {
             soldNumber += order.number
           }

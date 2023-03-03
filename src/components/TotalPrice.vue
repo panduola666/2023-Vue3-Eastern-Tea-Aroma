@@ -17,7 +17,7 @@
             v-else
             class="underline underline-offset-2 cursor-pointer hover:text-brand-02 hover:font-bold"
             @click="inputPrompt"
-            >{{ !discount ? "輸入折扣碼" : discount }}</span
+            >{{ !discount ? '輸入折扣碼' : discount }}</span
           >
         </p>
         <p
@@ -40,21 +40,52 @@
           </svg>
           折扣碼不存在
         </p>
+        <p
+          v-if="
+            discount === discountData.code && discountData.end <= new Date()
+          "
+          class="text-red-500 font-bold flex items-center left-0 top-full whitespace-nowrap"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-6 h-6"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+          折扣碼已過期
+        </p>
       </div>
     </div>
     <div>
       <p class="flex flex-wrap gap-x-2 items-center">
+        <!-- {{ discountData }} -->
         總計
-        <span v-if="discount !== discountData.code">
-          {{ toThousand(totalPrice) }}
+        <span
+          v-if="
+            discount !== discountData.code || discountData.end <= new Date()
+          "
+        >
+          $ {{ toThousand(totalPrice) }}
         </span>
+        <span v-else-if="!hasDiscount"> $ {{ toThousand(totalPrice) }} </span>
         <span v-else>
           <del class="text-base text-gray-01"
             >$ {{ toThousand(totalPrice) }}</del
           ><span class="text-xl">$ {{ toThousand(discountPrice) }}</span></span
         >
       </p>
-      <p class="text-gray-01" v-if="discount === discountData.code">
+      <p
+        class="text-gray-01"
+        v-if="discount === discountData.code && discountData.end > new Date()"
+      >
         已節省 {{ toThousand(totalPrice - discountPrice) }} 元
       </p>
     </div>
@@ -64,86 +95,94 @@
   </div>
 </template>
 <script>
-import { mapState, mapActions } from "pinia";
-import { discountStore, userStore, toThousand } from "../stores/index.js";
+import { mapState, mapActions } from 'pinia'
+import { discountStore, userStore, toThousand } from '../stores/index.js'
 export default {
   data() {
     return {
-      discount: "",
-    };
+      discount: ''
+    }
   },
   computed: {
-    ...mapState(userStore, ["user"]),
-    ...mapState(discountStore, ["discountData"]),
+    ...mapState(userStore, ['user']),
+    ...mapState(discountStore, ['discountData']),
     totalPrice() {
       const productsTotal = this.user.shoppingCart?.cart.products.reduce(
         (num, product) => (num += product.totalPrice),
         0
-      );
+      )
       const coursesTotal = this.user.shoppingCart?.cart.courses.reduce(
         (num, course) => (num += course.totalPrice),
         0
-      );
-      return productsTotal + coursesTotal;
+      )
+      return productsTotal + coursesTotal
     },
     discountPrice() {
+      // console.log(this.user.shoppingCart.cart)
+      // return 1
       const discountProducts = this.user.shoppingCart?.cart.products.reduce(
         (price, product) => {
           if (product.isDiscount) {
-            if (this.discountData.type === "money") {
-              price += product.totalPrice - this.discountData.scale;
+            if (this.discountData.type === 'money') {
+              price += product.totalPrice - this.discountData.scale
             } else {
-              price += product.totalPrice * this.discountData.scale;
+              price += product.totalPrice * this.discountData.scale
             }
           } else {
-            price += product.totalPrice;
+            price += product.totalPrice
           }
-          return price;
+          return price
         },
         0
-      );
-      const discountCourses = this.user.shoppingCart?.cart.courses.reduce(
+      )
+      const discountCourses = this.user.shoppingCart.cart.courses.reduce(
         (price, course) => {
           if (course.isDiscount) {
-            if (this.discountData.type === "money") {
-              price += course.totalPrice - this.discountData.scale;
+            if (this.discountData.type === 'money') {
+              price += course.totalPrice - this.discountData.scale
             } else {
-              price += course.totalPrice * this.discountData.scale;
+              price += course.totalPrice * this.discountData.scale
             }
           } else {
-            price += course.totalPrice;
+            price += course.totalPrice
           }
-          return price;
+          return price
         },
         0
-      );
-      return discountProducts + discountCourses;
+      )
+      return discountProducts + discountCourses
     },
+    hasDiscount() {
+      let flag = false
+      this.user.shoppingCart?.cart.product?.forEach((item) => (item.isDiscount ? (flag = true) : ''))
+      this.user.shoppingCart?.cart.courses?.forEach((item) => (item.isDiscount ? (flag = true) : ''))
+      return flag
+    }
   },
   methods: {
-    ...mapActions(discountStore, ["getDiscountData"]),
+    ...mapActions(discountStore, ['getDiscountData']),
     inputPrompt() {
       this.$swal({
-        titleText: "請輸入折扣碼代號",
-        input: "text",
-        inputValue: "",
+        titleText: '請輸入折扣碼代號',
+        input: 'text',
+        inputValue: '',
         showCancelButton: true,
         inputValidator: (value) => {
-          this.discount = value;
-          this.user.shoppingCart.discount = value;
-        },
-      });
+          this.discount = value
+          this.user.shoppingCart.discount = value
+        }
+      })
     },
     toThousand(money) {
-      return toThousand(money);
-    },
+      return toThousand(money)
+    }
   },
   mounted() {
     // 從 pinia 獲取資料
     // this.getUserData()
-    this.getDiscountData();
-    this.discount = this.user.shoppingCart?.discount;
-    console.log(this.user.shoppingCart?.discount);
-  },
-};
+    this.getDiscountData()
+    this.discount = this.user.shoppingCart?.discount
+    console.log(this.user.shoppingCart?.discount)
+  }
+}
 </script>

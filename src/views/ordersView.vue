@@ -34,41 +34,46 @@
               v-if="order.discount.code && product.isDiscount"
             >
               <p class="mx-2 text-base text-gray-02 line-through">
-                {{ product.totalPrice }} 元
+                {{ toThousand(product.totalPrice) }} 元
               </p>
               <p>
                 {{
                   order.discount.type === 'money'
-                    ? product.totalPrice - order.discount.scale
-                    : product.totalPrice * order.discount.scale
+                    ? toThousand(product.totalPrice - order.discount.scale)
+                    : toThousand(product.totalPrice * order.discount.scale)
                 }}
                 元
               </p>
             </td>
-            <td class="w-1/3" v-else>{{ product.totalPrice }} 元</td>
+            <td class="w-1/3" v-else>
+              {{ toThousand(product.totalPrice) }} 元
+            </td>
           </template>
           <template v-if="product.courseDateId">
             <td class="tracking-wider py-2 w-1/3">{{ product.name }}</td>
             <td class="py-2 w-1/3">
-              {{ $date(product.start).format('YYYY-MM-DD HH:mm') }}
+              {{ $date(product.start).format('YYYY-MM-DD HH:mm') }} ~
+              {{ $date(product.end).format('HH:mm') }}
             </td>
             <td
               class="py-2 w-1/3"
               v-if="order.discount.code && product.isDiscount"
             >
               <p class="mx-2 text-base text-gray-02 line-through">
-                {{ product.totalPrice }} 元
+                {{ toThousand(product.totalPrice) }} 元
               </p>
               <p>
                 {{
                   order.discount.type === 'money'
-                    ? product.totalPrice - order.discount.scale
-                    : product.totalPrice * order.discount.scale
+                    ? toThousand(product.totalPrice - order.discount.scale)
+                    : toThousand(product.totalPrice * order.discount.scale)
                 }}
                 元
               </p>
             </td>
-            <td class="w-1/3" v-else>{{ product.totalPrice }} 元</td>
+            <td class="w-1/3" v-else>
+              {{ toThousand(product.totalPrice) }} 元
+            </td>
           </template>
         </tr>
       </tbody>
@@ -83,10 +88,10 @@
               class="sm:block flex flex-col sm:text-xl"
               v-if="order.discount.code"
             >
-              總計 {{ discountPrice(order.id) }} 元
+              總計 {{ toThousand(discountPrice(order.id)) }} 元
             </span>
             <span class="sm:text-xl" v-else
-              >總計 {{ totalPrice(order.id) }} 元</span
+              >總計 {{ toThousand(totalPrice(order.id)) }} 元</span
             >
           </td>
         </tr>
@@ -96,7 +101,7 @@
 </template>
 <script>
 import { mapState, mapActions } from 'pinia'
-import { ordersStore } from '../stores/index.js'
+import { ordersStore, toThousand } from '../stores/index.js'
 export default {
   computed: {
     ...mapState(ordersStore, ['orders'])
@@ -121,11 +126,13 @@ export default {
             price += item.totalPrice * this.orders[index].discount.scale
           }
         } else {
-          console.log('mu')
           price += item.totalPrice
         }
       })
       return price
+    },
+    toThousand(money) {
+      return toThousand(money)
     }
   },
   mounted() {

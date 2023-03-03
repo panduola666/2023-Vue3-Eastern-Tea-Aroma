@@ -26,7 +26,11 @@
       {{ currentCourse.course?.title }}
     </h1>
     <div class="grid lg:grid-cols-3 gap-3 mt-5">
-      <img src="../assets/課堂01.png" alt="" class="w-full h-56 object-cover" />
+      <img
+        :src="currentCourse.course?.coverUrl"
+        :alt="currentCourse.course?.title"
+        class="w-full h-56 object-cover"
+      />
       <section
         class="lg:col-span-2 flex flex-col justify-between gap-3 lg:text-xl"
       >

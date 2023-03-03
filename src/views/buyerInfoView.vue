@@ -222,7 +222,7 @@ export default {
       // 結帳
       const { cart } = this.user.shoppingCart
       const { discount } = this.user.shoppingCart
-      const { code, type, scale } = this.discountData
+      const { code, type, scale,end } = this.discountData
       const orderCart = []
       const orderDiscount = { code: '', type: '', scale: '' }
       this.allProducts.forEach((product) => {
@@ -279,7 +279,7 @@ export default {
           })
         return
       }
-      if (discount === code) {
+      if (discount === code && end > new Date()) {
         orderDiscount.code = code
         orderDiscount.type = type
         orderDiscount.scale = scale
@@ -292,7 +292,6 @@ export default {
         trackingNumber: '',
         created: new Date().getTime()
       }
-
       cart.products.length = 0
       cart.courses.length = 0
       const { shoppingCart } = this.user
@@ -300,16 +299,14 @@ export default {
       this.$http
         .post(`${VITE_BASEURL}/orders`, data)
         .then((res) => {
-          console.log(res.data)
           this.buyerInfo = this.$options.data().buyerInfo
-          // this.user.shoppingCart;
           return this.$http.patch(
             `${VITE_BASEURL}/users/${sessionStorage.getItem('userId')}`,
             { shoppingCart }
           )
         })
         .then(() => {
-          this.$swal.fire({
+          return this.$swal.fire({
             icon: 'success',
             title: '訂單已成立',
             showConfirmButton: false,

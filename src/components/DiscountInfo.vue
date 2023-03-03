@@ -5,7 +5,7 @@
   >
     當前商品享活動優惠：全面
     <span class="text-2xl font-black">{{
-      discountData.type === "money"
+      discountData.type === 'money'
         ? `折扣 ${discountData.scale} 元`
         : `${discountData.scale * 100} 折`
     }}</span
@@ -13,17 +13,17 @@
   </p>
 </template>
 <script>
-import { mapState, mapActions } from "pinia";
-import { discountStore } from "../stores/index.js";
+import { mapState, mapActions } from 'pinia'
+import { discountStore } from '../stores/index.js'
 export default {
   computed: {
-    ...mapState(discountStore, ["discountData"]),
+    ...mapState(discountStore, ['discountData'])
   },
   methods: {
-    ...mapActions(discountStore, ["getDiscountData"]),
+    ...mapActions(discountStore, ['getDiscountData'])
   },
   mounted() {
-    this.getDiscountData();
-  },
-};
+    this.getDiscountData()
+  }
+}
 </script>
