@@ -199,13 +199,7 @@ export default {
     ...mapState(userStore, ["user"]),
   },
   methods: {
-    ...mapActions(userStore, [
-      "getUserData",
-      "login",
-      "checkLogin",
-      "register",
-      "signOut",
-    ]),
+    ...mapActions(userStore, ["getUserData", "login", "register", "signOut"]),
     inputReset(option) {
       if (option === "login") {
         this.login(this.userInput, this.identifyCode, this.AddIdentifyLetter);
@@ -243,7 +237,6 @@ export default {
   },
   mounted() {
     this.AddIdentifyLetter();
-    this.checkLogin();
   },
 };
 </script>

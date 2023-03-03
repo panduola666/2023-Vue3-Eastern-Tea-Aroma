@@ -10,10 +10,18 @@
           <span
             class="underline underline-offset-2 cursor-pointer hover:text-brand-02 hover:font-bold"
             @click="inputPrompt"
+            v-if="user.shoppingCart?.discount"
+            >{{ user.shoppingCart?.discount }}</span
+          >
+          <span
+            v-else
+            class="underline underline-offset-2 cursor-pointer hover:text-brand-02 hover:font-bold"
+            @click="inputPrompt"
             >{{ !discount ? "輸入折扣碼" : discount }}</span
           >
         </p>
         <p
+          v-if="discount && discount !== discountData.code"
           class="text-red-500 font-bold flex items-center left-0 top-full whitespace-nowrap"
         >
           <svg
@@ -34,35 +42,86 @@
         </p>
       </div>
     </div>
-    <div class="">
+    <div>
       <p class="flex flex-wrap gap-x-2 items-center">
-        總計<del class="text-base text-gray-01">$ 3,000</del
-        ><span class="text-xl">$ 1,999</span>
+        總計
+        <span v-if="discount !== discountData.code">
+          {{ toThousand(totalPrice) }}
+        </span>
+        <span v-else>
+          <del class="text-base text-gray-01"
+            >$ {{ toThousand(totalPrice) }}</del
+          ><span class="text-xl">$ {{ toThousand(discountPrice) }}</span></span
+        >
       </p>
-      <p class="text-gray-01">已節省 1,001 元</p>
+      <p class="text-gray-01" v-if="discount === discountData.code">
+        已節省 {{ toThousand(totalPrice - discountPrice) }} 元
+      </p>
     </div>
     <div>
-      <button
-        type="submit"
-        class="btn-primary w-full"
-        v-if="this.$route.name === 'buyerInfo'"
-      >
-        結帳
-      </button>
-      <router-link :to="{ name: 'buyerInfo' }" class="btn-primary block" v-else
-        >確認購買</router-link
-      >
+      <slot>按鈕 </slot>
     </div>
   </div>
 </template>
 <script>
+import { mapState, mapActions } from "pinia";
+import { discountStore, userStore, toThousand } from "../stores/index.js";
 export default {
   data() {
     return {
       discount: "",
     };
   },
+  computed: {
+    ...mapState(userStore, ["user"]),
+    ...mapState(discountStore, ["discountData"]),
+    totalPrice() {
+      const productsTotal = this.user.shoppingCart?.cart.products.reduce(
+        (num, product) => (num += product.totalPrice),
+        0
+      );
+      const coursesTotal = this.user.shoppingCart?.cart.courses.reduce(
+        (num, course) => (num += course.totalPrice),
+        0
+      );
+      return productsTotal + coursesTotal;
+    },
+    discountPrice() {
+      const discountProducts = this.user.shoppingCart?.cart.products.reduce(
+        (price, product) => {
+          if (product.isDiscount) {
+            if (this.discountData.type === "money") {
+              price += product.totalPrice - this.discountData.scale;
+            } else {
+              price += product.totalPrice * this.discountData.scale;
+            }
+          } else {
+            price += product.totalPrice;
+          }
+          return price;
+        },
+        0
+      );
+      const discountCourses = this.user.shoppingCart?.cart.courses.reduce(
+        (price, course) => {
+          if (course.isDiscount) {
+            if (this.discountData.type === "money") {
+              price += course.totalPrice - this.discountData.scale;
+            } else {
+              price += course.totalPrice * this.discountData.scale;
+            }
+          } else {
+            price += course.totalPrice;
+          }
+          return price;
+        },
+        0
+      );
+      return discountProducts + discountCourses;
+    },
+  },
   methods: {
+    ...mapActions(discountStore, ["getDiscountData"]),
     inputPrompt() {
       this.$swal({
         titleText: "請輸入折扣碼代號",
@@ -71,13 +130,20 @@ export default {
         showCancelButton: true,
         inputValidator: (value) => {
           this.discount = value;
+          this.user.shoppingCart.discount = value;
         },
       });
     },
-    // 點擊按鈕後把 discount 值傳到 pinia
+    toThousand(money) {
+      return toThousand(money);
+    },
   },
   mounted() {
     // 從 pinia 獲取資料
+    // this.getUserData()
+    this.getDiscountData();
+    this.discount = this.user.shoppingCart?.discount;
+    console.log(this.user.shoppingCart?.discount);
   },
 };
 </script>

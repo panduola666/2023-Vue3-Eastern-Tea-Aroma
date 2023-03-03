@@ -11,7 +11,9 @@
     <section class="bg-brand-03 bg-opacity-30 text-xl p-3 my-5">
       <h2 class="text-center text-2xl font-bold mb-3">當前已有折扣優惠</h2>
       <section class="grid lg:grid-cols-2">
-        <h3 class="lg:self-center lg:text-center mb-3 lg:mb-0">優惠碼：dewrr2113</h3>
+        <h3 class="lg:self-center lg:text-center mb-3 lg:mb-0">
+          優惠碼：dewrr2113
+        </h3>
         <div>
           <p class="mb-3">截止日期：2023-1-23 00:00:00</p>
           <p class="col-start-2">折扣額度：95 折</p>

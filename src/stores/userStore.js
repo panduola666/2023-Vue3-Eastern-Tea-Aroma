@@ -3,12 +3,14 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import router from "../router";
 const { VITE_BASEURL } = import.meta.env;
-
+const swalColor = {
+  confirmButtonColor: "#4c7866",
+  cancelButtonColor: "#727272",
+};
 export default defineStore("userDataStore", {
   state: () => ({
     user: {},
     isLogin: false,
-    postLogin: false,
   }),
   actions: {
     getUserData() {
@@ -22,7 +24,7 @@ export default defineStore("userDataStore", {
           this.isLogin = true;
           console.log("已登入");
           this.user = res.data;
-          console.log(this.user);
+          // console.log(this.user);
         })
         .catch((err) => {
           console.log(`checkLogin 登入超時`);
@@ -53,6 +55,7 @@ export default defineStore("userDataStore", {
             return Swal.fire({
               icon: "success",
               title: "登入成功",
+              ...swalColor,
             });
           })
           .then(() => {
@@ -60,7 +63,7 @@ export default defineStore("userDataStore", {
             router.push("/user");
           })
           .catch((err) => {
-            console.log(err.response);
+            console.log(err);
 
             const { data } = err.response;
             console.log(err);
@@ -69,11 +72,13 @@ export default defineStore("userDataStore", {
               return Swal.fire({
                 icon: "error",
                 title: "密碼錯誤",
+                ...swalColor,
               });
             } else if (data === "Cannot find user") {
               return Swal.fire({
                 icon: "error",
                 title: "此帳號未註冊",
+                ...swalColor,
               });
             }
           })
@@ -85,6 +90,7 @@ export default defineStore("userDataStore", {
         Swal.fire({
           icon: "error",
           title: "驗證失敗",
+          ...swalColor,
         }).then(() => {
           AddIdentifyLetter();
         });
@@ -105,6 +111,7 @@ export default defineStore("userDataStore", {
       Swal.fire({
         icon: "error",
         title: "登入超時",
+        ...swalColor,
       }).then(() => {
         router.push("/login");
       });
@@ -122,7 +129,10 @@ export default defineStore("userDataStore", {
         level: 1,
         shoppingCart: {
           discount: "",
-          cart: [],
+          cart: {
+            products: [],
+            courses: [],
+          },
         },
       };
       axios
@@ -132,6 +142,7 @@ export default defineStore("userDataStore", {
           return Swal.fire({
             icon: "success",
             title: "註冊成功",
+            ...swalColor,
           });
         })
         .then(() => {
@@ -143,21 +154,97 @@ export default defineStore("userDataStore", {
             Swal.fire({
               icon: "error",
               title: "該帳號已註冊",
+              ...swalColor,
             });
           }
         });
       console.log("註冊");
     },
     signOut() {
-      console.log("登出");
       Swal.fire({
         icon: "success",
         title: "登出成功",
+        ...swalColor,
       }).then(() => {
         sessionStorage.clear();
         this.isLogin = false;
       });
-      console.log(this.isLogin);
+    },
+    addToCart(config, currentDate, number = 1) {
+      if (!this.isLogin) {
+        Swal.fire({
+          icon: "warning",
+          title: "請登入會員",
+          showCancelButton: true,
+          reverseButtons: true,
+          confirmButtonText: "確定",
+          cancelButtonText: "取消",
+          ...swalColor,
+        }).then((result) => {
+          if (result.isConfirmed) {
+            router.push("/login");
+          }
+        });
+        return;
+      }
+      const { cart } = this.user.shoppingCart;
+      if (config === "courses") {
+        const { id: courseDateId, courseId, course, isDiscount } = currentDate;
+        const { price } = course;
+        const index = cart.courses.findIndex(
+          (item) =>
+            item.courseDateId === courseDateId && item.courseId === courseId
+        );
+        if (index !== -1) {
+          const data = cart.courses[index];
+          data.number += number;
+          data.totalPrice = data.number * data.price;
+        } else {
+          const data = {
+            courseDateId,
+            courseId,
+            price,
+            number,
+            totalPrice: number * price,
+            isDiscount,
+          };
+          cart.courses.push(data);
+        }
+      } else if (config === "products") {
+        const { id: productId, price, isDiscount } = currentDate;
+        const index = cart.products.findIndex(
+          (item) => item.productId === productId
+        );
+        if (index !== -1) {
+          const data = cart.products[index];
+          data.number += number;
+          data.totalPrice = data.number * data.price;
+        } else {
+          const data = {
+            productId,
+            price,
+            number,
+            totalPrice: number * price,
+            isDiscount,
+          };
+          cart.products.push(data);
+        }
+      }
+      const shoppingCart = this.user.shoppingCart;
+      axios
+        .patch(`${VITE_BASEURL}/users/${sessionStorage.getItem("userId")}`, {
+          shoppingCart,
+        })
+        .then((res) => {
+          console.log(res.data);
+          Swal.fire({
+            icon: "success",
+            title: "添加成功",
+            showConfirmButton: false,
+            timer: 1500,
+            allowOutsideClick: false,
+          });
+        });
     },
   },
   getters: {},

@@ -107,12 +107,6 @@ export default {
       checked: false,
     };
   },
-  methods: {
-    ...mapActions(userStore, ["checkLogin"]),
-  },
-  mounted() {
-    this.checkLogin();
-  },
   components: {
     bannerSwiper,
     courseList,

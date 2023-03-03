@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col justify-between w-full absolute left-0 px-3 py-6 min-h-[90vh] bg-bgImage z-10 shadow-[0_20px_10px_rgba(0,0,0,0.1)]"
+    class="flex flex-col justify-between w-full absolute left-0 px-3 py-6 min-h-[90vh] bg-bgImage z-50 shadow-[0_20px_10px_rgba(0,0,0,0.1)]"
   >
     <ul>
       <li>

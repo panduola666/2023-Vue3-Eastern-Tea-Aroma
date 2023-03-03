@@ -9,7 +9,9 @@
     <template #modal-body>
       <div class="flex flex-col-reverse lg:flex-row gap-3">
         <div>
-          <div class="flex flex-col gap-3 lg:w-96 h-[75vh] overflow-x-hidden px-3">
+          <div
+            class="flex flex-col gap-3 lg:w-96 h-[75vh] overflow-x-hidden px-3"
+          >
             <p class="font-semibold">
               * 封面
               <span class="float-right text-gray-02 font-normal">
@@ -27,7 +29,11 @@
                 </button>
               </span>
             </p>
-            <img src="../assets/課堂04.png" alt="" class="w-full object-cover" />
+            <img
+              src="../assets/課堂04.png"
+              alt=""
+              class="w-full object-cover"
+            />
             <input
               type="text"
               name=""
@@ -54,16 +60,29 @@
             <button type="button" class="btn-outline">刪除圖片</button>
           </div>
         </div>
-        <div class=" flex-grow lg:border-l-2 flex flex-col gap-3 lg:px-3">
-          <label for="" class="grid"
-            >* 標題
-            <input
-              type="text"
-              name=""
-              id=""
-              class="border border-gray-01 p-2 w-full"
-              placeholder="請輸入課程名稱..."
-          /></label>
+        <div class="flex-grow lg:border-l-2 flex flex-col gap-3 lg:px-3">
+          <div class="grid lg:grid-cols-2 lg:gap-7 gap-3">
+            <label for="" class=""
+              >* 課程
+              <select name="" id="" class="border border-gray-01 p-2 w-full">
+                <option value="" disabled>請選擇課程</option>
+                <option value="茶葉的風味鑑賞學">茶葉的風味鑑賞學</option>
+              </select>
+            </label>
+            <div>
+              <label for="">新增課程</label>
+              <div class="flex gap-3">
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  class="border border-gray-01 p-2 w-full"
+                  placeholder="請輸入課程名稱..."
+                />
+                <button type="button" class="btn-outline p-1 px-2 flex-shrink-0">確認</button>
+              </div>
+            </div>
+          </div>
           <div>
             <p>* 時段選擇</p>
             <v-date-picker

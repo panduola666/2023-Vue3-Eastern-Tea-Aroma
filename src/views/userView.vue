@@ -49,7 +49,7 @@
       <h1 class="lg:text-3xl text-2xl text-brand-02 font-self lg:mb-6 mb-3">
         會員資訊
       </h1>
-      <form
+      <div
         class="flex justify-between flex-col lg:flex-row lg:items-end tracking-widest"
       >
         <div class="flex flex-col gap-3 lg:gap-6 text-gray-02">
@@ -73,6 +73,7 @@
               type="text"
               name="userName"
               id="userName"
+              autocomplete="off"
               class="text-gray-01 px-2 py-1"
               v-model="userInfo.name"
               :disabled="!isInfoEditor"
@@ -85,6 +86,7 @@
               name="tel"
               id="tel"
               class="text-gray-01 px-2 py-1"
+              autocomplete="off"
               oninput="value=value.replace(/[^\d]/g,'')"
               v-model="userInfo.tel"
               :disabled="!isInfoEditor"
@@ -94,11 +96,11 @@
         <button
           type="button"
           class="btn-outline h-1/2 mt-3"
-          @click.prevent="editor('會員資訊', $event)"
+          @click.prevent="($event) => editor('會員資訊', $event)"
         >
           編輯
         </button>
-      </form>
+      </div>
     </div>
     <!-- 修改密碼 -->
     <div class="text-xl my-10">
@@ -116,7 +118,7 @@
               name="old"
               id="old"
               minlength="6"
-              autocomplete="on"
+              autocomplete="off"
               class="text-gray-01 px-2 py-1"
               v-model="password.oldPassword"
               :disabled="!isPasswordEditor"
@@ -195,7 +197,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(userStore, ["checkLogin", "overLogin", "getUserData"]),
+    ...mapActions(userStore, ["overLogin", "getUserData"]),
 
     changeBtnText(e) {
       if (e.target.textContent.trim() === "編輯") {
@@ -215,16 +217,22 @@ export default {
       if (area === "會員資訊") {
         this.isInfoEditor = flag === "編輯";
         if (!this.isInfoEditor) {
+          if (!this.userInfo.name) {
+            this.userInfo.name = this.user.name;
+            return;
+          }
+          if (
+            this.userInfo.name === this.user.name &&
+            this.userInfo.tel === this.user.tel
+          ) {
+            return;
+          }
           const data = {
             name: this.userInfo.name,
             tel: this.userInfo.tel,
           };
-          if (
-            this.userInfo.name === this.user.name &&
-            this.userInfo.tel === this.user.tel
-          )
-            return;
-          axios
+          this.user.name = this.userInfo.name;
+          this.$http
             .patch(
               `${VITE_BASEURL}/660/users/${sessionStorage.getItem("userId")}`,
               data
@@ -326,7 +334,7 @@ export default {
         const index = avatar.data.findIndex(
           (item) => item.type === type[value]
         );
-        const res = await this.$http.patch(
+        await this.$http.patch(
           `${VITE_BASEURL}/users/${sessionStorage.getItem("userId")}`,
           {
             avatarUrl: avatar.data[index].imgUrl,
@@ -336,12 +344,6 @@ export default {
         this.getUserData();
       }
     },
-  },
-  mounted() {
-    this.checkLogin();
-    if (!this.isLogin) {
-      this.overLogin();
-    }
   },
 };
 </script>
@@ -368,4 +370,7 @@ export default {
   bottom: -10px;
   left: 0;
 }
+/* input {
+  background-color: transparent;
+} */
 </style>

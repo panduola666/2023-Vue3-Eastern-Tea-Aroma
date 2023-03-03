@@ -7,7 +7,7 @@
         <img src="../assets/logo.png" alt="東方茶香logo" />
       </router-link>
       <ul class="hidden items-center text-brand-02 gap-7 xl:gap-14 lg:flex">
-        <li class="text-xl leading-[30px] pb-[10px] pt-[18px]">
+        <li class="text-xl leading-[30px] pb-[10px] pt-[18px] hover:text-brand-01">
           <router-link to="/knowledge">茶學資訊</router-link>
         </li>
         <li class="group relative">
@@ -24,7 +24,7 @@
             />
           </router-link>
           <ul
-            class="absolute button-0 left-0 hidden group-hover:block bg-white min-w-[216px] z-10 text-gray-01 shadow-lg"
+            class="absolute button-0 left-0 hidden group-hover:block bg-white min-w-[216px] text-gray-01 shadow-lg z-50"
           >
             <li>
               <router-link
@@ -65,9 +65,11 @@
         </li>
         <li class="group relative">
           <router-link
-            to="/shoppingMall"
+            to="/shoppingMall?page=1&search="
             class="flex transition-all group-hover:text-brand-01 text-xl leading-[30px] pb-[10px] pt-[18px]"
-            :class="{ 'font-semibold': this.$route.path === '/shoppingMall' }"
+            :class="{
+              'font-semibold': this.$route.path === '/shoppingMall',
+            }"
           >
             茶藝用品
             <img
@@ -77,7 +79,7 @@
             />
           </router-link>
           <ul
-            class="absolute button-0 left-0 hidden group-hover:block bg-white min-w-[216px] z-10 text-gray-01 shadow-lg"
+            class="absolute button-0 left-0 hidden group-hover:block bg-white min-w-[216px] z-50 text-gray-01 shadow-lg"
           >
             <li>
               <router-link
@@ -136,7 +138,7 @@
               />
             </router-link>
             <ul
-              class="absolute bg-white min-w-[216px] button-0 group-hover:block hidden text-gray-01 z-10 shadow-lg"
+              class="absolute bg-white min-w-[216px] button-0 group-hover:block hidden text-gray-01 z-50 shadow-lg"
             >
               <li>
                 <router-link
@@ -178,8 +180,9 @@
             </ul>
           </div>
         </section>
+
         <section class="flex mb-[10px] mt-[18px]">
-          <router-link :to="{name:'shopCart'}" class="relative"
+          <router-link :to="{ name: 'shopCart' }" class="relative"
             ><img
               src="../assets/Property 1=cart@2x.png"
               alt="購物車"
@@ -187,33 +190,34 @@
             />
             <div
               class="absolute bg-brand-02 text-white text-xs leading-[16px] font-medium px-1 min-w-[16px] max-h-[16px] rounded-lg -top-[5px] left-[14px]"
+              v-if="isLogin"
             >
-              99+
+              {{ shoppingCartLength > 99 ? "99+" : shoppingCartLength }}
             </div>
           </router-link>
-          <div class="relative flex items-center lg:hidden cursor-pointer">
-            <img
-              src="../assets/Property 1=more.png"
-              alt="more"
-              class="w-[30px] transition-all hover:brightness-125 hover:duration-[0s]"
-              :class="{
-                'scale-1': !openMore,
-                'scale-0': openMore,
-              }"
-              @click.prevent="openMore = !openMore"
-            />
-            <img
-              src="../assets/Property 1=close@2x.png"
-              alt="關閉"
-              class="w-[30px] transition-all absolute top-0 left-0 hover:brightness-75 hover:duration-[0s]"
-              :class="{
-                'scale-1': openMore,
-                'scale-0': !openMore,
-              }"
-              @click.prevent="openMore = !openMore"
-            />
-          </div>
         </section>
+        <div class="relative flex items-center lg:hidden cursor-pointer">
+          <img
+            src="../assets/Property 1=more.png"
+            alt="more"
+            class="w-[30px] transition-all hover:brightness-125 hover:duration-[0s]"
+            :class="{
+              'scale-1': !openMore,
+              'scale-0': openMore,
+            }"
+            @click.prevent="openMore = !openMore"
+          />
+          <img
+            src="../assets/Property 1=close@2x.png"
+            alt="關閉"
+            class="w-[30px] transition-all absolute top-0 left-0 hover:brightness-75 hover:duration-[0s]"
+            :class="{
+              'scale-1': openMore,
+              'scale-0': !openMore,
+            }"
+            @click.prevent="openMore = !openMore"
+          />
+        </div>
       </div>
     </div>
     <nav-more-select
@@ -235,7 +239,13 @@ export default {
     };
   },
   computed: {
-    ...mapState(userStore, ["isLogin"]),
+    ...mapState(userStore, ["isLogin", "user"]),
+    shoppingCartLength() {
+      return (
+        this.user.shoppingCart?.cart.products.length +
+        this.user.shoppingCart?.cart.courses.length
+      );
+    },
   },
   methods: {
     ...mapActions(userStore, ["signOut"]),

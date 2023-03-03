@@ -1,128 +1,138 @@
 <template>
   <main class="wrap">
     <h2 class="text-3xl font-black font-self text-brand-02">訂單資訊</h2>
-
     <table
+      v-for="order in orders.sort((a, b) => b.id - a.id)"
+      :key="order.id"
       class="w-full table-fixed h-20 text-center border border-brand-05 overflow-scroll bg-white bg-opacity-20 my-4"
     >
       <thead class="bg-brand-01 bg-opacity-50 font-self">
         <tr>
-          <th class="text-xs sm:text-base py-2">2022 - 11 - 23</th>
+          <th class="text-xs sm:text-base py-2">
+            成立日期: {{ $date(order.created).format("YYYY-MM-DD") }}
+          </th>
           <th class="py-2" colspan="2">
-            物流查詢編號：<span class="sm:text-xl">123dq1e</span>
+            物流查詢編號：<span class="sm:text-xl">{{
+              order.trackingNumber
+            }}</span>
           </th>
         </tr>
       </thead>
-      <tbody class="block w-[300%] max-h-40 overflow-auto">
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
-          <td class="tracking-wider py-2">全手工紫砂壺</td>
-          <td class="py-2">八角壺 * <span>1</span></td>
-          <td class="sm:block flex flex-col py-2">
-            <del class="mx-2 text-base text-gray-01">$ 799</del>
-            <span>$ 499</span>
-          </td>
-        </tr>
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
-          <td class="tracking-wider py-2">全手工紫砂壺</td>
-          <td class="py-2">八角壺 * <span>1</span></td>
-          <td class="sm:block flex flex-col py-2">
-            <del class="mx-2 text-base text-gray-01">$ 799</del>
-            <span>$ 499</span>
-          </td>
-        </tr>
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
-          <td class="tracking-wider py-2">全手工紫砂壺</td>
-          <td class="py-2">八角壺 * <span>1</span></td>
-          <td class="sm:block flex flex-col py-2">
-            <del class="mx-2 text-base text-gray-01">$ 799</del>
-            <span>$ 499</span>
-          </td>
-        </tr>
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
-          <td class="tracking-wider py-2">全手工紫砂壺</td>
-          <td class="py-2">八角壺 * <span>1</span></td>
-          <td class="sm:block flex flex-col py-2">
-            <del class="mx-2 text-base text-gray-01">$ 799</del>
-            <span>$ 499</span>
-          </td>
+      <tbody class="block w-[300%] max-h-40 overflow-auto cursor-default">
+        <tr
+          class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10"
+          v-for="(product, index) in order.cart"
+          :key="product.totalPrice + product.isDiscount + index"
+        >
+          <template v-if="product.productId">
+            <td class="tracking-wider py-2 w-1/3">{{ product.type }}</td>
+            <td class="py-2 w-1/3">
+              {{ product.type }} * {{ product.number }}
+            </td>
+            <td
+              class="py-2 w-1/3"
+              v-if="order.discount.code && product.isDiscount"
+            >
+              <p class="mx-2 text-base text-gray-02 line-through">
+                {{ product.totalPrice }} 元
+              </p>
+              <p>
+                {{
+                  order.discount.type === "money"
+                    ? product.totalPrice - order.discount.scale
+                    : product.totalPrice * order.discount.scale
+                }}
+                元
+              </p>
+            </td>
+            <td class="w-1/3" v-else>{{ product.totalPrice }} 元</td>
+          </template>
+          <template v-if="product.courseDateId">
+            <td class="tracking-wider py-2 w-1/3">{{ product.name }}</td>
+            <td class="py-2 w-1/3">
+              {{ $date(product.start).format("YYYY-MM-DD HH:mm") }}
+            </td>
+            <td
+              class="py-2 w-1/3"
+              v-if="order.discount.code && product.isDiscount"
+            >
+              <p class="mx-2 text-base text-gray-02 line-through">
+                {{ product.totalPrice }} 元
+              </p>
+              <p>
+                {{
+                  order.discount.type === "money"
+                    ? product.totalPrice - order.discount.scale
+                    : product.totalPrice * order.discount.scale
+                }}
+                元
+              </p>
+            </td>
+            <td class="w-1/3" v-else>{{ product.totalPrice }} 元</td>
+          </template>
         </tr>
       </tbody>
       <tfoot>
         <tr>
-          <td class="pt-3">3件商品</td>
-          <td class="pt-3 font-bold text-brand-02">未出貨</td>
+          <td class="pt-3">{{ order.cart.length }}件商品</td>
+          <td class="pt-3 font-bold text-brand-02">
+            {{ order.trackingNumber ? "已出貨" : "未出貨" }}
+          </td>
           <td class="flex justify-center pt-3">
-            <p>價格</p>
-            <div class="sm:block flex flex-col">
-              <span class="mx-2 text-gray-02 line-through">$ 1299</span>
-              <span class="sm:text-xl">$ 999</span>
-            </div>
-          </td>
-        </tr>
-      </tfoot>
-    </table>
-    <table
-      class="w-full table-fixed h-20 text-center border border-brand-05 overflow-scroll bg-white bg-opacity-20 my-4"
-    >
-      <thead class="bg-brand-01 bg-opacity-50 font-self">
-        <tr>
-          <th class="text-xs sm:text-base py-2">2022 - 11 - 23</th>
-          <th class="py-2" colspan="2">
-            物流查詢編號：<span class="sm:text-xl">123dq1e</span>
-          </th>
-        </tr>
-      </thead>
-      <tbody class="block w-[300%] max-h-40 overflow-auto">
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
-          <td class="tracking-wider py-2">全手工紫砂壺</td>
-          <td class="py-2">八角壺 * <span>1</span></td>
-          <td class="sm:block flex flex-col py-2">
-            <del class="mx-2 text-base text-gray-01">$ 799</del>
-            <span>$ 499</span>
-          </td>
-        </tr>
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
-          <td class="tracking-wider py-2">全手工紫砂壺</td>
-          <td class="py-2">八角壺 * <span>1</span></td>
-          <td class="sm:block flex flex-col py-2">
-            <del class="mx-2 text-base text-gray-01">$ 799</del>
-            <span>$ 499</span>
-          </td>
-        </tr>
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
-          <td class="tracking-wider py-2">全手工紫砂壺</td>
-          <td class="py-2">八角壺 * <span>1</span></td>
-          <td class="sm:block flex flex-col py-2">
-            <del class="mx-2 text-base text-gray-01">$ 799</del>
-            <span>$ 499</span>
-          </td>
-        </tr>
-        <tr class="table w-full text-lg hover:bg-brand-01 hover:bg-opacity-10">
-          <td class="tracking-wider py-2">全手工紫砂壺</td>
-          <td class="py-2">八角壺 * <span>1</span></td>
-          <td class="sm:block flex flex-col py-2">
-            <del class="mx-2 text-base text-gray-01">$ 799</del>
-            <span>$ 499</span>
-          </td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td class="pt-3">3件商品</td>
-          <td class="pt-3 font-bold text-brand-02">已出貨</td>
-          <td class="flex justify-center pt-3">
-            <p>價格</p>
-            <div class="sm:block flex flex-col">
-              <span class="mx-2 text-gray-02 line-through">$ 1299</span>
-              <span class="sm:text-xl">$ 999</span>
-            </div>
+            <span
+              class="sm:block flex flex-col sm:text-xl"
+              v-if="order.discount.code"
+            >
+              總計 {{ discountPrice(order.id) }} 元
+            </span>
+            <span class="sm:text-xl" v-else
+              >總計 {{ totalPrice(order.id) }} 元</span
+            >
           </td>
         </tr>
       </tfoot>
     </table>
   </main>
 </template>
-
+<script>
+import { mapState, mapActions } from "pinia";
+import { ordersStore } from "../stores/index.js";
+export default {
+  computed: {
+    ...mapState(ordersStore, ["orders"]),
+  },
+  methods: {
+    ...mapActions(ordersStore, ["getOrdersData"]),
+    totalPrice(id) {
+      const index = this.orders.findIndex((order) => order.id === id);
+      return this.orders[index].cart.reduce((price, item) => {
+        price += item.totalPrice;
+        return price;
+      }, 0);
+    },
+    discountPrice(id) {
+      const index = this.orders.findIndex((order) => order.id === id);
+      let price = 0;
+      this.orders[index].cart.forEach((item) => {
+        if (item.isDiscount) {
+          if (this.orders[index].discount.type === "money") {
+            price += item.totalPrice - this.orders[index].discount.scale;
+          } else {
+            price += item.totalPrice * this.orders[index].discount.scale;
+          }
+        } else {
+          console.log("mu");
+          price += item.totalPrice;
+        }
+      });
+      return price;
+    },
+  },
+  mounted() {
+    this.getOrdersData();
+  },
+};
+</script>
 <style scoped>
 ::-webkit-scrollbar {
   width: 7px;

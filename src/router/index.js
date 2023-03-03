@@ -100,6 +100,13 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: "/:pathMatch(.*)*",
+      component: () => import("../views/frontLayout.vue"),
+      children: [
+        { path: "", component: () => import("../views/notFound.vue") },
+      ],
+    },
   ],
 });
 router.afterEach(() => {

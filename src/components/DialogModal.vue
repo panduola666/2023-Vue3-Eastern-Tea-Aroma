@@ -60,7 +60,7 @@
                   </slot>
                   <button
                     type="button"
-                    @click="closeModal"
+                    @click="finish"
                     class="btn-primary py-2"
                   >
                     確認
@@ -86,12 +86,17 @@ import {
 } from "@headlessui/vue";
 
 export default {
+  props: ["finishFn"],
   data() {
     return {
       isOpen: false,
     };
   },
   methods: {
+    finish() {
+      this.closeModal();
+      this.finishFn();
+    },
     closeModal() {
       this.isOpen = false;
     },

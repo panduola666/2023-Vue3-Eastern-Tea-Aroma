@@ -1,6 +1,6 @@
 <template>
   <main class="wrap">
-    <!-- {{ currentCourse }} -->
+    <teleport to="title"> - {{ currentCourse.course?.title }}</teleport>
     <div class="flex justify-end mb-2">
       <router-link
         to="/courses"
@@ -45,8 +45,10 @@
         </h3>
         <h2>講師：{{ currentCourse.user?.name }} 講師</h2>
         <p class="flex justify-between">
-          價格：{{ currentCourse.course?.price }} 元<span
-            class="text-gray-02 text-base"
+          價格：{{
+            currentCourse.course && coursePrice(currentCourse.course.price)
+          }}
+          元<span class="text-gray-02 text-base"
             >剩餘: {{ currentCourse.total - remainingNumber }}</span
           >
         </p>
@@ -68,18 +70,7 @@
         </button>
       </section>
     </div>
-    <p
-      v-if="discountData.end > new Date().getTime() && currentCourse.isDiscount"
-      class="bg-brand-03 bg-opacity-20 px-5 py-8 text-xl text-gray-01 mt-5 font-self"
-    >
-      當前商品享活動優惠：全面
-      <span class="text-2xl font-black">{{
-        discountData.type === "money"
-          ? `折扣 ${discountData.scale} 元`
-          : `${discountData.scale * 100} 折`
-      }}</span
-      >，優惠碼：{{ discountData.code }}
-    </p>
+    <DiscountInfo v-if="currentCourse.isDiscount"></DiscountInfo>
     <article
       class="text-brand-05 lg:text-lg font-medium leading-8 tracking-wider mt-10"
     >
@@ -139,7 +130,7 @@
                 - {{ $date(courseDate.start).format("HH:mm") }}~{{
                   $date(courseDate.end).format("HH:mm")
                 }}
-                ／ 價格: {{ course.price }} 元</span
+                ／ 價格: {{ coursePrice(course.price) }} 元</span
               >
             </router-link>
           </li>
@@ -151,31 +142,31 @@
 </template>
 <script>
 import CourseList from "../components/CourseList.vue";
-import {
-  userStore,
-  coursesStore,
-  ordersStore,
-  discountStore,
-} from "../stores/index.js";
+import DiscountInfo from "../components/DiscountInfo.vue";
+import { userStore, coursesStore, ordersStore } from "../stores/index.js";
 import { mapState, mapActions } from "pinia";
 
 export default {
   computed: {
     ...mapState(coursesStore, ["currentCourse", "courses"]),
     ...mapState(ordersStore, ["orders"]),
-    ...mapState(discountStore, ["discountData"]),
     ...mapState(userStore, ["isLogin"]),
     remainingNumber() {
       const reserveDates = [];
-      this.orders.map((order) =>
-        order.courseDates.forEach((item) => {
-          reserveDates.push(item.courseDate);
-        })
-      );
+      this.orders.map((order) => {
+        order.cart.forEach((item) => {
+          if (item.courseDateId) {
+            reserveDates.push({
+              courseDateId: item.courseDateId,
+              number: item.number,
+            });
+          }
+        });
+      });
       let reserveNum = 0;
-      reserveDates.forEach((id) => {
-        if (+id === +this.$route.params.id) {
-          reserveNum++;
+      reserveDates.forEach((item) => {
+        if (item.courseDateId === +this.$route.params.id) {
+          reserveNum += item.number;
         }
       });
       return reserveNum;
@@ -190,26 +181,29 @@ export default {
     },
   },
   methods: {
-    ...mapActions(coursesStore, ["getCurrent", "getCoursesData", "patchSaved"]),
+    ...mapActions(coursesStore, [
+      "getCurrent",
+      "getCoursesData",
+      "patchSaved",
+      "coursePrice",
+    ]),
     ...mapActions(ordersStore, ["getOrdersData"]),
-    ...mapActions(discountStore, ["getDiscountData"]),
-    ...mapActions(userStore, ["checkLogin", "addToCart"]),
+    ...mapActions(userStore, ["addToCart"]),
   },
   watch: {
     "$route.params.id"(id) {
-      this.getCurrent(id);
+      if (id) this.getCurrent(id);
     },
   },
   mounted() {
     const { id } = this.$route.params;
     this.getCurrent(id);
     this.getOrdersData();
-    this.getDiscountData();
     this.getCoursesData();
-    this.checkLogin();
   },
   components: {
     CourseList,
+    DiscountInfo,
   },
 };
 </script>

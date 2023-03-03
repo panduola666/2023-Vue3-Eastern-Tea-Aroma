@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DialogModal>
+    <DialogModal :finishFn="showEditor">
       <template #modal-btn>
         <slot name="btn-content">按鈕</slot>
       </template>
@@ -133,14 +133,19 @@
             <div>
               <p class="mb-3">
                 * 商品介紹
-                <button
+                <!-- <button
                   type="button"
                   class="text-brand-01 opacity-80 font-bold text-3xl float-right hover:text-brand-02"
                 >
                   +
-                </button>
+                </button> -->
               </p>
-              <ul class="list-decimal list-inside introduce grid gap-5">
+              <ckeditor
+                :editor="editor"
+                v-model="editorData"
+                :config="editorConfig"
+              ></ckeditor>
+              <!-- <ul class="list-decimal list-inside introduce grid gap-5">
                 <li>
                   <textarea
                     name=""
@@ -156,7 +161,7 @@
                     class="border-b border-gray-01 w-[95%] overflow-auto"
                   ></textarea>
                 </li>
-              </ul>
+              </ul> -->
             </div>
           </div>
         </div>
@@ -167,13 +172,18 @@
 </template>
 <script>
 import DialogModal from "./DialogModal.vue";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 export default {
   data: () => ({
-    text: "",
+    editor: ClassicEditor,
+    editorData: "<p>Hello world!!</p>",
+    editorConfig: {
+      toolbar: ["heading", "|", "bold", "italic", "link"],
+    },
   }),
   methods: {
-    a() {
-      console.log(this.text);
+    showEditor() {
+      console.log(this.editorData);
     },
   },
   components: {

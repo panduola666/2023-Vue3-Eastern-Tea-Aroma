@@ -4,7 +4,7 @@
     <div class="grid grid-cols-4">
       <ul class="text-center text-2xl font-black font-self text-brand-02">
         <li
-          v-for="(item, index) in ['商品', '訂單','會員', '文章', '活動']"
+          v-for="(item, index) in ['商品', '訂單', '會員', '活動']"
           :key="item + index"
         >
           <button

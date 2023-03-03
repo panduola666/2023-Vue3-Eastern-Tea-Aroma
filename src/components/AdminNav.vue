@@ -5,14 +5,18 @@
         <img src="../assets/logo.png" alt="東方茶香logo" />
       </router-link>
       <ul class="hidden items-center text-brand-02 gap-5 xl:gap-10 lg:flex">
-        <li class="text-xl leading-[30px] pb-[10px] pt-[18px]">
+        <li
+          class="text-xl leading-[30px] pb-[10px] pt-[18px] hover:text-brand-01"
+        >
           <router-link
             :to="{ name: '課程列表' }"
             :class="{ 'font-semibold': this.$route.path === '/admin' }"
             >課程列表</router-link
           >
         </li>
-        <li class="text-xl leading-[30px] pb-[10px] pt-[18px]">
+        <li
+          class="text-xl leading-[30px] pb-[10px] pt-[18px] hover:text-brand-01"
+        >
           <router-link
             :to="{ name: '折扣碼' }"
             :class="{ 'font-semibold': this.$route.path === '/admin/discount' }"
@@ -77,36 +81,10 @@
             </li>
           </ul>
         </li>
-        <li class="group relative">
-          <router-link
-            to=""
-            class="flex transition-all group-hover:text-brand-01 text-xl leading-[30px] pb-[10px] pt-[18px]"
-          >
-            數據分析
-            <img
-              src="../assets/Property 1=arrow-down.png"
-              alt=""
-              class="group-hover:-rotate-180 transition"
-            />
-          </router-link>
-          <ul
-            class="absolute button-0 left-0 hidden group-hover:block bg-white min-w-[216px] z-10 text-gray-01 shadow-lg"
-          >
-            <li>
-              <router-link
-                to=""
-                class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
-                >課程分析</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                to=""
-                class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
-                >商品分析</router-link
-              >
-            </li>
-          </ul>
+        <li
+          class="text-xl leading-[30px] pb-[10px] pt-[18px] hover:text-brand-01"
+        >
+          <router-link to=""> 數據分析 </router-link>
         </li>
       </ul>
       <div class="flex items-center">

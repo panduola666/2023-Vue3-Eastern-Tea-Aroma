@@ -50,7 +50,9 @@
             </div>
             <OrderCourseModal>
               <template #btn-content>
-                <button typeof="button" class="btn-primary md:w-max w-full">預約詳情</button>
+                <button typeof="button" class="btn-primary md:w-max w-full">
+                  預約詳情
+                </button>
               </template>
             </OrderCourseModal>
           </div>

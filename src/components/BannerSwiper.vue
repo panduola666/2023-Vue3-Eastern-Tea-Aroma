@@ -36,7 +36,7 @@
       </div>
     </swiper-slide>
 
-    <!-- <swiper-slide
+    <swiper-slide
       ><div class="relative h-[520px] w-full">
         <img
           src="../assets/BANNER-1.png"
@@ -59,9 +59,9 @@
           </p>
         </section>
       </div>
-    </swiper-slide> -->
+    </swiper-slide>
 
-    <!-- <swiper-slide
+    <swiper-slide
       ><div class="relative h-[520px] w-full">
         <img
           src="../assets/BANNER-2.png"
@@ -84,10 +84,10 @@
           </p>
         </section>
       </div>
-    </swiper-slide> -->
+    </swiper-slide>
 
     <!-- 最新活動 要跟著變動 -->
-    <!-- <swiper-slide
+    <swiper-slide
       ><div class="relative h-[520px] w-full">
         <img
           src="../assets/BANNER-3.png"
@@ -122,7 +122,7 @@
           </button>
         </section>
       </div>
-    </swiper-slide> -->
+    </swiper-slide>
   </swiper>
 </template>
 <script>

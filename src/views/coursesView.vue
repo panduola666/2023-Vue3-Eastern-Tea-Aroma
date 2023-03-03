@@ -1,5 +1,6 @@
 <template>
   <main class="wrap">
+    <teleport to="title"> - 茶藝課堂</teleport>
     <h2 class="text-3xl font-black font-self text-brand-02">茶藝課堂</h2>
     <form
       class="shadow bg-white bg-opacity-20 border-2 border-brand-01 border-opacity-50 mt-2 mb-6 text-xl p-3 grid gap-3"
@@ -107,7 +108,9 @@
                     )
                   }}
                 </p>
-                <p class="text-end text-lg">$ {{ course.price }}</p>
+                <p class="text-end text-lg">
+                  $ {{ coursePrice(course.price) }}
+                </p>
               </template>
               <template #card-footer>
                 <svg
@@ -183,7 +186,7 @@
                   )
                 }}
               </p>
-              <p class="text-end text-lg">$ {{ course.price }}</p>
+              <p class="text-end text-lg">$ {{ coursePrice(course.price) }}</p>
             </template>
             <template #card-footer>
               <svg
@@ -236,8 +239,11 @@ export default {
     ...mapState(userStore, ["isLogin"]),
   },
   methods: {
-    ...mapActions(coursesStore, ["getCoursesData", "patchSaved"]),
-    ...mapActions(userStore, ["checkLogin"]),
+    ...mapActions(coursesStore, [
+      "getCoursesData",
+      "patchSaved",
+      "coursePrice",
+    ]),
     weekText(timer) {
       const text = ["日", "一", "二", "三", "四", "五", "六"];
       return text[this.$date(timer).day()];
@@ -278,7 +284,6 @@ export default {
   },
   mounted() {
     this.getCoursesData();
-    this.checkLogin();
   },
   components: {
     CoursesCard,
