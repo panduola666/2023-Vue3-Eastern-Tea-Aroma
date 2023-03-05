@@ -98,7 +98,7 @@
 import bannerSwiper from '../components/BannerSwiper.vue'
 import courseList from '../components/CourseList.vue'
 import activityList from '../components/ActivityList.vue'
-// import { mapActions } from 'pinia'
+// import { mapActions,mapState } from 'pinia'
 // import { userStore } from '../stores/index.js'
 
 export default {

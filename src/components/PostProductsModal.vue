@@ -171,23 +171,23 @@
   </div>
 </template>
 <script>
-import DialogModal from "./DialogModal.vue";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import DialogModal from './DialogModal.vue'
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 export default {
   data: () => ({
     editor: ClassicEditor,
-    editorData: "<p>Hello world!!</p>",
+    editorData: '<p>Hello world!!</p>',
     editorConfig: {
-      toolbar: ["heading", "|", "bold", "italic", "link"],
-    },
+      toolbar: ['heading', '|', 'bold', 'italic', 'link']
+    }
   }),
   methods: {
     showEditor() {
-      console.log(this.editorData);
-    },
+      console.log(this.editorData)
+    }
   },
   components: {
-    DialogModal,
-  },
-};
+    DialogModal
+  }
+}
 </script>

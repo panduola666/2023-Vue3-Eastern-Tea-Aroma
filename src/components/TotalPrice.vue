@@ -118,8 +118,6 @@ export default {
       return productsTotal + coursesTotal
     },
     discountPrice() {
-      // console.log(this.user.shoppingCart.cart)
-      // return 1
       const discountProducts = this.user.shoppingCart?.cart.products.reduce(
         (price, product) => {
           if (product.isDiscount) {
@@ -154,8 +152,12 @@ export default {
     },
     hasDiscount() {
       let flag = false
-      this.user.shoppingCart?.cart.product?.forEach((item) => (item.isDiscount ? (flag = true) : ''))
-      this.user.shoppingCart?.cart.courses?.forEach((item) => (item.isDiscount ? (flag = true) : ''))
+      this.user.shoppingCart?.cart.product?.forEach((item) =>
+        item.isDiscount ? (flag = true) : ''
+      )
+      this.user.shoppingCart?.cart.courses?.forEach((item) =>
+        item.isDiscount ? (flag = true) : ''
+      )
       return flag
     }
   },
@@ -173,13 +175,9 @@ export default {
         }
       })
     },
-    toThousand(money) {
-      return toThousand(money)
-    }
+    toThousand
   },
   mounted() {
-    // 從 pinia 獲取資料
-    // this.getUserData()
     this.getDiscountData()
     this.discount = this.user.shoppingCart?.discount
     console.log(this.user.shoppingCart?.discount)

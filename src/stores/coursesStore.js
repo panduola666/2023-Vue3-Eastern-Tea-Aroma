@@ -1,4 +1,4 @@
-import { userStore, toThousand } from './index.js'
+import { userStore } from './index.js'
 import router from '../router/index.js'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -76,9 +76,6 @@ export default defineStore('coursesStore', {
           console.log('收藏')
           console.log(err)
         })
-    },
-    coursePrice(money) {
-      return toThousand(money)
     }
   },
   getters: {}

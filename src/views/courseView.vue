@@ -50,7 +50,7 @@
         <h2>講師：{{ currentCourse.user?.name }} 講師</h2>
         <p class="flex justify-between">
           價格：{{
-            currentCourse.course && coursePrice(currentCourse.course.price)
+            currentCourse.course && toThousand(currentCourse.course.price)
           }}
           元<span class="text-gray-02 text-base"
             >剩餘: {{ currentCourse.total - remainingNumber }}</span
@@ -134,7 +134,7 @@
                 - {{ $date(courseDate.start).format('HH:mm') }}~{{
                   $date(courseDate.end).format('HH:mm')
                 }}
-                ／ 價格: {{ coursePrice(course.price) }} 元</span
+                ／ 價格: {{ toThousand(course.price) }} 元</span
               >
             </router-link>
           </li>
@@ -147,7 +147,12 @@
 <script>
 import CourseList from '../components/CourseList.vue'
 import DiscountInfo from '../components/DiscountInfo.vue'
-import { userStore, coursesStore, ordersStore } from '../stores/index.js'
+import {
+  userStore,
+  coursesStore,
+  ordersStore,
+  toThousand
+} from '../stores/index.js'
 import { mapState, mapActions } from 'pinia'
 
 export default {
@@ -185,14 +190,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(coursesStore, [
-      'getCurrent',
-      'getCoursesData',
-      'patchSaved',
-      'coursePrice'
-    ]),
+    ...mapActions(coursesStore, ['getCurrent', 'getCoursesData', 'patchSaved']),
     ...mapActions(ordersStore, ['getOrdersData']),
-    ...mapActions(userStore, ['addToCart'])
+    ...mapActions(userStore, ['addToCart']),
+    toThousand
   },
   watch: {
     '$route.params.id'(id) {

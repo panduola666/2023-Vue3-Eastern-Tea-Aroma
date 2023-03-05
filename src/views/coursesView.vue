@@ -108,9 +108,7 @@
                     )
                   }}
                 </p>
-                <p class="text-end text-lg">
-                  $ {{ coursePrice(course.price) }}
-                </p>
+                <p class="text-end text-lg">$ {{ toThousand(course.price) }}</p>
               </template>
               <template #card-footer>
                 <svg
@@ -186,7 +184,7 @@
                   )
                 }}
               </p>
-              <p class="text-end text-lg">$ {{ coursePrice(course.price) }}</p>
+              <p class="text-end text-lg">$ {{ toThousand(course.price) }}</p>
             </template>
             <template #card-footer>
               <svg
@@ -221,7 +219,7 @@
 </template>
 <script>
 import CoursesCard from '../components/CoursesCard.vue'
-import { coursesStore, userStore } from '../stores/index.js'
+import { coursesStore, userStore, toThousand } from '../stores/index.js'
 import { mapState, mapActions } from 'pinia'
 export default {
   data() {
@@ -239,17 +237,16 @@ export default {
     ...mapState(userStore, ['isLogin'])
   },
   methods: {
-    ...mapActions(coursesStore, [
-      'getCoursesData',
-      'patchSaved',
-      'coursePrice'
-    ]),
+    ...mapActions(coursesStore, ['getCoursesData', 'patchSaved']),
+    toThousand,
     weekText(timer) {
       const text = ['日', '一', '二', '三', '四', '五', '六']
       return text[this.$date(timer).day()]
     },
     conversionScore(score) {
-      return score ? `${Math.round(score * 10) / 10} / 5.0` : '尚未評分'
+      return score
+        ? `${(Math.round(score * 10) / 10).toFixed(1)} / 5.0`
+        : '尚未評分'
     },
     clearSearch() {
       this.search = this.$options.data().search

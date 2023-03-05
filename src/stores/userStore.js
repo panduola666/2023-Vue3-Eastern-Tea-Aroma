@@ -1,204 +1,205 @@
-import { defineStore } from "pinia";
-import axios from "axios";
-import Swal from "sweetalert2";
-import router from "../router";
-const { VITE_BASEURL } = import.meta.env;
+import { defineStore } from 'pinia'
+import axios from 'axios'
+import Swal from 'sweetalert2'
+import router from '../router'
+const { VITE_BASEURL } = import.meta.env
 const swalColor = {
-  confirmButtonColor: "#4c7866",
-  cancelButtonColor: "#727272",
-};
-export default defineStore("userDataStore", {
+  confirmButtonColor: '#4c7866',
+  cancelButtonColor: '#727272'
+}
+export default defineStore('userDataStore', {
   state: () => ({
     user: {},
-    isLogin: false,
+    isLogin: false
   }),
   actions: {
     getUserData() {
       // 必登入情況
-      axios.defaults.headers.common[
-        "Authorization"
-      ] = `Bearer ${sessionStorage.getItem("accessToken")}`;
+      axios.defaults.headers.common.Authorization = `Bearer ${sessionStorage.getItem(
+        'accessToken'
+      )}`
       axios
-        .get(`${VITE_BASEURL}/660/users/${sessionStorage.getItem("userId")}`)
+        .get(`${VITE_BASEURL}/660/users/${sessionStorage.getItem('userId')}`)
         .then((res) => {
-          this.isLogin = true;
-          console.log("已登入");
-          this.user = res.data;
+          this.isLogin = true
+          console.log('已登入')
+          this.user = res.data
           // console.log(this.user);
         })
         .catch((err) => {
-          console.log(`checkLogin 登入超時`);
-          sessionStorage.clear();
-          console.log(err.response);
-          this.isLogin = false;
+          console.log('checkLogin 登入超時')
+          sessionStorage.clear()
+          console.log(err.response)
+          this.isLogin = false
           // if (err.response.data === "jwt expired") {
           //   this.overLogin();
           // }
-        });
+        })
     },
     login(userInput, identifyCode, AddIdentifyLetter) {
-      const { email, password, identify } = userInput;
-      const data = { email, password };
+      const { email, password, identify } = userInput
+      const data = { email, password }
       if (identify.toUpperCase() === identifyCode) {
         // 驗證成功
         axios
           .post(`${VITE_BASEURL}/login`, data)
           .then((res) => {
-            const { accessToken, user } = res.data;
-            this.user = user;
-            sessionStorage.setItem("accessToken", accessToken);
-            sessionStorage.setItem("userId", user.id);
-            sessionStorage.setItem("first_token", "null");
-
-            console.log(res.data);
-
+            const { accessToken, user } = res.data
+            this.user = user
+            sessionStorage.setItem('accessToken', accessToken)
+            sessionStorage.setItem('userId', user.id)
+            sessionStorage.setItem('first_token', 'null')
+            console.log(res.data)
             return Swal.fire({
-              icon: "success",
-              title: "登入成功",
-              ...swalColor,
-            });
+              icon: 'success',
+              title: '登入成功',
+              ...swalColor
+            })
           })
           .then(() => {
-            this.isLogin = true;
-            router.push("/user");
+            this.isLogin = true
+            if (this.user.isAdmin) {
+              router.push('/admin')
+            } else {
+              router.push('/user')
+            }
           })
           .catch((err) => {
-            console.log(err);
+            console.log(err)
 
-            const { data } = err.response;
-            console.log(err);
-            console.log(data);
-            if (data === "Incorrect password") {
+            const { data } = err.response
+            console.log(err)
+            console.log(data)
+            if (data === 'Incorrect password') {
               return Swal.fire({
-                icon: "error",
-                title: "密碼錯誤",
-                ...swalColor,
-              });
-            } else if (data === "Cannot find user") {
+                icon: 'error',
+                title: '密碼錯誤',
+                ...swalColor
+              })
+            } else if (data === 'Cannot find user') {
               return Swal.fire({
-                icon: "error",
-                title: "此帳號未註冊",
-                ...swalColor,
-              });
+                icon: 'error',
+                title: '此帳號未註冊',
+                ...swalColor
+              })
             }
           })
           .then(() => {
-            AddIdentifyLetter();
-          });
+            AddIdentifyLetter()
+          })
       } else {
         // 驗證失敗
         Swal.fire({
-          icon: "error",
-          title: "驗證失敗",
-          ...swalColor,
+          icon: 'error',
+          title: '驗證失敗',
+          ...swalColor
         }).then(() => {
-          AddIdentifyLetter();
-        });
+          AddIdentifyLetter()
+        })
       }
     },
     checkLogin() {
       if (
-        sessionStorage.getItem("accessToken") &&
-        sessionStorage.getItem("userId")
+        sessionStorage.getItem('accessToken') &&
+        sessionStorage.getItem('userId')
       ) {
-        this.isLogin = true;
-        this.getUserData();
+        this.isLogin = true
+        this.getUserData()
       } else {
-        this.isLogin = false;
+        this.isLogin = false
       }
     },
     overLogin() {
       Swal.fire({
-        icon: "error",
-        title: "登入超時",
-        ...swalColor,
+        icon: 'error',
+        title: '登入超時',
+        ...swalColor
       }).then(() => {
-        router.push("/login");
-      });
+        router.push('/login')
+      })
     },
     register(userInput) {
-      const { email, password, name: userName } = userInput;
+      const { email, password, name: userName } = userInput
       const data = {
         email,
         password,
         name: userName,
-        avatarUrl: "",
-        tel: "",
+        avatarUrl: '',
+        tel: '',
         isAdmin: false,
-        amountSpent: 0,
         level: 1,
         shoppingCart: {
-          discount: "",
+          discount: '',
           cart: {
             products: [],
-            courses: [],
-          },
-        },
-      };
+            courses: []
+          }
+        }
+      }
       axios
         .post(`${VITE_BASEURL}/users`, data)
         .then((res) => {
-          console.log(res.data);
+          console.log(res.data)
           return Swal.fire({
-            icon: "success",
-            title: "註冊成功",
-            ...swalColor,
-          });
+            icon: 'success',
+            title: '註冊成功',
+            ...swalColor
+          })
         })
         .then(() => {
-          this.isLogin = true;
-          router.push("/user");
+          this.isLogin = true
+          router.push('/user')
         })
         .catch((err) => {
-          if (err.response.data === "Email already exists") {
+          if (err.response.data === 'Email already exists') {
             Swal.fire({
-              icon: "error",
-              title: "該帳號已註冊",
-              ...swalColor,
-            });
+              icon: 'error',
+              title: '該帳號已註冊',
+              ...swalColor
+            })
           }
-        });
-      console.log("註冊");
+        })
+      console.log('註冊')
     },
     signOut() {
       Swal.fire({
-        icon: "success",
-        title: "登出成功",
-        ...swalColor,
+        icon: 'success',
+        title: '登出成功',
+        ...swalColor
       }).then(() => {
-        sessionStorage.clear();
-        this.isLogin = false;
-      });
+        sessionStorage.clear()
+        this.isLogin = false
+      })
     },
     addToCart(config, currentDate, number = 1) {
       if (!this.isLogin) {
         Swal.fire({
-          icon: "warning",
-          title: "請登入會員",
+          icon: 'warning',
+          title: '請登入會員',
           showCancelButton: true,
           reverseButtons: true,
-          confirmButtonText: "確定",
-          cancelButtonText: "取消",
-          ...swalColor,
+          confirmButtonText: '確定',
+          cancelButtonText: '取消',
+          ...swalColor
         }).then((result) => {
           if (result.isConfirmed) {
-            router.push("/login");
+            router.push('/login')
           }
-        });
-        return;
+        })
+        return
       }
-      const { cart } = this.user.shoppingCart;
-      if (config === "courses") {
-        const { id: courseDateId, courseId, course, isDiscount } = currentDate;
-        const { price } = course;
+      const { cart } = this.user.shoppingCart
+      if (config === 'courses') {
+        const { id: courseDateId, courseId, course, isDiscount } = currentDate
+        const { price } = course
         const index = cart.courses.findIndex(
           (item) =>
             item.courseDateId === courseDateId && item.courseId === courseId
-        );
+        )
         if (index !== -1) {
-          const data = cart.courses[index];
-          data.number += number;
-          data.totalPrice = data.number * data.price;
+          const data = cart.courses[index]
+          data.number += number
+          data.totalPrice = data.number * data.price
         } else {
           const data = {
             courseDateId,
@@ -206,46 +207,46 @@ export default defineStore("userDataStore", {
             price,
             number,
             totalPrice: number * price,
-            isDiscount,
-          };
-          cart.courses.push(data);
+            isDiscount
+          }
+          cart.courses.push(data)
         }
-      } else if (config === "products") {
-        const { id: productId, price, isDiscount } = currentDate;
+      } else if (config === 'products') {
+        const { id: productId, price, isDiscount } = currentDate
         const index = cart.products.findIndex(
           (item) => item.productId === productId
-        );
+        )
         if (index !== -1) {
-          const data = cart.products[index];
-          data.number += number;
-          data.totalPrice = data.number * data.price;
+          const data = cart.products[index]
+          data.number += number
+          data.totalPrice = data.number * data.price
         } else {
           const data = {
             productId,
             price,
             number,
             totalPrice: number * price,
-            isDiscount,
-          };
-          cart.products.push(data);
+            isDiscount
+          }
+          cart.products.push(data)
         }
       }
-      const shoppingCart = this.user.shoppingCart;
+      const shoppingCart = this.user.shoppingCart
       axios
-        .patch(`${VITE_BASEURL}/users/${sessionStorage.getItem("userId")}`, {
-          shoppingCart,
+        .patch(`${VITE_BASEURL}/users/${sessionStorage.getItem('userId')}`, {
+          shoppingCart
         })
         .then((res) => {
-          console.log(res.data);
+          console.log(res.data)
           Swal.fire({
-            icon: "success",
-            title: "添加成功",
+            icon: 'success',
+            title: '添加成功',
             showConfirmButton: false,
             timer: 1500,
-            allowOutsideClick: false,
-          });
-        });
-    },
+            allowOutsideClick: false
+          })
+        })
+    }
   },
-  getters: {},
-});
+  getters: {}
+})

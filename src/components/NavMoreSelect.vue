@@ -5,7 +5,7 @@
     <ul>
       <li>
         <router-link
-          @click.prevent="$emit('update:open', false)"
+          @click.prevent="() => $emit('update:open', false)"
           to="knowledge"
           class="block p-4 text-brand-02 hover:bg-brand-03 hover:bg-opacity-20"
           >茶學小知識</router-link
@@ -16,9 +16,10 @@
           class="p-4 flex justify-between text-brand-02 hover:bg-brand-03 hover:bg-opacity-20 cursor-pointer"
           :class="{ 'more-active': choose.includes('茶藝課堂') }"
           @click="
-            choose.includes('茶藝課堂')
-              ? removeItem('茶藝課堂')
-              : pushItem('茶藝課堂')
+            () =>
+              choose.includes('茶藝課堂')
+                ? removeItem('茶藝課堂')
+                : pushItem('茶藝課堂')
           "
         >
           茶藝課堂
@@ -29,7 +30,7 @@
               class="object-none transition-all"
               :class="{
                 'scale-1': !choose.includes('茶藝課堂'),
-                'scale-0': choose.includes('茶藝課堂'),
+                'scale-0': choose.includes('茶藝課堂')
               }"
             />
             <img
@@ -38,50 +39,24 @@
               class="transition-all absolute top-0"
               :class="{
                 'scale-1': choose.includes('茶藝課堂'),
-                'scale-0': !choose.includes('茶藝課堂'),
+                'scale-0': !choose.includes('茶藝課堂')
               }"
             />
           </span>
         </p>
         <ul
           v-if="choose.includes('茶藝課堂')"
-          @click="$emit('update:open', false)"
+          @click="() => $emit('update:open', false)"
         >
-          <li>
-            <router-link
-              to=""
-              class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
-              >茶的風味鑑賞學</router-link
-            >
-          </li>
-          <li>
-            <router-link
-              to=""
-              class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
-              >茶席基礎入門</router-link
-            >
-          </li>
-          <li>
-            <router-link
-              to=""
-              class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
-              >不一樣的台灣茶</router-link
-            >
-          </li>
-          <li>
-            <router-link
-              to=""
-              class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
-              >鍋煮香料奶茶學</router-link
-            >
-          </li>
-          <li>
-            <router-link
-              to=""
-              class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
-              >茶藝文化</router-link
-            >
-          </li>
+          <template v-for="(course, index) in coursesList" :key="course.id">
+            <li v-if="index < 5">
+              <router-link
+                :to="`/course/${course.id}`"
+                class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
+                >{{ course.title }}</router-link
+              >
+            </li>
+          </template>
         </ul>
       </li>
       <li class="flex flex-col">
@@ -89,9 +64,10 @@
           class="p-4 flex justify-between text-brand-02 hover:bg-brand-03 hover:bg-opacity-20 cursor-pointer"
           :class="{ 'more-active': choose.includes('茶藝用品') }"
           @click="
-            choose.includes('茶藝用品')
-              ? removeItem('茶藝用品')
-              : pushItem('茶藝用品')
+            () =>
+              choose.includes('茶藝用品')
+                ? removeItem('茶藝用品')
+                : pushItem('茶藝用品')
           "
         >
           茶藝用品
@@ -102,7 +78,7 @@
               class="object-none transition-all"
               :class="{
                 'scale-1': !choose.includes('茶藝用品'),
-                'scale-0': choose.includes('茶藝用品'),
+                'scale-0': choose.includes('茶藝用品')
               }"
             />
             <img
@@ -111,48 +87,20 @@
               class="transition-all absolute top-0"
               :class="{
                 'scale-1': choose.includes('茶藝用品'),
-                'scale-0': !choose.includes('茶藝用品'),
+                'scale-0': !choose.includes('茶藝用品')
               }"
             />
           </span>
         </p>
         <ul
           v-if="choose.includes('茶藝用品')"
-          @click="$emit('update:open', false)"
+          @click="() => $emit('update:open', false)"
         >
-          <li>
+          <li v-for="(item, index) in productTypes" :key="`前往搜尋${index}`">
             <router-link
-              to=""
+              :to="`/shoppingMall?page=1&search=${index}`"
               class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
-              >茶葉</router-link
-            >
-          </li>
-          <li>
-            <router-link
-              to=""
-              class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
-              >茶壺</router-link
-            >
-          </li>
-          <li>
-            <router-link
-              to=""
-              class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
-              >茶罐</router-link
-            >
-          </li>
-          <li>
-            <router-link
-              to=""
-              class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
-              >茶具組</router-link
-            >
-          </li>
-          <li>
-            <router-link
-              to=""
-              class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
-              >品茶小物</router-link
+              >{{ index }}</router-link
             >
           </li>
         </ul>
@@ -171,7 +119,7 @@
               class="object-none transition-all"
               :class="{
                 'scale-1': !choose.includes('會員中心'),
-                'scale-0': choose.includes('會員中心'),
+                'scale-0': choose.includes('會員中心')
               }"
             />
             <img
@@ -180,7 +128,7 @@
               class="transition-all absolute top-0"
               :class="{
                 'scale-1': choose.includes('會員中心'),
-                'scale-0': !choose.includes('會員中心'),
+                'scale-0': !choose.includes('會員中心')
               }"
             />
           </span>
@@ -239,25 +187,25 @@
 </template>
 <script>
 export default {
-  props: ["open"],
+  props: ['open', 'coursesList', 'productTypes'],
   data() {
     return {
-      choose: [],
-    };
+      choose: []
+    }
   },
   methods: {
     toggleSelected(str) {
-      this.choose.includes(str) ? this.removeItem(str) : this.choose.push(str);
+      this.choose.includes(str) ? this.removeItem(str) : this.choose.push(str)
     },
     pushItem(str) {
-      this.choose.push(str);
+      this.choose.push(str)
     },
     removeItem(str) {
-      const index = this.choose.indexOf(str);
-      this.choose.splice(index, 1);
-    },
-  },
-};
+      const index = this.choose.indexOf(str)
+      this.choose.splice(index, 1)
+    }
+  }
+}
 </script>
 <style scoped>
 .more-active {

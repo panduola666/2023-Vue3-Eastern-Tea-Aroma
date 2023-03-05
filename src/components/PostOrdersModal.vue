@@ -56,15 +56,17 @@
           <p>3899</p>
         </section>
       </template>
-      <template #modal-footer></template>
+      <template #modal-footerBTN>
+        <p></p>
+      </template>
     </DialogModal>
   </div>
 </template>
 <script>
-import DialogModal from "../components/DialogModal.vue";
+import DialogModal from '../components/DialogModal.vue'
 export default {
   components: {
-    DialogModal,
-  },
-};
+    DialogModal
+  }
+}
 </script>

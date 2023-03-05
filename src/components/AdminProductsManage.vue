@@ -49,9 +49,9 @@
           <section
             class="w-full flex flex-col lg:flex-row lg:justify-between gap-3"
           >
-            <h1 class="lg:w-4/5 overflow-hidden truncate">
+            <h2 class="lg:w-4/5 overflow-hidden truncate">
               阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶阿里山烏龍茶
-            </h1>
+            </h2>
             <DiscountToggle
               class="text-sm self-end lg:self-center mb-1 lg:mb-0"
             ></DiscountToggle>

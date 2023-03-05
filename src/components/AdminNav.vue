@@ -44,7 +44,7 @@
                 to="/admin/manage?current=商品管理"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 :class="{
-                  'font-semibold': this.$route.query.current === '商品管理',
+                  'font-semibold': this.$route.query.current === '商品管理'
                 }"
                 >商品管理</router-link
               >
@@ -54,19 +54,9 @@
                 to="/admin/manage?current=訂單管理"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 :class="{
-                  'font-semibold': this.$route.query.current === '訂單管理',
+                  'font-semibold': this.$route.query.current === '訂單管理'
                 }"
                 >訂單管理</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                to="/admin/manage?current=文章管理"
-                class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
-                :class="{
-                  'font-semibold': this.$route.query.current === '文章管理',
-                }"
-                >文章管理</router-link
               >
             </li>
             <li>
@@ -74,7 +64,7 @@
                 to="/admin/manage?current=活動管理"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 :class="{
-                  'font-semibold': this.$route.query.current === '活動管理',
+                  'font-semibold': this.$route.query.current === '活動管理'
                 }"
                 >活動管理</router-link
               >
@@ -84,7 +74,12 @@
         <li
           class="text-xl leading-[30px] pb-[10px] pt-[18px] hover:text-brand-01"
         >
-          <router-link to=""> 數據分析 </router-link>
+          <router-link
+            :to="{ name: '數據分析' }"
+            :class="{ 'font-semibold': this.$route.path === '/admin/analyze' }"
+          >
+            數據分析
+          </router-link>
         </li>
       </ul>
       <div class="flex items-center">
@@ -99,7 +94,7 @@
           >
             <li>
               <router-link
-                to="/user"
+                to="/admin/user"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 >會員專區</router-link
               >
@@ -117,7 +112,7 @@
                 to="/admin/discount"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 :class="{
-                  'font-semibold': this.$route.path === '/admin/discount',
+                  'font-semibold': this.$route.path === '/admin/discount'
                 }"
                 >折扣碼</router-link
               >
@@ -127,15 +122,18 @@
                 to="/admin/manage?current=商品管理"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 :class="{
-                  'font-semibold': this.$route.path === '/admin/manage',
+                  'font-semibold': this.$route.path === '/admin/manage'
                 }"
                 >管理項目</router-link
               >
             </li>
             <li>
               <router-link
-                to=""
+                to="/admin/analyze"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
+                :class="{
+                  'font-semibold': this.$route.path === '/admin/analyze'
+                }"
                 >數據分析</router-link
               >
             </li>

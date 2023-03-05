@@ -7,7 +7,9 @@
         <img src="../assets/logo.png" alt="東方茶香logo" />
       </router-link>
       <ul class="hidden items-center text-brand-02 gap-7 xl:gap-14 lg:flex">
-        <li class="text-xl leading-[30px] pb-[10px] pt-[18px] hover:text-brand-01">
+        <li
+          class="text-xl leading-[30px] pb-[10px] pt-[18px] hover:text-brand-01"
+        >
           <router-link to="/knowledge">茶學資訊</router-link>
         </li>
         <li class="group relative">
@@ -26,39 +28,11 @@
           <ul
             class="absolute button-0 left-0 hidden group-hover:block bg-white min-w-[216px] text-gray-01 shadow-lg z-50"
           >
-            <li>
+            <li v-for="course in coursesList" :key="course.id">
               <router-link
-                to=""
+                :to="`/course/${course.id}`"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
-                >茶的風味鑑賞學</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                to=""
-                class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
-                >茶席基礎入門</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                to=""
-                class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
-                >不一樣的台灣茶</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                to=""
-                class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
-                >鍋煮香料奶茶學</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                to=""
-                class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
-                >茶藝文化</router-link
+                >{{ course.title }}</router-link
               >
             </li>
           </ul>
@@ -68,7 +42,7 @@
             to="/shoppingMall?page=1&search="
             class="flex transition-all group-hover:text-brand-01 text-xl leading-[30px] pb-[10px] pt-[18px]"
             :class="{
-              'font-semibold': this.$route.path === '/shoppingMall',
+              'font-semibold': this.$route.path === '/shoppingMall'
             }"
           >
             茶藝用品
@@ -81,39 +55,11 @@
           <ul
             class="absolute button-0 left-0 hidden group-hover:block bg-white min-w-[216px] z-50 text-gray-01 shadow-lg"
           >
-            <li>
+            <li v-for="(item, index) in productTypes" :key="`前往搜尋${index}`">
               <router-link
-                to=""
+                :to="`/shoppingMall?page=1&search=${index}`"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
-                >茶葉</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                to=""
-                class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
-                >茶壺</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                to=""
-                class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
-                >茶罐</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                to=""
-                class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
-                >茶具組</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                to=""
-                class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
-                >品茶小物</router-link
+                >{{ index }}</router-link
               >
             </li>
           </ul>
@@ -192,7 +138,7 @@
               class="absolute bg-brand-02 text-white text-xs leading-[16px] font-medium px-1 min-w-[16px] max-h-[16px] rounded-lg -top-[5px] left-[14px]"
               v-if="isLogin"
             >
-              {{ shoppingCartLength > 99 ? "99+" : shoppingCartLength }}
+              {{ shoppingCartLength > 99 ? '99+' : shoppingCartLength }}
             </div>
           </router-link>
         </section>
@@ -203,7 +149,7 @@
             class="w-[30px] transition-all hover:brightness-125 hover:duration-[0s]"
             :class="{
               'scale-1': !openMore,
-              'scale-0': openMore,
+              'scale-0': openMore
             }"
             @click.prevent="openMore = !openMore"
           />
@@ -213,7 +159,7 @@
             class="w-[30px] transition-all absolute top-0 left-0 hover:brightness-75 hover:duration-[0s]"
             :class="{
               'scale-1': openMore,
-              'scale-0': !openMore,
+              'scale-0': !openMore
             }"
             @click.prevent="openMore = !openMore"
           />
@@ -224,35 +170,59 @@
       v-if="openMore"
       v-model:open="openMore"
       :to-href="userHref"
+      :coursesList="coursesList"
+      :productTypes="productTypes"
     ></nav-more-select>
   </nav>
 </template>
 <script>
-import navMoreSelect from "./NavMoreSelect.vue";
-import { mapState, mapActions } from "pinia";
-import { userStore } from "../stores/index.js";
+import navMoreSelect from './NavMoreSelect.vue'
+import { mapState, mapActions } from 'pinia'
+import { userStore, coursesStore, productsStore } from '../stores/index.js'
 
 export default {
   data() {
     return {
-      openMore: false,
-    };
+      openMore: false
+    }
   },
   computed: {
-    ...mapState(userStore, ["isLogin", "user"]),
+    ...mapState(userStore, ['isLogin', 'user']),
+    ...mapState(coursesStore, ['courses']),
+    ...mapState(productsStore, ['productTypes']),
     shoppingCartLength() {
       return (
         this.user.shoppingCart?.cart.products.length +
         this.user.shoppingCart?.cart.courses.length
-      );
+      )
     },
+    coursesList() {
+      const list = []
+      this.courses.forEach((course) => {
+        course.courseDates.forEach((date) => {
+          const data = {
+            id: date.id,
+            title: course.title
+          }
+          const index = list.findIndex((item) => item.title === course.title)
+          if (index !== -1) list.splice(index, 1)
+          list.push(data)
+        })
+      })
+      return list
+    }
   },
   methods: {
-    ...mapActions(userStore, ["signOut"]),
+    ...mapActions(userStore, ['signOut']),
+    ...mapActions(coursesStore, ['getCoursesData']),
+    ...mapActions(productsStore, ['getAllProducts'])
   },
   components: {
-    navMoreSelect,
+    navMoreSelect
   },
-  mounted() {},
-};
+  mounted() {
+    this.getAllProducts()
+    this.getCoursesData()
+  }
+}
 </script>

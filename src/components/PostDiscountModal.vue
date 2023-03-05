@@ -31,19 +31,19 @@
             <div class="flex flex-col">
               <label for="" class="">* 截止日期</label>
 
-              <v-date-picker class="inline-block h-full" v-model="date">
+              <v-date-picker class="inline-block flex-grow" v-model="date" color="teal">
                 <template v-slot="{ inputValue, togglePopover }">
                   <div
-                    class="flex items-center border border-gray-01 shadow-lg"
+                    class="flex items-center border border-gray-01 shadow-lg h-full"
                   >
                     <button
-                      class="p-2 bg-blue-100 border border-gray hover:bg-blue-200 text-blue-600 focus:bg-blue-500 focus:text-white focus:border-blue-500 focus:outline-none"
+                      class="p-2 bg-brand-01 bg-opacity-10 border-r border-gray-01 hover:bg-opacity-30 focus:bg-brand-02 focus:outline-none group h-full"
                       @click="togglePopover()"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
-                        class="w-4 h-4 fill-current"
+                        class="w-4 h-4 fill-brand-01 group-focus:fill-white"
                       >
                         <path
                           d="M1 4c0-1.1.9-2 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4zm2 2v12h14V6H3zm2-6h2v2H5V0zm8 0h2v2h-2V0zM5 9h2v2H5V9zm0 4h2v2H5v-2zm4-4h2v2H9V9zm0 4h2v2H9v-2zm4-4h2v2h-2V9zm0 4h2v2h-2v-2z"
@@ -52,7 +52,7 @@
                     </button>
                     <input
                       :value="inputValue"
-                      class="bg-white text-gray-700 border w-full py-1 px-2 appearance-none focus:outline-none"
+                      class="bg-white text-gray-700 border w-full py-1 px-2 appearance-none focus:outline-none h-full"
                       readonly
                     />
                   </div>
@@ -69,7 +69,6 @@
                 class="border border-gray-01 p-2 shadow-lg"
               />
             </div>
-
             <!-- <div class="flex flex-col">
               <label for="">* 折扣額度</label>
               <select name="" id="" class="border border-gray-01 p-2">
@@ -84,7 +83,7 @@
               </select>
             </div> -->
           </div>
-          <div class="bg-brand-03 bg-opacity-30 py-10 px-3 m-10">
+          <div class="bg-brand-03 bg-opacity-30 py-5 px-3 m-10">
             <table class="w-full text-center">
               <caption class="text-xl">
                 優惠資訊

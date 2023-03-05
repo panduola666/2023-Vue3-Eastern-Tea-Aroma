@@ -318,17 +318,14 @@ export default {
     },
     async chooseAvatar() {
       this.postImg = true
-      const type = ['男孩', '女孩']
-      const { value, isDismissed } = await this.$swal.fire({
+      const type = ['男孩', '女孩', '隱藏']
+      const { value } = await this.$swal.fire({
         title: '請選擇您的性別',
         input: 'radio',
         inputOptions: type,
         showCancelButton: true,
         reverseButtons: true
       })
-      if (isDismissed) {
-        this.postImg = false
-      }
       if (value) {
         const avatar = await this.$http.get(`${VITE_BASEURL}/avatar`)
         const index = avatar.data.findIndex((item) => item.type === type[value])
@@ -338,8 +335,10 @@ export default {
             avatarUrl: avatar.data[index].imgUrl
           }
         )
+        await this.getUserData()
         this.postImg = false
-        this.getUserData()
+      } else {
+        this.postImg = false
       }
     }
   }

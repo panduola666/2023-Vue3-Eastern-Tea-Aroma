@@ -51,7 +51,7 @@
         >
           剩餘: {{ currentProduct.totalNumber - soldNumber }}
           <span class="text-2xl text-gray-01"
-            >$ {{ productPrice(currentProduct.price) }}</span
+            >$ {{ toThousand(currentProduct.price) }}</span
           >
         </p>
         <div
@@ -186,9 +186,7 @@ export default {
           this.$router.push('/404')
         })
     },
-    productPrice(money) {
-      return toThousand(money)
-    },
+    toThousand,
     setProductsHistory(id) {
       if (localStorage.getItem('productsHistory')) {
         const historyArr = localStorage.getItem('productsHistory').split(',')

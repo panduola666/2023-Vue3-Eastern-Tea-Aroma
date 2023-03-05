@@ -4,10 +4,9 @@
       "email": "admin@gmail.com",
       "password": "$2a$10$UiqEPtBH9XtkaCxeonfL3.B6oxygD7U28J3lCKh31sJfGf/If8oPm",
       "name": "管理員",
-      "avatarUrl": "",
+      "avatarUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/avatar-2.png?raw=true",
       "tel": "",
       "isAdmin": true,
-      "amountSpent": 0,
       "level": 3,
       "shoppingCart": {
         "discount": "",
@@ -22,16 +21,24 @@
       "email": "user@gmail.com",
       "password": "$2a$10$1NktAqc61akAxpYRtwwapuKt8xpVsvtgAE3A3uRPOj71WdwdPWPx.",
       "name": "客戶",
-      "avatarUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/avatar-1.png?raw=true",
+      "avatarUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/avatar-2.png?raw=true",
       "tel": "213",
       "isAdmin": false,
-      "amountSpent": 0,
       "level": 1,
       "shoppingCart": {
         "discount": "",
         "cart": {
           "products": [],
-          "courses": []
+          "courses": [
+            {
+              "courseDateId": 2,
+              "courseId": 1,
+              "price": 3000,
+              "number": 1,
+              "totalPrice": 3000,
+              "isDiscount": true
+            }
+          ]
         }
       },
       "id": 2
@@ -43,7 +50,6 @@
       "avatarUrl": "",
       "tel": "",
       "isAdmin": false,
-      "amountSpent": 0,
       "level": 1,
       "shoppingCart": {
         "discount": "",
@@ -128,7 +134,8 @@
       "end": 1675063800000,
       "total": 30,
       "savedUsersId": [],
-      "isDiscount": false
+      "isDiscount": false,
+      "created": 1674835200000
     },
     {
       "id": 2,
@@ -138,9 +145,11 @@
       "end": 1679482800000,
       "total": 30,
       "savedUsersId": [
-        1
+        1,
+        2
       ],
-      "isDiscount": true
+      "isDiscount": true,
+      "created": 1677513600000
     },
     {
       "id": 3,
@@ -149,8 +158,11 @@
       "start": 1679551200000,
       "end": 1679558400000,
       "total": 10,
-      "savedUsersId": [],
-      "isDiscount": true
+      "savedUsersId": [
+        1
+      ],
+      "isDiscount": true,
+      "created": 1677772800000
     }
   ],
   "products": [
@@ -193,6 +205,8 @@
     {
       "id": 1,
       "title": "521國際茶日",
+      "type": "優惠",
+      "coverUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8201.png?raw=true",
       "created": 1675063800000,
       "content": "在2020年5月21日，聯合國首次確定＂國際茶日＂。 為表紀念每年521將推出全場商品 9 折活動為期 3 日，折扣碼：Tea521。"
     }
@@ -691,6 +705,44 @@
       "trackingNumber": "",
       "created": 1677857040876,
       "id": 12
+    },
+    {
+      "userId": 1,
+      "buyerInfo": {
+        "name": "4",
+        "tel": "3",
+        "method": "店家寄件",
+        "address": "213123",
+        "payMethods": {
+          "choose": "貨到付款",
+          "cardNumber": "",
+          "cardTime": [
+            "",
+            ""
+          ],
+          "cardCode": ""
+        }
+      },
+      "discount": {
+        "code": "",
+        "type": "",
+        "scale": ""
+      },
+      "cart": [
+        {
+          "name": "茶葉的風味鑑賞學",
+          "start": 1679479200000,
+          "end": 1679482800000,
+          "price": 3000,
+          "number": 1,
+          "totalPrice": 3000,
+          "isDiscount": true,
+          "courseDateId": 2
+        }
+      ],
+      "trackingNumber": "",
+      "created": 1678037643485,
+      "id": 13
     }
   ],
   "avatar": [
@@ -703,6 +755,11 @@
       "id": 2,
       "type": "女孩",
       "imgUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/avatar-2.png?raw=true"
+    },
+    {
+      "id": 3,
+      "type": "隱藏",
+      "imgUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/avatar-3.png?raw=true"
     }
   ]
 }

@@ -77,12 +77,12 @@
                     "
                   >
                     <del class="text-gray-02 mr-3"
-                      >$ {{ coursePrice(item.number * item.price) }}</del
+                      >$ {{ toThousand(item.number * item.price) }}</del
                     >
                     <p v-if="discountData.type === 'money'">
                       $
                       {{
-                        coursePrice(
+                        toThousand(
                           item.number * item.price - discountData.scale
                         )
                       }}
@@ -90,7 +90,7 @@
                     <p v-else>
                       $
                       {{
-                        coursePrice(
+                        toThousand(
                           item.number * item.price * discountData.scale
                         )
                       }}
@@ -100,7 +100,7 @@
                     v-else
                     class="text-lg flex flex-wrap items-center gap-2 whitespace-nowrap"
                   >
-                    $ {{ coursePrice(item.number * item.price) }}
+                    $ {{ toThousand(item.number * item.price) }}
                   </p>
 
                   <button
@@ -184,12 +184,12 @@
                       "
                     >
                       <del class="text-gray-02 mr-3"
-                        >$ {{ coursePrice(item.number * item.price) }}</del
+                        >$ {{ toThousand(item.number * item.price) }}</del
                       >
                       <p v-if="discountData.type === 'money'">
                         $
                         {{
-                          coursePrice(
+                          toThousand(
                             item.number * item.price - discountData.scale
                           )
                         }}
@@ -197,7 +197,7 @@
                       <p v-else>
                         $
                         {{
-                          coursePrice(
+                          toThousand(
                             item.number * item.price * discountData.scale
                           )
                         }}
@@ -207,7 +207,7 @@
                       v-else
                       class="text-lg flex flex-wrap items-center gap-2 whitespace-nowrap"
                     >
-                      $ {{ coursePrice(item.number * item.price) }}
+                      $ {{ toThousand(item.number * item.price) }}
                     </p>
                     <button
                       type="button"
@@ -236,7 +236,7 @@ import {
   userStore,
   productsStore,
   coursesStore,
-  discountStore
+  discountStore,toThousand
 } from '../stores/index.js'
 const { VITE_BASEURL } = import.meta.env
 
@@ -267,7 +267,8 @@ export default {
   methods: {
     ...mapActions(userStore, ['getUserData']),
     ...mapActions(productsStore, ['getAllProducts']),
-    ...mapActions(coursesStore, ['getCoursesData', 'coursePrice']),
+    ...mapActions(coursesStore, ['getCoursesData']),
+    toThousand,
     patchCartAJAX(shoppingCart) {
       this.$http
         .patch(`${VITE_BASEURL}/users/${sessionStorage.getItem('userId')}`, {

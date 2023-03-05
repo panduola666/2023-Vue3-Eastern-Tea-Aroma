@@ -4,12 +4,12 @@
     :centeredSlides="true"
     :autoplay="{
       delay: 2500,
-      disableOnInteraction: false,
+      disableOnInteraction: false
     }"
     :pagination="{
-      clickable: true,
+      clickable: true
     }"
-    :navigation="true"
+    :navigation="false"
     :modules="modules"
     class="mySwiper"
   >
@@ -127,27 +127,27 @@
 </template>
 <script>
 // Import Swiper Vue.js components
-import { Swiper, SwiperSlide } from "swiper/vue";
+import { Swiper, SwiperSlide } from 'swiper/vue'
 
 // Import Swiper styles
-import "swiper/css";
+import 'swiper/css'
 
-import "swiper/css/pagination";
+import 'swiper/css/pagination'
 
 // import required modules
-import { Autoplay, Pagination } from "swiper";
+import { Autoplay, Pagination } from 'swiper'
 
 export default {
   components: {
     Swiper,
-    SwiperSlide,
+    SwiperSlide
   },
   setup() {
     return {
-      modules: [Autoplay, Pagination],
-    };
-  },
-};
+      modules: [Autoplay, Pagination]
+    }
+  }
+}
 </script>
 <style>
 .swiper {

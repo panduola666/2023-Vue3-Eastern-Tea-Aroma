@@ -75,65 +75,65 @@
   </section>
 </template>
 <script>
-import PostOrdersModal from "../components/PostOrdersModal.vue";
+import PostOrdersModal from '../components/PostOrdersModal.vue'
 
 export default {
   methods: {
     async postTrackingNum() {
       const { value: trackingNumber } = await this.$swal.fire({
-        title: "物流查詢編號",
-        input: "text",
-        inputValue: "",
-        inputPlaceholder: "請輸入物流查詢編號",
+        title: '物流查詢編號',
+        input: 'text',
+        inputValue: '',
+        inputPlaceholder: '請輸入物流查詢編號',
         showCancelButton: true,
-        cancelButtonText: "取消",
-        confirmButtonText: "確認",
+        cancelButtonText: '取消',
+        confirmButtonText: '確認',
         reverseButtons: true,
         inputValidator: (value) => {
           if (!value) {
-            return "物流編號 必填";
+            return '物流編號 必填'
           }
-        },
-      });
-      console.log(trackingNumber);
+        }
+      })
+      console.log(trackingNumber)
       if (trackingNumber) {
-        this.$swal.fire(`物流查詢編號為: ${trackingNumber}`);
+        this.$swal.fire(`物流查詢編號為: ${trackingNumber}`)
       }
     },
     async orderCheck() {
       const { value: choose } = await this.$swal.fire({
-        title: "請選擇訂單狀態",
-        input: "select",
+        title: '請選擇訂單狀態',
+        input: 'select',
         customClass: {
-          input: "border-2 border-black",
+          input: 'border-2 border-black'
         },
         inputOptions: {
-          cancel: "取消訂單",
-          finish: "完成訂單",
+          cancel: '取消訂單',
+          finish: '完成訂單'
         },
-        inputPlaceholder: "訂單狀態",
+        inputPlaceholder: '訂單狀態',
         showCancelButton: true,
-        cancelButtonText: "取消",
-        confirmButtonText: "確認",
+        cancelButtonText: '取消',
+        confirmButtonText: '確認',
         reverseButtons: true,
         inputValidator: (value) => {
           if (!value) {
             return new Promise((resolve) => {
-              resolve("請選擇訂單狀態");
-            });
+              resolve('請選擇訂單狀態')
+            })
           }
-        },
-      });
+        }
+      })
 
-      if (choose === "cancel") {
-        this.$swal.fire("已取消該筆訂單");
-      } else if (choose === "finish") {
-        this.postTrackingNum();
+      if (choose === 'cancel') {
+        this.$swal.fire('已取消該筆訂單')
+      } else if (choose === 'finish') {
+        this.postTrackingNum()
       }
-    },
+    }
   },
   components: {
-    PostOrdersModal,
-  },
-};
+    PostOrdersModal
+  }
+}
 </script>

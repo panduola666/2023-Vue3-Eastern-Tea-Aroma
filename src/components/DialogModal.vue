@@ -17,7 +17,7 @@
       </TransitionChild>
 
       <div class="fixed inset-0 overflow-y-auto">
-        <div class="flex h-full justify-center p-4 text-center">
+        <div class="flex h-full justify-center p-4 text-center items-center">
           <TransitionChild
             as="template"
             enter="duration-300 ease-out"
@@ -28,7 +28,7 @@
             leave-to="opacity-0 scale-95"
           >
             <DialogPanel
-              class="w-5/6 overflow-auto transform rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all h-max"
+              class="w-5/6 overflow-auto transform rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all min-h-max max-h-full"
             >
               <DialogTitle
                 as="div"
@@ -82,36 +82,36 @@ import {
   TransitionChild,
   Dialog,
   DialogPanel,
-  DialogTitle,
-} from "@headlessui/vue";
+  DialogTitle
+} from '@headlessui/vue'
 
 export default {
-  props: ["finishFn"],
+  props: ['finishFn'],
   data() {
     return {
-      isOpen: false,
-    };
+      isOpen: false
+    }
   },
   methods: {
     finish() {
-      this.closeModal();
-      this.finishFn();
+      this.closeModal()
+      this.finishFn()
     },
     closeModal() {
-      this.isOpen = false;
+      this.isOpen = false
     },
     openModal() {
-      this.isOpen = true;
-    },
+      this.isOpen = true
+    }
   },
   components: {
     TransitionRoot,
     TransitionChild,
     Dialog,
     DialogPanel,
-    DialogTitle,
-  },
-};
+    DialogTitle
+  }
+}
 // const isOpen = ref(false);
 
 // function ZZ

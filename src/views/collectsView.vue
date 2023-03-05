@@ -64,7 +64,9 @@
                   <span v-if="!score(course.scores)">尚未評分</span>
                   <span v-else>{{ score(course.scores) }} / 5.0</span>
                 </p>
-                <p class="text-end font-sans">$ {{ course.price }}</p>
+                <p class="text-end font-sans">
+                  $ {{ toThousand(course.price) }}
+                </p>
               </section>
               <div class="font-normal font-sans flex gap-3 justify-end text-sm">
                 <button
@@ -89,7 +91,7 @@
 </template>
 <script>
 import { mapState, mapActions } from 'pinia'
-import { coursesStore, userStore } from '../stores/index'
+import { coursesStore, userStore, toThousand } from '../stores/index'
 export default {
   data() {
     return {
@@ -126,7 +128,6 @@ export default {
             (a, b) => b[config[title]] - a[config[title]]
           )
         }
-        // console.log(this.sortData)
       },
       deep: true
     }
@@ -148,18 +149,15 @@ export default {
     }
   },
   methods: {
-    ...mapActions(coursesStore, [
-      'getCoursesData',
-      'coursePrice',
-      'patchSaved'
-    ]),
+    ...mapActions(coursesStore, ['getCoursesData', 'patchSaved']),
+    toThousand,
     score(data) {
       const score = data.reduce((num, item) => (num += item.score), 0)
       const avg = score / data.length
       if (isNaN(avg)) {
         return 0
       } else {
-        return Math.round(avg * 10) / 10
+        return (Math.round(avg * 10) / 10).toFixed(1)
       }
     }
   },

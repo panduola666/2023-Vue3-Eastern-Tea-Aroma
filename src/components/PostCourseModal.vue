@@ -32,7 +32,7 @@
             <img
               src="../assets/課堂04.png"
               alt=""
-              class="w-full object-cover"
+              class="w-full object-cover max-h-[300px]"
             />
             <input
               type="text"
@@ -61,7 +61,7 @@
           </div>
         </div>
         <div class="flex-grow lg:border-l-2 flex flex-col gap-3 lg:px-3">
-          <div class="grid lg:grid-cols-2 lg:gap-7 gap-3">
+          <div class="grid lg:grid-cols-2 gap-3">
             <label for="" class=""
               >* 課程
               <select name="" id="" class="border border-gray-01 p-2 w-full">
@@ -79,82 +79,94 @@
                   class="border border-gray-01 p-2 w-full"
                   placeholder="請輸入課程名稱..."
                 />
-                <button type="button" class="btn-outline p-1 px-2 flex-shrink-0">確認</button>
+                <button
+                  type="button"
+                  class="btn-outline p-1 px-2 flex-shrink-0"
+                >
+                  確認
+                </button>
               </div>
             </div>
           </div>
-          <div>
-            <p>* 時段選擇</p>
-            <v-date-picker
-              v-model="range"
-              mode="dateTime"
-              :masks="masks"
-              is-range
-            >
-              <template v-slot="{ inputValue, inputEvents, isDragging }">
-                <div
-                  class="flex flex-col sm:flex-row justify-start items-center"
+          <div class="grid lg:grid-cols-2 gap-3">
+            <div>
+              <p>* 時段選擇</p>
+              <v-date-picker
+                class="inline-block w-full"
+                v-model="date"
+                color="teal"
+              >
+                <template v-slot="{ inputValue, togglePopover }">
+                  <div class="flex items-center">
+                    <button
+                      class="p-2 bg-brand-01 bg-opacity-10 border border-brand-01 hover:bg-opacity-30 rounded-l focus:bg-brand-02 focus:border-brand-02 focus:outline-none group"
+                      @click="togglePopover()"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        class="w-4 h-4 fill-brand-01 group-focus:fill-white"
+                      >
+                        <path
+                          d="M1 4c0-1.1.9-2 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4zm2 2v12h14V6H3zm2-6h2v2H5V0zm8 0h2v2h-2V0zM5 9h2v2H5V9zm0 4h2v2H5v-2zm4-4h2v2H9V9zm0 4h2v2H9v-2zm4-4h2v2h-2V9zm0 4h2v2h-2v-2z"
+                        ></path>
+                      </svg>
+                    </button>
+                    <input
+                      :value="inputValue"
+                      class="bg-white text-gray-01 w-full py-1 px-2 appearance-none border border-brand-03 rounded-r focus:outline-none focus:border-brand-02"
+                      readonly
+                    />
+                  </div>
+                </template>
+              </v-date-picker>
+            </div>
+            <div class="bg-gray-03 bg-opacity-20 flex flex-col p-2 gap-2">
+              <div class="flex gap-3 items-center">
+                <span class="flex-shrink-0">開始:</span>
+                <label for="" class="flex flex-grow"
+                  ><select name="" id="" class="flex-grow">
+                    <option value="" v-for="i in 10" :key="i">
+                      {{ i + 12 }}
+                    </option></select
+                  >時</label
                 >
-                  <div class="relative flex-grow">
-                    <svg
-                      class="text-gray-600 w-4 h-full mx-2 absolute pointer-events-none"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
+                <label for="" class="flex flex-grow"
+                  ><select name="" id="" class="flex-grow">
+                    <option
+                      value=""
+                      v-for="i in ['00', '15', '30', '45']"
+                      :key="i"
                     >
-                      <path
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      ></path>
-                    </svg>
-                    <input
-                      class="flex-grow pl-8 pr-2 py-1 bg-gray-100 border rounded w-full"
-                      :class="isDragging ? 'text-gray-600' : 'text-gray-900'"
-                      :value="inputValue.start"
-                      v-on="inputEvents.start"
-                    />
-                  </div>
-                  <span class="flex-shrink-0 m-2">
-                    <svg
-                      class="w-4 h-4 stroke-current text-gray-600"
-                      viewBox="0 0 24 24"
+                      {{ i }}
+                    </option></select
+                  >分</label
+                >
+              </div>
+              <div class="flex gap-3 items-center">
+                <span class="flex-shrink-0">結束:</span>
+                <label for="" class="flex flex-grow"
+                  ><select name="" id="" class="flex-grow">
+                    <option value="" v-for="i in 10" :key="i">
+                      {{ i + 12 }}
+                    </option></select
+                  >時</label
+                >
+                <label for="" class="flex flex-grow"
+                  ><select name="" id="" class="flex-grow">
+                    <option
+                      value=""
+                      v-for="i in ['00', '15', '30', '45']"
+                      :key="i"
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M14 5l7 7m0 0l-7 7m7-7H3"
-                      />
-                    </svg>
-                  </span>
-                  <div class="relative flex-grow">
-                    <svg
-                      class="text-gray-600 w-4 h-full mx-2 absolute pointer-events-none"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      ></path>
-                    </svg>
-                    <input
-                      class="flex-grow pl-8 pr-2 py-1 bg-gray-100 border rounded w-full"
-                      :class="isDragging ? 'text-gray-600' : 'text-gray-900'"
-                      :value="inputValue.end"
-                      v-on="inputEvents.end"
-                    />
-                  </div>
-                </div>
-              </template>
-            </v-date-picker>
+                      {{ i }}
+                    </option></select
+                  >分</label
+                >
+              </div>
+            </div>
           </div>
-          <div class="grid lg:grid-cols-2 lg:gap-7 gap-3">
+          <div class="grid lg:grid-cols-2 gap-3">
             <label for="" class="grid"
               >* 價格<input
                 type="number"
@@ -209,22 +221,16 @@
   </DialogModal>
 </template>
 <script>
-import DialogModal from "../components/DialogModal.vue";
+import DialogModal from '../components/DialogModal.vue'
 
 export default {
   data() {
     return {
-      range: {
-        start: new Date(),
-        end: new Date(),
-      },
-      masks: {
-        input: "YYYY-MM-DD h:mm A",
-      },
-    };
+      date: new Date()
+    }
   },
   components: {
-    DialogModal,
-  },
-};
+    DialogModal
+  }
+}
 </script>

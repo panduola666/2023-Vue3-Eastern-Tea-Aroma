@@ -120,7 +120,7 @@ export default {
     return {
       chooseType: '',
       currentChoose: '',
-      limit: 6 // 控制一頁顯示幾個
+      limit: 2 // 控制一頁顯示幾個
     }
   },
   computed: {
@@ -168,6 +168,9 @@ export default {
           ? `&_page=${page}&_limit=${this.limit}`
           : `?_page=${page}&_limit=${this.limit}`
       )
+    },
+    '$route.query.search'(search) {
+      if (search) this.currentChoose = search
     },
     currentChoose() {
       this.$router.push(`/shoppingMall?page=1&search=${this.currentChoose}`)

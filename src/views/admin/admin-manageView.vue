@@ -1,10 +1,10 @@
 <template>
   <main class="admin-wrap">
     <h1 class="text-3xl font-black font-self text-brand-02 mb-5">項目總管理</h1>
-    <div class="grid grid-cols-4">
+    <div class="grid grid-cols-5">
       <ul class="text-center text-2xl font-black font-self text-brand-02">
         <li
-          v-for="(item, index) in ['商品', '訂單', '會員', '活動']"
+          v-for="(item, index) in ['商品', '訂單', '活動']"
           :key="item + index"
         >
           <button
@@ -26,7 +26,7 @@
         </li>
       </ul>
       <div
-        class="col-span-3 border-2 border-brand-02 bg-white bg-opacity-20 p-5"
+        class="col-span-4 border-2 border-brand-02 bg-white bg-opacity-20 p-5 min-h-[330px]"
       >
         <AdminProductsManage
           v-if="this.$route.query.current === '商品管理'"
@@ -34,27 +34,26 @@
         <AdminOrdersManage
           v-else-if="this.$route.query.current === '訂單管理'"
         ></AdminOrdersManage>
-        <p v-else class="text-center text-2xl font-self">~ 未完成 ~</p>
-
-        <PagingComponent class="mt-5"></PagingComponent>
+        <AdminActivitiesManage
+          v-else-if="this.$route.query.current === '活動管理'"
+        ></AdminActivitiesManage>
       </div>
     </div>
   </main>
 </template>
 <script>
-import PagingComponent from '../../components/PagingComponent.vue'
 import AdminProductsManage from '../../components/AdminProductsManage.vue'
 import AdminOrdersManage from '../../components/AdminOrdersManage.vue'
-
+import AdminActivitiesManage from '../../components/AdminActivitiesManage.vue'
 export default {
   data() {
     return {}
   },
   components: {
     // CoursesCard,
-    PagingComponent,
     AdminProductsManage,
-    AdminOrdersManage
+    AdminOrdersManage,
+    AdminActivitiesManage
   }
 }
 </script>

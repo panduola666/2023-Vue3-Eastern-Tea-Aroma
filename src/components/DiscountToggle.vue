@@ -1,5 +1,5 @@
 <template>
-  <SwitchGroup>
+  <SwitchGroup @click="() => $emit('update:is-discount', enabled)">
     <div class="flex items-center">
       <TailWindSwitch
         v-model="enabled"
@@ -19,17 +19,31 @@
   </SwitchGroup>
 </template>
 <script>
-import { Switch, SwitchGroup, SwitchLabel } from "@headlessui/vue";
+import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
 export default {
+  props: {
+    isDiscount: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
-      enabled: false,
-    };
+      enabled: false
+    }
+  },
+  watch: {
+    isDiscount() {
+      this.enabled = this.isDiscount
+    }
+  },
+  mounted() {
+    this.enabled = this.isDiscount
   },
   components: {
     TailWindSwitch: Switch,
     SwitchGroup,
-    SwitchLabel,
-  },
-};
+    SwitchLabel
+  }
+}
 </script>

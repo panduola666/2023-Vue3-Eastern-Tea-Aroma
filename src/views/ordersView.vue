@@ -131,9 +131,7 @@ export default {
       })
       return price
     },
-    toThousand(money) {
-      return toThousand(money)
-    }
+    toThousand
   },
   mounted() {
     this.getOrdersData()

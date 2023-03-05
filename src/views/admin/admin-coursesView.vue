@@ -10,54 +10,70 @@
       </PostCourseModal>
     </div>
     <ul class="grid gap-5">
-      <li is="vue:CoursesCard">
-        <template #image>
-          <img
-            src="../../assets/BANNER@3x-2.png"
-            alt=""
-            class="w-full h-full object-cover"
-          />
-        </template>
-        <template #card-header>
-          茶葉的風味鑑賞學
-          <PostCourseModal>
-            <template #btn-content>
-              <button typeof="button" class="btn-outline py-2 text-base mb-1">
-                編輯
-              </button>
+      <template v-for="course in courses" :key="course.id + course.title">
+        <div
+          v-for="date in course.courseDates"
+          :key="`課程編號${date.courseId}的第${date.id}堂`"
+        >
+          <li is="vue:CoursesCard" v-if="date.userId === user.id">
+            <template #image>
+              <img
+                :src="course.coverUrl"
+                :alt="course.title"
+                class="w-full h-full object-cover"
+              />
             </template>
-          </PostCourseModal>
-        </template>
-        <template #card-body>
-          <p>時段：2022-03-10 (三) / 15:00~16:30</p>
-          <p>開放人數：30人</p>
-          <div class="flex justify-between">
-            <p>評分：尚未評分</p>
-            <p class="text-xl">$ 3500</p>
-          </div>
-          <p class="text-gray-02 text-end text-sm">剩餘：10</p>
-        </template>
-        <template #card-footer>
-          <div class="flex flex-grow gap-3 flex-col md:flex-row justify-end">
-            <DiscountToggle
-              class="justify-end my-3 md:my-0 md:justify-start flex-grow"
-            ></DiscountToggle>
-            <div class="grid grid-cols-2 gap-3">
-              <button typeof="button" class="btn-outline">刪除</button>
-              <router-link to="" class="btn-outline text-center"
-                >課程詳情</router-link
+            <template #card-header>
+              <h1>{{ course.title }}</h1>
+              <PostCourseModal>
+                <template #btn-content>
+                  <button
+                    typeof="button"
+                    class="btn-outline py-2 text-base mb-1"
+                  >
+                    編輯
+                  </button>
+                </template>
+              </PostCourseModal>
+            </template>
+            <template #card-body>
+              <!-- {{ date }} -->
+              <p>
+                時段：{{ $date(date.start).format('YYYY-MM-DD') }} /
+                {{ $date(date.start).format('HH:mm') }}~{{
+                  $date(date.end).format('HH:mm')
+                }}
+              </p>
+              <p>開放人數：{{ date.total }}人</p>
+              <p>評分：{{ score(course.scores) }}</p>
+              <p class="text-xl text-end">$ {{ toThousand(course.price) }}</p>
+            </template>
+            <template #card-footer>
+              <div
+                class="flex flex-grow gap-3 flex-col md:flex-row justify-end"
               >
-            </div>
-            <OrderCourseModal>
-              <template #btn-content>
-                <button typeof="button" class="btn-primary md:w-max w-full">
-                  預約詳情
-                </button>
-              </template>
-            </OrderCourseModal>
-          </div>
-        </template>
-      </li>
+                <DiscountToggle
+                  v-model:is-discount="date.isDiscount"
+                  class="justify-end my-3 md:my-0 md:justify-start flex-grow"
+                ></DiscountToggle>
+                <div class="grid grid-cols-2 gap-3">
+                  <button typeof="button" class="btn-outline">刪除</button>
+                  <router-link to="" class="btn-outline text-center"
+                    >課程詳情</router-link
+                  >
+                </div>
+                <OrderCourseModal>
+                  <template #btn-content>
+                    <button typeof="button" class="btn-primary md:w-max w-full">
+                      預約詳情
+                    </button>
+                  </template>
+                </OrderCourseModal>
+              </div>
+            </template>
+          </li>
+        </div>
+      </template>
     </ul>
   </main>
 </template>
@@ -66,8 +82,27 @@ import CoursesCard from '../../components/CoursesCard.vue'
 import PostCourseModal from '../../components/PostCourseModal.vue'
 import OrderCourseModal from '../../components/OrderCourseModal.vue'
 import DiscountToggle from '../../components/DiscountToggle.vue'
-
+import { mapState, mapActions } from 'pinia'
+import { coursesStore, userStore, toThousand } from '../../stores/index'
 export default {
+  computed: {
+    ...mapState(coursesStore, ['courses']),
+    ...mapState(userStore, ['user'])
+  },
+  methods: {
+    toThousand,
+    ...mapActions(coursesStore, ['getCoursesData']),
+    ...mapActions(userStore, ['getUserData']),
+    score(scoreData) {
+      const total = scoreData.reduce((num, item) => (num += item.score), 0)
+      const avg = Math.round((total / scoreData.length) * 10) / 10
+      return isNaN(avg) ? 0 : avg.toFixed(1)
+    }
+  },
+  mounted() {
+    this.getCoursesData()
+    this.getUserData()
+  },
   components: {
     CoursesCard,
     PostCourseModal,

@@ -38,7 +38,6 @@ export default {
   },
   mounted() {
     this.checkLogin()
-    console.log(this.$route)
     if (
       (this.$route.fullPath.startsWith('/user') ||
         this.$route.fullPath === '/shopCart' ||
