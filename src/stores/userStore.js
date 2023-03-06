@@ -9,17 +9,27 @@ const swalColor = {
 }
 export default defineStore('userDataStore', {
   state: () => ({
+    allUser: [],
     user: {},
     isLogin: false
   }),
   actions: {
+    getAllUser() {
+      axios
+        .get(`${VITE_BASEURL}/users`)
+        .then((res) => (this.allUser = res.data))
+    },
     getUserData() {
       // 必登入情況
       axios.defaults.headers.common.Authorization = `Bearer ${sessionStorage.getItem(
         'accessToken'
       )}`
       axios
-        .get(`${VITE_BASEURL}/660/users/${sessionStorage.getItem('userId')}`)
+        .get(
+          `${VITE_BASEURL}/660/users/${sessionStorage.getItem(
+            'userId'
+          )}?_expand=avatar`
+        )
         .then((res) => {
           this.isLogin = true
           console.log('已登入')
@@ -31,9 +41,12 @@ export default defineStore('userDataStore', {
           sessionStorage.clear()
           console.log(err.response)
           this.isLogin = false
-          // if (err.response.data === "jwt expired") {
-          //   this.overLogin();
-          // }
+          if (
+            !this.isLogin &&
+            router.currentRoute.value.fullPath.includes('admin')
+          ) {
+            this.overLogin()
+          }
         })
     },
     login(userInput, identifyCode, AddIdentifyLetter) {
@@ -124,7 +137,7 @@ export default defineStore('userDataStore', {
         email,
         password,
         name: userName,
-        avatarUrl: '',
+        avatarId: 3,
         tel: '',
         isAdmin: false,
         level: 1,

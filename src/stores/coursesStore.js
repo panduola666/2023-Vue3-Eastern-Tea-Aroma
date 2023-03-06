@@ -1,4 +1,4 @@
-import { userStore } from './index.js'
+import { userStore, updatedImgStore } from './index.js'
 import router from '../router/index.js'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -20,7 +20,19 @@ export default defineStore('coursesStore', {
       )
       this.courses = res.data
     },
-    async getCurrent(courseDateId) {
+    async getCurrent(courseDateId, isNew = false) {
+      const updatedImg = updatedImgStore()
+      updatedImg.imgUrl = ''
+      if (isNew) {
+        this.currentCourse = {
+          title: '',
+          coverUrl: '',
+          contents: [''],
+          price: 0,
+          total: 0
+        }
+        return
+      }
       try {
         const courseDate = await axios.get(
           `${VITE_BASEURL}/courseDates/${courseDateId}?_expand=course&_expand=user`
@@ -70,7 +82,6 @@ export default defineStore('coursesStore', {
         .patch(`${VITE_BASEURL}/courseDates/${courseDate.id}`, { savedUsersId })
         .then(() => {
           this.getCoursesData()
-          // console.log(res.data);
         })
         .catch((err) => {
           console.log('收藏')

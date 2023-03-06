@@ -9,7 +9,7 @@
           class="absolute top-0 right-0 left-0 bottom-0 bg-white rounded-full bg-opacity-30"
         />
         <img
-          :src="user.avatarUrl"
+          :src="user.avatar?.imgUrl"
           alt="用戶頭像"
           class="flex-shrink-0 rounded-full object-cover border border-brand-02 bg-brand-01 bg-opacity-70 cursor-pointer hover:contrast-[0.8] lg:w-[25vw] lg:h-[25vw] w-[30vw] h-[30vw] min-h-[170px] min-w-[170px]"
           @click="chooseAvatar"
@@ -326,20 +326,26 @@ export default {
         showCancelButton: true,
         reverseButtons: true
       })
-      if (value) {
-        const avatar = await this.$http.get(`${VITE_BASEURL}/avatar`)
-        const index = avatar.data.findIndex((item) => item.type === type[value])
-        await this.$http.patch(
-          `${VITE_BASEURL}/users/${sessionStorage.getItem('userId')}`,
-          {
-            avatarUrl: avatar.data[index].imgUrl
-          }
-        )
-        await this.getUserData()
+      console.log(value)
+      if (!value) {
         this.postImg = false
-      } else {
-        this.postImg = false
+        return
       }
+      const avatar = await this.$http.get(`${VITE_BASEURL}/avatars`)
+      const index = avatar.data.findIndex((item) => item.type === type[value])
+      const newAvatar = avatar.data[index]
+      if (this.user.avatarId === newAvatar.id) {
+        this.postImg = false
+        return
+      }
+      await this.$http.patch(
+        `${VITE_BASEURL}/users/${sessionStorage.getItem('userId')}`,
+        {
+          avatarId: newAvatar.id
+        }
+      )
+      this.getUserData()
+      this.postImg = false
     }
   }
 }

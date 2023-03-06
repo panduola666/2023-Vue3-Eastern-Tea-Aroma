@@ -118,7 +118,7 @@
                 <router-link
                   to="/"
                   class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20 text-gray-02 w-full"
-                  @click="signOut()"
+                  @click="() => signOut()"
                 >
                   登出
                 </router-link>

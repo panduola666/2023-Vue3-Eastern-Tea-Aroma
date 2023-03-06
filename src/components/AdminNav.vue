@@ -141,6 +141,7 @@
               <router-link
                 to="/"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20 text-gray-02"
+                @click="() => signOut()"
                 >登出</router-link
               >
             </li>
@@ -156,3 +157,12 @@
     </div>
   </nav>
 </template>
+<script>
+import { mapActions } from 'pinia'
+import { userStore } from '@/stores/index.js'
+export default {
+  methods: {
+    ...mapActions(userStore, ['signOut'])
+  }
+}
+</script>

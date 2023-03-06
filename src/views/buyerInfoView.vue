@@ -290,7 +290,8 @@ export default {
         discount: orderDiscount,
         cart: orderCart,
         trackingNumber: '',
-        created: new Date().getTime()
+        created: new Date().getTime(),
+        finish: false
       }
       cart.products.length = 0
       cart.courses.length = 0

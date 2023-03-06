@@ -1,5 +1,5 @@
 <template>
-  <SwitchGroup @click="() => $emit('update:is-discount', enabled)">
+  <SwitchGroup>
     <div class="flex items-center">
       <TailWindSwitch
         v-model="enabled"
@@ -20,21 +20,46 @@
 </template>
 <script>
 import { Switch, SwitchGroup, SwitchLabel } from '@headlessui/vue'
+const { VITE_BASEURL } = import.meta.env
 export default {
   props: {
     isDiscount: {
       type: Boolean,
       default: false
+    },
+    id: {
+      type: Number,
+      required: true
+    },
+    which: {
+      type: String,
+      required: true
     }
   },
   data() {
     return {
-      enabled: false
+      enabled: this.isDiscount
     }
   },
   watch: {
     isDiscount() {
       this.enabled = this.isDiscount
+    },
+    enabled() {
+      this.$emit('update:is-discount', this.enabled)
+      this.$http
+        .patch(`${VITE_BASEURL}/${this.which}/${this.id}`, {
+          isDiscount: this.enabled
+        })
+        .then(() => {
+          this.$swal.fire({
+            icon: 'success',
+            title: '修改成功',
+            showConfirmButton: false,
+            timer: 1500,
+            allowOutsideClick: false
+          })
+        })
     }
   },
   mounted() {

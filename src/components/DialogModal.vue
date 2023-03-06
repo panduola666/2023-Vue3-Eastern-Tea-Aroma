@@ -76,7 +76,6 @@
 </template>
 
 <script>
-// import { ref } from "vue";
 import {
   TransitionRoot,
   TransitionChild,
@@ -86,7 +85,11 @@ import {
 } from '@headlessui/vue'
 
 export default {
-  props: ['finishFn'],
+  props: {
+    finishFn: {
+      type: Function
+    }
+  },
   data() {
     return {
       isOpen: false
@@ -112,7 +115,4 @@ export default {
     DialogTitle
   }
 }
-// const isOpen = ref(false);
-
-// function ZZ
 </script>

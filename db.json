@@ -4,14 +4,21 @@
       "email": "admin@gmail.com",
       "password": "$2a$10$UiqEPtBH9XtkaCxeonfL3.B6oxygD7U28J3lCKh31sJfGf/If8oPm",
       "name": "管理員",
-      "avatarUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/avatar-2.png?raw=true",
+      "avatarId": 3,
       "tel": "",
       "isAdmin": true,
-      "level": 3,
       "shoppingCart": {
         "discount": "",
         "cart": {
-          "products": [],
+          "products": [
+            {
+              "productId": 2,
+              "price": 200,
+              "number": 1,
+              "totalPrice": 200,
+              "isDiscount": false
+            }
+          ],
           "courses": []
         }
       },
@@ -21,10 +28,9 @@
       "email": "user@gmail.com",
       "password": "$2a$10$1NktAqc61akAxpYRtwwapuKt8xpVsvtgAE3A3uRPOj71WdwdPWPx.",
       "name": "客戶",
-      "avatarUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/avatar-2.png?raw=true",
+      "avatarId": 2,
       "tel": "213",
       "isAdmin": false,
-      "level": 1,
       "shoppingCart": {
         "discount": "",
         "cart": {
@@ -47,10 +53,9 @@
       "email": "panduola666@gmail.com",
       "password": "$2a$10$T1/adyg9e7BK14xB2/yPJuEAm0eWwB17xV0hYLqunnIwhWOBBWty2",
       "name": "圈圈",
-      "avatarUrl": "",
+      "avatarId": 3,
       "tel": "",
       "isAdmin": false,
-      "level": 1,
       "shoppingCart": {
         "discount": "",
         "cart": {
@@ -80,11 +85,6 @@
       "id": 1,
       "title": "茶葉的風味鑑賞學",
       "coverUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8201.png?raw=true",
-      "imagesUrl": [
-        "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8201.png?raw=true",
-        "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8201.png?raw=true",
-        "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8201.png?raw=true"
-      ],
       "contents": [
         "認識主流茶葉的特性與風味",
         "學習5種泡茶法，並實作其中2種，體驗茶葉在不同溫度、沖泡時間以及技巧下的變化",
@@ -94,12 +94,8 @@
       "userId": 1,
       "scores": [
         {
-          "userId": 3,
-          "score": 3
-        },
-        {
           "userId": 2,
-          "score": 4
+          "score": 3
         }
       ],
       "price": 3000
@@ -114,7 +110,7 @@
         "學習基本茶桌禮儀，讓你可以在生活中展現儀態加分",
         "建立自己的品位，足夠的知識亦可在人際交流上擁有更多話題"
       ],
-      "userId": 2,
+      "userId": 1,
       "scores": [
         {
           "score": 4,
@@ -123,24 +119,48 @@
       ],
       "price": 1500,
       "id": 2
+    },
+    {
+      "contents": [
+        "台灣茶席美學的發展梗概與起落",
+        "基礎茶席禮儀",
+        "初步體驗完整茶席流程"
+      ],
+      "coverUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8202@2x.png?raw=true",
+      "price": 2000,
+      "title": "茶席基礎入門",
+      "scores": [],
+      "userId": 1,
+      "id": 3
+    },
+    {
+      "contents": [
+        ""
+      ],
+      "coverUrl": "https://i.imgur.com/LN7I2GW.png",
+      "price": 2311,
+      "title": "2312",
+      "scores": [],
+      "userId": 1,
+      "id": 4
     }
   ],
   "courseDates": [
     {
       "id": 1,
       "courseId": 1,
-      "userId": 2,
+      "userId": 1,
       "start": 1675056600000,
       "end": 1675063800000,
       "total": 30,
       "savedUsersId": [],
-      "isDiscount": false,
+      "isDiscount": true,
       "created": 1674835200000
     },
     {
       "id": 2,
       "courseId": 1,
-      "userId": 2,
+      "userId": 1,
       "start": 1679479200000,
       "end": 1679482800000,
       "total": 30,
@@ -163,6 +183,17 @@
       ],
       "isDiscount": true,
       "created": 1677772800000
+    },
+    {
+      "end": 1678863600000,
+      "start": 1678856400000,
+      "total": 20,
+      "userId": 1,
+      "savedUsersId": [],
+      "isDiscount": true,
+      "created": 1678117379857,
+      "courseId": 3,
+      "id": 4
     }
   ],
   "products": [
@@ -214,12 +245,13 @@
   "orders": [
     {
       "created": 1679932800000,
+      "finish": true,
       "trackingNumber": "weqeq",
       "id": 1,
       "userId": 2,
       "buyerInfo": {
-        "name": "",
-        "tel": "",
+        "name": "某某",
+        "tel": "01231",
         "method": "自取",
         "address": "",
         "payMethods": {
@@ -261,6 +293,7 @@
     },
     {
       "created": 1679587200000,
+      "finish": false,
       "trackingNumber": "",
       "userId": 2,
       "buyerInfo": {
@@ -350,10 +383,12 @@
       ],
       "trackingNumber": "",
       "created": 1677773823142,
+      "finish": false,
       "id": 3
     },
     {
       "userId": 2,
+      "finish": false,
       "buyerInfo": {
         "name": "dwqdqd",
         "tel": "32",
@@ -390,329 +425,12 @@
       "id": 4
     },
     {
-      "userId": 2,
-      "buyerInfo": {
-        "name": "3",
-        "tel": "2",
-        "method": "自取",
-        "address": "",
-        "payMethods": {
-          "choose": "貨到付款",
-          "cardNumber": "",
-          "cardTime": [
-            "",
-            ""
-          ],
-          "cardCode": ""
-        }
-      },
-      "discount": {
-        "code": "",
-        "type": "",
-        "scale": ""
-      },
-      "cart": [
-        {
-          "type": "高山烏龍",
-          "name": "阿里山烏龍茶",
-          "price": 700,
-          "number": 1,
-          "totalPrice": 700,
-          "isDiscount": true,
-          "productId": 1
-        }
-      ],
-      "trackingNumber": "",
-      "created": 1677773913689,
-      "id": 5
-    },
-    {
-      "userId": 2,
-      "buyerInfo": {
-        "name": "w",
-        "tel": "6",
-        "method": "自取",
-        "address": "",
-        "payMethods": {
-          "choose": "貨到付款",
-          "cardNumber": "",
-          "cardTime": [
-            "",
-            ""
-          ],
-          "cardCode": ""
-        }
-      },
-      "discount": {
-        "code": "",
-        "type": "",
-        "scale": ""
-      },
-      "cart": [
-        {
-          "type": "高山烏龍",
-          "name": "杉林溪烏龍茶",
-          "price": 200,
-          "number": 1,
-          "totalPrice": 200,
-          "isDiscount": false,
-          "productId": 2
-        }
-      ],
-      "trackingNumber": "",
-      "created": 1677773949780,
-      "id": 6
-    },
-    {
-      "userId": 2,
-      "buyerInfo": {
-        "name": "e",
-        "tel": "2",
-        "method": "自取",
-        "address": "",
-        "payMethods": {
-          "choose": "貨到付款",
-          "cardNumber": "",
-          "cardTime": [
-            "",
-            ""
-          ],
-          "cardCode": ""
-        }
-      },
-      "discount": {
-        "code": "",
-        "type": "",
-        "scale": ""
-      },
-      "cart": [
-        {
-          "type": "高山烏龍",
-          "name": "杉林溪烏龍茶",
-          "price": 200,
-          "number": 1,
-          "totalPrice": 200,
-          "isDiscount": false,
-          "productId": 2
-        }
-      ],
-      "trackingNumber": "",
-      "created": 1677773965730,
-      "id": 7
-    },
-    {
-      "userId": 2,
-      "buyerInfo": {
-        "name": "qw",
-        "tel": "2132131232",
-        "method": "自取",
-        "address": "",
-        "payMethods": {
-          "choose": "貨到付款",
-          "cardNumber": "",
-          "cardTime": [
-            "",
-            ""
-          ],
-          "cardCode": ""
-        }
-      },
-      "discount": {
-        "code": "",
-        "type": "",
-        "scale": ""
-      },
-      "cart": [
-        {
-          "type": "高山烏龍",
-          "name": "杉林溪烏龍茶",
-          "price": 200,
-          "number": 1,
-          "totalPrice": 200,
-          "isDiscount": false,
-          "productId": 2
-        },
-        {
-          "name": "茶葉的風味鑑賞學",
-          "start": 1679479200000,
-          "end": 1679482800000,
-          "price": 3000,
-          "number": 1,
-          "totalPrice": 3000,
-          "isDiscount": true,
-          "courseDateId": 2
-        },
-        {
-          "name": "茶葉的風味鑑賞學test",
-          "start": 1679551200000,
-          "end": 1679558400000,
-          "price": 1500,
-          "number": 1,
-          "totalPrice": 1500,
-          "isDiscount": true,
-          "courseDateId": 3
-        }
-      ],
-      "trackingNumber": "",
-      "created": 1677856883939,
-      "id": 8
-    },
-    {
-      "userId": 2,
-      "buyerInfo": {
-        "name": "e",
-        "tel": "3",
-        "method": "自取",
-        "address": "",
-        "payMethods": {
-          "choose": "貨到付款",
-          "cardNumber": "",
-          "cardTime": [
-            "",
-            ""
-          ],
-          "cardCode": ""
-        }
-      },
-      "discount": {
-        "code": "",
-        "type": "",
-        "scale": ""
-      },
-      "cart": [
-        {
-          "type": "高山烏龍",
-          "name": "阿里山烏龍茶",
-          "price": 700,
-          "number": 1,
-          "totalPrice": 700,
-          "isDiscount": true,
-          "productId": 1
-        }
-      ],
-      "trackingNumber": "",
-      "created": 1677856925371,
-      "id": 9
-    },
-    {
-      "userId": 2,
-      "buyerInfo": {
-        "name": "qw",
-        "tel": "213123",
-        "method": "自取",
-        "address": "",
-        "payMethods": {
-          "choose": "貨到付款",
-          "cardNumber": "",
-          "cardTime": [
-            "",
-            ""
-          ],
-          "cardCode": ""
-        }
-      },
-      "discount": {
-        "code": "",
-        "type": "",
-        "scale": ""
-      },
-      "cart": [
-        {
-          "name": "茶葉的風味鑑賞學test",
-          "start": 1679551200000,
-          "end": 1679558400000,
-          "price": 1500,
-          "number": 1,
-          "totalPrice": 1500,
-          "isDiscount": true,
-          "courseDateId": 3
-        }
-      ],
-      "trackingNumber": "",
-      "created": 1677856962980,
-      "id": 10
-    },
-    {
-      "userId": 2,
-      "buyerInfo": {
-        "name": "qw",
-        "tel": "213123",
-        "method": "自取",
-        "address": "",
-        "payMethods": {
-          "choose": "貨到付款",
-          "cardNumber": "",
-          "cardTime": [
-            "",
-            ""
-          ],
-          "cardCode": ""
-        }
-      },
-      "discount": {
-        "code": "",
-        "type": "",
-        "scale": ""
-      },
-      "cart": [
-        {
-          "type": "高山烏龍",
-          "name": "杉林溪烏龍茶",
-          "price": 200,
-          "number": 1,
-          "totalPrice": 200,
-          "isDiscount": false,
-          "productId": 2
-        }
-      ],
-      "trackingNumber": "",
-      "created": 1677856988038,
-      "id": 11
-    },
-    {
-      "userId": 2,
-      "buyerInfo": {
-        "name": "圈圈",
-        "tel": "213123",
-        "method": "自取",
-        "address": "",
-        "payMethods": {
-          "choose": "貨到付款",
-          "cardNumber": "",
-          "cardTime": [
-            "",
-            ""
-          ],
-          "cardCode": ""
-        }
-      },
-      "discount": {
-        "code": "",
-        "type": "",
-        "scale": ""
-      },
-      "cart": [
-        {
-          "type": "高山烏龍",
-          "name": "杉林溪烏龍茶",
-          "price": 200,
-          "number": 1,
-          "totalPrice": 200,
-          "isDiscount": false,
-          "productId": 2
-        }
-      ],
-      "trackingNumber": "",
-      "created": 1677857040876,
-      "id": 12
-    },
-    {
       "userId": 1,
       "buyerInfo": {
-        "name": "4",
-        "tel": "3",
-        "method": "店家寄件",
-        "address": "213123",
+        "name": "dqwdq",
+        "tel": "23",
+        "method": "自取",
+        "address": "",
         "payMethods": {
           "choose": "貨到付款",
           "cardNumber": "",
@@ -741,11 +459,12 @@
         }
       ],
       "trackingNumber": "",
-      "created": 1678037643485,
-      "id": 13
+      "created": 1678094916663,
+      "finish": false,
+      "id": 5
     }
   ],
-  "avatar": [
+  "avatars": [
     {
       "id": 1,
       "type": "男孩",

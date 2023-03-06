@@ -87,24 +87,6 @@
           {{ content }}
         </li>
       </ul>
-      <div
-        class="grid sm:grid-cols-3 gap-3 my-4"
-        :class="{
-          'sm:grid-cols-2': currentCourse.course.imagesUrl.length <= 2
-        }"
-        v-if="currentCourse.course"
-      >
-        <template
-          v-for="(imageUrl, index) in currentCourse.course?.imagesUrl"
-          :key="currentCourse.course?.title + index"
-        >
-          <img
-            :src="imageUrl"
-            :alt="currentCourse.course.title + index"
-            class="w-full h-48 object-cover"
-          />
-        </template>
-      </div>
     </article>
     <p class="font-self text-gray-01 mt-16">其他時段</p>
     <ol class="list-disc list-inside">
