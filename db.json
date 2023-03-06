@@ -101,8 +101,8 @@
       "price": 3000
     },
     {
-      "title": "茶葉的風味鑑賞學test",
-      "coverUrl": "https://storage.googleapis.com/vue-course-api.appspot.com/panduola666/1676484286171.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=k7v6tv8avkxZT42KwGx6Y8slacnK939FpotsmuQ30Z%2BadaVv2WM7NaNnJCpvCIYcmy92v7x%2FhQMbD4yqIKr%2BZGTQca5F0L0iJgeVd38akOo7D0FHRLkQPnNCIPS3%2BHX8kT4YBb%2FZZN3Jj9nqpIi1UjFXTx9HJ3mptq7d%2F14qYSIb7GgGOyKGs9XAN79FKnUcQ7n47NhJ3bst%2FAdygxc7MjDpK%2BHJOj3Q%2BimjQZPwatg%2BPEzzfVJsrPRUHmHkktrxdxiDsDnQnZfKwefgEqZ7U%2FbvCk1kP3RaYiYmC9SXbsGzvi7ahNFXuFFwXH0QgRrfsSKrRmrXe%2BDWCAh0Sty%2FBg%3D%3D",
+      "title": "不一樣的台灣茶",
+      "coverUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8203@2x.png?raw=true",
       "imagesUrl": [],
       "contents": [
         "認識主流茶葉的特性與風味",
@@ -132,17 +132,6 @@
       "scores": [],
       "userId": 1,
       "id": 3
-    },
-    {
-      "contents": [
-        ""
-      ],
-      "coverUrl": "https://i.imgur.com/LN7I2GW.png",
-      "price": 2311,
-      "title": "2312",
-      "scores": [],
-      "userId": 1,
-      "id": 4
     }
   ],
   "courseDates": [
@@ -175,9 +164,9 @@
       "id": 3,
       "courseId": 2,
       "userId": 1,
-      "start": 1679551200000,
-      "end": 1679558400000,
-      "total": 10,
+      "start": 1678258800000,
+      "end": 1678266000000,
+      "total": 15,
       "savedUsersId": [
         1
       ],

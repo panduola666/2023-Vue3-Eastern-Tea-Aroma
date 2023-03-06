@@ -209,7 +209,8 @@
                       name="startHour"
                       id="startHour"
                       class="flex-grow"
-                      v-model="start.hour"
+                      :value="$date(editorData.start).format('HH')"
+                      @change="($event) => changTime('start', 'hour', $event)"
                     >
                       <option :value="i + 12" v-for="i in 10" :key="i">
                         {{ i + 12 }}
@@ -221,7 +222,8 @@
                       name="startMinute"
                       id="startMinute"
                       class="flex-grow"
-                      v-model="start.minute"
+                      :value="$date(editorData.start).format('mm')"
+                      @change="($event) => changTime('start', 'minute', $event)"
                     >
                       <option
                         :value="i"
@@ -240,7 +242,8 @@
                       name="endHour"
                       id="endHour"
                       class="flex-grow"
-                      v-model="end.hour"
+                      :value="$date(editorData.end).format('HH')"
+                      @change="($event) => changTime('end', 'hour', $event)"
                     >
                       <option :value="i + 12" v-for="i in 10" :key="i">
                         {{ i + 12 }}
@@ -252,7 +255,8 @@
                       name="endMinute"
                       id="endMinute"
                       class="flex-grow"
-                      v-model="end.minute"
+                      :value="$date(editorData.end).format('mm')"
+                      @change="($event) => changTime('end', 'minute', $event)"
                     >
                       <option
                         :value="i"
@@ -342,6 +346,7 @@
 import DialogModal from '../components/DialogModal.vue'
 import { mapState, mapActions } from 'pinia'
 import { coursesStore, updatedImgStore } from '../stores/index'
+import { is } from 'dom7'
 const { VITE_BASEURL } = import.meta.env
 
 export default {
@@ -489,7 +494,7 @@ export default {
           .then(() => {
             this.$swal.fire({
               icon: 'success',
-              title: '課程新增成功',
+              title: '課程修改成功',
               showConfirmButton: false,
               timer: 1500
             })
@@ -521,6 +526,15 @@ export default {
     },
     contentPush(contentsIndex, e) {
       this.editorData.contents[contentsIndex] = e.target.value
+    },
+    changTime(choose, timer, e) {
+      this[choose][timer] = e.target.value
+      this.editorData[choose] =
+        new Date(
+          this.$date(this.editorData[choose]).format('YYYY,MM,DD')
+        ).getTime() +
+        this[choose].hour * 60 * 60 * 1000 +
+        this[choose].minute * 60 * 1000
     }
   },
   watch: {
@@ -542,33 +556,28 @@ export default {
           end,
           total
         }
-        this.start.hour = this.$date(obj.start).format('HH')
-        this.start.minute = this.$date(obj.start).format('mm')
-        this.end.hour = this.$date(obj.end).format('HH')
-        this.end.minute = this.$date(obj.end).format('mm')
         this.date = obj.start
         this.editorData = obj
       }
       this.options()
     },
     end: {
-      handler({ hour, minute }) {
-        if (hour < this.start.hour) {
-          this.start.hour = hour
-        }
-        if (hour === this.start.hour && minute < this.start.minute) {
-          this.start.minute = minute
+      handler() {
+        if (this.editorData.end < this.editorData.start) {
+          this.editorData.start = this.editorData.end
+          console.log(this.editorData.start === this.editorData.end)
+          console.log(new Date(this.editorData.start).toLocaleString())
+          console.log(new Date(this.editorData.end).toLocaleString())
         }
       },
       deep: true
     },
     start: {
-      handler({ hour, minute }) {
-        if (hour > this.end.hour) {
-          this.end.hour = hour
-        }
-        if (hour === this.end.hour && minute > this.end.minute) {
-          this.end.minute = minute
+      handler() {
+        if (this.editorData.start > this.editorData.end) {
+          this.editorData.end = this.editorData.start
+          console.log(new Date(this.editorData.start).toLocaleString())
+          console.log(new Date(this.editorData.end).toLocaleString())
         }
       },
       deep: true
@@ -592,6 +601,11 @@ export default {
         this.editorData.coverUrl = coverUrl
         this.editorData.contents = contents
         this.editorData.price = price
+      } else if (this.editorData.courseId) {
+        // this.editorData.courseId = 0
+        // this.editorData.coverUrl = ''
+        // this.editorData.contents = ['']
+        // this.editorData.price = 0
       } else {
         this.editorData.courseId = 0
         this.editorData.coverUrl = ''

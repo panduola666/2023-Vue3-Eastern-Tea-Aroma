@@ -29,7 +29,13 @@ export default defineStore('coursesStore', {
           coverUrl: '',
           contents: [''],
           price: 0,
-          total: 0
+          total: 0,
+          start:
+            new Date(new Date().toLocaleDateString()).getTime() +
+            13 * 60 * 60 * 1000,
+          end:
+            new Date(new Date().toLocaleDateString()).getTime() +
+            13 * 60 * 60 * 1000
         }
         return
       }
@@ -56,7 +62,6 @@ export default defineStore('coursesStore', {
       // console.log(courseDate.data);
     },
     patchSaved(courseDate) {
-      console.log(courseDate)
       const user = userStore()
       if (!user.isLogin) return
       const { savedUsersId } = courseDate
