@@ -39,7 +39,7 @@
           :key="'第' + date.id + '課'"
         >
           <li
-            class="bg-white bg-opacity-40 text-brand-05 font-self font-semibold grid lg:grid-cols-2 gap-3 shadow-md min-h-max"
+            class="bg-white text-brand-05 font-self font-semibold grid lg:grid-cols-2 gap-3 shadow-md min-h-max"
             v-if="date.savedUsersId.includes(user.id)"
           >
             <div class="h-64 overflow-hidden">

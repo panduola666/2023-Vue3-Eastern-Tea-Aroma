@@ -1,6 +1,6 @@
 <template>
   <img
-    src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/back%20to%20top.png?raw=true"
+    src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/back%20to%20top.png?raw=true"
     alt="返回頂部"
     class="cursor-pointer fixed lg:right-24 lg:bottom-16 right-3 bottom-3 z-50"
     :class="{ hidden: top < 500 }"
@@ -12,7 +12,7 @@
     >
       <a href="/">
         <img
-          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/logo2.png?raw=true"
+          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/logo2.png?raw=true"
           alt="東方茶香logo"
         />
       </a>

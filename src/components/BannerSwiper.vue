@@ -16,12 +16,12 @@
     <swiper-slide
       ><div class="relative h-[520px] w-full">
         <img
-          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/BANNER.png?raw=true"
+          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER.png?raw=true"
           alt=""
           class="object-cover hidden lg:block object-left"
         />
         <img
-          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/BANNER%20375.png?raw=true"
+          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER%20375.png?raw=true"
           alt=""
           class="object-bottom block lg:hidden"
         />
@@ -39,12 +39,12 @@
     <swiper-slide
       ><div class="relative h-[520px] w-full">
         <img
-          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/BANNER-1.png?raw=true"
+          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER-1.png?raw=true"
           alt=""
           class="object-cover hidden lg:block object-left"
         />
         <img
-          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/BANNER%20375-1.png?raw=true"
+          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER%20375-1.png?raw=true"
           alt=""
           class="object-bottom block lg:hidden"
         />
@@ -64,12 +64,12 @@
     <swiper-slide
       ><div class="relative h-[520px] w-full">
         <img
-          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/BANNER-2.png?raw=true"
+          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER-2.png?raw=true"
           alt=""
           class="object-cover hidden lg:block object-left"
         />
         <img
-          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/BANNER%20375-2.png?raw=true"
+          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER%20375-2.png?raw=true"
           alt=""
           class="object-bottom block lg:hidden"
         />
@@ -90,12 +90,12 @@
     <swiper-slide
       ><div class="relative h-[520px] w-full">
         <img
-          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/BANNER-3.png?raw=true"
+          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER-3.png?raw=true"
           alt=""
           class="object-cover hidden lg:block object-left"
         />
         <img
-          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/BANNER%20375-3.png?raw=true"
+          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER%20375-3.png?raw=true"
           alt=""
           class="object-bottom block lg:hidden"
         />

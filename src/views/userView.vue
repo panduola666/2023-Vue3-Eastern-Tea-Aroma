@@ -4,7 +4,7 @@
       <div class="relative flex-shrink-0">
         <img
           v-if="postImg"
-          src="https://raw.githubusercontent.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/8620d479450a0a5a0928d77bf80fbd260b935229/src/assets/loading.svg"
+          src="https://raw.githubusercontent.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/432edba69ae101dadc9806b476921a84c08c5b43/public/loading.svg"
           alt="loadingSVG"
           class="absolute top-0 right-0 left-0 bottom-0 bg-white rounded-full bg-opacity-30"
         />
@@ -37,7 +37,7 @@
         </li>
         <li>
           <img
-            src="https://raw.githubusercontent.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/8620d479450a0a5a0928d77bf80fbd260b935229/src/assets/teaIcon.svg"
+            src="https://raw.githubusercontent.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/432edba69ae101dadc9806b476921a84c08c5b43/public/teaIcon.svg"
             alt="icon茶壺"
             class="bottom-0 right-0 float-right"
           />
@@ -186,7 +186,6 @@ export default {
       postImg: false
     }
   },
-
   computed: {
     ...mapState(userStore, ['isLogin', 'user']),
     userInfo() {
@@ -347,6 +346,9 @@ export default {
       this.getUserData()
       this.postImg = false
     }
+  },
+  mounted() {
+    this.getUserData()
   }
 }
 </script>

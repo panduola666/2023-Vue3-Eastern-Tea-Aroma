@@ -40,7 +40,7 @@
       <li is="vue:CoursesCard">
         <template #image>
           <img
-            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/%E6%9C%80%E6%96%B0%E6%B4%BB%E5%8B%9501.png?raw=true"
+            src="https://images.unsplash.com/photo-1678117733318-1aaccb9dc4c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
             alt=""
             class="w-full h-full object-cover"
           />

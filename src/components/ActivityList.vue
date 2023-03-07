@@ -8,17 +8,23 @@
       </h2>
       <div class="flex">
         <div class="relative group cursor-pointer">
-          <img src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/type=L,%20status=Default.png?raw=true" alt="上一頁" />
           <img
-            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/type=L,%20status=Hover.png?raw=true"
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/type=L,%20status=Default.png?raw=true"
+            alt="上一頁"
+          />
+          <img
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/type=L,%20status=Hover.png?raw=true"
             alt="上一頁"
             class="absolute top-0 group-hover:opacity-100 opacity-0 px-3 py-2 transition-all duration-500"
           />
         </div>
         <div class="relative group cursor-pointer">
-          <img src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/type=R,%20status=Default.png?raw=true" alt="下一頁" />
           <img
-            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/type=R,%20status=Hover.png?raw=true"
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/type=R,%20status=Default.png?raw=true"
+            alt="下一頁"
+          />
+          <img
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/type=R,%20status=Hover.png?raw=true"
             alt="下一頁"
             class="absolute top-0 group-hover:opacity-100 opacity-0 px-3 py-2 transition-all duration-500"
           />
@@ -31,7 +37,7 @@
       >
         <router-link to="">
           <img
-            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/%E6%9C%80%E6%96%B0%E6%B4%BB%E5%8B%9501.png?raw=true"
+            src="https://images.unsplash.com/photo-1678117733318-1aaccb9dc4c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
             alt="521國際茶日"
             class="w-full h-[312px] object-cover"
           />

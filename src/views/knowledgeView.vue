@@ -43,7 +43,7 @@
         宋代，是古代茶道最盛之時，正所謂「茶，興於唐，盛於宋」。其時主要的備茶方式為點茶法，即是先將茶餅磨成細末，置於茶盌內，注入沸水，再加以擊拂，形成細滑如乳的泡沫。每個步驟都一絲不苟，有如禪修，靜心凝神，修身養性。點茶法東傳至日本後，孕育出茶道精神，今時今日大行其道的抹茶也是起源於此。
       </p>
       <img
-        src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/%E8%AA%B2%E5%A0%8204.png?raw=true"
+        src="https://images.unsplash.com/photo-1678117733318-1aaccb9dc4c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
         alt=""
         class="object-cover w-full"
       />

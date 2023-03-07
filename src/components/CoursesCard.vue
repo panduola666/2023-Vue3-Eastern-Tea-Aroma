@@ -2,7 +2,7 @@
   <div
     class="bg-white bg-opacity-100 text-brand-05 font-semibold lg:grid grid-cols-3 gap-3 shadow-md group min-h-max w-full overflow-hidden"
   >
-    <div class="w-full lg:h-full h-64 overflow-hidden">
+    <div class="w-full h-64 overflow-hidden">
       <slot name="image">圖片</slot>
     </div>
     <article class="flex flex-col justify-between col-span-2 p-3">

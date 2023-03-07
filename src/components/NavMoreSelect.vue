@@ -25,7 +25,7 @@
           茶藝課堂
           <span class="relative">
             <img
-              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/icon+.png?raw=true"
+              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon+.png?raw=true"
               alt="展開"
               class="object-none transition-all"
               :class="{
@@ -34,7 +34,7 @@
               }"
             />
             <img
-              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/icon-.png?raw=true"
+              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon-.png?raw=true"
               alt="收合"
               class="transition-all absolute top-0"
               :class="{
@@ -73,7 +73,7 @@
           茶藝用品
           <span class="relative">
             <img
-              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/icon+.png?raw=true"
+              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon+.png?raw=true"
               alt="展開"
               class="object-none transition-all"
               :class="{
@@ -82,7 +82,7 @@
               }"
             />
             <img
-              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/icon-.png?raw=true"
+              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon-.png?raw=true"
               alt="收合"
               class="transition-all absolute top-0"
               :class="{
@@ -114,7 +114,7 @@
           會員中心
           <span class="relative">
             <img
-              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/icon+.png?raw=true"
+              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon+.png?raw=true"
               alt="展開"
               class="object-none transition-all"
               :class="{
@@ -123,7 +123,7 @@
               }"
             />
             <img
-              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/icon-.png?raw=true"
+              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon-.png?raw=true"
               alt="收合"
               class="transition-all absolute top-0"
               :class="{

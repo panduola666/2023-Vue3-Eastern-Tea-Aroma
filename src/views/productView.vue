@@ -66,7 +66,7 @@
               "
             >
               <img
-                src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/icon-.png?raw=true"
+                src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon-.png?raw=true"
                 alt=""
               />
             </button>
@@ -86,7 +86,7 @@
               "
             >
               <img
-                src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/icon+.png?raw=true"
+                src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon+.png?raw=true"
                 alt=""
               />
             </button>

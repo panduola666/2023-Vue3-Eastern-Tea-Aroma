@@ -4,7 +4,7 @@
       class="mx-auto xl:w-[70%] lg:w-[80%] w-[90%] flex justify-between items-center pb-2"
     >
       <router-link to="/" class="pb-[10px] pt-[18px]">
-        <img src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/logo.png?raw=true" alt="東方茶香logo" />
+        <img src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/logo.png?raw=true" alt="東方茶香logo" />
       </router-link>
       <ul class="hidden items-center text-brand-02 gap-7 xl:gap-14 lg:flex">
         <li
@@ -20,7 +20,7 @@
           >
             茶藝課堂
             <img
-              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/Property%201=arrow-down.png?raw=true"
+              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/Property%201=arrow-down.png?raw=true"
               alt="展開"
               class="group-hover:-rotate-180 transition"
             />
@@ -47,7 +47,7 @@
           >
             茶藝用品
             <img
-              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/Property%201=arrow-down.png?raw=true"
+              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/Property%201=arrow-down.png?raw=true"
               alt=""
               class="group-hover:-rotate-180 transition"
             />
@@ -78,7 +78,7 @@
             <!-- 已登入 -->
             <router-link to="/user">
               <img
-                src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/Property%201=account.png?raw=true"
+                src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/Property%201=account.png?raw=true"
                 alt="會員專區"
                 class="object-contain h-9 max-w-[30px] mb-[10px] mt-[18px]"
               />
@@ -130,7 +130,7 @@
         <section class="flex mb-[10px] mt-[18px]">
           <router-link :to="{ name: 'shopCart' }" class="relative"
             ><img
-              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/Property%201=cart@2x.png?raw=true"
+              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/Property%201=cart@2x.png?raw=true"
               alt="購物車"
               class="w-[30px] mr-6 hover:brightness-125"
             />
@@ -144,7 +144,7 @@
         </section>
         <div class="relative flex items-center lg:hidden cursor-pointer">
           <img
-            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/Property%201=more.png?raw=true"
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/Property%201=more.png?raw=true"
             alt="more"
             class="w-[30px] transition-all hover:brightness-125 hover:duration-[0s]"
             :class="{
@@ -154,7 +154,7 @@
             @click.prevent="()=>openMore = !openMore"
           />
           <img
-            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/Property%201=close@2x.png?raw=true"
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/Property%201=close@2x.png?raw=true"
             alt="關閉"
             class="w-[30px] transition-all absolute top-0 left-0 hover:brightness-75 hover:duration-[0s]"
             :class="{

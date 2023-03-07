@@ -36,12 +36,12 @@
               521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日
             </h3>
             <img
-              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/icon-.png?raw=true"
+              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon-.png?raw=true"
               alt="收合"
               v-if="open"
             />
             <img
-              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/icon+.png?raw=true"
+              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon+.png?raw=true"
               alt="展開"
               v-else
             />
