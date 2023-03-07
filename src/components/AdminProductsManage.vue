@@ -40,7 +40,7 @@
       <li is="vue:CoursesCard">
         <template #image>
           <img
-            src="../assets/課堂02.png"
+            src="../assets/最新活動03@3x.png"
             alt=""
             class="w-full h-full object-cover"
           />

@@ -84,7 +84,7 @@
     {
       "id": 1,
       "title": "茶葉的風味鑑賞學",
-      "coverUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8201.png?raw=true",
+      "coverUrl": "https://images.unsplash.com/photo-1519095615130-d36e0fe3bf63?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8ODh8fHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
       "contents": [
         "認識主流茶葉的特性與風味",
         "學習5種泡茶法，並實作其中2種，體驗茶葉在不同溫度、沖泡時間以及技巧下的變化",
@@ -102,7 +102,7 @@
     },
     {
       "title": "不一樣的台灣茶",
-      "coverUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8203@2x.png?raw=true",
+      "coverUrl": "https://images.unsplash.com/photo-1563822249366-3efb23b8e0c9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
       "imagesUrl": [],
       "contents": [
         "認識主流茶葉的特性與風味",
@@ -120,7 +120,7 @@
         "基礎茶席禮儀",
         "初步體驗完整茶席流程"
       ],
-      "coverUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8202@2x.png?raw=true",
+      "coverUrl": "https://images.unsplash.com/photo-1631682477691-9021a9218860?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTY2fHx0ZWF8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
       "price": 2000,
       "title": "茶席基礎入門",
       "scores": [],
@@ -134,7 +134,7 @@
         "介紹香料故事與風格分類",
         "鍋煮技巧"
       ],
-      "coverUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8204@2x.png?raw=true",
+      "coverUrl": "https://images.unsplash.com/photo-1551540827-6c8ae1aaedbb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
       "price": 2000,
       "title": "鍋煮香料奶茶學",
       "scores": [],
