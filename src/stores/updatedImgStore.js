@@ -13,30 +13,30 @@ export default defineStore('updatedImgStore', {
   }),
   actions: {
     // 將選擇的圖像文件轉換為 Base64 編碼
-    changeBase64(e) {
-      const file = e.target.files[0]
-      console.log(file)
-      if (!['image/png', 'image/jpg', 'image/jpeg'].includes(file.type)) {
-        alert('請上傳正確的圖片格式')
-        return
-      }
-      if (file.size > 10 * 1024 * 1024) {
-        alert('請選擇 10M 以內的圖片')
-        return
-      }
-      if (typeof FileReader === 'function') {
-        const render = new FileReader()
-        render.readAsDataURL(file)
-        render.onload = (event) => {
-          this.base64 = event.target.result
-          // 在這裡可以將編碼後的圖像數據上傳到服務器 只有在這裡有值!
-          console.log('壓縮前:   ' + this.base64)
-          this.compressImage(this.base64)
-        }
-      } else {
-        alert('對不起,你的瀏覽器不支援此功能')
-      }
-    },
+    // changeBase64(e) {
+    //   const file = e.target.files[0]
+    //   console.log(file)
+    //   if (!['image/png', 'image/jpg', 'image/jpeg'].includes(file.type)) {
+    //     alert('請上傳正確的圖片格式')
+    //     return
+    //   }
+    //   if (file.size > 10 * 1024 * 1024) {
+    //     alert('請選擇 10M 以內的圖片')
+    //     return
+    //   }
+    //   if (typeof FileReader === 'function') {
+    //     const render = new FileReader()
+    //     render.readAsDataURL(file)
+    //     render.onload = (event) => {
+    //       this.base64 = event.target.result
+    //       // 在這裡可以將編碼後的圖像數據上傳到服務器 只有在這裡有值!
+    //       console.log('壓縮前:   ' + this.base64)
+    //       this.compressImage(this.base64)
+    //     }
+    //   } else {
+    //     alert('對不起,你的瀏覽器不支援此功能')
+    //   }
+    // },
     // 最終 AJAX 點
     postImg(e, token) {
       const formData = new FormData()
