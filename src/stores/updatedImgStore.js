@@ -38,7 +38,7 @@ export default defineStore('updatedImgStore', {
       }
     },
     // 最終 AJAX 點
-    postImg(e, token, whichAPI, dataId) {
+    postImg(e, token) {
       const formData = new FormData()
       // console.log(e.target.files[0])
       formData.append('image', e.target.files[0]) // 必要
@@ -74,7 +74,7 @@ export default defineStore('updatedImgStore', {
       window.location.href = location.href.replace(`?code=${code}`, '')
     },
     // 中轉
-    exchangeCodeForToken(code, e, whichAPI, dataId) {
+    exchangeCodeForToken(code, e) {
       if (!code) return
       const url = 'https://api.imgur.com/oauth2/token'
       const data = {
@@ -88,7 +88,7 @@ export default defineStore('updatedImgStore', {
         .then((response) => {
           this.access_token = response.data.access_token
           if (e) {
-            this.postImg(e, this.access_token, whichAPI, dataId)
+            this.postImg(e, this.access_token)
             console.log('access_token 完成')
           }
         })
@@ -97,16 +97,11 @@ export default defineStore('updatedImgStore', {
         })
     },
     // 這裡是 input file 的進入點
-    postFinal(e, whichAPI, dataId) {
+    postFinal(e) {
       this.imgurId = sessionStorage.getItem('imgurId')
       this.imgurSecret = sessionStorage.getItem('imgurSecret')
       if (sessionStorage.getItem('first_token') !== 'null') {
-        this.exchangeCodeForToken(
-          sessionStorage.getItem('first_token'),
-          e,
-          whichAPI,
-          dataId
-        )
+        this.exchangeCodeForToken(sessionStorage.getItem('first_token'), e)
       }
     }
   }

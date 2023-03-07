@@ -30,12 +30,12 @@ export default defineStore('coursesStore', {
           contents: [''],
           price: 0,
           total: 0,
-          start:
-            new Date(new Date().toLocaleDateString()).getTime() +
-            13 * 60 * 60 * 1000,
-          end:
-            new Date(new Date().toLocaleDateString()).getTime() +
-            13 * 60 * 60 * 1000
+          start: new Date().getTime(),
+          startHour: '13',
+          startMinute: '00',
+          end: new Date().getTime(),
+          endHour: '13',
+          endMinute: '00'
         }
         return
       }

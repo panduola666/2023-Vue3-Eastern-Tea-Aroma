@@ -34,7 +34,15 @@ export default defineStore('userDataStore', {
           this.isLogin = true
           console.log('已登入')
           this.user = res.data
-          // console.log(this.user);
+          if (router.currentRoute.value.fullPath === '/login' && this.user.id) {
+            router.push('/user')
+          }
+          if (
+            router.currentRoute.value.fullPath.startsWith('/admin') &&
+            !this.user.isAdmin
+          ) {
+            router.push('/')
+          }
         })
         .catch((err) => {
           console.log('checkLogin 登入超時')

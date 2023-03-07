@@ -1,13 +1,13 @@
 <template>
-  <PostActivitiesModal>
-    <template #btn-content>
-      <div class="text-end">
+  <div class="text-end">
+    <PostActivitiesModal>
+      <template #btn-content>
         <button type="button" class="btn-primary lg:px-10 py-2 text-lg">
           新增活動
         </button>
-      </div>
-    </template>
-  </PostActivitiesModal>
+      </template>
+    </PostActivitiesModal>
+  </div>
   <section class="bg-white p-3 pb-10 mt-3">
     <h2 class="text-xl mb-3">活動列表</h2>
     <ul class="rounded-md grid gap-3">

@@ -27,7 +27,7 @@ export default {
       if (!this.isLogin) this.overLogin()
     },
     mounted() {
-      this.checkLogin()
+      // this.checkLogin()
     }
   }
 }

@@ -107,7 +107,7 @@
                   >訂單詳情</router-link
                 >
               </li>
-              <li>
+              <li v-if="user.isAdmin">
                 <router-link
                   to="/admin"
                   class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"

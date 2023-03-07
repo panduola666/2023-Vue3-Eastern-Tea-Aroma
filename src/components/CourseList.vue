@@ -9,7 +9,7 @@
       <div class="flex">
         <div
           class="relative group cursor-pointer"
-          @click="finalCourses.unshift(...finalCourses.splice(-1, 1))"
+          @click="() => finalCourses.unshift(...finalCourses.splice(-4, 4))"
         >
           <img src="../assets/type=L, status=Default.png" alt="上一頁" />
           <img
@@ -24,7 +24,7 @@
             src="../assets/type=R, status=Hover.png"
             alt="下一頁"
             class="absolute top-0 group-hover:opacity-100 opacity-0 px-3 py-2 transition-all duration-500"
-            @click="finalCourses.push(...finalCourses.splice(0, 1))"
+            @click="() => finalCourses.push(...finalCourses.splice(0, 4))"
           />
         </div>
       </div>

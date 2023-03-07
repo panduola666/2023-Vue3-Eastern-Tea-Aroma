@@ -12,42 +12,77 @@
       <template #modal-body>
         <div class="flex flex-col-reverse lg:flex-row gap-3">
           <div
-            class="flex flex-col gap-3 lg:w-96 h-full overflow-x-hidden px-3"
+            class="flex flex-col gap-3 lg:w-96 lg:h-full h-[75vh] overflow-x-hidden px-3"
           >
             <p class="font-semibold">
               * 封面
               <span class="float-right text-gray-02 font-normal">
                 <button
                   type="button"
-                  class="mr-2 hover:underline hover:text-gray-01 underline text-gray-01"
+                  class="mr-2 hover:underline hover:text-gray-01"
+                  :class="{
+                    'underline text-gray-01': imageStyle === '本地圖片'
+                  }"
+                  @click="
+                    () => {
+                      imageStyle = '本地圖片'
+                    }
+                  "
                 >
                   本地圖片
                 </button>
                 <button
                   type="button"
                   class="hover:underline hover:text-gray-01"
+                  :class="{
+                    'underline text-gray-01': imageStyle === '雲端圖片'
+                  }"
+                  @click="() => (imageStyle = '雲端圖片')"
                 >
                   雲端圖片
                 </button>
               </span>
             </p>
             <img
-              src="../assets/課堂04.png"
-              alt=""
+              v-if="imageStyle === '本地圖片' && imgUrl"
+              :src="imgUrl"
+              :alt="productDate.title"
               class="w-full object-cover"
             />
-            <input
-              type="text"
-              name=""
-              id=""
-              class="border border-gray-01 p-2"
-              placeholder="請輸入圖片網址..."
-              aria-label="雲端圖片輸入框"
+            <img
+              v-else-if="imageStyle === '雲端圖片'"
+              :src="productDate.coverUrl"
+              :alt="productDate.title"
+              class="w-full object-cover"
             />
-            <label class="btn-primary cursor-pointer relative"
-              >上傳圖片
-              <input type="file" name="" id="" class="absolute opacity-0" />
-            </label>
+            <label for="imgUrl" v-if="imageStyle === '雲端圖片'"
+              >網址<input
+                type="text"
+                name="imgUrl"
+                id="imgUrl"
+                v-model="productDate.coverUrl"
+                class="border border-gray-01 p-2 w-full"
+                placeholder="請輸入圖片網址..."
+                aria-label="雲端圖片輸入框"
+            /></label>
+            <div class="flex flex-col gap-3" v-else>
+              <label
+                for="updateImg"
+                class="btn-primary cursor-pointer relative"
+                v-if="isImgurLogin"
+                >上傳圖片
+                <input
+                  type="file"
+                  name="updateImg"
+                  id="updateImg"
+                  class="absolute opacity-0"
+                  @change="($event) => postFinal($event)"
+                />
+              </label>
+              <router-link to="/admin" class="btn-primary" v-else
+                >取得驗證</router-link
+              >
+            </div>
           </div>
           <div class="flex-grow lg:border-l-2 flex flex-col gap-3 lg:px-3">
             <label for="" class="grid"
@@ -173,15 +208,27 @@
 <script>
 import DialogModal from './DialogModal.vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
+import { mapState, mapActions } from 'pinia'
+import { updatedImgStore } from '../stores/index'
 export default {
   data: () => ({
+    imageStyle: '雲端圖片',
+    productDate: {
+      coverUrl: '',
+      title: ''
+    },
     editor: ClassicEditor,
     editorData: '<p>Hello world!!</p>',
     editorConfig: {
-      toolbar: ['heading', '|', 'bold', 'italic', 'link']
-    }
+      toolbar: ['bold', 'italic', 'blockQuote', '|', 'undo', 'redo']
+    },
+    isImgurLogin: sessionStorage.getItem('first_token') !== 'null'
   }),
+  computed: {
+    ...mapState(updatedImgStore, ['imgUrl'])
+  },
   methods: {
+    ...mapActions(updatedImgStore, ['postFinal']),
     showEditor() {
       console.log(this.editorData)
     }

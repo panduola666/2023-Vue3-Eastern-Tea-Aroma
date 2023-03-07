@@ -11,120 +11,77 @@
       </template>
       <template #modal-body>
         <div class="flex flex-col-reverse lg:flex-row gap-3">
-          <div>
-            <div
-              class="flex flex-col gap-3 lg:w-96 lg:h-full h-[75vh] overflow-x-hidden px-3"
-            >
-              <p class="font-semibold">
-                * 封面
-                <span class="float-right text-gray-02 font-normal">
-                  <button
-                    type="button"
-                    class="mr-2 hover:underline hover:text-gray-01"
-                    :class="{
-                      'underline text-gray-01': imageStyle === '本地圖片'
-                    }"
-                    @click="
-                      () => {
-                        imageStyle = '本地圖片'
-                      }
-                    "
-                  >
-                    本地圖片
-                  </button>
-                  <button
-                    type="button"
-                    class="hover:underline hover:text-gray-01"
-                    :class="{
-                      'underline text-gray-01': imageStyle === '雲端圖片'
-                    }"
-                    @click="() => (imageStyle = '雲端圖片')"
-                  >
-                    雲端圖片
-                  </button>
-                </span>
-              </p>
-              <img
-                v-if="imageStyle === '本地圖片' && imgUrl"
-                :src="imgUrl"
-                :alt="editorData.title"
-                class="w-full object-cover"
-              />
-              <img
-                v-else-if="imageStyle === '雲端圖片'"
-                :src="editorData.coverUrl"
-                :alt="editorData.title"
-                class="w-full object-cover"
-              />
-              <label for="imgUrl" v-if="imageStyle === '雲端圖片'"
-                >網址<input
-                  type="text"
-                  name="imgUrl"
-                  id="imgUrl"
-                  v-model="editorData.coverUrl"
-                  class="border border-gray-01 p-2 w-full"
-                  placeholder="請輸入圖片網址..."
-                  aria-label="雲端圖片輸入框"
-              /></label>
-              <div class="flex flex-col gap-3" v-else>
-                <form
-                  class="flex flex-col gap-3"
-                  @submit.prevent="() => imgurLogin()"
-                  v-if="!imgur.isLogin"
-                >
-                  <div>
-                    <label for="imgurId">imgurId</label>
-                    <input
-                      name="imgurId"
-                      id="imgurId"
-                      type="text"
-                      class="border border-gray-01 p-2 w-full"
-                      v-model="imgur.id"
-                      placeholder="請輸入 imgur 註冊的 Client ID"
-                    />
-                  </div>
-                  <div>
-                    <label for="imgurSecret">imgurSecret</label>
-                    <input
-                      name="imgurSecret"
-                      id="imgurSecret"
-                      type="password"
-                      class="border border-gray-01 p-2 w-full"
-                      autocomplete="on"
-                      v-model="imgur.secret"
-                      placeholder="請輸入 imgur 註冊的 Client Secret"
-                    />
-                  </div>
-                  <span class="text-sm text-gray-02">
-                    redirect 需設置成 http://127.0.0.1:5173/#/admin
-                  </span>
-                  <button type="submit" class="btn-primary">登入</button>
-                </form>
+          <div
+            class="flex flex-col gap-3 lg:w-96 lg:h-full h-[75vh] overflow-x-hidden px-3"
+          >
+            <p class="font-semibold">
+              * 封面
+              <span class="float-right text-gray-02 font-normal">
                 <button
                   type="button"
-                  class="btn-primary"
-                  v-else-if="imgur.firstToken === 'null'"
-                  @click="getFirstToken"
+                  class="mr-2 hover:underline hover:text-gray-01"
+                  :class="{
+                    'underline text-gray-01': imageStyle === '本地圖片'
+                  }"
+                  @click="
+                    () => {
+                      imageStyle = '本地圖片'
+                    }
+                  "
                 >
-                  取得驗證
+                  本地圖片
                 </button>
-                <label
-                  v-else
-                  for="updateImg"
-                  class="btn-primary cursor-pointer relative"
-                  >上傳圖片
-                  <input
-                    type="file"
-                    name="updateImg"
-                    id="updateImg"
-                    class="absolute opacity-0"
-                    @change="
-                      ($event) =>
-                        postFinal($event, 'courses', editorData.courseId)
-                    "
-                  />
-                </label>
-              </div>
+                <button
+                  type="button"
+                  class="hover:underline hover:text-gray-01"
+                  :class="{
+                    'underline text-gray-01': imageStyle === '雲端圖片'
+                  }"
+                  @click="() => (imageStyle = '雲端圖片')"
+                >
+                  雲端圖片
+                </button>
+              </span>
+            </p>
+            <img
+              v-if="imageStyle === '本地圖片' && imgUrl"
+              :src="imgUrl"
+              :alt="editorData.title"
+              class="w-full object-cover"
+            />
+            <img
+              v-else-if="imageStyle === '雲端圖片'"
+              :src="editorData.coverUrl"
+              :alt="editorData.title"
+              class="w-full object-cover"
+            />
+            <label for="imgUrl" v-if="imageStyle === '雲端圖片'"
+              >網址<input
+                type="text"
+                name="imgUrl"
+                id="imgUrl"
+                v-model="editorData.coverUrl"
+                class="border border-gray-01 p-2 w-full"
+                placeholder="請輸入圖片網址..."
+                aria-label="雲端圖片輸入框"
+            /></label>
+            <div class="flex flex-col gap-3" v-else>
+              <label
+                v-if="isImgurLogin"
+                for="updateImg"
+                class="btn-primary cursor-pointer relative"
+                >上傳圖片
+                <input
+                  type="file"
+                  name="updateImg"
+                  id="updateImg"
+                  class="absolute opacity-0"
+                  @change="($event) => postFinal($event)"
+                />
+              </label>
+              <p v-else class="text-center text-red-500 text-xl">
+                還未取得驗證
+              </p>
             </div>
           </div>
           <div class="flex-grow lg:border-l-2 flex flex-col gap-3 lg:px-3">
@@ -173,7 +130,7 @@
                 <p>* 時段選擇</p>
                 <v-date-picker
                   class="inline-block w-full"
-                  v-model="date"
+                  v-model="editorData.start"
                   color="teal"
                 >
                   <template v-slot="{ inputValue, togglePopover }">
@@ -209,8 +166,8 @@
                       name="startHour"
                       id="startHour"
                       class="flex-grow"
-                      :value="$date(editorData.start).format('HH')"
-                      @change="($event) => changTime('start', 'hour', $event)"
+                      v-model="editorData.startHour"
+                      @change="() => changeTimer()"
                     >
                       <option :value="i + 12" v-for="i in 10" :key="i">
                         {{ i + 12 }}
@@ -222,8 +179,8 @@
                       name="startMinute"
                       id="startMinute"
                       class="flex-grow"
-                      :value="$date(editorData.start).format('mm')"
-                      @change="($event) => changTime('start', 'minute', $event)"
+                      v-model="editorData.startMinute"
+                      @change="() => changeTimer()"
                     >
                       <option
                         :value="i"
@@ -242,8 +199,8 @@
                       name="endHour"
                       id="endHour"
                       class="flex-grow"
-                      :value="$date(editorData.end).format('HH')"
-                      @change="($event) => changTime('end', 'hour', $event)"
+                      v-model="editorData.endHour"
+                      @change="() => changeTimer()"
                     >
                       <option :value="i + 12" v-for="i in 10" :key="i">
                         {{ i + 12 }}
@@ -255,8 +212,8 @@
                       name="endMinute"
                       id="endMinute"
                       class="flex-grow"
-                      :value="$date(editorData.end).format('mm')"
-                      @change="($event) => changTime('end', 'minute', $event)"
+                      v-model="editorData.endMinute"
+                      @change="() => changeTimer()"
                     >
                       <option
                         :value="i"
@@ -346,7 +303,6 @@
 import DialogModal from '../components/DialogModal.vue'
 import { mapState, mapActions } from 'pinia'
 import { coursesStore, updatedImgStore } from '../stores/index'
-import { is } from 'dom7'
 const { VITE_BASEURL } = import.meta.env
 
 export default {
@@ -358,25 +314,11 @@ export default {
   },
   data() {
     return {
-      date: new Date(),
-      start: {
-        hour: '13',
-        minute: '00'
-      },
-      end: {
-        hour: '13',
-        minute: '00'
-      },
-      editorData: {},
-      imageStyle: '雲端圖片',
       newCourseTitle: '',
       coursesOptions: {},
-      imgur: {
-        isLogin: false,
-        id: '',
-        secret: '',
-        firstToken: sessionStorage.getItem('first_token')
-      }
+      editorData: {},
+      imageStyle: '雲端圖片',
+      isImgurLogin: sessionStorage.getItem('first_token') !== 'null'
     }
   },
   computed: {
@@ -390,13 +332,22 @@ export default {
     ...mapActions(updatedImgStore, ['postFinal', 'getFirstToken']),
     ...mapActions(coursesStore, ['getCoursesData']),
     finishFn() {
-      const { contents, price, title, total, courseId } = this.editorData
+      const {
+        contents,
+        price,
+        title,
+        total,
+        courseId,
+        start,
+        startHour,
+        startMinute,
+        endHour,
+        endMinute
+      } = this.editorData
       let { coverUrl } = this.editorData
-      const day = new Date(this.$date(this.date).format('YYYY,MM,DD')).getTime()
-      const startTime =
-        this.start.hour * 60 * 60 * 1000 + this.start.minute * 60 * 1000
-      const endTime =
-        this.end.hour * 60 * 60 * 1000 + this.end.minute * 60 * 1000
+      const day = new Date(this.$date(start).format('YYYY,MM,DD')).getTime()
+      const startTime = startHour * 60 * 60 * 1000 + startMinute * 60 * 1000
+      const endTime = endHour * 60 * 60 * 1000 + endMinute * 60 * 1000
       if (this.imageStyle === '本地圖片') {
         coverUrl = this.imgUrl
       }
@@ -502,20 +453,17 @@ export default {
           })
       }
     },
-    imgurLogin() {
-      this.imgur.isLogin = true
-      sessionStorage.setItem('imgurId', this.imgur.id)
-      sessionStorage.setItem('imgurSecret', this.imgur.secret)
-      const CLIENT_ID = this.imgur.id
-      const AUTH_URL = `https://api.imgur.com/oauth2/authorize?response_type=code&client_id=${CLIENT_ID}`
-      location.href = AUTH_URL
-    },
     addNewCourse() {
       this.coursesOptions[this.newCourseTitle]
         ? this.coursesOptions[this.newCourseTitle]++
         : (this.coursesOptions[this.newCourseTitle] = 1)
       this.editorData.title = this.newCourseTitle
       this.newCourseTitle = ''
+      this.editorData.startHour = '13'
+      this.editorData.startMinute = '00'
+      this.editorData.endHour = '13'
+      this.editorData.endMinute = '00'
+      this.editorData.start = new Date()
     },
     options() {
       const obj = this.courses.reduce((obj, course) => {
@@ -527,14 +475,15 @@ export default {
     contentPush(contentsIndex, e) {
       this.editorData.contents[contentsIndex] = e.target.value
     },
-    changTime(choose, timer, e) {
-      this[choose][timer] = e.target.value
-      this.editorData[choose] =
-        new Date(
-          this.$date(this.editorData[choose]).format('YYYY,MM,DD')
-        ).getTime() +
-        this[choose].hour * 60 * 60 * 1000 +
-        this[choose].minute * 60 * 1000
+    changeTimer() {
+      const { startHour, startMinute, endHour, endMinute } = this.editorData
+      if (startHour > endHour) {
+        this.editorData.endHour = this.editorData.startHour
+        this.editorData.endMinute = this.editorData.startMinute
+      }
+      if (startHour === endHour && startMinute > endMinute) {
+        this.editorData.endMinute = this.editorData.startMinute
+      }
     }
   },
   watch: {
@@ -553,74 +502,36 @@ export default {
           userId,
           price: course.price,
           start,
+          startHour: this.$date(start).format('HH'),
+          startMinute: this.$date(start).format('mm'),
           end,
+          endHour: this.$date(end).format('HH'),
+          endMinute: this.$date(end).format('mm'),
           total
         }
-        this.date = obj.start
         this.editorData = obj
       }
       this.options()
-    },
-    end: {
-      handler() {
-        if (this.editorData.end < this.editorData.start) {
-          this.editorData.start = this.editorData.end
-          console.log(this.editorData.start === this.editorData.end)
-          console.log(new Date(this.editorData.start).toLocaleString())
-          console.log(new Date(this.editorData.end).toLocaleString())
-        }
-      },
-      deep: true
-    },
-    start: {
-      handler() {
-        if (this.editorData.start > this.editorData.end) {
-          this.editorData.end = this.editorData.start
-          console.log(new Date(this.editorData.start).toLocaleString())
-          console.log(new Date(this.editorData.end).toLocaleString())
-        }
-      },
-      deep: true
     },
     'editorData.title'() {
       const index = this.courses.findIndex(
         (item) => item.title === this.editorData.title
       )
-      this.date = new Date()
-      this.start = {
-        hour: '13',
-        minute: '00'
-      }
-      this.end = {
-        hour: '13',
-        minute: '00'
-      }
       if (index !== -1) {
         const { id, coverUrl, contents, price } = this.courses[index]
         this.editorData.courseId = id
         this.editorData.coverUrl = coverUrl
         this.editorData.contents = contents
         this.editorData.price = price
-      } else if (this.editorData.courseId) {
-        // this.editorData.courseId = 0
-        // this.editorData.coverUrl = ''
-        // this.editorData.contents = ['']
-        // this.editorData.price = 0
-      } else {
+      } else if (!this.editorData.courseId || index === -1) {
         this.editorData.courseId = 0
         this.editorData.coverUrl = ''
         this.editorData.contents = ['']
         this.editorData.price = 0
+        this.editorData.total = 0
       }
     }
   },
-  mounted() {
-    if (
-      sessionStorage.getItem('imgurId') &&
-      sessionStorage.getItem('imgurSecret')
-    ) {
-      this.imgur.isLogin = true
-    }
-  }
+  mounted() {}
 }
 </script>

@@ -106,18 +106,12 @@
       "imagesUrl": [],
       "contents": [
         "認識主流茶葉的特性與風味",
-        "學習5種泡茶法，並實作其中2種，體驗茶葉在不同溫度、沖泡時間以及技巧下的變化",
-        "學習基本茶桌禮儀，讓你可以在生活中展現儀態加分",
-        "建立自己的品位，足夠的知識亦可在人際交流上擁有更多話題"
+        "區分茶葉的不同性質",
+        "體驗不同茶葉間口感的區分"
       ],
       "userId": 1,
-      "scores": [
-        {
-          "score": 4,
-          "userId": 2
-        }
-      ],
-      "price": 1500,
+      "scores": [],
+      "price": 2500,
       "id": 2
     },
     {
@@ -132,6 +126,34 @@
       "scores": [],
       "userId": 1,
       "id": 3
+    },
+    {
+      "contents": [
+        "介紹不同茶葉的質感",
+        "行家選茶指南",
+        "介紹香料故事與風格分類",
+        "鍋煮技巧"
+      ],
+      "coverUrl": "https://github.com/panduola666/2023-Vue3-Side-Project/blob/main/src/assets/%E8%AA%B2%E5%A0%8204@2x.png?raw=true",
+      "price": 2000,
+      "title": "鍋煮香料奶茶學",
+      "scores": [],
+      "userId": 1,
+      "id": 4
+    },
+    {
+      "contents": [
+        "透過深入淺出的系統化引導，帶你輕鬆入門茶葉",
+        "茶葉分類概論與產製",
+        "茶葉的發酵工藝對茶風味的影響",
+        "如何沖泡台灣清香型烏龍茶"
+      ],
+      "coverUrl": "https://images.unsplash.com/photo-1571934811356-5cc061b6821f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OXx8dGVhfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60",
+      "price": 1300,
+      "title": "烏龍茶風味體驗課",
+      "scores": [],
+      "userId": 1,
+      "id": 5
     }
   ],
   "courseDates": [
@@ -164,8 +186,8 @@
       "id": 3,
       "courseId": 2,
       "userId": 1,
-      "start": 1678258800000,
-      "end": 1678266000000,
+      "start": 1678510800000,
+      "end": 1678516200000,
       "total": 15,
       "savedUsersId": [
         1
@@ -183,6 +205,39 @@
       "created": 1678117379857,
       "courseId": 3,
       "id": 4
+    },
+    {
+      "end": 1678789800000,
+      "start": 1678784400000,
+      "total": 10,
+      "userId": 1,
+      "savedUsersId": [],
+      "isDiscount": true,
+      "created": 1678123667312,
+      "courseId": 4,
+      "id": 5
+    },
+    {
+      "end": 1678165200000,
+      "start": 1678165200000,
+      "total": 20,
+      "userId": 1,
+      "savedUsersId": [],
+      "isDiscount": true,
+      "created": 1678123805174,
+      "courseId": 5,
+      "id": 6
+    },
+    {
+      "end": 1678528800000,
+      "start": 1678525200000,
+      "total": 20,
+      "userId": 1,
+      "savedUsersId": [],
+      "isDiscount": true,
+      "created": 1678173974735,
+      "courseId": 2,
+      "id": 7
     }
   ],
   "products": [

@@ -1,10 +1,13 @@
-@import "../node_modules/v-calendar/dist/style.css";
+@import '../node_modules/v-calendar/dist/style.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 @layer base {
 }
 @layer components {
+  blockquote {
+    @apply border-l-4 pl-3;
+  }
   .btn-primary {
     @apply lg:py-[14px] py-3 lg:px-6 px-5 border-2 border-brand-01 bg-brand-01 text-white text-center  hover:bg-brand-02 hover:text-white hover:border-brand-02  focus:outline-2 focus:outline outline-offset-2 outline-brand-01 disabled:bg-gray-03 disabled:border-gray-03 disabled:text-gray-01;
   }
@@ -18,14 +21,14 @@
     @apply mx-auto w-[90%] my-10;
   }
 }
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
 /* Firefox */
-input[type="number"] {
+input[type='number'] {
   -moz-appearance: textfield;
 }
 /* input:-webkit-autofill {
