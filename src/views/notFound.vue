@@ -3,7 +3,7 @@
     <img
       class="mx-auto"
       src="https://cdn-icons-png.flaticon.com/512/3551/3551629.png"
-      alt=""
+      alt="查無此頁面"
     />
     <div class="flex-grow text-center">
       <p class="text-5xl mb-5">查無此頁面</p>

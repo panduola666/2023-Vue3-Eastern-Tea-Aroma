@@ -17,16 +17,16 @@
         <button
           type="button"
           class="flex btn-outline text-brand-01 font-sans text-xl leading-6 font-medium group"
-          @click="checked = !checked"
+          @click="() => (checked = !checked)"
         >
           尋求解疑
           <img
-            src="../assets/Property 1=arrow-left.svg"
+            src="../assets/left.svg"
             class="group-hover:hidden"
             alt="下一步"
           />
           <img
-            src="../assets/Property 1=arrow-left.png"
+            src="../assets/left.png"
             alt="下一步"
             class="hidden group-hover:block"
           />
@@ -59,16 +59,16 @@
         <button
           type="button"
           class="flex btn-outline text-brand-01 font-sans text-xl leading-6 font-medium group"
-          @click="checked = !checked"
+          @click="()=>checked = !checked"
         >
           尋求解疑
           <img
-            src="../assets/Property 1=arrow-left.svg"
+            src="../assets/left.svg"
             class="group-hover:hidden"
             alt="下一步"
           />
           <img
-            src="../assets/Property 1=arrow-left.png"
+            src="../assets/left.png"
             alt="下一步"
             class="hidden group-hover:block"
           />
@@ -77,7 +77,7 @@
       <section
         class="text-brand-05 text-2xl leading-7 font-black font-self py-8 px-4 cursor-pointer"
         v-else
-        @click="checked = !checked"
+        @click="() => (checked = !checked)"
       >
         <p class="mb-4">古言道：茶者，一人得神、二人得趣、三人得味</p>
         <p>

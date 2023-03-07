@@ -12,7 +12,7 @@
       <div class="flex items-center gap-3" v-if="!cartNumber">
         <img
           src="https://cdn-icons-png.flaticon.com/512/3648/3648756.png"
-          alt=""
+          alt="購物車沒有商品"
         />
         <div class="flex-grow text-center">
           <p class="text-4xl mb-3">購物車沒有商品</p>

@@ -65,7 +65,7 @@
                 () => (shoppingNumber > 1 ? shoppingNumber-- : shoppingNumber)
               "
             >
-              <img src="../assets/Property 1=-.png" alt="" />
+              <img src="../assets/icon-.png" alt="" />
             </button>
             <p
               class="flex items-center justify-around px-2 border-y-2 border-brand-01 bg-opacity-40 bg-white min-w-[100px] w-full h-full"
@@ -82,7 +82,7 @@
                     : ''
               "
             >
-              <img src="../assets/Property 1=+.png" alt="" />
+              <img src="../assets/icon+.png" alt="" />
             </button>
           </div>
           <button
