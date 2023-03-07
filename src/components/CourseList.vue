@@ -11,17 +11,23 @@
           class="relative group cursor-pointer"
           @click="() => finalCourses.unshift(...finalCourses.splice(-4, 4))"
         >
-          <img src="../assets/type=L, status=Default.png" alt="上一頁" />
           <img
-            src="../assets/type=L, status=Hover.png"
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/type=L,%20status=Default.png?raw=true"
+            alt="上一頁"
+          />
+          <img
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/type=L,%20status=Hover.png?raw=true"
             alt="上一頁"
             class="absolute top-0 group-hover:opacity-100 opacity-0 px-3 py-2 transition-all duration-500"
           />
         </div>
         <div class="relative group cursor-pointer">
-          <img src="../assets/type=R, status=Default.png" alt="下一頁" />
           <img
-            src="../assets/type=R, status=Hover.png"
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/type=R,%20status=Default.png?raw=true"
+            alt="下一頁"
+          />
+          <img
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/type=R,%20status=Hover.png?raw=true"
             alt="下一頁"
             class="absolute top-0 group-hover:opacity-100 opacity-0 px-3 py-2 transition-all duration-500"
             @click="() => finalCourses.push(...finalCourses.splice(0, 4))"

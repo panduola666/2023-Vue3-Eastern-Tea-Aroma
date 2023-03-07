@@ -8,17 +8,17 @@
       </h2>
       <div class="flex">
         <div class="relative group cursor-pointer">
-          <img src="../assets/type=L, status=Default.png" alt="上一頁" />
+          <img src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/type=L,%20status=Default.png?raw=true" alt="上一頁" />
           <img
-            src="../assets/type=L, status=Hover.png"
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/type=L,%20status=Hover.png?raw=true"
             alt="上一頁"
             class="absolute top-0 group-hover:opacity-100 opacity-0 px-3 py-2 transition-all duration-500"
           />
         </div>
         <div class="relative group cursor-pointer">
-          <img src="../assets/type=R, status=Default.png" alt="下一頁" />
+          <img src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/type=R,%20status=Default.png?raw=true" alt="下一頁" />
           <img
-            src="../assets/type=R, status=Hover.png"
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/type=R,%20status=Hover.png?raw=true"
             alt="下一頁"
             class="absolute top-0 group-hover:opacity-100 opacity-0 px-3 py-2 transition-all duration-500"
           />
@@ -31,7 +31,7 @@
       >
         <router-link to="">
           <img
-            src="../assets/最新活動01.png"
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/%E6%9C%80%E6%96%B0%E6%B4%BB%E5%8B%9501.png?raw=true"
             alt="521國際茶日"
             class="w-full h-[312px] object-cover"
           />

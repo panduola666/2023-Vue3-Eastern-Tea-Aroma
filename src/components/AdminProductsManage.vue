@@ -40,7 +40,7 @@
       <li is="vue:CoursesCard">
         <template #image>
           <img
-            src="../assets/最新活動03@3x.png"
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/%E6%9C%80%E6%96%B0%E6%B4%BB%E5%8B%9501.png?raw=true"
             alt=""
             class="w-full h-full object-cover"
           />
@@ -77,15 +77,15 @@
   </section>
 </template>
 <script>
-import PostProductsModal from "./PostProductsModal.vue";
-import CoursesCard from "../components/CoursesCard.vue";
-import DiscountToggle from "./DiscountToggle.vue";
+import PostProductsModal from './PostProductsModal.vue'
+import CoursesCard from '../components/CoursesCard.vue'
+import DiscountToggle from './DiscountToggle.vue'
 
 export default {
   components: {
     CoursesCard,
     PostProductsModal,
-    DiscountToggle,
-  },
-};
+    DiscountToggle
+  }
+}
 </script>

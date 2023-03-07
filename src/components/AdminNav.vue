@@ -2,7 +2,10 @@
   <nav class="shadow-md">
     <div class="wrap my-0 flex justify-between items-center pb-2">
       <router-link to="/" class="pb-[10px] pt-[18px]">
-        <img src="../assets/logo.png" alt="東方茶香logo" />
+        <img
+          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/logo.png?raw=true"
+          alt="東方茶香logo"
+        />
       </router-link>
       <ul class="hidden items-center text-brand-02 gap-5 xl:gap-10 lg:flex">
         <li
@@ -31,8 +34,8 @@
           >
             管理項目
             <img
-              src="../assets/Property 1=arrow-down.png"
-              alt=""
+              src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/Property%201=arrow-down.png?raw=true"
+              alt="展開"
               class="group-hover:-rotate-180 transition"
             />
           </router-link>
@@ -85,7 +88,7 @@
       <div class="flex items-center">
         <div class="relative group mr-8 mb-[10px] mt-[18px]">
           <img
-            src="../assets/Property 1=account.png"
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/Property%201=account.png?raw=true"
             alt="會員"
             class="object-contain h-9 max-w-[30px]"
           />

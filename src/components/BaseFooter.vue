@@ -1,6 +1,6 @@
 <template>
   <img
-    src="../assets/back to top.png"
+    src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/back%20to%20top.png?raw=true"
     alt="返回頂部"
     class="cursor-pointer fixed lg:right-24 lg:bottom-16 right-3 bottom-3 z-50"
     :class="{ hidden: top < 500 }"
@@ -11,7 +11,10 @@
       class="xl:w-[70%] lg:w-[80%] w-[90%] mx-auto lg:flex items-center justify-between lg:py-10 py-8"
     >
       <a href="/">
-        <img src="../assets/logo2.png" alt="東方茶香logo" />
+        <img
+          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/logo2.png?raw=true"
+          alt="東方茶香logo"
+        />
       </a>
       <div class="w-full lg:h-[130px] lg:flex justify-end">
         <address
@@ -48,8 +51,8 @@
 export default {
   data() {
     return {
-      top: 0,
-    };
+      top: 0
+    }
   },
   methods: {
     toTop() {
@@ -57,22 +60,22 @@ export default {
         document.body.scrollTop =
           document.documentElement.scrollTop =
           this.top -=
-            50;
+            50
         if (this.top <= 0) {
-          clearInterval(timeTop);
+          clearInterval(timeTop)
         }
-      }, 10);
-    },
+      }, 10)
+    }
   },
   mounted() {
-    window.addEventListener("scroll", () => {
-      this.top = document.documentElement.scrollTop;
-    });
+    window.addEventListener('scroll', () => {
+      this.top = document.documentElement.scrollTop
+    })
   },
   unmounted() {
-    window.removeEventListener("scroll", () => {
-      this.top = document.documentElement.scrollTop;
-    });
-  },
-};
+    window.removeEventListener('scroll', () => {
+      this.top = document.documentElement.scrollTop
+    })
+  }
+}
 </script>
