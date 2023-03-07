@@ -226,8 +226,7 @@ import {
   ordersStore,
   toThousand,
   updatedImgStore
-} from '../../stores/index'
-import { val } from 'dom7'
+} from '../../stores/index.js'
 const { VITE_BASEURL } = import.meta.env
 
 export default {

@@ -159,7 +159,7 @@
 </template>
 <script>
 import { mapActions } from 'pinia'
-import { userStore } from '@/stores/index.js'
+import { userStore } from '../stores/index.js'
 export default {
   methods: {
     ...mapActions(userStore, ['signOut'])

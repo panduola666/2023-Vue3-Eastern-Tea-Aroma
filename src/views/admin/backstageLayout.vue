@@ -9,7 +9,7 @@
 import AdminNav from '../../components/AdminNav.vue'
 import BaseFooter from '../../components/BaseFooter.vue'
 import { mapState, mapActions } from 'pinia'
-import { userStore } from '../../stores/index'
+import { userStore } from '../../stores/index.js'
 export default {
   components: {
     AdminNav,

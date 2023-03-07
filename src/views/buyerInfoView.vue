@@ -188,7 +188,7 @@ import {
   discountStore,
   coursesStore,
   productsStore
-} from '../stores/index'
+} from '../stores/index.js'
 
 const { VITE_BASEURL } = import.meta.env
 export default {
@@ -222,7 +222,7 @@ export default {
       // 結帳
       const { cart } = this.user.shoppingCart
       const { discount } = this.user.shoppingCart
-      const { code, type, scale,end } = this.discountData
+      const { code, type, scale, end } = this.discountData
       const orderCart = []
       const orderDiscount = { code: '', type: '', scale: '' }
       this.allProducts.forEach((product) => {

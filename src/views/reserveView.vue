@@ -118,8 +118,8 @@ import {
   coursesStore,
   userStore,
   toThousand
-} from '@/stores/index'
-import CoursesCard from '@/components/CoursesCard.vue'
+} from '../stores/index.js'
+import CoursesCard from '../components/CoursesCard.vue'
 const { VITE_BASEURL } = import.meta.env
 
 export default {

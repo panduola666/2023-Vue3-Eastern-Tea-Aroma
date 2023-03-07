@@ -65,7 +65,10 @@
                 () => (shoppingNumber > 1 ? shoppingNumber-- : shoppingNumber)
               "
             >
-              <img src="../assets/icon-.png" alt="" />
+              <img
+                src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/icon-.png?raw=true"
+                alt=""
+              />
             </button>
             <p
               class="flex items-center justify-around px-2 border-y-2 border-brand-01 bg-opacity-40 bg-white min-w-[100px] w-full h-full"
@@ -82,7 +85,10 @@
                     : ''
               "
             >
-              <img src="../assets/icon+.png" alt="" />
+              <img
+                src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/icon+.png?raw=true"
+                alt=""
+              />
             </button>
           </div>
           <button

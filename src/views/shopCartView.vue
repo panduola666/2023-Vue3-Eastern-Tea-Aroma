@@ -236,7 +236,8 @@ import {
   userStore,
   productsStore,
   coursesStore,
-  discountStore,toThousand
+  discountStore,
+  toThousand
 } from '../stores/index.js'
 const { VITE_BASEURL } = import.meta.env
 

@@ -21,12 +21,12 @@
         >
           尋求解疑
           <img
-            src="../assets/left.svg"
+            src="https://raw.githubusercontent.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/8620d479450a0a5a0928d77bf80fbd260b935229/src/assets/left.svg"
             class="group-hover:hidden"
             alt="下一步"
           />
           <img
-            src="../assets/left.png"
+            src="https://raw.githubusercontent.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/8620d479450a0a5a0928d77bf80fbd260b935229/src/assets/left.svg"
             alt="下一步"
             class="hidden group-hover:block"
           />
@@ -42,7 +42,7 @@
         </p>
       </section>
       <img
-        src="../assets/解疑.png"
+        src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/%E8%A7%A3%E7%96%91.png?raw=true"
         alt="解疑圖片"
         class="w-1/2 object-cover duration-1000 absolute h-full right-0"
         :class="{ '-translate-x-full': checked }"
@@ -63,12 +63,12 @@
         >
           尋求解疑
           <img
-            src="../assets/left.svg"
+            src="https://raw.githubusercontent.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/8620d479450a0a5a0928d77bf80fbd260b935229/src/assets/left.svg"
             class="group-hover:hidden"
             alt="下一步"
           />
           <img
-            src="../assets/left.png"
+            src="https://raw.githubusercontent.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/8620d479450a0a5a0928d77bf80fbd260b935229/src/assets/left.svg"
             alt="下一步"
             class="hidden group-hover:block"
           />
@@ -85,7 +85,7 @@
         </p>
       </section>
       <img
-        src="../assets/解疑@2x.png"
+        src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/src/assets/%E8%A7%A3%E7%96%91.png?raw=trueg"
         alt="解疑圖片"
         class="w-full h-[282px] object-cover"
       />

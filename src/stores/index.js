@@ -1,11 +1,11 @@
-import userStore from "./userStore";
-import coursesStore from "./coursesStore";
-import updatedImgStore from "./updatedImgStore";
-import discountStore from "./discountStore";
-import ordersStore from "./ordersStore";
-import productsStore from "./productsStore";
+import userStore from './userStore.js'
+import coursesStore from './coursesStore.js'
+import updatedImgStore from './updatedImgStore.js'
+import discountStore from './discountStore.js'
+import ordersStore from './ordersStore.js'
+import productsStore from './productsStore.js'
 const toThousand = (money) =>
-  money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
 
 export {
   userStore,
@@ -14,5 +14,5 @@ export {
   discountStore,
   ordersStore,
   productsStore,
-  toThousand,
-};
+  toThousand
+}

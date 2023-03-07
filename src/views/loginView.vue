@@ -7,7 +7,7 @@
       }"
     >
       <img
-        src="../assets/login.jpg"
+        src="https://images.unsplash.com/photo-1548323164-ea1cb76539e8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTI3fHx0ZWF8ZW58MHx8MHx8&auto=format&fit=crop&w=300&q=60"
         alt=""
         class="w-full h-full object-cover"
       />

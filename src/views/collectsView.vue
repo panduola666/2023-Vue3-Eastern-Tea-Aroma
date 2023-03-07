@@ -91,7 +91,7 @@
 </template>
 <script>
 import { mapState, mapActions } from 'pinia'
-import { coursesStore, userStore, toThousand } from '../stores/index'
+import { coursesStore, userStore, toThousand } from '../stores/index.js'
 export default {
   data() {
     return {
