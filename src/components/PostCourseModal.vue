@@ -74,6 +74,7 @@
                 <input
                   type="file"
                   name="updateImg"
+                  accept=".png"
                   id="updateImg"
                   class="absolute opacity-0"
                   @change="($event) => postFinal($event)"
@@ -240,7 +241,7 @@
                   v-model="editorData.price"
               /></label>
               <label for="courseTotal" class="grid"
-                >* 開課人數<input
+                >開課人數<input
                   type="number"
                   name="courseTotal"
                   id="courseTotal"
@@ -329,7 +330,11 @@ export default {
     DialogModal
   },
   methods: {
-    ...mapActions(updatedImgStore, ['postFinal', 'getFirstToken']),
+    ...mapActions(updatedImgStore, [
+      'postFinal',
+      'getFirstToken',
+      'clearImgUrl'
+    ]),
     ...mapActions(coursesStore, ['getCoursesData']),
     finishFn() {
       const {
@@ -344,20 +349,18 @@ export default {
         endHour,
         endMinute
       } = this.editorData
-      let { coverUrl } = this.editorData
       const day = new Date(this.$date(start).format('YYYY,MM,DD')).getTime()
       const startTime = startHour * 60 * 60 * 1000 + startMinute * 60 * 1000
       const endTime = endHour * 60 * 60 * 1000 + endMinute * 60 * 1000
       if (this.imageStyle === '本地圖片') {
-        coverUrl = this.imgUrl
+        this.editorData.coverUrl = this.imgUrl
       }
       if (this.isNew) {
         // 基本驗證
         if (
           price <= 0 ||
           title.trim() === '' ||
-          total <= 0 ||
-          coverUrl === ''
+          this.editorData.coverUrl === ''
         ) {
           this.$swal.fire({
             icon: 'error',
@@ -370,7 +373,7 @@ export default {
         // 新增
         const coursesData = {
           contents,
-          coverUrl,
+          coverUrl: this.editorData.coverUrl,
           price,
           title,
           scores: [],
@@ -428,7 +431,12 @@ export default {
         // 編輯
         const { id } = this.editorData
 
-        const coursesData = { contents, coverUrl, price, title }
+        const coursesData = {
+          contents,
+          coverUrl: this.editorData.coverUrl,
+          price,
+          title
+        }
         const courseDatesData = {
           end: new Date(day + endTime).getTime(),
           start: new Date(day + startTime).getTime(),
@@ -452,6 +460,7 @@ export default {
             this.getCoursesData()
           })
       }
+      this.clearImgUrl()
     },
     addNewCourse() {
       this.coursesOptions[this.newCourseTitle]

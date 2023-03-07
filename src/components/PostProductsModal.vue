@@ -74,6 +74,7 @@
                 <input
                   type="file"
                   name="updateImg"
+                  accept=".png"
                   id="updateImg"
                   class="absolute opacity-0"
                   @change="($event) => postFinal($event)"
@@ -220,6 +221,7 @@ export default {
     editor: ClassicEditor,
     editorData: '<p>Hello world!!</p>',
     editorConfig: {
+      placeholder: '請輸入商品介紹...',
       toolbar: ['bold', 'italic', 'blockQuote', '|', 'undo', 'redo']
     },
     isImgurLogin: sessionStorage.getItem('first_token') !== 'null'

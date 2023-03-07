@@ -267,24 +267,24 @@ export default {
             })
         })
       })
-      //   console.log(this.courses)
     },
-    deleteCurrent(id) {
-      this.$http.delete(`${VITE_BASEURL}/courseDates/${id}`).then(() => {
-        return this.$swal
-          .fire({
-            icon: 'success',
-            title: '刪除課程成功',
-            showConfirmButton: false,
-            timer: 1500,
-            allowOutsideClick: false
-          })
-          .then((res) => {
-            if (res.isDismissed) {
-              this.getCoursesData()
-            }
-          })
+    async deleteCurrent(id) {
+      const { isConfirmed } = await this.$swal.fire({
+        title: '是否刪除該課程',
+        showCancelButton: true,
+        reverseButtons: true
       })
+      if (isConfirmed) {
+        await this.$http.delete(`${VITE_BASEURL}/courseDates/${id}`)
+        const { isDismissed } = await this.$swal.fire({
+          icon: 'success',
+          title: '刪除課程成功',
+          showConfirmButton: false,
+          allowOutsideClick: false,
+          timer: 1500
+        })
+        if (isDismissed) this.getCoursesData()
+      }
     },
     async imgurLogin() {
       const { value } = await this.$swal.fire({
@@ -333,7 +333,6 @@ export default {
     this.checkLogin()
     this.getCoursesData()
     this.getOrdersData()
-    console.log(this.isImgurLogin)
   },
   components: {
     CoursesCard,

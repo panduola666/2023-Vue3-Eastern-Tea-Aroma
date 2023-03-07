@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DialogModal :finishFn="showEditor">
+    <DialogModal :finish-fn="finishFn">
       <template #modal-btn>
         <slot name="btn-content">按鈕</slot>
       </template>
@@ -12,7 +12,7 @@
       <template #modal-body>
         <div class="flex flex-col-reverse lg:flex-row gap-3">
           <div
-            class="flex flex-col gap-3 lg:w-96 lg:h-full h-[75vh] overflow-x-hidden px-3"
+            class="flex flex-col gap-3 lg:w-96 lg:h-full h-[75vh] overflow-x-hidden px-3 flex-shrink-0"
           >
             <p class="font-semibold">
               * 封面
@@ -74,6 +74,7 @@
                 <input
                   type="file"
                   name="updateImg"
+                  accept=".png"
                   id="updateImg"
                   class="absolute opacity-0"
                   @change="($event) => postFinal($event)"
@@ -85,26 +86,31 @@
             </div>
           </div>
           <div class="flex-grow lg:border-l-2 flex flex-col gap-3 lg:px-3">
-            <label for="" class="grid"
+            <label for="title" class="grid"
               >* 標題
               <input
                 type="text"
-                name=""
-                id=""
+                name="title"
+                id="title"
                 class="border border-gray-01 p-2 w-full"
                 placeholder="請輸入商品名稱..."
+                v-model="activitiesData.title"
             /></label>
             <div>
               <p>* 分類</p>
-              <div class="flex gap-3">
-                <label for=""
-                  ><input type="radio" name="分類" id="" />優惠</label
-                >
-                <label for=""
-                  ><input type="radio" name="分類" id="" />活動</label
-                >
-                <label for=""
-                  ><input type="radio" name="分類" id="" />展覽</label
+              <div class="flex md:gap-5 gap-3 text-lg">
+                <label
+                  :for="item + index"
+                  v-for="(item, index) in ['活動', '優惠', '展覽']"
+                  :key="item + index"
+                  ><input
+                    type="radio"
+                    name="type"
+                    class="scale-110"
+                    :id="item + index"
+                    :value="item"
+                    v-model="activitiesData.type"
+                  />{{ item }}</label
                 >
               </div>
             </div>
@@ -112,7 +118,7 @@
               <p>* 活動內容</p>
               <ckeditor
                 :editor="editor"
-                v-model="editorData"
+                v-model="activitiesData.content"
                 :config="editorConfig"
               ></ckeditor>
             </div>
@@ -127,30 +133,92 @@
 import DialogModal from './DialogModal.vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { mapState, mapActions } from 'pinia'
-import { updatedImgStore } from '../stores/index'
+import { updatedImgStore, activitiesStore } from '../stores/index'
 const { VITE_BASEURL } = import.meta.env
-// import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline'
 export default {
+  props: {
+    isNew: {
+      typeof: Boolean,
+      required: true
+    }
+  },
   data: () => ({
     imageStyle: '雲端圖片',
     activitiesData: {
       coverUrl: '',
-      title: ''
+      title: '',
+      type: '活動',
+      content: ''
     },
     editor: ClassicEditor,
-    editorData: '<p>Hello world!!</p>',
     editorConfig: {
+      placeholder: '請輸入活動內容...',
       toolbar: ['bold', 'italic', 'blockQuote', '|', 'undo', 'redo']
     },
     isImgurLogin: sessionStorage.getItem('first_token') !== 'null'
   }),
   computed: {
-    ...mapState(updatedImgStore, ['imgUrl'])
+    ...mapState(updatedImgStore, ['imgUrl']),
+    ...mapState(activitiesStore, ['activity'])
   },
   methods: {
     ...mapActions(updatedImgStore, ['postFinal']),
-    showEditor() {
-      console.log(this.editorData)
+    ...mapActions(activitiesStore, ['getAllActivitiesData']),
+    finishFn() {
+      const { content, title } = this.activitiesData
+      if (this.imageStyle === '本地圖片') {
+        this.activitiesData.coverUrl = this.imgUrl
+      }
+      if (!content | !title | !this.activitiesData.coverUrl) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '內容未填寫完成',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+      if (this.isNew) {
+        // 新增
+        this.activitiesData.created = new Date().getTime()
+        console.log('新增')
+        this.$http
+          .post(`${VITE_BASEURL}/activities`, this.activitiesData)
+          .then(() => {
+            this.$swal.fire({
+              icon: 'success',
+              title: '新增成功',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            this.getAllActivitiesData()
+          })
+      } else {
+        // 編輯
+        this.$http
+          .patch(
+            `${VITE_BASEURL}/activities/${this.activitiesData.id}`,
+            this.activitiesData
+          )
+          .then(() => {
+            this.$swal.fire({
+              icon: 'success',
+              title: '編輯成功',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            this.getAllActivitiesData()
+          })
+      }
+    }
+  },
+  watch: {
+    activity: {
+      handler() {
+        if (this.isNew) return
+        this.activitiesData = this.activity
+      },
+      deep: true
     }
   },
   components: {

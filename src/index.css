@@ -6,7 +6,7 @@
 }
 @layer components {
   blockquote {
-    @apply border-l-4 pl-3;
+    @apply border-l-4 border-brand-02 border-opacity-30 pl-3;
   }
   .btn-primary {
     @apply lg:py-[14px] py-3 lg:px-6 px-5 border-2 border-brand-01 bg-brand-01 text-white text-center  hover:bg-brand-02 hover:text-white hover:border-brand-02  focus:outline-2 focus:outline outline-offset-2 outline-brand-01 disabled:bg-gray-03 disabled:border-gray-03 disabled:text-gray-01;

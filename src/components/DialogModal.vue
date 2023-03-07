@@ -87,7 +87,8 @@ import {
 export default {
   props: {
     finishFn: {
-      type: Function
+      type: Function,
+      required: true
     }
   },
   data() {

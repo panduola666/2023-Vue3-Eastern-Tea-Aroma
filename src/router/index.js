@@ -59,6 +59,10 @@ const router = createRouter({
           component: () => import('../views/productView.vue')
         },
         {
+          path: 'activity/:id',
+          component: () => import('../views/activityView.vue')
+        },
+        {
           path: 'shopCart',
           children: [
             {

@@ -1,6 +1,6 @@
 <template>
   <div class="text-end">
-    <PostActivitiesModal>
+    <PostActivitiesModal :is-new="true">
       <template #btn-content>
         <button type="button" class="btn-primary lg:px-10 py-2 text-lg">
           新增活動
@@ -11,12 +11,19 @@
   <section class="bg-white p-3 pb-10 mt-3">
     <h2 class="text-xl mb-3">活動列表</h2>
     <ul class="rounded-md grid gap-3">
-      <Disclosure v-slot="{ open }" as="li" class="flex gap-3">
+      <Disclosure
+        v-slot="{ open }"
+        as="li"
+        class="flex gap-3"
+        v-for="activity in activities"
+        :key="activity.index"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
           fill="currentColor"
           class="w-6 h-6 fill-red-300 hover:fill-red-600 cursor-pointer flex-shrink-0 my-2"
+          @click="() => deleteActivity(activity.id)"
         >
           <path
             fill-rule="evenodd"
@@ -33,7 +40,7 @@
             }"
           >
             <h3 class="text-lg font-bold truncate">
-              521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日521國際茶日
+              {{ activity.title }}
             </h3>
             <img
               src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon-.png?raw=true"
@@ -47,44 +54,25 @@
             />
           </DisclosureButton>
           <DisclosurePanel>
-            <article class="m-3 max-h-36 overflow-hidden">
-              <p>
-                在2020年5月21日，聯合國首次確定＂國際茶日＂。
-                為表紀念每年521將推出全場商品 9 折活動為期 3
-                日，折扣碼：Tea521。
-                在2020年5月21日，聯合國首次確定＂國際茶日＂。
-                為表紀念每年521將推出全場商品 9 折活動為期 3
-                日，折扣碼：Tea521。
-                在2020年5月21日，聯合國首次確定＂國際茶日＂。
-                為表紀念每年521將推出全場商品 9 折活動為期 3
-                日，折扣碼：Tea521。
-                在2020年5月21日，聯合國首次確定＂國際茶日＂。
-                為表紀念每年521將推出全場商品 9 折活動為期 3
-                日，折扣碼：Tea521。
-                在2020年5月21日，聯合國首次確定＂國際茶日＂。
-                為表紀念每年521將推出全場商品 9 折活動為期 3
-                日，折扣碼：Tea521。
-                在2020年5月21日，聯合國首次確定＂國際茶日＂。
-                為表紀念每年521將推出全場商品 9 折活動為期 3
-                日，折扣碼：Tea521。
-                在2020年5月21日，聯合國首次確定＂國際茶日＂。
-                為表紀念每年521將推出全場商品 9 折活動為期 3
-                日，折扣碼：Tea521。
-                在2020年5月21日，聯合國首次確定＂國際茶日＂。
-                為表紀念每年521將推出全場商品 9 折活動為期 3
-                日，折扣碼：Tea521。
-                在2020年5月21日，聯合國首次確定＂國際茶日＂。
-                為表紀念每年521將推出全場商品 9 折活動為期 3
-                日，折扣碼：Tea521。
-              </p>
-            </article>
+            <article
+              class="m-3 max-h-36 overflow-hidden"
+              v-html="activity.content"
+            ></article>
             <div class="flex justify-end gap-3">
-              <button type="button" class="btn-outline py-1 px-2">
+              <router-link
+                :to="`/activity/${activity.id}`"
+                type="button"
+                class="btn-outline py-1 px-2"
+              >
                 查看活動
-              </button>
-              <PostActivitiesModal>
+              </router-link>
+              <PostActivitiesModal :is-new="false">
                 <template #btn-content>
-                  <button type="button" class="btn-outline py-1 px-2">
+                  <button
+                    type="button"
+                    class="btn-outline py-1 px-2"
+                    @click="() => getCurrentActivity(activity.id)"
+                  >
                     編輯
                   </button>
                 </template>
@@ -99,7 +87,41 @@
 <script>
 import PostActivitiesModal from './PostActivitiesModal.vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
+import { mapState, mapActions } from 'pinia'
+import { activitiesStore } from '../stores/index.js'
+const { VITE_BASEURL } = import.meta.env
+
 export default {
+  computed: {
+    ...mapState(activitiesStore, ['activities'])
+  },
+  methods: {
+    ...mapActions(activitiesStore, [
+      'getAllActivitiesData',
+      'getCurrentActivity'
+    ]),
+    async deleteActivity(id) {
+      const { isConfirmed } = await this.$swal.fire({
+        title: '是否刪除該活動',
+        showCancelButton: true,
+        reverseButtons: true
+      })
+      if (isConfirmed) {
+        await this.$http.delete(`${VITE_BASEURL}/activities/${id}`)
+        const { isDismissed } = await this.$swal.fire({
+          icon: 'success',
+          title: '刪除成功',
+          showConfirmButton: false,
+          allowOutsideClick: false,
+          timer: 1500
+        })
+        if (isDismissed) this.getAllActivitiesData()
+      }
+    }
+  },
+  mounted() {
+    this.getAllActivitiesData()
+  },
   components: {
     Disclosure,
     DisclosureButton,
