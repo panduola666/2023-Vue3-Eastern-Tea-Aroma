@@ -1,6 +1,5 @@
-// import router from '../router/index.js'
+import { vueLoadingStore } from './index.js'
 import axios from 'axios'
-// import Swal from 'sweetalert2'
 import { defineStore } from 'pinia'
 const { VITE_BASEURL } = import.meta.env
 export default defineStore('activitiesStore', {
@@ -10,14 +9,20 @@ export default defineStore('activitiesStore', {
   }),
   actions: {
     getAllActivitiesData() {
+      const loading = vueLoadingStore()
+      loading.openLoading()
       axios.get(`${VITE_BASEURL}/activities`).then((res) => {
         this.activities = res.data
+        loading.closeLoading()
       })
     },
     getCurrentActivity(id) {
-      axios
-        .get(`${VITE_BASEURL}/activities/${id}`)
-        .then((res) => (this.activity = res.data))
+      const loading = vueLoadingStore()
+      loading.openLoading()
+      axios.get(`${VITE_BASEURL}/activities/${id}`).then((res) => {
+        loading.closeLoading()
+        this.activity = res.data
+      })
     }
   }
 })

@@ -1,3 +1,4 @@
+import { vueLoadingStore } from './index.js'
 import { defineStore } from 'pinia'
 import axios from 'axios'
 import Swal from 'sweetalert2'
@@ -15,12 +16,17 @@ export default defineStore('userDataStore', {
   }),
   actions: {
     getAllUser() {
-      axios
-        .get(`${VITE_BASEURL}/users`)
-        .then((res) => (this.allUser = res.data))
+      const loading = vueLoadingStore()
+      loading.openLoading()
+      axios.get(`${VITE_BASEURL}/users`).then((res) => {
+        loading.closeLoading()
+        this.allUser = res.data
+      })
     },
     getUserData() {
       // 必登入情況
+      const loading = vueLoadingStore()
+      loading.openLoading()
       axios.defaults.headers.common.Authorization = `Bearer ${sessionStorage.getItem(
         'accessToken'
       )}`
@@ -31,8 +37,8 @@ export default defineStore('userDataStore', {
           )}?_expand=avatar`
         )
         .then((res) => {
+          loading.closeLoading()
           this.isLogin = true
-          console.log('已登入')
           this.user = res.data
           if (router.currentRoute.value.fullPath === '/login' && this.user.id) {
             router.push('/user')
@@ -45,7 +51,6 @@ export default defineStore('userDataStore', {
           }
         })
         .catch((err) => {
-          console.log('checkLogin 登入超時')
           sessionStorage.clear()
           console.log(err.response)
           this.isLogin = false
@@ -86,8 +91,6 @@ export default defineStore('userDataStore', {
             }
           })
           .catch((err) => {
-            console.log(err)
-
             const { data } = err.response
             console.log(err)
             console.log(data)
@@ -160,7 +163,6 @@ export default defineStore('userDataStore', {
       axios
         .post(`${VITE_BASEURL}/users`, data)
         .then((res) => {
-          console.log(res.data)
           return Swal.fire({
             icon: 'success',
             title: '註冊成功',
@@ -180,7 +182,6 @@ export default defineStore('userDataStore', {
             })
           }
         })
-      console.log('註冊')
     },
     signOut() {
       Swal.fire({
@@ -258,7 +259,6 @@ export default defineStore('userDataStore', {
           shoppingCart
         })
         .then((res) => {
-          console.log(res.data)
           Swal.fire({
             icon: 'success',
             title: '添加成功',

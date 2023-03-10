@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DialogModal>
+    <DialogModal :finish-fn="finishFn" :cancel-fn="cancelFn">
       <template #modal-btn>
         <slot name="btn-content">按鈕</slot>
       </template>
@@ -10,35 +10,45 @@
       <template #modal-body>
         <div class="flex flex-col gap-4">
           <div class="flex flex-col">
-            <label for="">* 折扣碼</label>
+            <label for="code">* 折扣碼</label>
             <input
               type="text"
-              name=""
-              id=""
+              name="code"
+              id="code"
               placeholder="請輸入折扣碼..."
               class="border border-gray-01 p-2 shadow-lg"
+              v-model.trim="editorData.code"
             />
           </div>
           <div class="flex flex-col">
-            <label for="" class="">* 折扣方式</label>
-            <select name="" id="" class="border border-gray-01 p-2 shadow-lg">
-              <option value="" selected disabled hidden>請選擇折扣方式</option>
-              <option value="百分比">百分比</option>
-              <option value="實際金額">實際金額</option>
+            <label for="type" class="">* 折扣方式</label>
+            <select
+              name="type"
+              id="type"
+              class="border border-gray-01 p-2 shadow-lg"
+              v-model="editorData.type"
+              @change="() => (editorData.scale = '')"
+            >
+              <option value="" selected disabled>請選擇折扣方式</option>
+              <option value="percentage">百分比</option>
+              <option value="money">實際金額</option>
             </select>
           </div>
           <div class="grid grid-cols-2 gap-6">
             <div class="flex flex-col">
-              <label for="" class="">* 截止日期</label>
-
-              <v-date-picker class="inline-block flex-grow" v-model="date" color="teal">
+              <p>* 截止日期</p>
+              <v-date-picker
+                class="inline-block flex-grow"
+                v-model="editorData.end"
+                color="teal"
+              >
                 <template v-slot="{ inputValue, togglePopover }">
                   <div
                     class="flex items-center border border-gray-01 shadow-lg h-full"
                   >
                     <button
                       class="p-2 bg-brand-01 bg-opacity-10 border-r border-gray-01 hover:bg-opacity-30 focus:bg-brand-02 focus:outline-none group h-full"
-                      @click="togglePopover()"
+                      @click="() => togglePopover()"
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -59,29 +69,34 @@
                 </template>
               </v-date-picker>
             </div>
-            <div class="flex flex-col">
-              <label for="">* 折扣額度</label>
+            <div v-if="editorData.type === 'money'">
+              <label for="moneyScale">* 折扣額度</label>
               <input
-                type="text"
-                name=""
-                id=""
+                type="number"
+                name="moneyScale"
+                id="moneyScale"
                 placeholder="請輸入金額..."
-                class="border border-gray-01 p-2 shadow-lg"
+                class="border border-gray-01 p-2 shadow-lg w-full"
+                v-model.number="editorData.scale"
+                onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
               />
             </div>
-            <!-- <div class="flex flex-col">
-              <label for="">* 折扣額度</label>
-              <select name="" id="" class="border border-gray-01 p-2">
-                <option value="" selected disabled hidden>
-                  請選擇折扣比例
-                </option>
-                <option value="95 折">95 折</option>
-                <option value="9 折">9 折</option>
-                <option value="85 折">85 折</option>
-                <option value="8 折">8 折</option>
-                <option value="75 折">75 折</option>
+            <div class="flex flex-col" v-else>
+              <label for="percentageScale">* 折扣額度</label>
+              <select
+                name="percentageScale"
+                id="percentageScale"
+                class="border border-gray-01 p-2"
+                v-model="editorData.scale"
+              >
+                <option value="" selected disabled>請選擇折扣比例</option>
+                <option value="95">95 折</option>
+                <option value="9">9 折</option>
+                <option value="85">85 折</option>
+                <option value="8">8 折</option>
+                <option value="75">75 折</option>
               </select>
-            </div> -->
+            </div>
           </div>
           <div class="bg-brand-03 bg-opacity-30 py-5 px-3 m-10">
             <table class="w-full text-center">
@@ -95,18 +110,24 @@
                 <th>折扣額度</th>
               </tr>
               <tr class="text-2xl">
-                <td class="p-2">adasd</td>
-                <td>百分比</td>
+                <td class="p-2">{{ editorData.code }}</td>
+                <td>
+                  {{ editorData.type === 'money' ? '實際金額' : '百分比' }}
+                </td>
                 <td :class="{ 'text-red-500': date < new Date().getTime() }">
+                  {{ $date(editorData.end).format('YYYY-MM-DD') }}
+                </td>
+                <td>
                   {{
-                    new Date(date).toLocaleDateString().replace(/\//g, " - ")
+                    editorData.type === 'money'
+                      ? `${editorData.scale} 元`
+                      : `${editorData.scale} 折`
                   }}
                 </td>
-                <td>92 折</td>
               </tr>
             </table>
             <p
-              v-if="date < new Date().getTime()"
+              v-if="editorData.end < new Date().getTime()"
               class="text-red-500 mt-5 text-xl font-bold text-end"
             >
               * 截止日期不可小於今日
@@ -118,22 +139,137 @@
   </div>
 </template>
 <script>
-import DialogModal from "./DialogModal.vue";
+import DialogModal from './DialogModal.vue'
+import { mapActions } from 'pinia'
+import { discountStore, productsStore, coursesStore } from '../stores/index.js'
+const { VITE_BASEURL } = import.meta.env
 export default {
+  props: {
+    discountData: {
+      type: Object,
+      required: true
+    },
+    allProducts: {
+      type: Object,
+      required: true
+    },
+    courses: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
-      date: new Date(),
-    };
+      editorData: {}
+    }
   },
   computed: {
     endDate() {
-      const dateArr = new Date(this.date).toLocaleDateString().split("/");
-      const date = new Date(...dateArr);
-      return date;
+      const dateArr = new Date(this.date).toLocaleDateString().split('/')
+      const date = new Date(...dateArr)
+      return date
+    }
+  },
+  methods: {
+    ...mapActions(discountStore, ['getDiscountData']),
+    ...mapActions(productsStore, ['getAllProducts']),
+    ...mapActions(coursesStore, ['getCoursesData']),
+    async finishFn() {
+      const { code, type, scale, end } = this.editorData
+      if (!code || !type || !scale || !end) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '內容未填寫完成',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+      if (type === 'money' && scale > 200) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '現金折扣最多 200 元',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+      if (end < new Date()) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '截止日期不可小於今日',
+          showConfirmButton: false,
+          timer: 1500,
+          allowOutsideClick: false
+        })
+        return
+      }
+      if (type === 'percentage') {
+        this.editorData.scale = `0.${scale}`
+      }
+      const year = new Date(end).getFullYear()
+      const month = new Date(end).getMonth()
+      const day = new Date(end).getDate()
+      this.editorData.end = new Date(year, month, day, 23, 59, 59).getTime()
+      this.allProducts.forEach((product) => {
+        if (
+          (type === 'money'
+            ? product.price - scale
+            : Math.round(product.price * scale)) <= 0
+        ) {
+          this.$http
+            .patch(`${VITE_BASEURL}/products/${product.id}`, {
+              isDiscount: false
+            })
+            .then(() => this.getAllProducts())
+        }
+      })
+      this.courses.forEach((course) => {
+        if (
+          (type === 'money'
+            ? course.price - scale
+            : Math.round(course.price * scale)) <= 0
+        ) {
+          course.courseDates.forEach((date) => {
+            this.$http
+              .patch(`${VITE_BASEURL}/courseDates/${date.id}`, {
+                isDiscount: false
+              })
+              .then(() => this.getCoursesData())
+          })
+        }
+      })
+      await this.$http
+        .patch(`${VITE_BASEURL}/discount`, this.editorData)
+        .then(() => {
+          this.$swal.fire({
+            icon: 'success',
+            title: '折扣碼新增成功',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.editorData = { ...this.discountData }
+          this.getDiscountData()
+        })
     },
+    cancelFn() {
+      this.editorData = { ...this.discountData }
+    }
+  },
+  watch: {
+    discountData() {
+      this.editorData = { ...this.discountData }
+      if (this.editorData.type === 'percentage') {
+        if ((this.editorData.scale * 100) % 10 === 0) {
+          this.editorData.scale = this.editorData.scale * 10
+        } else {
+          this.editorData.scale = this.editorData.scale * 100
+        }
+      }
+    }
   },
   components: {
-    DialogModal,
-  },
-};
+    DialogModal
+  }
+}
 </script>

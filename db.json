@@ -4,21 +4,13 @@
       "email": "admin@gmail.com",
       "password": "$2a$10$UiqEPtBH9XtkaCxeonfL3.B6oxygD7U28J3lCKh31sJfGf/If8oPm",
       "name": "管理員",
-      "avatarId": 3,
+      "avatarId": 2,
       "tel": "",
       "isAdmin": true,
       "shoppingCart": {
         "discount": "",
         "cart": {
-          "products": [
-            {
-              "productId": 2,
-              "price": 200,
-              "number": 1,
-              "totalPrice": 200,
-              "isDiscount": false
-            }
-          ],
+          "products": [],
           "courses": []
         }
       },
@@ -67,18 +59,10 @@
     }
   ],
   "discount": {
-    "state": true,
-    "code": "test123",
+    "code": "accac",
     "type": "money",
-    "scale": 200,
-    "end": 1777747600000,
-    "productId": [
-      1,
-      3
-    ],
-    "coursesId": [
-      2
-    ]
+    "scale": 20,
+    "end": 1678463999000
   },
   "courses": [
     {
@@ -234,7 +218,7 @@
       "total": 15,
       "userId": 1,
       "savedUsersId": [],
-      "isDiscount": false,
+      "isDiscount": true,
       "created": 1678205797536,
       "courseId": 4,
       "id": 7
@@ -249,9 +233,8 @@
       "price": 700,
       "coverUrl": "https://images.unsplash.com/photo-1628153792464-21bffac488d4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NjV8fHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
       "totalNumber": 10,
-      "soldNumber": 3,
       "content": "<p>高山烏龍茶，泛指種植、製造於海拔1000公尺以上茶區之茶葉，因高山茶葉生長較慢、茶葉中的苦澀成份降低，口感也會比較圓潤，近年來取代平地烏龍茶，高山烏龍茶漸漸成為台灣茶的主流。</p><p>&nbsp;</p><p>高山烏龍茶會受到歡迎，主要是因其口感清新、甘甜。因種於高山，茶葉生長慢，導致茶葉中的苦澀成份少、甜度高。此外不同產區的高山茶葉，會有其獨特的「山頭韻」，也就是不同山頭生產的茶葉會有不同的味道，這也是高山烏龍茶受歡迎的主因。</p>",
-      "isDiscount": true
+      "isDiscount": false
     },
     {
       "id": 2,
@@ -314,7 +297,8 @@
     {
       "created": 1679932800000,
       "finish": true,
-      "trackingNumber": "weqeq",
+      "isCancel": false,
+      "trackingNumber": "vdw",
       "id": 1,
       "userId": 2,
       "buyerInfo": {
@@ -362,6 +346,7 @@
     {
       "created": 1679587200000,
       "finish": false,
+      "isCancel": false,
       "trackingNumber": "",
       "userId": 2,
       "buyerInfo": {
@@ -418,6 +403,7 @@
     },
     {
       "userId": 2,
+      "isCancel": false,
       "buyerInfo": {
         "name": "d",
         "tel": "231",
@@ -457,6 +443,7 @@
     {
       "userId": 2,
       "finish": false,
+      "isCancel": false,
       "buyerInfo": {
         "name": "dwqdqd",
         "tel": "32",
@@ -494,6 +481,7 @@
     },
     {
       "userId": 1,
+      "isCancel": false,
       "buyerInfo": {
         "name": "dqwdq",
         "tel": "23",

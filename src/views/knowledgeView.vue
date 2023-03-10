@@ -5,7 +5,7 @@
     >
       <li
         class="relative"
-        v-for="(item, index) in productTypes"
+        v-for="(item, index) in asideList"
         :key="item + index"
       >
         <input
@@ -19,7 +19,7 @@
         <label
           :for="item + index"
           :class="{ 'bg-brand-01 bg-opacity-30': currentChoose === item }"
-          @click="currentChoose = item"
+          @click="() => (currentChoose = item)"
           class="block w-full p-4 hover:bg-brand-01 hover:bg-opacity-30 cursor-pointer"
           >{{ item }}</label
         >
@@ -43,48 +43,76 @@
         宋代，是古代茶道最盛之時，正所謂「茶，興於唐，盛於宋」。其時主要的備茶方式為點茶法，即是先將茶餅磨成細末，置於茶盌內，注入沸水，再加以擊拂，形成細滑如乳的泡沫。每個步驟都一絲不苟，有如禪修，靜心凝神，修身養性。點茶法東傳至日本後，孕育出茶道精神，今時今日大行其道的抹茶也是起源於此。
       </p>
       <img
-        src="https://images.unsplash.com/photo-1678117733318-1aaccb9dc4c6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw2fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60"
+        src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/teaBook.jpg?raw=true"
         alt=""
         class="object-cover w-full"
       />
     </article>
-    <form
-      action=""
-      v-else-if="currentChoose === '問題反饋'"
-      class="bg-white bg-opacity-30 lg:col-span-4 p-4 text-gray-01 text-lg tracking-widest grid gap-8"
+    <div
+      v-if="currentChoose === '活動資訊'"
+      class="bg-white bg-opacity-30 lg:col-span-4 p-4 text-gray-01 text-lg tracking-widest grid gap-4"
     >
-      <h1 class="text-3xl font-self">問題反饋</h1>
-      <div class="flex flex-col gap-1">
-        <label for="question" class="text-gray-02">問題</label>
-        <input type="text" name="question" id="question" class="p-2" required />
-      </div>
-      <div class="flex flex-col gap-1">
-        <label for="email" class="text-gray-02">聯絡信箱</label>
-        <input type="email" name="email" id="email" class="p-2" required />
-      </div>
-      <div class="flex flex-col gap-1">
-        <label for="detailed" class="text-gray-02">詳細情況</label>
-        <textarea
-          name="detailed"
-          id="detailed"
-          cols="30"
-          rows="10"
-          class="p-2"
-          required
-        ></textarea>
-      </div>
-      <button class="btn-outline text-xl">送出</button>
-    </form>
+      <h1 class="text-3xl font-self">活動資訊</h1>
+      <ul class="grid gap-5">
+        <li
+          is="vue:CoursesCard"
+          v-for="activity in activities"
+          :key="activity.id"
+        >
+          <template #image>
+            <img
+              :src="activity.coverUrl"
+              :alt="activity.title"
+              class="h-full w-full object-cover"
+            />
+          </template>
+          <template #card-header>
+            {{ activity.title }}
+            <span class="text-brand-05 text-base self-center font-sans">
+              {{ activity.type }}</span
+            >
+          </template>
+          <template #card-body>
+            <article
+              v-html="activity.content"
+              class="flex-grow overflow-hidden max-h-20 text-sm"
+            ></article>
+          </template>
+          <template #card-footer>
+            <router-link
+              :to="`/activity/${activity.id}`"
+              class="btn-primary py-2 px-4"
+              >活動詳情</router-link
+            >
+          </template>
+        </li>
+      </ul>
+    </div>
   </main>
 </template>
 <script>
+import CoursesCard from '../components/CoursesCard.vue'
+import { mapState, mapActions } from 'pinia'
+import { activitiesStore } from '../stores/index.js'
 export default {
   data() {
     return {
       chooseType: '',
       currentChoose: '茶學演變',
-      productTypes: ['茶學演變', '活動資訊', '文章分享', '相關證照', '問題反饋']
+      asideList: ['茶學演變', '活動資訊']
     }
+  },
+  computed: {
+    ...mapState(activitiesStore, ['activities'])
+  },
+  methods: {
+    ...mapActions(activitiesStore, ['getAllActivitiesData'])
+  },
+  mounted() {
+    this.getAllActivitiesData()
+  },
+  components: {
+    CoursesCard
   }
 }
 </script>

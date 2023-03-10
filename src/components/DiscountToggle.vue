@@ -25,7 +25,7 @@ export default {
   props: {
     isDiscount: {
       type: Boolean,
-      default: false
+      required: true
     },
     id: {
       type: Number,
@@ -33,6 +33,10 @@ export default {
     },
     which: {
       type: String,
+      required: true
+    },
+    price: {
+      type: Number,
       required: true
     }
   },
@@ -46,19 +50,33 @@ export default {
       this.enabled = this.isDiscount
     },
     enabled() {
+      if (this.price <= 0) {
+        this.enabled = false
+      }
       this.$emit('update:is-discount', this.enabled)
       this.$http
         .patch(`${VITE_BASEURL}/${this.which}/${this.id}`, {
           isDiscount: this.enabled
         })
         .then(() => {
-          this.$swal.fire({
-            icon: 'success',
-            title: '修改成功',
-            showConfirmButton: false,
-            timer: 1500,
-            allowOutsideClick: false
-          })
+          if (this.price <= 0) {
+            this.$swal.fire({
+              icon: 'error',
+              title: '該商品不可折扣',
+              text: '優惠後的價格不可低於 0',
+              showConfirmButton: false,
+              timer: 1500,
+              allowOutsideClick: false
+            })
+          } else {
+            this.$swal.fire({
+              icon: 'success',
+              title: '修改成功',
+              showConfirmButton: false,
+              timer: 1500,
+              allowOutsideClick: false
+            })
+          }
         })
     }
   },

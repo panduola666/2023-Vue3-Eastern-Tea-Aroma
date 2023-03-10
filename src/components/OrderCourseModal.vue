@@ -109,7 +109,6 @@ export default {
             product.courseDateId &&
             product.courseDateId === this.currentCourse.id
           ) {
-            console.log(order.buyerInfo)
             const data = {
               userId: order.userId,
               name: order.buyerInfo.name,

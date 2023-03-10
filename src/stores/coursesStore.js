@@ -1,13 +1,9 @@
-import { userStore, updatedImgStore } from './index.js'
+import { userStore, updatedImgStore, vueLoadingStore } from './index.js'
 import router from '../router/index.js'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { defineStore } from 'pinia'
 const { VITE_BASEURL } = import.meta.env
-// const swalColor = {
-//   confirmButtonColor: "#4c7866",
-//   cancelButtonColor: "#727272",
-// };
 export default defineStore('coursesStore', {
   state: () => ({
     courses: [],
@@ -15,9 +11,12 @@ export default defineStore('coursesStore', {
   }),
   actions: {
     async getCoursesData() {
+      const loading = vueLoadingStore()
+      loading.openLoading()
       const res = await axios.get(
         `${VITE_BASEURL}/courses?_expand=user&_embed=courseDates`
       )
+      loading.closeLoading()
       this.courses = res.data
     },
     async getCurrent(courseDateId, isNew = false) {
@@ -40,9 +39,12 @@ export default defineStore('coursesStore', {
         return
       }
       try {
+        const loading = vueLoadingStore()
+        loading.openLoading()
         const courseDate = await axios.get(
           `${VITE_BASEURL}/courseDates/${courseDateId}?_expand=course&_expand=user`
         )
+        loading.closeLoading()
         this.currentCourse = courseDate.data
       } catch (err) {
         if (err.response.status === 404) {
@@ -59,7 +61,6 @@ export default defineStore('coursesStore', {
         }
         console.log(err)
       }
-      // console.log(courseDate.data);
     },
     patchSaved(courseDate) {
       const user = userStore()

@@ -98,7 +98,8 @@ export default {
       sort: {
         title: '講師',
         order: '升序'
-      }
+      },
+      sortData: []
     }
   },
   watch: {
@@ -135,9 +136,6 @@ export default {
   computed: {
     ...mapState(userStore, ['user']),
     ...mapState(coursesStore, ['courses']),
-    sortData() {
-      return [...this.courses]
-    },
     hasSaved() {
       let hasSaved = false
       this.sortData.forEach((course) => {
@@ -161,8 +159,9 @@ export default {
       }
     }
   },
-  mounted() {
-    this.getCoursesData()
+  async mounted() {
+    await this.getCoursesData()
+    this.sortData = [...this.courses]
   }
 }
 </script>

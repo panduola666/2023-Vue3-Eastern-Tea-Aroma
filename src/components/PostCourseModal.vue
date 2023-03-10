@@ -238,7 +238,7 @@
                   placeholder="請輸入價格..."
                   min="0"
                   onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
-                  v-model="editorData.price"
+                  v-model.number="editorData.price"
               /></label>
               <label for="courseTotal" class="grid"
                 >開課人數<input
@@ -249,7 +249,7 @@
                   placeholder="請輸入人數..."
                   min="0"
                   onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
-                  v-model="editorData.total"
+                  v-model.number="editorData.total"
               /></label>
             </div>
             <div>
@@ -354,6 +354,15 @@ export default {
       const endTime = endHour * 60 * 60 * 1000 + endMinute * 60 * 1000
       if (this.imageStyle === '本地圖片') {
         this.editorData.coverUrl = this.imgUrl
+      }
+      if (this.imageStyle === '本地圖片' && !this.imgUrl) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '還未上傳本地圖片',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
       }
       if (this.isNew) {
         // 基本驗證

@@ -40,7 +40,9 @@
                 {{
                   order.discount.type === 'money'
                     ? toThousand(product.totalPrice - order.discount.scale)
-                    : toThousand(product.totalPrice * order.discount.scale)
+                    : toThousand(
+                        Math.round(product.totalPrice * order.discount.scale)
+                      )
                 }}
                 元
               </p>
@@ -66,7 +68,9 @@
                 {{
                   order.discount.type === 'money'
                     ? toThousand(product.totalPrice - order.discount.scale)
-                    : toThousand(product.totalPrice * order.discount.scale)
+                    : toThousand(
+                        Math.round(product.totalPrice * order.discount.scale)
+                      )
                 }}
                 元
               </p>
@@ -123,7 +127,9 @@ export default {
           if (this.orders[index].discount.type === 'money') {
             price += item.totalPrice - this.orders[index].discount.scale
           } else {
-            price += item.totalPrice * this.orders[index].discount.scale
+            price += Math.round(
+              item.totalPrice * this.orders[index].discount.scale
+            )
           }
         } else {
           price += item.totalPrice

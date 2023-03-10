@@ -196,7 +196,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(userStore, ['overLogin', 'getUserData']),
+    ...mapActions(userStore, ['overLogin']),
 
     changeBtnText(e) {
       if (e.target.textContent.trim() === '編輯') {
@@ -346,9 +346,6 @@ export default {
       this.getUserData()
       this.postImg = false
     }
-  },
-  mounted() {
-    this.getUserData()
   }
 }
 </script>

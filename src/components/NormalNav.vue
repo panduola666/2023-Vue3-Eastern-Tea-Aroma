@@ -4,7 +4,10 @@
       class="mx-auto xl:w-[70%] lg:w-[80%] w-[90%] flex justify-between items-center pb-2"
     >
       <router-link to="/" class="pb-[10px] pt-[18px]">
-        <img src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/logo.png?raw=true" alt="東方茶香logo" />
+        <img
+          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/logo.png?raw=true"
+          alt="東方茶香logo"
+        />
       </router-link>
       <ul class="hidden items-center text-brand-02 gap-7 xl:gap-14 lg:flex">
         <li
@@ -28,13 +31,15 @@
           <ul
             class="absolute button-0 left-0 hidden group-hover:block bg-white min-w-[216px] text-gray-01 shadow-lg z-50"
           >
-            <li v-for="course in coursesList" :key="course.id">
-              <router-link
-                :to="`/course/${course.id}`"
-                class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
-                >{{ course.title }}</router-link
-              >
-            </li>
+            <template v-for="(course, index) in coursesList" :key="course.id">
+              <li v-if="index < 5">
+                <router-link
+                  :to="`/course/${course.id}`"
+                  class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
+                  >{{ course.title }}</router-link
+                >
+              </li>
+            </template>
           </ul>
         </li>
         <li class="group relative">
@@ -55,7 +60,10 @@
           <ul
             class="absolute button-0 left-0 hidden group-hover:block bg-white min-w-[216px] z-50 text-gray-01 shadow-lg"
           >
-            <li v-for="(item, index) in productTypes" :key="`前往搜尋${index}`">
+            <li
+              v-for="(item, index) in productGroups"
+              :key="`前往搜尋${index}`"
+            >
               <router-link
                 :to="`/shoppingMall?page=1&search=${index}`"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
@@ -126,8 +134,7 @@
             </ul>
           </div>
         </section>
-
-        <section class="flex mb-[10px] mt-[18px]">
+        <section class="flex mb-[10px] mt-[18px]" v-if="isLogin">
           <router-link :to="{ name: 'shopCart' }" class="relative"
             ><img
               src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/Property%201=cart@2x.png?raw=true"
@@ -135,8 +142,8 @@
               class="w-[30px] mr-6 hover:brightness-125"
             />
             <div
-              class="absolute bg-brand-02 text-white text-xs leading-[16px] font-medium px-1 min-w-[16px] max-h-[16px] rounded-lg -top-[5px] left-[14px]"
-              v-if="isLogin"
+              class="shoppingCartNumber transform absolute bg-brand-02 text-white text-xs leading-[16px] font-medium px-1 min-w-[16px] max-h-[16px] rounded-lg -top-[5px] left-[14px]"
+              v-if="isLogin && shoppingCartLength > 0"
             >
               {{ shoppingCartLength > 99 ? '99+' : shoppingCartLength }}
             </div>
@@ -151,7 +158,7 @@
               'scale-1': !openMore,
               'scale-0': openMore
             }"
-            @click.prevent="()=>openMore = !openMore"
+            @click.prevent="() => (openMore = !openMore)"
           />
           <img
             src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/Property%201=close@2x.png?raw=true"
@@ -161,7 +168,7 @@
               'scale-1': openMore,
               'scale-0': !openMore
             }"
-            @click.prevent="openMore = !openMore"
+            @click.prevent="() => (openMore = !openMore)"
           />
         </div>
       </div>
@@ -169,9 +176,11 @@
     <nav-more-select
       v-if="openMore"
       v-model:open="openMore"
-      :to-href="userHref"
       :coursesList="coursesList"
-      :productTypes="productTypes"
+      :productGroups="productGroups"
+      :user="user"
+      :sign-out="signOut"
+      :is-login="isLogin"
     ></nav-more-select>
   </nav>
 </template>
@@ -189,7 +198,7 @@ export default {
   computed: {
     ...mapState(userStore, ['isLogin', 'user']),
     ...mapState(coursesStore, ['courses']),
-    ...mapState(productsStore, ['productTypes']),
+    ...mapState(productsStore, ['productGroups']),
     shoppingCartLength() {
       return (
         this.user.shoppingCart?.cart.products.length +
@@ -209,7 +218,7 @@ export default {
           list.push(data)
         })
       })
-      return list
+      return list.sort((a, b) => b.id - a.id)
     }
   },
   methods: {
@@ -226,3 +235,19 @@ export default {
   }
 }
 </script>
+<style>
+.shoppingCartNumber {
+  animation: bounce 1s infinite;
+}
+@keyframes bounce {
+  0% {
+    top: -5px;
+  }
+  50% {
+    top: -8px;
+  }
+  100% {
+    top: -5px;
+  }
+}
+</style>

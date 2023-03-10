@@ -1,6 +1,6 @@
 <template>
   <main class="wrap">
-    <teleport to="title"> - 茶藝課堂</teleport>
+    <!-- <teleport to="title"> - 茶藝課堂</teleport> -->
     <h2 class="text-3xl font-black font-self text-brand-02">茶藝課堂</h2>
     <form
       class="shadow bg-white bg-opacity-20 border-2 border-brand-01 border-opacity-50 mt-2 mb-6 text-xl p-3 grid gap-3"
@@ -68,11 +68,90 @@
             )"
             :key="course.id"
           >
-            <li
-              is="vue:CoursesCard"
+            <template
               v-for="(date, index) in course.courseDates"
               :key="`第${index + 1}堂-${date}`"
             >
+              <li is="vue:CoursesCard" v-if="date.end > new Date()">
+                <template #image>
+                  <img
+                    :src="course.coverUrl"
+                    :alt="course.title"
+                    class="h-full w-full object-cover"
+                  />
+                </template>
+                <template #card-header>
+                  {{ course.title }}
+                  <span class="text-brand-04 text-base self-center font-sans">{{
+                    $date(new Date(date.start).toLocaleDateString()).format(
+                      'YYYY-MM-DD'
+                    )
+                  }}</span>
+                </template>
+                <template #card-body>
+                  <p>
+                    時間：<span
+                      >星期{{ weekText(date.start) }} /
+                      {{ $dayjs(new Date(date.start)).format('HH:mm') }}~{{
+                        $dayjs(new Date(date.end)).format('HH:mm')
+                      }}</span
+                    >
+                  </p>
+                  <h2>講師：{{ course.user.name }} 講師</h2>
+                  <p>
+                    評分：{{
+                      conversionScore(
+                        course.scores.reduce(
+                          (score, item) => score + item.score,
+                          0
+                        ) / course.scores.length
+                      )
+                    }}
+                  </p>
+                  <p class="text-end text-lg">
+                    $ {{ toThousand(course.price) }}
+                  </p>
+                </template>
+                <template #card-footer>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    aria-label="課程收藏"
+                    class="w-6 h-6 cursor-pointer stroke-brand-02 hover:fill-brand-02"
+                    v-if="isLogin"
+                    @click="() => patchSaved(date)"
+                    :class="{ 'fill-brand-02': isUserSaved(date) }"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
+                    />
+                  </svg>
+                  <router-link
+                    :to="`/course/${date.id}`"
+                    class="btn-primary py-2 px-4"
+                    >課程詳情</router-link
+                  >
+                </template>
+              </li>
+            </template>
+          </template>
+        </template>
+        <li class="text-2xl text-gray-01 md:tracking-widest text-center" v-else>
+          該時段暫無課程
+        </li>
+      </template>
+      <template v-else>
+        <template v-for="course in courses" :key="course.id">
+          <template
+            v-for="(date, index) in course.courseDates"
+            :key="`第${index + 1}堂-${date}`"
+          >
+            <li is="vue:CoursesCard" v-if="date.end > new Date()">
               <template #image>
                 <img
                   :src="course.coverUrl"
@@ -120,7 +199,7 @@
                   aria-label="課程收藏"
                   class="w-6 h-6 cursor-pointer stroke-brand-02 hover:fill-brand-02"
                   v-if="isLogin"
-                  @click="() => patchSaved(date)"
+                  @click="($event) => patchSaved(date)"
                   :class="{ 'fill-brand-02': isUserSaved(date) }"
                 >
                   <path
@@ -137,81 +216,6 @@
               </template>
             </li>
           </template>
-        </template>
-        <li class="text-2xl text-gray-01 md:tracking-widest text-center" v-else>
-          該時段暫無課程
-        </li>
-      </template>
-      <template v-else>
-        <template v-for="course in courses" :key="course.id">
-          <li
-            is="vue:CoursesCard"
-            v-for="(date, index) in course.courseDates"
-            :key="`第${index + 1}堂-${date}`"
-          >
-            <template #image>
-              <img
-                :src="course.coverUrl"
-                :alt="course.title"
-                class="h-full w-full object-cover"
-              />
-            </template>
-            <template #card-header>
-              {{ course.title }}
-              <span class="text-brand-04 text-base self-center font-sans">{{
-                $date(new Date(date.start).toLocaleDateString()).format(
-                  'YYYY-MM-DD'
-                )
-              }}</span>
-            </template>
-            <template #card-body>
-              <p>
-                時間：<span
-                  >星期{{ weekText(date.start) }} /
-                  {{ $dayjs(new Date(date.start)).format('HH:mm') }}~{{
-                    $dayjs(new Date(date.end)).format('HH:mm')
-                  }}</span
-                >
-              </p>
-              <h2>講師：{{ course.user.name }} 講師</h2>
-              <p>
-                評分：{{
-                  conversionScore(
-                    course.scores.reduce(
-                      (score, item) => score + item.score,
-                      0
-                    ) / course.scores.length
-                  )
-                }}
-              </p>
-              <p class="text-end text-lg">$ {{ toThousand(course.price) }}</p>
-            </template>
-            <template #card-footer>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                aria-label="課程收藏"
-                class="w-6 h-6 cursor-pointer stroke-brand-02 hover:fill-brand-02"
-                v-if="isLogin"
-                @click="($event) => patchSaved(date)"
-                :class="{ 'fill-brand-02': isUserSaved(date) }"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z"
-                />
-              </svg>
-              <router-link
-                :to="`/course/${date.id}`"
-                class="btn-primary py-2 px-4"
-                >課程詳情</router-link
-              >
-            </template>
-          </li>
         </template>
       </template>
     </ul>

@@ -17,12 +17,12 @@
       ><div class="relative h-[520px] w-full">
         <img
           src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER.png?raw=true"
-          alt=""
+          alt="banner1"
           class="object-cover hidden lg:block object-left"
         />
         <img
           src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER%20375.png?raw=true"
-          alt=""
+          alt="banner1"
           class="object-bottom block lg:hidden"
         />
         <section
@@ -40,12 +40,12 @@
       ><div class="relative h-[520px] w-full">
         <img
           src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER-1.png?raw=true"
-          alt=""
+          alt="banner2"
           class="object-cover hidden lg:block object-left"
         />
         <img
           src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER%20375-1.png?raw=true"
-          alt=""
+          alt="banner2"
           class="object-bottom block lg:hidden"
         />
         <section
@@ -65,12 +65,12 @@
       ><div class="relative h-[520px] w-full">
         <img
           src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER-2.png?raw=true"
-          alt=""
+          alt="banner3"
           class="object-cover hidden lg:block object-left"
         />
         <img
           src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER%20375-2.png?raw=true"
-          alt=""
+          alt="banner3"
           class="object-bottom block lg:hidden"
         />
         <section
@@ -87,57 +87,64 @@
     </swiper-slide>
 
     <!-- 最新活動 要跟著變動 -->
-    <swiper-slide
-      ><div class="relative h-[520px] w-full">
-        <img
-          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER-3.png?raw=true"
-          alt=""
-          class="object-cover hidden lg:block object-left"
-        />
-        <img
-          src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER%20375-3.png?raw=true"
-          alt=""
-          class="object-bottom block lg:hidden"
-        />
-        <section
-          class="absolute font-self font-black text-gray-04 bg-[#003416] bg-opacity-40 lg:text-[32px] lg:leading-9 lg:top-[10%] lg:left-[16%] lg:w-[45%] lg:py-[45px] lg:pl-12 text-2xl leading-7 top-6 left-4 w-[90%] py-4 px-6 text-start"
-        >
-          <span
-            class="bg-brand-01 text-white lg:absolute font-medium lg:text-xl text-base leading-5 font-sans lg:py-2 py-1 lg:px-3 px-2 lg:top-[12%] lg:-left-8"
+    <template
+      v-for="(activity, index) in activities.sort(
+        (a, b) => b.created - a.created
+      )"
+      :key="activity.id"
+    >
+      <swiper-slide v-if="index === 0">
+        <div class="relative h-[520px] w-full">
+          <img
+            :src="activity.coverUrl"
+            :alt="activity.title"
+            class="object-cover w-full h-full"
+          />
+          <section
+            class="absolute font-self font-black text-gray-04 bg-[#003416] bg-opacity-40 lg:text-[32px] lg:leading-9 lg:top-[10%] lg:left-[16%] lg:w-[45%] lg:py-[45px] lg:pl-12 text-2xl leading-7 top-6 left-4 w-[90%] py-4 px-6 text-start"
           >
-            優惠
-          </span>
-          <p class="mt-4 lg:mt-0">521國際茶日</p>
-          <p
-            class="lg:text-xl text-base font-normal lg:leading-[30px] font-sans lg:mt-6"
-          >
-            在2020年5月21日，聯合國首次確定＂國際茶日＂。
-            為表紀念每年521將推出全場商品 9 折活動為期 3 日，折扣碼：Tea521。
-          </p>
-          <button
-            type="button"
-            class="btn-outline lg:text-xl text-base lg:leading-6 leading-5 font-medium text-brand-01 font-sans lg:mt-6 mt-3 duration-500 outline-white"
-          >
-            活動詳情
-          </button>
-        </section>
-      </div>
-    </swiper-slide>
+            <span
+              class="bg-brand-01 text-white lg:absolute font-medium lg:text-xl text-base leading-5 font-sans lg:py-2 py-1 lg:px-3 px-2 lg:top-[12%] lg:-left-8"
+            >
+              {{ activity.type }}
+            </span>
+            <p class="mt-4 lg:mt-0">{{ activity.title }}</p>
+            <article
+              class="lg:text-xl text-base font-normal lg:leading-[30px] font-sans lg:my-6 my-3 max-h-24 overflow-hidden"
+              v-html="activity.content"
+            ></article>
+            <router-link
+              :to="`/activity/${activity.id}`"
+              class="btn-outline border-white lg:text-xl text-base lg:leading-6 leading-5 font-medium text-white font-sans lg:mt-6 mt-3 duration-500 outline-white opacity-50 hover:opacity-100"
+            >
+              活動詳情
+            </router-link>
+          </section>
+        </div>
+      </swiper-slide>
+    </template>
   </swiper>
 </template>
 <script>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
-
 // Import Swiper styles
 import 'swiper/css'
-
 import 'swiper/css/pagination'
-
 // import required modules
 import { Autoplay, Pagination } from 'swiper'
-
+import { mapState, mapActions } from 'pinia'
+import { activitiesStore } from '../stores/index.js'
 export default {
+  computed: {
+    ...mapState(activitiesStore, ['activities'])
+  },
+  methods: {
+    ...mapActions(activitiesStore, ['getAllActivitiesData'])
+  },
+  mounted() {
+    this.getAllActivitiesData()
+  },
   components: {
     Swiper,
     SwiperSlide

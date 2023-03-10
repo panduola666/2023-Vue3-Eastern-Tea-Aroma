@@ -1,16 +1,19 @@
-import axios from "axios";
-import Swal from "sweetalert2";
-import { defineStore } from "pinia";
-const { VITE_BASEURL } = import.meta.env;
-export default defineStore("ordersStore", {
+import { vueLoadingStore } from './index.js'
+import axios from 'axios'
+import { defineStore } from 'pinia'
+const { VITE_BASEURL } = import.meta.env
+export default defineStore('ordersStore', {
   state: () => ({
-    orders: [],
+    orders: []
   }),
   actions: {
     getOrdersData() {
+      const loading = vueLoadingStore()
+      loading.openLoading()
       axios.get(`${VITE_BASEURL}/orders?_expand=user`).then((res) => {
-        this.orders = res.data;
-      });
-    },
-  },
-});
+        loading.closeLoading()
+        this.orders = res.data
+      })
+    }
+  }
+})

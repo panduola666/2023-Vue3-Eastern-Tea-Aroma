@@ -124,7 +124,7 @@ export default {
             if (this.discountData.type === 'money') {
               price += product.totalPrice - this.discountData.scale
             } else {
-              price += product.totalPrice * this.discountData.scale
+              price += Math.round(product.totalPrice * this.discountData.scale)
             }
           } else {
             price += product.totalPrice
@@ -139,7 +139,7 @@ export default {
             if (this.discountData.type === 'money') {
               price += course.totalPrice - this.discountData.scale
             } else {
-              price += course.totalPrice * this.discountData.scale
+              price += Math.round(course.totalPrice * this.discountData.scale)
             }
           } else {
             price += course.totalPrice

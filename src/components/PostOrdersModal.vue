@@ -9,9 +9,10 @@
       </template>
       <template #modal-body>
         <div class="flex justify-between text-lg">
-          <p>訂單編號: 2</p>
-          <p>成立時間：2022-11-23</p>
+          <p>訂單編號: {{ orderData.id }}</p>
+          <p>成立時間：{{ $date(orderData.created).format('YYYY-MM-DD') }}</p>
         </div>
+        <!-- {{ orderData }} -->
         <table
           class="my-4 w-full border border-brand-02 divide-y divide-brand-02 text-center"
         >
@@ -27,33 +28,62 @@
           <tbody class="border divide-y divide-brand-02">
             <tr
               class="hover:bg-gray-03 hover:bg-opacity-30 divide-x md:divide-x-0 divide-brand-02"
+              v-for="(product, index) in orderData.cart"
+              :key="product.name + index"
             >
-              <td class="py-2">全手工紫砂壺</td>
-              <td>八角壺</td>
-              <td>1</td>
-              <td class="">799</td>
-              <td class="font-semibold text-lg">399</td>
-            </tr>
-            <tr
-              class="hover:bg-gray-03 hover:bg-opacity-30 divide-x md:divide-x-0 divide-brand-02"
-            >
-              <td class="py-2">茶葉的風味鑑賞學</td>
-              <td>2022-03-10 (三) / 15:00~16:30</td>
-              <td>3</td>
-              <td>3500</td>
-              <td class="font-semibold text-lg"></td>
+              <td class="py-2">
+                {{ product.type ? product.type : product.name }}
+              </td>
+              <td>
+                {{
+                  product.type
+                    ? product.name
+                    : `${$date(product.start).format(
+                        'YYYY-MM-DD HH:mm'
+                      )}~${$date(product.end).format('HH:mm')}`
+                }}
+              </td>
+              <td>{{ product.number }}</td>
+              <td class="">{{ product.totalPrice }}</td>
+              <td class="font-semibold text-lg">
+                {{ productDiscount(product) }}
+              </td>
             </tr>
           </tbody>
         </table>
         <section
           class="grid grid-cols-2 gap-y-1 lg:w-1/4 text-end sm:text-lg ml-auto mt-5"
+          v-if="orderData.discount.code"
         >
           <p>原價</p>
-          <p class="line-through text-gray-02">5299</p>
+          <p class="line-through text-gray-02">
+            {{
+              orderData.cart.reduce(
+                (total, product) => (total += product.totalPrice),
+                0
+              )
+            }}
+          </p>
+          <p>折扣碼</p>
+          <p>{{ orderData.discount.code }}</p>
+          <h2>總計</h2>
+          <p>{{ totalDiscountPrice(orderData) }}</p>
+        </section>
+        <section
+          v-else
+          class="grid grid-cols-2 gap-y-1 lg:w-1/4 text-end sm:text-lg ml-auto mt-5"
+        >
           <p>折扣碼</p>
           <p>無</p>
           <h2>總計</h2>
-          <p>3899</p>
+          <p>
+            {{
+              orderData.cart.reduce(
+                (total, product) => (total += product.totalPrice),
+                0
+              )
+            }}
+          </p>
         </section>
       </template>
       <template #modal-footerBTN>
@@ -65,6 +95,37 @@
 <script>
 import DialogModal from '../components/DialogModal.vue'
 export default {
+  props: {
+    orderData: {
+      type: Object,
+      required: true
+    }
+  },
+  methods: {
+    productDiscount(product) {
+      const { scale, type, code } = this.orderData.discount
+      if (product.isDiscount && code) {
+        return type === 'money'
+          ? product.totalPrice - scale
+          : Math.round(product.totalPrice * scale)
+      }
+      return ''
+    },
+    totalDiscountPrice(order) {
+      const total = order.cart.reduce((price, product) => {
+        if (product.isDiscount) {
+          const { scale, type } = this.orderData.discount
+          type === 'money'
+            ? (price += product.totalPrice - scale)
+            : (price += Math.round(product.totalPrice * scale))
+        } else {
+          price += product.totalPrice
+        }
+        return price
+      }, 0)
+      return total
+    }
+  },
   components: {
     DialogModal
   }

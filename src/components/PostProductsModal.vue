@@ -1,12 +1,12 @@
 <template>
   <div>
-    <DialogModal :finishFn="showEditor">
+    <DialogModal :finish-fn="finishFn" :cancel-fn="cancelFn">
       <template #modal-btn>
         <slot name="btn-content">按鈕</slot>
       </template>
       <template #modal-header>
         <h2 class="text-xl font-black font-self text-brand-02">
-          新增商品/編輯商品
+          {{ isNew ? '新增商品' : '編輯商品' }}
         </h2>
       </template>
       <template #modal-body>
@@ -46,13 +46,13 @@
             <img
               v-if="imageStyle === '本地圖片' && imgUrl"
               :src="imgUrl"
-              :alt="productDate.title"
+              :alt="currentData.name"
               class="w-full object-cover"
             />
             <img
               v-else-if="imageStyle === '雲端圖片'"
-              :src="productDate.coverUrl"
-              :alt="productDate.title"
+              :src="currentData.coverUrl"
+              :alt="currentData.name"
               class="w-full object-cover"
             />
             <label for="imgUrl" v-if="imageStyle === '雲端圖片'"
@@ -60,7 +60,7 @@
                 type="text"
                 name="imgUrl"
                 id="imgUrl"
-                v-model="productDate.coverUrl"
+                v-model="currentData.coverUrl"
                 class="border border-gray-01 p-2 w-full"
                 placeholder="請輸入圖片網址..."
                 aria-label="雲端圖片輸入框"
@@ -86,118 +86,181 @@
             </div>
           </div>
           <div class="flex-grow lg:border-l-2 flex flex-col gap-3 lg:px-3">
-            <label for="" class="grid"
+            <label for="name" class="grid"
               >* 標題
               <input
                 type="text"
-                name=""
-                id=""
+                name="name"
+                id="name"
                 class="border border-gray-01 p-2 w-full"
+                v-model="currentData.name"
                 placeholder="請輸入商品名稱..."
             /></label>
             <div>
               <p>
-                <label for="">* 商品系列 </label>
+                <label for="type">* 商品系列 </label>
                 <button
                   type="button"
                   class="text-brand-01 font-bold text-3xl float-right opacity-60 hover:opacity-100"
+                  v-if="!isNewTypeOpen"
+                  @click="() => (isNewTypeOpen = true)"
                 >
                   +
                 </button>
                 <button
                   type="button"
                   class="text-brand-01 font-bold text-[35px] leading-8 float-right opacity-60 hover:opacity-100"
+                  v-else
+                  @click="() => (isNewTypeOpen = false)"
                 >
                   -
                 </button>
               </p>
-              <p class="bg-brand-06 bg-opacity-40 my-2 p-3">
-                <label for=""
+              <p
+                class="bg-brand-06 bg-opacity-40 my-2 p-3"
+                v-if="isNewTypeOpen"
+              >
+                <label for="newType"
                   >新增系列
                   <input
+                    name="newType"
+                    id="newType"
                     type="text"
                     class="border border-gray-01 p-2 w-full mt-3"
+                    v-model="newTypeInput"
                   />
                 </label>
                 <span class="text-end block">
-                  <button type="button" class="btn-outline py-1 mt-3 mr-3">
+                  <button
+                    type="button"
+                    class="btn-outline py-1 mt-3 mr-3"
+                    @click="() => (isNewTypeOpen = false)"
+                  >
                     取消
                   </button>
-                  <button type="button" class="btn-outline py-1 mt-3">
+                  <button
+                    type="button"
+                    class="btn-outline py-1 mt-3"
+                    @click="() => addNewType()"
+                  >
                     新增
                   </button>
                 </span>
               </p>
-              <select name="" id="" class="border border-gray-01 p-2 w-full">
+              <select
+                name="type"
+                id="type"
+                class="border border-gray-01 p-2 w-full"
+                v-model="currentData.type"
+              >
                 <option value="" selected disabled>請選擇商品系列</option>
-                <option value="">高山烏龍</option>
-                <option value="">高山烏龍</option>
-                <option value="">高山烏龍</option>
+                <option
+                  :value="type"
+                  v-for="(typeNumber, type) in productTypes"
+                  :key="type + typeNumber"
+                >
+                  {{ type }}
+                </option>
               </select>
             </div>
-
-            <label for="" class="grid"
-              >* 商品分類
-              <select name="" id="" class="border border-gray-01 p-2 w-full">
+            <div>
+              <p>
+                <label for="group">* 商品分類 </label>
+                <button
+                  type="button"
+                  class="text-brand-01 font-bold text-3xl float-right opacity-60 hover:opacity-100"
+                  v-if="!isNewGroupOpen"
+                  @click="() => (isNewGroupOpen = true)"
+                >
+                  +
+                </button>
+                <button
+                  type="button"
+                  class="text-brand-01 font-bold text-[35px] leading-8 float-right opacity-60 hover:opacity-100"
+                  v-else
+                  @click="() => (isNewGroupOpen = false)"
+                >
+                  -
+                </button>
+              </p>
+              <p
+                class="bg-brand-06 bg-opacity-40 my-2 p-3"
+                v-if="isNewGroupOpen"
+              >
+                <label for="newGroup"
+                  >新增分類
+                  <input
+                    name="newGroup"
+                    id="newGroup"
+                    type="text"
+                    class="border border-gray-01 p-2 w-full mt-3"
+                    v-model="newGroupInput"
+                  />
+                </label>
+                <span class="text-end block">
+                  <button
+                    type="button"
+                    class="btn-outline py-1 mt-3 mr-3"
+                    @click="() => (isNewGroupOpen = false)"
+                  >
+                    取消
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-outline py-1 mt-3"
+                    @click="addNewGroup"
+                  >
+                    新增
+                  </button>
+                </span>
+              </p>
+              <select
+                name="group"
+                id="group"
+                class="border border-gray-01 p-2 w-full"
+                v-model="currentData.group"
+              >
                 <option value="" selected disabled>請選擇商品分類</option>
-                <option value="">茶葉</option>
-                <option value="">茶壺</option>
-                <option value="">茶罐</option>
-                <option value="">茶具組</option>
-                <option value="">品茶小物</option>
+                <option
+                  :value="type"
+                  v-for="(typeNumber, type) in productGroups"
+                  :key="type + typeNumber"
+                >
+                  {{ type }}
+                </option>
               </select>
-            </label>
-
+            </div>
             <div class="grid lg:grid-cols-2 lg:gap-7 gap-3">
-              <label for="" class="grid"
+              <label for="price" class="grid"
                 >* 價格<input
                   type="number"
-                  name=""
-                  id=""
+                  name="price"
+                  id="price"
                   class="border border-gray-01 p-2 w-full"
                   placeholder="請輸入價格..."
+                  min="1"
+                  onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
+                  v-model.number="currentData.price"
               /></label>
-              <label for="" class="grid"
+              <label for="totalNumber" class="grid"
                 >* 數量<input
                   type="number"
-                  name=""
-                  id=""
+                  name="totalNumber"
+                  id="totalNumber"
                   class="border border-gray-01 p-2 w-full"
                   placeholder="請輸銷售數量..."
+                  v-model.number="currentData.totalNumber"
+                  min="1"
+                  onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
               /></label>
             </div>
             <div>
-              <p class="mb-3">
-                * 商品介紹
-                <!-- <button
-                  type="button"
-                  class="text-brand-01 opacity-80 font-bold text-3xl float-right hover:text-brand-02"
-                >
-                  +
-                </button> -->
-              </p>
+              <p class="mb-3">* 商品介紹</p>
               <ckeditor
                 :editor="editor"
-                v-model="editorData"
+                v-model="currentData.content"
                 :config="editorConfig"
               ></ckeditor>
-              <!-- <ul class="list-decimal list-inside introduce grid gap-5">
-                <li>
-                  <textarea
-                    name=""
-                    id=""
-                    placeholder="請輸入商品介紹內容..."
-                    class="border-b border-gray-01 w-[95%] overflow-auto"
-                  ></textarea>
-                </li>
-                <li>
-                  <textarea
-                    name=""
-                    id=""
-                    class="border-b border-gray-01 w-[95%] overflow-auto"
-                  ></textarea>
-                </li>
-              </ul> -->
             </div>
           </div>
         </div>
@@ -210,29 +273,153 @@
 import DialogModal from './DialogModal.vue'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import { mapState, mapActions } from 'pinia'
-import { updatedImgStore } from '../stores/index'
+import { updatedImgStore, productsStore } from '../stores/index'
+const { VITE_BASEURL } = import.meta.env
 export default {
+  props: {
+    isNew: {
+      type: Boolean,
+      default: false
+    },
+    productData: {
+      type: Object
+    },
+    productGroups: {
+      type: Object,
+      required: true
+    },
+    productTypes: {
+      type: Object,
+      required: true
+    }
+  },
   data: () => ({
     imageStyle: '雲端圖片',
-    productDate: {
+    currentData: {
       coverUrl: '',
-      title: ''
+      type: '',
+      group: '',
+      name: '',
+      price: 100,
+      totalNumber: 10,
+      content: '',
+      isDiscount: false
     },
     editor: ClassicEditor,
-    editorData: '<p>Hello world!!</p>',
     editorConfig: {
       placeholder: '請輸入商品介紹...',
       toolbar: ['bold', 'italic', 'blockQuote', '|', 'undo', 'redo']
     },
-    isImgurLogin: sessionStorage.getItem('first_token') !== 'null'
+    isImgurLogin: sessionStorage.getItem('first_token') !== 'null',
+    isNewTypeOpen: false,
+    isNewGroupOpen: false,
+    newTypeInput: '',
+    newGroupInput: ''
   }),
   computed: {
     ...mapState(updatedImgStore, ['imgUrl'])
   },
   methods: {
     ...mapActions(updatedImgStore, ['postFinal']),
-    showEditor() {
-      console.log(this.editorData)
+    ...mapActions(productsStore, [
+      'getAllProducts',
+      'pushNewType',
+      'pushNewGroup'
+    ]),
+    finishFn() {
+      const { type, group, name, price, totalNumber, content, isDiscount } =
+        this.currentData
+      if (this.imageStyle === '本地圖片') {
+        this.currentData.coverUrl = this.imgUrl
+      }
+      // 簡單驗證
+      if (this.imageStyle === '本地圖片' && !this.imgUrl) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '還未上傳本地圖片',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+      if (!type || !group || !name || !content) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '內容未填寫完成',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+      if (price < 1 || totalNumber < 1) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '價格及數量不可小於 1',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+      if (this.isNew) {
+        // 新增
+        this.$http
+          .post(`${VITE_BASEURL}/products`, this.currentData)
+          .then(() => {
+            this.$swal.fire({
+              icon: 'success',
+              title: '商品新增成功',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            this.getAllProducts()
+            this.currentData = this.$options.data().currentData
+          })
+      } else {
+        // 編輯
+        console.log(this.currentData)
+        this.$http
+          .patch(
+            `${VITE_BASEURL}/products/${this.currentData.id}`,
+            this.currentData
+          )
+          .then(() => {
+            this.$swal.fire({
+              icon: 'success',
+              title: '商品編輯成功',
+              showConfirmButton: false,
+              timer: 1500
+            })
+            this.getAllProducts()
+          })
+      }
+    },
+    cancelFn() {
+      if (this.isNew) {
+        this.currentData = this.$options.data().currentData
+      } else {
+        this.currentData = { ...this.productData }
+      }
+    },
+    addNewType() {
+      this.currentData.type = this.newTypeInput
+      this.isNewTypeOpen = false
+      if (!this.productTypes[this.newTypeInput]) {
+        this.pushNewType(this.newTypeInput)
+      }
+      this.newTypeInput = ''
+    },
+    addNewGroup() {
+      this.currentData.group = this.newGroupInput
+      this.isNewGroupOpen = false
+      if (!this.productGroups[this.newGroupInput]) {
+        this.pushNewGroup(this.newGroupInput)
+      }
+      this.newGroupInput = ''
+    }
+  },
+  watch: {
+    productData() {
+      this.currentData = { ...this.productData }
     }
   },
   components: {

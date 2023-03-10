@@ -1,21 +1,27 @@
 <template>
   <div class="admin-wrap min-h-[50vh]">
     <h1 class="text-3xl font-black font-self text-brand-02">數據分析</h1>
-    <p>課程分析</p>
-    <div class="grid grid-cols-2">
-      <div>
-        <Doughnut :data="doughnut.data" :options="doughnut.options" />
-      </div>
-      <table>
-        <caption>
-          預約人數
-        </caption>
-      </table>
+    <h2 class="text-xl font-black font-self text-brand-02 mt-4">課程分析</h2>
+    <div>
+      <Doughnut :data="doughnut.data" :options="doughnut.options" />
     </div>
-    <div class="w-full h-96">
-      <chartLine :data="line.data" :options="line.options" />
-    </div>
-    <p>商品分析</p>
+    <table
+      class="w-full my-5 divide-y divide-gray-01 border border-gray-01 table-fixed"
+    >
+      <thead>
+        <tr class="bg-brand-01 bg-opacity-50 text-xl">
+          <th class="py-2">課程</th>
+          <th>總預約人數</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white bg-opacity-30 text-center divide-y divide-gray-01">
+        <tr class="hover:bg-gray-03 hover:bg-opacity-30">
+          <td class="py-3">課程名1</td>
+          <td>3</td>
+        </tr>
+      </tbody>
+    </table>
+    <h2 class="text-xl font-black font-self text-brand-02 my-4">商品分析</h2>
     <div class="w-full h-96">
       <Bar :data="bar.data" :options="bar.options" />
     </div>
@@ -34,7 +40,9 @@ import {
   PointElement,
   LineElement
 } from 'chart.js'
-import { Doughnut, Bar, Line } from 'vue-chartjs'
+import { Doughnut, Bar } from 'vue-chartjs'
+import { mapState, mapActions } from 'pinia'
+import { coursesStore, productsStore, ordersStore } from '../../stores/index.js'
 ChartJS.register(
   ArcElement,
   BarElement,
@@ -48,11 +56,6 @@ ChartJS.register(
 )
 export default {
   name: 'App',
-  components: {
-    Doughnut,
-    Bar,
-    chartLine: Line
-  },
   data() {
     return {
       doughnut: {
@@ -76,7 +79,7 @@ export default {
             },
             legend: {
               display: true,
-              position: 'right'
+              position: 'bottom'
             }
           }
         }
@@ -108,49 +111,12 @@ export default {
             }
           }
         }
-      },
-      line: {
-        data: {
-          labels: [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July'
-          ],
-          datasets: [
-            {
-              label: 'Data One',
-              backgroundColor: 'red',
-              data: [40, 39, 10, 40, 39, 80, 40]
-            },
-            {
-              label: 'Data One',
-              backgroundColor: '#000',
-              borderColor: '#000',
-              data: [42, 1, 13, 20, 49, 10, 50]
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: {
-            title: {
-              display: true,
-              text: '講師收益',
-              position: 'bottom'
-            },
-            legend: {
-              display: true,
-              position: 'bottom'
-            }
-          }
-        }
       }
     }
+  },
+  components: {
+    Doughnut,
+    Bar
   }
 }
 </script>

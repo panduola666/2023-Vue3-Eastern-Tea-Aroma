@@ -1,12 +1,12 @@
 <template>
   <div>
-    <DialogModal :finish-fn="finishFn">
+    <DialogModal :finish-fn="finishFn" :cancel-fn="cancelFn">
       <template #modal-btn>
         <slot name="btn-content">按鈕</slot>
       </template>
       <template #modal-header>
         <h2 class="text-xl font-black font-self text-brand-02">
-          新增活動/編輯活動
+          {{ isNew ? '新增活動' : activity.title }}
         </h2>
       </template>
       <template #modal-body>
@@ -169,6 +169,15 @@ export default {
       if (this.imageStyle === '本地圖片') {
         this.activitiesData.coverUrl = this.imgUrl
       }
+      if (this.imageStyle === '本地圖片' && !this.imgUrl) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '還未上傳本地圖片',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
       if (!content | !title | !this.activitiesData.coverUrl) {
         this.$swal.fire({
           icon: 'error',
@@ -181,17 +190,17 @@ export default {
       if (this.isNew) {
         // 新增
         this.activitiesData.created = new Date().getTime()
-        console.log('新增')
         this.$http
           .post(`${VITE_BASEURL}/activities`, this.activitiesData)
           .then(() => {
             this.$swal.fire({
               icon: 'success',
-              title: '新增成功',
+              title: '活動新增成功',
               showConfirmButton: false,
               timer: 1500
             })
             this.getAllActivitiesData()
+            this.activitiesData = this.$options.data().activitiesData
           })
       } else {
         // 編輯
@@ -210,13 +219,16 @@ export default {
             this.getAllActivitiesData()
           })
       }
+    },
+    cancelFn() {
+      this.activitiesData = this.$options.data().activitiesData
     }
   },
   watch: {
     activity: {
       handler() {
         if (this.isNew) return
-        this.activitiesData = this.activity
+        this.activitiesData = { ...this.activity }
       },
       deep: true
     }

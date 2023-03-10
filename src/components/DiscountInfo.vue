@@ -7,7 +7,11 @@
     <span class="text-2xl font-black">{{
       discountData.type === 'money'
         ? `折扣 ${discountData.scale} 元`
-        : `${discountData.scale * 100} 折`
+        : `${
+            (discountData.scale * 100) % 10 === 0
+              ? discountData.scale * 10
+              : discountData.scale * 100
+          } 折`
     }}</span
     >，優惠碼：{{ discountData.code }}
   </p>

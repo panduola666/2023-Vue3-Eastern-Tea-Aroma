@@ -86,14 +86,14 @@
         </li>
       </ul>
       <div class="flex items-center">
-        <div class="relative group mr-8 mb-[10px] mt-[18px]">
+        <div class="relative group lg:mr-8 mr-3">
           <img
             src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/Property%201=account.png?raw=true"
             alt="會員"
             class="object-contain h-9 max-w-[30px]"
           />
           <ul
-            class="absolute bg-white min-w-[216px] button-0 group-hover:block hidden text-gray-01 z-10 shadow-lg"
+            class="absolute bg-white min-w-[216px] button-0 -translate-x-1/4 md:-translate-x-0 group-hover:block hidden text-gray-01 z-10 shadow-lg"
           >
             <li>
               <router-link
@@ -150,10 +150,7 @@
             </li>
           </ul>
         </div>
-        <router-link
-          to="/"
-          type="button"
-          class="btn-outline mb-[10px] mt-[18px]"
+        <router-link to="/" type="button" class="btn-outline"
           >退出後台</router-link
         >
       </div>

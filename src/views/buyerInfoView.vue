@@ -291,7 +291,8 @@ export default {
         cart: orderCart,
         trackingNumber: '',
         created: new Date().getTime(),
-        finish: false
+        finish: false,
+        isCancel: false
       }
       cart.products.length = 0
       cart.courses.length = 0

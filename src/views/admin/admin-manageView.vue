@@ -1,7 +1,7 @@
 <template>
   <main class="admin-wrap">
     <h1 class="text-3xl font-black font-self text-brand-02 mb-5">項目總管理</h1>
-    <div class="grid grid-cols-5">
+    <div class="grid lg:grid-cols-5 grid-cols-1">
       <ul class="text-center text-2xl font-black font-self text-brand-02">
         <li
           v-for="(item, index) in ['商品', '訂單', '活動']"

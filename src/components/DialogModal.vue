@@ -87,8 +87,10 @@ import {
 export default {
   props: {
     finishFn: {
-      type: Function,
-      required: true
+      type: Function
+    },
+    cancelFn: {
+      type: Function
     }
   },
   data() {
@@ -98,11 +100,12 @@ export default {
   },
   methods: {
     finish() {
-      this.closeModal()
-      this.finishFn()
+      this.isOpen = false
+      this.finishFn && this.finishFn()
     },
     closeModal() {
       this.isOpen = false
+      this.cancelFn && this.cancelFn()
     },
     openModal() {
       this.isOpen = true

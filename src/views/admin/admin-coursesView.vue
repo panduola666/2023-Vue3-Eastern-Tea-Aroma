@@ -1,7 +1,7 @@
 <template>
   <main class="admin-wrap">
     <h1 class="text-3xl font-black font-self text-brand-02">課程列表</h1>
-    <div class="flex justify-end gap-5 mb-5">
+    <div class="flex flex-col lg:flex-row lg:justify-end lg:gap-5 gap-2 my-5">
       <button
         type="button"
         class="btn-outline"
@@ -21,14 +21,19 @@
       <p class="flex items-center text-sm text-gray-02" v-else>
         已取得 imgur 驗證,允許本地上傳圖片
       </p>
-      <button type="button" class="btn-outline" @click="allDiscount">
+      <button
+        type="button"
+        class="btn-outline"
+        @click="allDiscount"
+        :disabled="isAllDiscount"
+      >
         全部套用
       </button>
       <PostCourseModal :is-new="true">
         <template #btn-content>
           <button
             typeof="button"
-            class="btn-primary"
+            class="btn-primary w-full"
             @click="() => getCurrent(0, true)"
           >
             開新課程
@@ -86,13 +91,19 @@
                 <p class="text-xl text-end">$ {{ toThousand(course.price) }}</p>
               </template>
               <template #card-footer>
+                {{ date.isDiscount }}
                 <div
                   class="flex flex-grow gap-3 flex-col md:flex-row justify-between"
                 >
                   <DiscountToggle
                     v-model:is-discount="date.isDiscount"
                     :id="date.id"
-                    :which="'courseDates'"
+                    which="courseDates"
+                    :price="
+                      discountData.type === 'money'
+                        ? course.price - discountData.scale
+                        : Math.round(course.price * discountData.scale)
+                    "
                     class="justify-end my-3 md:my-0 md:justify-start"
                   ></DiscountToggle>
                   <div class="flex flex-col-reverse md:flex-row gap-3">
@@ -177,7 +188,8 @@
                   <DiscountToggle
                     v-model:is-discount="date.isDiscount"
                     :id="date.id"
-                    :which="'courseDates'"
+                    which="courseDates"
+                    :price="course.price"
                     class="justify-end my-3 md:my-0 md:justify-start"
                   ></DiscountToggle>
                   <div class="flex flex-col-reverse md:flex-row gap-3">
@@ -225,7 +237,8 @@ import {
   userStore,
   ordersStore,
   toThousand,
-  updatedImgStore
+  updatedImgStore,
+  discountStore
 } from '../../stores/index.js'
 const { VITE_BASEURL } = import.meta.env
 
@@ -241,7 +254,21 @@ export default {
   computed: {
     ...mapState(coursesStore, ['courses']),
     ...mapState(userStore, ['user', 'isLogin']),
-    ...mapState(ordersStore, ['orders'])
+    ...mapState(ordersStore, ['orders']),
+    ...mapState(discountStore, ['discountData']),
+    isAllDiscount() {
+      let isDiscountNumber = 0
+      let dateNumber = 0
+      this.courses.forEach((course) => {
+        course.courseDates.forEach((date) => {
+          dateNumber++
+          if (date.isDiscount) {
+            isDiscountNumber++
+          }
+        })
+      })
+      return isDiscountNumber === dateNumber
+    }
   },
   methods: {
     toThousand,
@@ -249,6 +276,7 @@ export default {
     ...mapActions(coursesStore, ['getCoursesData', 'getCurrent']),
     ...mapActions(userStore, ['getUserData', 'checkLogin']),
     ...mapActions(ordersStore, ['getOrdersData']),
+    ...mapActions(discountStore, ['getDiscountData']),
     score(scoreData) {
       const total = scoreData.reduce((num, item) => (num += item.score), 0)
       const avg = Math.round((total / scoreData.length) * 10) / 10
@@ -258,6 +286,20 @@ export default {
       this.courses.forEach((course) => {
         course.courseDates.forEach((date) => {
           if (date.isDiscount) return
+          if (
+            (this.discountData.type === 'money'
+              ? course.price - this.discountData.scale
+              : Math.round(course.price * this.discountData.scale)) <= 0
+          ) {
+            this.$swal.fire({
+              icon: 'error',
+              title: '內含不可折扣商品,無法全部套用',
+              showConfirmButton: false,
+              timer: 1500,
+              allowOutsideClick: false
+            })
+            return
+          }
           this.$http
             .patch(`${VITE_BASEURL}/courseDates/${date.id}`, {
               isDiscount: true
@@ -333,6 +375,7 @@ export default {
     this.checkLogin()
     this.getCoursesData()
     this.getOrdersData()
+    this.getDiscountData()
   },
   components: {
     CoursesCard,

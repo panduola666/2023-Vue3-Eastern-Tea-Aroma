@@ -1,6 +1,6 @@
 <template>
   <main class="wrap">
-    <teleport to="title"> - {{ currentCourse.course?.title }}</teleport>
+    <!-- <teleport to="title"> - {{ currentCourse.course?.title }}</teleport> -->
     <div class="flex justify-end mb-2">
       <router-link
         to="/courses"

@@ -1,8 +1,6 @@
 import { defineStore } from 'pinia'
-import { coursesStore, productsStore } from './index.js'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-const { VITE_BASEURL } = import.meta.env
 export default defineStore('updatedImgStore', {
   state: () => ({
     first_token: '',

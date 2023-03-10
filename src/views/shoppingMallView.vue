@@ -1,6 +1,6 @@
 <template>
   <main class="wrap grid lg:grid-cols-5 gap-4">
-    <teleport to="title"> - 茶藝用品</teleport>
+    <!-- <teleport to="title"> - 茶藝用品</teleport> -->
     <ol
       class="flex flex-wrap lg:flex-col bg-brand-06 text-brand-05 font-black font-self text-xl h-max"
     >
@@ -23,7 +23,7 @@
       </li>
       <li
         class="relative"
-        v-for="(item, index) in productTypes"
+        v-for="(item, index) in productGroups"
         :key="item + index"
       >
         <input
@@ -124,7 +124,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(productsStore, ['products', 'allProducts', 'productTypes']),
+    ...mapState(productsStore, ['products', 'allProducts', 'productGroups']),
     currentProducts() {
       return this.allProducts.filter((product) => {
         if (this.currentChoose) {

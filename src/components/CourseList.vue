@@ -55,7 +55,7 @@
               class="h-full w-full object-cover group-hover:scale-125 transition-all duration-[1.5s]"
             />
             <h1
-              class="absolute bg-[#003416] bg-opacity-60 text-white text-2xl leading-7 font-self py-4 px-2 truncate bottom-0 left-0 right-0 z-10"
+              class="absolute bg-[#003416] bg-opacity-60 text-white text-2xl leading-7 font-self py-4 px-2 truncate bottom-0 w-full z-10"
             >
               {{ course.title }}
             </h1>

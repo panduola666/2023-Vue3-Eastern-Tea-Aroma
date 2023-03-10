@@ -37,7 +37,7 @@
         </div>
       </div>
     </section>
-    <ul class="grid lg:grid-cols-3 lg:gap-6 gap-4">
+    <ul class="grid lg:grid-cols-3 grid-cols-1 lg:gap-6 gap-4">
       <template v-for="(activity, index) in activitiesData" :key="activity.id">
         <li
           class="bg-white hover:shadow-[4px_16px_30px_rgba(0,0,0,.1)] cursor-pointer"
@@ -54,19 +54,11 @@
                 class="absolute text-white lg:py-2 py-1 lg:px-3 px-2 lg:text-xl text-base lg:leading-6 leading-5 font-medium bg-brand-01 top-0 lg:left-[8%] md:left-[2%] left-[3%] -translate-y-1/2"
                 >{{ activity.type }}</span
               >
-              <section
-                class="flex items-center justify-between lg:pb-4 pb-3 border-b-2 border-line"
+              <h1
+                class="lg:text-[28px] text-2xl lg:leading-8 leading-7 font-black font-self text-brand-05 lg:pb-4 pb-3 border-b-2 border-line truncate"
               >
-                <h1
-                  class="lg:text-[28px] text-2xl lg:leading-8 leading-7 font-black font-self text-brand-05 truncate"
-                >
-                  {{ activity.title }}
-                </h1>
-                <span
-                  class="lg:text-xl text-base lg:leading-[30px] text-brand-04 whitespace-nowrap"
-                  >{{ $date(activity.created).format('YYYY-MM-DD') }}</span
-                >
-              </section>
+                {{ activity.title }}
+              </h1>
               <article
                 class="lg:h-[120px] h-[72px] overflow-hidden lg:text-xl text-base lg:leading-[30px] text-gray-02 lg:mt-4 mt-3 lg:mb-6 mb-4"
                 v-html="activity.content"

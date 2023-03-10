@@ -96,7 +96,7 @@
           v-if="choose.includes('茶藝用品')"
           @click="() => $emit('update:open', false)"
         >
-          <li v-for="(item, index) in productTypes" :key="`前往搜尋${index}`">
+          <li v-for="(item, index) in productGroups" :key="`前往搜尋${index}`">
             <router-link
               :to="`/shoppingMall?page=1&search=${index}`"
               class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
@@ -105,11 +105,11 @@
           </li>
         </ul>
       </li>
-      <li class="flex flex-col">
+      <li class="flex flex-col" v-if="isLogin">
         <p
           class="p-4 flex justify-between text-brand-02 hover:bg-brand-03 hover:bg-opacity-20 cursor-pointer"
           :class="{ 'more-active': choose.includes('會員中心') }"
-          @click="toggleSelected('會員中心')"
+          @click="() => toggleSelected('會員中心')"
         >
           會員中心
           <span class="relative">
@@ -135,7 +135,7 @@
         </p>
         <ul
           v-if="choose.includes('會員中心')"
-          @click="$emit('update:open', false)"
+          @click="() => $emit('update:open', false)"
         >
           <li>
             <router-link
@@ -158,7 +158,7 @@
               >訂單詳情</router-link
             >
           </li>
-          <li>
+          <li v-if="user.isAdmin">
             <router-link
               to="/admin"
               class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
@@ -170,24 +170,45 @@
     </ul>
     <div class="mt-8">
       <router-link
-        to="/login"
-        class="btn-primary xl:text-xl leading-6 font-medium text-base block"
-        @click="$emit('update:open', false)"
-        >登入/註冊</router-link
-      >
-      <router-link
         to="/"
         class="block p-4 w-full text-gray-02 text-center hover:bg-brand-03 hover:bg-opacity-20 cursor-pointer"
-        @click="$emit('update:open', false)"
+        @click="() => moreNavSignOut()"
+        v-if="isLogin"
       >
         登出
       </router-link>
+      <router-link
+        to="/login"
+        class="btn-primary xl:text-xl leading-6 font-medium text-base block"
+        @click="() => $emit('update:open', false)"
+        v-else
+        >登入/註冊</router-link
+      >
     </div>
   </div>
 </template>
 <script>
 export default {
-  props: ['open', 'coursesList', 'productTypes'],
+  props: {
+    open: {
+      type: Boolean
+    },
+    coursesList: {
+      type: Object
+    },
+    productGroups: {
+      type: Object
+    },
+    user: {
+      type: Object
+    },
+    signOut: {
+      type: Function
+    },
+    isLogin: {
+      type: Boolean
+    }
+  },
   data() {
     return {
       choose: []
@@ -203,6 +224,10 @@ export default {
     removeItem(str) {
       const index = this.choose.indexOf(str)
       this.choose.splice(index, 1)
+    },
+    moreNavSignOut() {
+      this.$emit('update:open', false)
+      this.signOut()
     }
   }
 }
@@ -212,6 +237,6 @@ export default {
   background-color: rgba(162, 190, 149, 0.2);
 }
 .bg-bgImage {
-  background-image: url(../assets/Background.png);
+  background-image: url('https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/Background.png?raw=true');
 }
 </style>
