@@ -20,7 +20,7 @@
       <button
         type="button"
         class="absolute bottom-10 -translate-x-1/2 btn-primary text-xl text-gray-01 duration-500 bg-white bg-opacity-30 hover:bg-brand-01 hover:bg-opacity-70"
-        @click="inputReset('changeImg')"
+        @click="() => inputReset('changeImg')"
       >
         {{ imgChange ? '登入' : '註冊' }}
       </button>
@@ -28,7 +28,7 @@
 
     <form
       class="flex flex-col font-self text-2xl text-gray-01 gap-5 w-full mb-10 lg:mb-0"
-      @submit.prevent="inputReset('register')"
+      @submit.prevent="() => inputReset('register')"
     >
       <h1 class="text-3xl text-brand-02 text-center">註冊</h1>
       <div class="flex flex-col">
@@ -76,7 +76,7 @@
     </form>
     <form
       class="flex flex-col font-self text-2xl text-gray-01 gap-5 w-full"
-      @submit.prevent="inputReset('login')"
+      @submit.prevent="() => inputReset('login')"
     >
       <h1 class="text-3xl text-brand-02 text-center">登入</h1>
       <div class="flex flex-col">
@@ -206,6 +206,7 @@ export default {
         this.login(this.userInput, this.identifyCode, this.AddIdentifyLetter)
       } else if (option === 'register') {
         this.register(this.userInput)
+        this.imgChange = false
       } else if (option === 'changeImg') {
         this.imgChange = !this.imgChange
       }

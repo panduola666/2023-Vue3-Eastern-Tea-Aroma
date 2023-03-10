@@ -149,7 +149,6 @@ export default defineStore('userDataStore', {
         avatarId: 3,
         tel: '',
         isAdmin: false,
-        level: 1,
         shoppingCart: {
           discount: '',
           cart: {
@@ -160,16 +159,12 @@ export default defineStore('userDataStore', {
       }
       axios
         .post(`${VITE_BASEURL}/users`, data)
-        .then((res) => {
-          return Swal.fire({
+        .then(() => {
+          Swal.fire({
             icon: 'success',
             title: '註冊成功',
             ...swalColor
           })
-        })
-        .then(() => {
-          this.isLogin = true
-          router.push('/user')
         })
         .catch((err) => {
           if (err.response.data === 'Email already exists') {

@@ -42,9 +42,9 @@
         </template>
       </PostCourseModal>
     </div>
-    <ul class="grid gap-5">
+    <ul class="grid gap-5" v-if="myCourses.length">
       <template
-        v-for="course in courses.sort((a, b) => b.id - a.id)"
+        v-for="course in myCourses.sort((a, b) => b.id - a.id)"
         :key="course.id + course.title"
       >
         <template
@@ -58,7 +58,7 @@
             >
               未開放
             </div>
-            <div is="vue:CoursesCard" v-if="date.userId === user.id">
+            <div is="vue:CoursesCard">
               <template #image>
                 <img
                   :src="course.coverUrl"
@@ -137,7 +137,7 @@
           </li>
         </template>
       </template>
-      <template v-for="course in courses" :key="course.id + course.title">
+      <template v-for="course in myCourses" :key="course.id + course.title">
         <template
           v-for="date in course.courseDates"
           :key="`課程編號${date.courseId}的第${date.id}堂`"
@@ -224,6 +224,7 @@
         </template>
       </template>
     </ul>
+    <p v-else class="flex items-center justify-around text-3xl h-[35vh]">無販售課程</p>
   </main>
 </template>
 <script>
@@ -268,6 +269,15 @@ export default {
         })
       })
       return isDiscountNumber === dateNumber
+    },
+    myCourses() {
+      const arr = []
+      this.courses.forEach((course) => {
+        if (course.userId === +sessionStorage.getItem('userId')) {
+          arr.push(course)
+        }
+      })
+      return arr
     }
   },
   methods: {
@@ -376,6 +386,7 @@ export default {
     this.getCoursesData()
     this.getOrdersData()
     this.getDiscountData()
+    console.log(this.courses)
   },
   components: {
     CoursesCard,

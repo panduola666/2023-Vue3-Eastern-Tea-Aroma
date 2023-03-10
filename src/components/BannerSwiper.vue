@@ -96,7 +96,7 @@
       <swiper-slide v-if="index === 0">
         <div class="relative h-[520px] w-full">
           <img
-            :src="activity.coverUrl"
+            src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/BANNER-3.png?raw=true"
             :alt="activity.title"
             class="object-cover w-full h-full"
           />

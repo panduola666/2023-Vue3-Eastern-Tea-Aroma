@@ -11,7 +11,16 @@
         "discount": "",
         "cart": {
           "products": [],
-          "courses": []
+          "courses": [
+            {
+              "courseDateId": 2,
+              "courseId": 1,
+              "price": 3000,
+              "number": 2,
+              "totalPrice": 6000,
+              "isDiscount": true
+            }
+          ]
         }
       },
       "id": 1
@@ -40,29 +49,13 @@
         }
       },
       "id": 2
-    },
-    {
-      "email": "panduola666@gmail.com",
-      "password": "$2a$10$T1/adyg9e7BK14xB2/yPJuEAm0eWwB17xV0hYLqunnIwhWOBBWty2",
-      "name": "圈圈",
-      "avatarId": 3,
-      "tel": "",
-      "isAdmin": false,
-      "shoppingCart": {
-        "discount": "",
-        "cart": {
-          "products": [],
-          "courses": []
-        }
-      },
-      "id": 3
     }
   ],
   "discount": {
     "code": "accac",
-    "type": "money",
-    "scale": 20,
-    "end": 1678463999000
+    "type": "percentage",
+    "scale": "0.95",
+    "end": 1678550399000
   },
   "courses": [
     {

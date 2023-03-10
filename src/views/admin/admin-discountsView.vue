@@ -58,7 +58,7 @@
         </tr>
         <template v-else>
           <!-- 產品 -->
-          <template v-for="(product, index) in allProducts" :key="index">
+          <template v-for="product in allProducts" :key="product.id">
             <tr class="hover:bg-gray-03 hover:bg-opacity-30">
               <td class="p-3">{{ product.type }}</td>
               <td>{{ product.name }}</td>
@@ -104,7 +104,7 @@
             </tr>
           </template>
           <!-- 課程 -->
-          <template v-for="course in courses" :key="course.id + course.title">
+          <template v-for="course in myCourses" :key="course.id + course.title">
             <template
               v-for="date in course.courseDates"
               :key="date.id + date.courseId"
@@ -189,6 +189,15 @@ export default {
       } else {
         return this.discountData.scale * 100
       }
+    },
+    myCourses() {
+      const arr = []
+      this.courses.forEach((course) => {
+        if (course.userId === +sessionStorage.getItem('userId')) {
+          arr.push(course)
+        }
+      })
+      return arr
     }
   },
   methods: {
