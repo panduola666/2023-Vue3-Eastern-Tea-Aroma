@@ -63,7 +63,7 @@
               <td class="p-3">{{ product.type }}</td>
               <td>{{ product.name }}</td>
               <td :class="{ 'bg-brand-03 bg-opacity-30': !product.isDiscount }">
-                {{ product.price }}
+                {{ toThousand(product.price) }}
               </td>
               <td
                 :class="{
@@ -121,7 +121,7 @@
                   }})
                 </td>
                 <td :class="{ 'bg-brand-03 bg-opacity-30': !date.isDiscount }">
-                  {{ course.price }}
+                  {{ toThousand(course.price) }}
                 </td>
                 <td
                   :class="{
@@ -174,7 +174,8 @@ import { mapState, mapActions } from 'pinia'
 import {
   productsStore,
   coursesStore,
-  discountStore
+  discountStore,
+  toThousand
 } from '../../stores/index.js'
 const { VITE_BASEURL } = import.meta.env
 
@@ -204,6 +205,7 @@ export default {
     ...mapActions(productsStore, ['getAllProducts']),
     ...mapActions(coursesStore, ['getCoursesData']),
     ...mapActions(discountStore, ['getDiscountData']),
+    toThousand,
     patchDiscountState(whitchAPI, data, price) {
       const { id } = data
       if (

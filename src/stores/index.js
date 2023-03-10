@@ -6,8 +6,9 @@ import ordersStore from './ordersStore.js'
 import productsStore from './productsStore.js'
 import activitiesStore from './activitiesStore.js'
 import vueLoadingStore from './vueLoadingStore.js'
-const toThousand = (money) =>
-  money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+const toThousand = (money) => {
+  return money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+}
 
 export {
   userStore,

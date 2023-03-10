@@ -1,6 +1,5 @@
 <template>
-  <section>
-    <h1></h1>
+  <div>
     <label for="orderSearch" class="mt-3">訂單查詢</label>
     <div class="relative">
       <input
@@ -117,12 +116,12 @@
         </button>
       </li>
     </ul>
-  </section>
+  </div>
 </template>
 <script>
 import PostOrdersModal from '../components/PostOrdersModal.vue'
 import { mapState, mapActions } from 'pinia'
-import { ordersStore } from '../stores/index.js'
+import { ordersStore, toThousand } from '../stores/index.js'
 const { VITE_BASEURL } = import.meta.env
 
 export default {
@@ -217,7 +216,7 @@ export default {
         }
         return totalPrice
       }, 0)
-      return total
+      return toThousand(total)
     },
     matchOrderId() {
       this.finalOrders.length = 0

@@ -85,7 +85,7 @@
           <p>分類：{{ product.group }}</p>
           <p>系列：{{ product.type }}</p>
           <p class="flex justify-between items-center text-lg">
-            單價：$ {{ product.price }}
+            單價：$ {{ toThousand(product.price) }}
             <span class="text-sm text-gray-02"
               >剩餘：{{ product.totalNumber - sellNumber(product) }}</span
             >
@@ -124,7 +124,7 @@ import PostProductsModal from './PostProductsModal.vue'
 import CoursesCard from '../components/CoursesCard.vue'
 import DiscountToggle from './DiscountToggle.vue'
 import { mapState, mapActions } from 'pinia'
-import { productsStore, ordersStore, discountStore } from '../stores/index.js'
+import { productsStore, ordersStore, discountStore,toThousand } from '../stores/index.js'
 const { VITE_BASEURL } = import.meta.env
 export default {
   data() {
@@ -153,6 +153,7 @@ export default {
     ...mapActions(productsStore, ['getAllProducts']),
     ...mapActions(ordersStore, ['getOrdersData']),
     ...mapActions(discountStore, ['getDiscountData']),
+    toThousand,
     sellNumber(productData) {
       let sellNumber = 0
       this.orders.forEach((order) => {

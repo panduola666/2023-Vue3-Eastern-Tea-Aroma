@@ -312,7 +312,7 @@
       "discount": {
         "code": "Tea123",
         "type": "money",
-        "scale": 200
+        "scale": 20
       },
       "cart": [
         {
@@ -360,7 +360,7 @@
       "discount": {
         "code": "test123",
         "type": "money",
-        "scale": 200
+        "scale": 20
       },
       "cart": [
         {

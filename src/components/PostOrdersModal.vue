@@ -44,7 +44,7 @@
                 }}
               </td>
               <td>{{ product.number }}</td>
-              <td class="">{{ product.totalPrice }}</td>
+              <td class="">{{ toThousand(product.totalPrice) }}</td>
               <td class="font-semibold text-lg">
                 {{ productDiscount(product) }}
               </td>
@@ -58,10 +58,10 @@
           <p>原價</p>
           <p class="line-through text-gray-02">
             {{
-              orderData.cart.reduce(
+              toThousand(orderData.cart.reduce(
                 (total, product) => (total += product.totalPrice),
                 0
-              )
+              ))
             }}
           </p>
           <p>折扣碼</p>
@@ -78,9 +78,11 @@
           <h2>總計</h2>
           <p>
             {{
-              orderData.cart.reduce(
-                (total, product) => (total += product.totalPrice),
-                0
+              toThousand(
+                orderData.cart.reduce(
+                  (total, product) => (total += product.totalPrice),
+                  0
+                )
               )
             }}
           </p>
@@ -94,6 +96,7 @@
 </template>
 <script>
 import DialogModal from '../components/DialogModal.vue'
+import { toThousand } from '../stores/index.js'
 export default {
   props: {
     orderData: {
@@ -102,12 +105,13 @@ export default {
     }
   },
   methods: {
+    toThousand,
     productDiscount(product) {
       const { scale, type, code } = this.orderData.discount
       if (product.isDiscount && code) {
         return type === 'money'
-          ? product.totalPrice - scale
-          : Math.round(product.totalPrice * scale)
+          ? toThousand(product.totalPrice - scale)
+          : toThousand(Math.round(product.totalPrice * scale))
       }
       return ''
     },
@@ -123,7 +127,7 @@ export default {
         }
         return price
       }, 0)
-      return total
+      return toThousand(total)
     }
   },
   components: {

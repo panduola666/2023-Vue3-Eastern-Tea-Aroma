@@ -18,7 +18,7 @@
     git init
     git checkout -B main
     git add -A
-    git commit -m '給 input 加上 trim'
+    git commit -m '完成'
 
     # if you are deploying to https://panduola666.github.io
     # git push -f git@github.com:panduola666/panduola666.github.io.git main

@@ -21,8 +21,8 @@
             :key="courseTitle"
           >
             <td class="py-3">{{ courseTitle }}</td>
-            <td>{{ course.price }}</td>
-            <td>{{ course.number }}</td>
+            <td>{{ toThousand(course.price) }}</td>
+            <td>{{ toThousand(course.number) }}</td>
           </tr>
         </template>
         <tr v-else>
@@ -48,7 +48,12 @@ import {
 } from 'chart.js'
 import { Bar } from 'vue-chartjs'
 import { mapState, mapActions } from 'pinia'
-import { coursesStore, productsStore, ordersStore } from '../../stores/index.js'
+import {
+  coursesStore,
+  productsStore,
+  ordersStore,
+  toThousand
+} from '../../stores/index.js'
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend, Title)
 export default {
   name: 'App',
@@ -95,7 +100,8 @@ export default {
   methods: {
     ...mapActions(coursesStore, ['getCoursesData']),
     ...mapActions(productsStore, ['getAllProducts']),
-    ...mapActions(ordersStore, ['getOrdersData'])
+    ...mapActions(ordersStore, ['getOrdersData']),
+    toThousand
   },
   watch: {
     orders(orders) {

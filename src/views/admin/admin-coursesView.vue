@@ -386,7 +386,6 @@ export default {
     this.getCoursesData()
     this.getOrdersData()
     this.getDiscountData()
-    console.log(this.courses)
   },
   components: {
     CoursesCard,
