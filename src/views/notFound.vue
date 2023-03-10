@@ -1,5 +1,6 @@
 <template>
   <div class="wrap lg:flex gap-3 items-center">
+    <teleport to="title">404</teleport>
     <img
       class="mx-auto"
       src="https://cdn-icons-png.flaticon.com/512/3551/3551629.png"

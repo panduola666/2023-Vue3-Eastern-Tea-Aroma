@@ -1,4 +1,5 @@
 <template>
+  <teleport to="title">{{ currentProduct.name }}</teleport>
   <main class="wrap" v-if="currentProduct">
     <p
       class="flex items-center justify-end text-gray-02 hover:text-gray-01"

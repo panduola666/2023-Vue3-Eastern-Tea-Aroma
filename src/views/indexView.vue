@@ -1,11 +1,12 @@
 <!-- eslint-disable prettier/prettier -->
 <template>
   <div class="lg:mb-[120px]">
+    <teleport to="title">東方茶香</teleport>
     <!-- BANNER -->
     <bannerSwiper></bannerSwiper>
     <div
       class="xl:w-[70%] lg:w-[80%] w-[90%] mx-auto bg-brand-06 mt-20 transition-all relative h-[478px] hidden lg:flex"
-      @mouseleave="checked = false"
+      @mouseleave="() => checked = false"
     >
       <section
         class="text-brand-05 text-[28px] leading-8 font-black font-self m-auto w-1/2 px-12 scale-1 duration-1000"

@@ -1,5 +1,6 @@
 <template>
   <main>
+    <teleport to="title">確認購買</teleport>
     <div class="wrap">
       <h1 class="text-3xl font-black font-self text-brand-02">購買人資訊</h1>
       <VForm

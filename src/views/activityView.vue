@@ -1,4 +1,5 @@
 <template>
+  <teleport to="title">{{ activity.title }}</teleport>
   <main class="wrap min-h-[50vh] bg-white px-3 py-5 bg-opacity-50">
     <h1 class="text-3xl font-black font-self text-brand-02 mb-5">
       {{ activity.title }}

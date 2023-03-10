@@ -1,5 +1,6 @@
 <template>
   <main class="wrap lg:grid lg:grid-cols-2 relative lg:gap-6">
+    <teleport to="title">登入註冊</teleport>
     <div
       class="lg:w-1/2 absolute lg:h-full text-center duration-1000 h-1/2 w-full"
       :class="{
@@ -217,7 +218,6 @@ export default {
     refreshCode() {
       this.identifyCode = ''
       this.makeCode(this.identifyCodes, 4)
-      console.log('當前驗證碼==', this.identifyCode)
     },
     makeCode(o, l) {
       for (let i = 0; i < l; i++) {

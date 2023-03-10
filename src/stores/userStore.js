@@ -75,7 +75,6 @@ export default defineStore('userDataStore', {
             sessionStorage.setItem('accessToken', accessToken)
             sessionStorage.setItem('userId', user.id)
             sessionStorage.setItem('first_token', 'null')
-            console.log(res.data)
             return Swal.fire({
               icon: 'success',
               title: '登入成功',
@@ -93,7 +92,6 @@ export default defineStore('userDataStore', {
           .catch((err) => {
             const { data } = err.response
             console.log(err)
-            console.log(data)
             if (data === 'Incorrect password') {
               return Swal.fire({
                 icon: 'error',

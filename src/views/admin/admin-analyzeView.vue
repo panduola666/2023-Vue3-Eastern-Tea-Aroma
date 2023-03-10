@@ -1,5 +1,6 @@
 <template>
   <div class="admin-wrap min-h-[50vh]">
+    <teleport to="title">數據分析</teleport>
     <h1 class="text-3xl font-black font-self text-brand-02">數據分析</h1>
     <h2 class="text-xl font-black font-self text-brand-02 mt-4">課程分析</h2>
     <div>

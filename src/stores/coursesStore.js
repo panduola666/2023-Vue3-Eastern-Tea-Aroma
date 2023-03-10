@@ -53,8 +53,7 @@ export default defineStore('coursesStore', {
             title: '查無此課程',
             showConfirmButton: false,
             timer: 1500
-          }).then((res) => {
-            console.log(res)
+          }).then(() => {
             router.push('/404')
           })
           return
@@ -90,7 +89,6 @@ export default defineStore('coursesStore', {
           this.getCoursesData()
         })
         .catch((err) => {
-          console.log('收藏')
           console.log(err)
         })
     }

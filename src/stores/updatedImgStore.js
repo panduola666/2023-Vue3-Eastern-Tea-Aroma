@@ -36,7 +36,6 @@ export default defineStore('updatedImgStore', {
             title: '上傳檔案錯誤',
             text: '僅接受10MB內圖檔'
           })
-          console.log('postImg 出錯')
         })
     },
     getFirstToken() {
@@ -73,7 +72,6 @@ export default defineStore('updatedImgStore', {
           this.access_token = response.data.access_token
           if (e) {
             this.postImg(e, this.access_token)
-            console.log('access_token 完成')
           }
         })
         .catch((error) => {

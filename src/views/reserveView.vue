@@ -1,5 +1,6 @@
 <template>
   <main class="wrap">
+    <teleport to="title">課程預約</teleport>
     <h1 class="text-3xl font-black font-self text-brand-02">課程預約</h1>
     <ol class="grid gap-3 my-5">
       <template v-for="course in courses" :key="course.id + course.title">

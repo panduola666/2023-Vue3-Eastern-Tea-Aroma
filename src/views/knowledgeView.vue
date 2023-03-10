@@ -1,5 +1,6 @@
 <template>
   <main class="wrap grid lg:grid-cols-5 gap-4">
+    <teleport to="title">茶學小知識</teleport>
     <ol
       class="flex lg:flex-col bg-brand-06 text-brand-05 font-black font-self text-xl h-max"
     >

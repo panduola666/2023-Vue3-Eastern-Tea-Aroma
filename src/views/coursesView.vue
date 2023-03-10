@@ -1,10 +1,10 @@
 <template>
   <main class="wrap">
-    <!-- <teleport to="title"> - 茶藝課堂</teleport> -->
+    <teleport to="title">茶藝課堂</teleport>
     <h2 class="text-3xl font-black font-self text-brand-02">茶藝課堂</h2>
     <form
       class="shadow bg-white bg-opacity-20 border-2 border-brand-01 border-opacity-50 mt-2 mb-6 text-xl p-3 grid gap-3"
-      @submit.prevent="($event) => userSearch()"
+      @submit.prevent="() => userSearch()"
     >
       <p>
         <label for="keyWord" class="mr-3">課程關鍵字 /</label>
@@ -40,7 +40,7 @@
         <button
           type="button"
           class="text-gray-02 py-2 px-4 hover:text-gray-01 duration-500"
-          @click="($event) => clearSearch()"
+          @click="() => clearSearch()"
         >
           清空列表
         </button>

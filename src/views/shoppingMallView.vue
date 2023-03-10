@@ -1,6 +1,6 @@
 <template>
-  <main class="wrap grid lg:grid-cols-5 gap-4">
-    <!-- <teleport to="title"> - 茶藝用品</teleport> -->
+  <div class="wrap grid lg:grid-cols-5 gap-4">
+    <teleport to="title">茶藝用品</teleport>
     <ol
       class="flex flex-wrap lg:flex-col bg-brand-06 text-brand-05 font-black font-self text-xl h-max"
     >
@@ -110,7 +110,7 @@
         </button>
       </p>
     </div>
-  </main>
+  </div>
 </template>
 <script>
 import { productsStore } from '../stores/index.js'

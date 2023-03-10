@@ -4,6 +4,7 @@
       :active="isLoading"
       :is-full-page="true"
       :lock-scroll="true"
+      :can-cancel="true"
     ></loading>
     <router-view></router-view>
   </div>

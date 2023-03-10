@@ -1,6 +1,7 @@
 <template>
   <main>
     <div class="wrap">
+      <teleport to="title">購買商品</teleport>
       <h2 class="text-3xl font-black font-self text-brand-02">購買商品</h2>
       <TotalPrice v-if="cartNumber">
         <template #default>

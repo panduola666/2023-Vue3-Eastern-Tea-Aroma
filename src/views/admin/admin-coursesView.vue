@@ -1,5 +1,6 @@
 <template>
   <main class="admin-wrap">
+    <teleport to="title">課程列表</teleport>
     <h1 class="text-3xl font-black font-self text-brand-02">課程列表</h1>
     <div class="flex flex-col lg:flex-row lg:justify-end lg:gap-5 gap-2 my-5">
       <button
@@ -91,7 +92,6 @@
                 <p class="text-xl text-end">$ {{ toThousand(course.price) }}</p>
               </template>
               <template #card-footer>
-                {{ date.isDiscount }}
                 <div
                   class="flex flex-grow gap-3 flex-col md:flex-row justify-between"
                 >

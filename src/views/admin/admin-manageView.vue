@@ -1,5 +1,6 @@
 <template>
   <main class="admin-wrap">
+    <teleport to="title">項目管理</teleport>
     <h1 class="text-3xl font-black font-self text-brand-02 mb-5">項目總管理</h1>
     <div class="grid lg:grid-cols-5 grid-cols-1">
       <ul class="text-center text-2xl font-black font-self text-brand-02">

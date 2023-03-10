@@ -1,5 +1,6 @@
 <template>
   <main class="wrap">
+    <teleport to="title">用戶專區</teleport>
     <div class="flex flex-col md:flex-row items-center gap-8">
       <div class="relative flex-shrink-0">
         <img

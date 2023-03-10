@@ -1,5 +1,6 @@
 <template>
   <main class="wrap">
+    <teleport to="title">收藏項目</teleport>
     <h2 class="text-3xl font-black font-self text-brand-02">收藏項目</h2>
     <div class="flex justify-between gap-3 flex-col md:flex-row my-3">
       <div class="flex gap-3">

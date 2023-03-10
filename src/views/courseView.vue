@@ -1,6 +1,6 @@
 <template>
   <main class="wrap">
-    <!-- <teleport to="title"> - {{ currentCourse.course?.title }}</teleport> -->
+    <teleport to="title">{{ currentCourse.course?.title }}</teleport>
     <div class="flex justify-end mb-2">
       <router-link
         to="/courses"
@@ -50,7 +50,7 @@
         <h2>講師：{{ currentCourse.user?.name }} 講師</h2>
         <p class="flex justify-between">
           價格：{{
-            currentCourse.course && toThousand(currentCourse.course.price)
+            currentCourse.course && toThousand(currentCourse.course?.price)
           }}
           元<span class="text-gray-02 text-base"
             >剩餘: {{ currentCourse.total - remainingNumber }}</span

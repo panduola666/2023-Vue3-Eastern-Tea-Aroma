@@ -1,5 +1,6 @@
 <template>
   <main class="wrap">
+    <teleport to="title">訂單資訊</teleport>
     <h2 class="text-3xl font-black font-self text-brand-02">訂單資訊</h2>
     <table
       v-for="order in orders.sort((a, b) => b.id - a.id)"
