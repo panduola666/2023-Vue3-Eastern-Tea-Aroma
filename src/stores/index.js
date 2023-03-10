@@ -7,7 +7,7 @@ import productsStore from './productsStore.js'
 import activitiesStore from './activitiesStore.js'
 import vueLoadingStore from './vueLoadingStore.js'
 const toThousand = (money) => {
-  return money.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+  return money.toLocaleString()
 }
 
 export {
