@@ -120,7 +120,7 @@ export default {
     return {
       chooseType: '',
       currentChoose: '',
-      limit: 2 // 控制一頁顯示幾個
+      limit: 6 // 控制一頁顯示幾個
     }
   },
   computed: {
