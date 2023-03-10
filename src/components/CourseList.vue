@@ -40,10 +40,10 @@
     <ul class="grid lg:grid-cols-4 lg:gap-6 gap-4">
       <template v-for="(course, index) in finalCourses" :key="course.id">
         <li
-          class="group overflow-hidden lg:h-[230px] h-64 flex-shrink-0"
+          class="group overflow-hidden lg:h-[230px] h-64 flex-shrink-0 relative"
           v-if="index < 4"
         >
-          <router-link :to="`/course/${course.id}`" class="relative">
+          <router-link :to="`/course/${course.id}`">
             <span
               class="absolute bg-white bg-opacity-60 text-brand-02 py-2 px-3 top-3 left-3 z-10"
               v-if="course.created + 7 * 24 * 60 * 60 * 1000 > new Date()"
@@ -78,31 +78,35 @@ export default {
     ...mapState(coursesStore, ['courses'])
   },
   methods: {
-    ...mapActions(coursesStore, ['getCoursesData']),
-    init() {
-      this.courses.forEach((course) => {
-        course.courseDates.forEach((date) => {
-          const data = {
-            id: date.id,
-            created: date.created,
-            coverUrl: course.coverUrl,
-            title: course.title
-          }
-          const index = this.finalCourses.findIndex(
-            (item) => item.title === data.title
-          )
-          if (index !== -1) {
-            this.finalCourses.splice(index, 1)
-          }
-          this.finalCourses.push(data)
-          this.finalCourses.sort((a, b) => b.created - a.created)
+    ...mapActions(coursesStore, ['getCoursesData'])
+  },
+  watch: {
+    courses: {
+      handler() {
+        this.courses.forEach((course) => {
+          course.courseDates.forEach((date) => {
+            const data = {
+              id: date.id,
+              created: date.created,
+              coverUrl: course.coverUrl,
+              title: course.title
+            }
+            const index = this.finalCourses.findIndex(
+              (item) => item.title === data.title
+            )
+            if (index !== -1) {
+              this.finalCourses.splice(index, 1)
+            }
+            this.finalCourses.push(data)
+            this.finalCourses.sort((a, b) => b.created - a.created)
+          })
         })
-      })
+      },
+      deep: true
     }
   },
-  async mounted() {
-    await this.getCoursesData()
-    await this.init()
+  mounted() {
+    this.getCoursesData()
   }
 }
 </script>

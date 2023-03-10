@@ -180,7 +180,6 @@ export default {
   mounted() {
     this.getDiscountData()
     this.discount = this.user.shoppingCart?.discount
-    console.log(this.user.shoppingCart?.discount)
   }
 }
 </script>

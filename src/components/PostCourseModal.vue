@@ -549,7 +549,6 @@ export default {
         this.editorData.total = 0
       }
     }
-  },
-  mounted() {}
+  }
 }
 </script>

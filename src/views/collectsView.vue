@@ -103,6 +103,32 @@ export default {
       sortData: []
     }
   },
+  computed: {
+    ...mapState(userStore, ['user']),
+    ...mapState(coursesStore, ['courses']),
+    hasSaved() {
+      let hasSaved = false
+      this.sortData.forEach((course) => {
+        course.courseDates.forEach((date) => {
+          if (date.savedUsersId.includes(this.user.id)) hasSaved = true
+        })
+      })
+      return hasSaved
+    }
+  },
+  methods: {
+    ...mapActions(coursesStore, ['getCoursesData', 'patchSaved']),
+    toThousand,
+    score(data) {
+      const score = data.reduce((num, item) => (num += item.score), 0)
+      const avg = score / data.length
+      if (isNaN(avg)) {
+        return 0
+      } else {
+        return (Math.round(avg * 10) / 10).toFixed(1)
+      }
+    }
+  },
   watch: {
     sort: {
       handler({ title, order }) {
@@ -132,37 +158,16 @@ export default {
         }
       },
       deep: true
+    },
+    courses: {
+      handler() {
+        this.sortData = [...this.courses]
+      },
+      deep: true
     }
   },
-  computed: {
-    ...mapState(userStore, ['user']),
-    ...mapState(coursesStore, ['courses']),
-    hasSaved() {
-      let hasSaved = false
-      this.sortData.forEach((course) => {
-        course.courseDates.forEach((date) => {
-          if (date.savedUsersId.includes(this.user.id)) hasSaved = true
-        })
-      })
-      return hasSaved
-    }
-  },
-  methods: {
-    ...mapActions(coursesStore, ['getCoursesData', 'patchSaved']),
-    toThousand,
-    score(data) {
-      const score = data.reduce((num, item) => (num += item.score), 0)
-      const avg = score / data.length
-      if (isNaN(avg)) {
-        return 0
-      } else {
-        return (Math.round(avg * 10) / 10).toFixed(1)
-      }
-    }
-  },
-  async mounted() {
-    await this.getCoursesData()
-    this.sortData = [...this.courses]
+  mounted() {
+    this.getCoursesData()
   }
 }
 </script>

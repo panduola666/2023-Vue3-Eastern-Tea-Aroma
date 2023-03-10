@@ -25,9 +25,6 @@ export default {
     '$route.fullPath'(path) {
       this.checkLogin()
       if (!this.isLogin) this.overLogin()
-    },
-    mounted() {
-      // this.checkLogin()
     }
   }
 }
