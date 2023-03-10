@@ -9,7 +9,7 @@
           type="radio"
           name="productType"
           id="all"
-          v-model="chooseType"
+          v-model.trim="chooseType"
           value=""
           class="absolute opacity-0"
         />
@@ -30,7 +30,7 @@
           type="radio"
           name="productType"
           :id="item + index"
-          v-model="chooseType"
+          v-model.trim="chooseType"
           :value="index"
           class="absolute opacity-0"
         />

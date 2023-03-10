@@ -76,7 +76,7 @@
               id="userName"
               autocomplete="off"
               class="text-gray-01 px-2 py-1"
-              v-model="userInfo.name"
+              v-model.trim="userInfo.name"
               :disabled="!isInfoEditor"
             />
           </p>
@@ -89,7 +89,7 @@
               class="text-gray-01 px-2 py-1"
               autocomplete="off"
               oninput="value=value.replace(/[^\d]/g,'')"
-              v-model="userInfo.tel"
+              v-model.trim="userInfo.tel"
               :disabled="!isInfoEditor"
             />
           </p>
@@ -121,7 +121,7 @@
               minlength="6"
               autocomplete="off"
               class="text-gray-01 px-2 py-1"
-              v-model="password.oldPassword"
+              v-model.trim="password.oldPassword"
               :disabled="!isPasswordEditor"
             />
           </p>
@@ -134,7 +134,7 @@
               minlength="6"
               autocomplete="off"
               class="text-gray-01 px-2 py-1"
-              v-model="password.newPassword"
+              v-model.trim="password.newPassword"
               :disabled="!isPasswordEditor"
             />
           </p>
@@ -147,7 +147,7 @@
               minlength="6"
               autocomplete="off"
               class="text-gray-01 px-2 py-1"
-              v-model="password.check"
+              v-model.trim="password.check"
               :disabled="!isPasswordEditor"
             />
           </p>

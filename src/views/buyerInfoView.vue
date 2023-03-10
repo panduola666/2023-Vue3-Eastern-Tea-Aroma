@@ -22,7 +22,7 @@
           class="px-2 py-1"
           placeholder="請輸入姓名..."
           rules="required"
-          v-model="buyerInfo.name"
+          v-model.trim="buyerInfo.name"
         />
         <VErrorMessage name="姓名" class="text-red-600"></VErrorMessage>
         <label
@@ -37,7 +37,7 @@
           class="px-2 py-1"
           placeholder="請輸入手機號碼..."
           rules="required|numeric"
-          v-model="buyerInfo.tel"
+          v-model.trim="buyerInfo.tel"
         />
         <VErrorMessage name="手機號碼" class="text-red-600"></VErrorMessage>
         <p class="text-xl text-brand-02 font-self font-semibold mt-4">
@@ -51,7 +51,7 @@
             name="取貨方式"
             id="selfPickUp"
             value="自取"
-            v-model="buyerInfo.method"
+            v-model.trim="buyerInfo.method"
             rules="required"
           />自取</label
         >
@@ -77,7 +77,7 @@
             class="px-2 py-1"
             placeholder="請輸入寄件地址..."
             rules="required"
-            v-model="buyerInfo.address"
+            v-model.trim="buyerInfo.address"
           />
           <VErrorMessage name="地址" class="text-red-600"></VErrorMessage>
         </form-box>
@@ -91,7 +91,7 @@
             type="radio"
             name="付款方式"
             id="cashOnDelivery"
-            v-model="buyerInfo.payMethods.choose"
+            v-model.trim="buyerInfo.payMethods.choose"
             value="貨到付款"
             rules="required"
           />貨到付款</label
@@ -116,7 +116,7 @@
             class="px-2 py-1"
             placeholder="請輸入卡號..."
             rules="required|numeric"
-            v-model="buyerInfo.payMethods.cardNumber"
+            v-model.trim="buyerInfo.payMethods.cardNumber"
             onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"
           />
           <VErrorMessage name="卡號" class="text-red-600"></VErrorMessage>
@@ -131,7 +131,7 @@
                   class="md:w-1/3 w-full px-2 py-1 ml-1"
                   placeholder="DD"
                   rules="required|numeric|length:2"
-                  v-model="buyerInfo.payMethods.cardTime[0]"
+                  v-model.trim="buyerInfo.payMethods.cardTime[0]"
                   onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"
               /></label>
               <span class="mx-2 hidden md:inline-block">/</span>
@@ -143,7 +143,7 @@
                   class="md:w-1/3 w-full px-2 py-1 ml-1"
                   placeholder="MM"
                   rules="required|numeric|length:2"
-                  v-model="buyerInfo.payMethods.cardTime[1]"
+                  v-model.trim="buyerInfo.payMethods.cardTime[1]"
                   onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"
               /></label>
               <p>
@@ -163,7 +163,7 @@
                 type="number"
                 class="w-full px-2 py-1"
                 placeholder="請輸入安全碼..."
-                v-model="buyerInfo.payMethods.cardCode"
+                v-model.trim="buyerInfo.payMethods.cardCode"
                 onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"
                 rules="required|numeric|length:3"
               />

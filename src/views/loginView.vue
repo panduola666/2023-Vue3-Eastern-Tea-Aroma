@@ -39,7 +39,7 @@
           id="registerEmail"
           class="py-1 px-2"
           placeholder="請輸入信箱"
-          v-model="userInput.email"
+          v-model.trim="userInput.email"
           required
         />
       </div>
@@ -53,7 +53,7 @@
           placeholder="請輸入密碼"
           autocomplete="off"
           minlength="6"
-          v-model="userInput.password"
+          v-model.trim="userInput.password"
           required
         />
       </div>
@@ -66,7 +66,7 @@
           class="py-1 px-2"
           placeholder="請輸入用戶名"
           maxlength="6"
-          v-model="userInput.name"
+          v-model.trim="userInput.name"
           required
         />
       </div>
@@ -87,7 +87,7 @@
           id="loginEmail"
           class="py-1 px-2"
           placeholder="請輸入信箱"
-          v-model="userInput.email"
+          v-model.trim="userInput.email"
           required
         />
       </div>
@@ -102,7 +102,7 @@
             placeholder="請輸入密碼"
             autocomplete="off"
             minlength="6"
-            v-model="userInput.password"
+            v-model.trim="userInput.password"
             required
           />
           <svg

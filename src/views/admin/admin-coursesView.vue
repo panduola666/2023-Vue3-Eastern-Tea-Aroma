@@ -347,7 +347,7 @@ export default {
                     type="password"
                     class="border border-gray-01 p-2 w-full"
                     autocomplete="on"
-                    v-model="imgur.secret"
+                    v-model.trim="imgur.secret"
                     placeholder="請輸入 imgur 註冊的 Client Secret"
                   /></form>` +
           `<span class="text-sm text-red-500">

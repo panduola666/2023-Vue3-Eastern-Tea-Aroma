@@ -86,7 +86,7 @@
                   :name="product.id"
                   :id="product.id"
                   class="scale-150 cursor-pointer mr-2"
-                  v-model="product.isDiscount"
+                  v-model.trim="product.isDiscount"
                   @change="
                     () => patchDiscountState('products', product, product.price)
                   "
@@ -144,7 +144,7 @@
                     :name="date.id"
                     :id="date.id"
                     class="scale-150 cursor-pointer mr-2"
-                    v-model="date.isDiscount"
+                    v-model.trim="date.isDiscount"
                     @change="
                       () =>
                         patchDiscountState('courseDates', date, course.price)

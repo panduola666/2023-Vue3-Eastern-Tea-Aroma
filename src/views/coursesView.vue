@@ -14,7 +14,7 @@
           id="keyWord"
           placeholder="請輸入關鍵字..."
           class="border border-brand-01 px-3 py-1 md:w-2/3 w-full"
-          v-model="search.input"
+          v-model.trim="search.input"
         />
       </p>
       <div>
@@ -31,7 +31,7 @@
               :id="item"
               class="scale-125 mr-2"
               :value="item"
-              v-model="search.weeks"
+              v-model.trim="search.weeks"
             />星期{{ item }}</label
           >
         </div>
