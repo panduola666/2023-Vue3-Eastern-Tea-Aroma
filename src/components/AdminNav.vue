@@ -28,7 +28,7 @@
         </li>
         <li class="group relative">
           <router-link
-            to="/admin/manage?current=商品管理"
+            to="/admin/manage/products"
             class="flex transition-all group-hover:text-brand-01 text-xl leading-[30px] pb-[10px] pt-[18px]"
             :class="{ 'font-semibold': this.$route.path === '/admin/manage' }"
           >

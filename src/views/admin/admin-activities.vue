@@ -85,10 +85,10 @@
   </section>
 </template>
 <script>
-import PostActivitiesModal from './PostActivitiesModal.vue'
+import PostActivitiesModal from '@/components/PostActivitiesModal.vue'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/vue'
 import { mapState, mapActions } from 'pinia'
-import { activitiesStore } from '../stores/index.js'
+import { activitiesStore } from '@/stores/index.js'
 const { VITE_BASEURL } = import.meta.env
 
 export default {

@@ -1,8 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 // eslint-disable-next-line no-undef
 module.exports = {
+  mode: 'jit',
   purge: {
-    enabled: false,
+    enabled: true,
     content: ['index.html', './src/**/*.{js,jsx,ts,tsx,vue,html}']
   },
   darkMode: false, // or 'media' or 'class'

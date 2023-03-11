@@ -103,8 +103,24 @@ const router = createRouter({
         },
         {
           path: 'manage',
-          name: '管理項目',
-          component: () => import('../views/admin/admin-manageView.vue')
+          component: () => import('../views/admin/manageLayout.vue'),
+          children: [
+            {
+              path: 'products',
+              name: '商品',
+              component: () => import('../views/admin/admin-products.vue')
+            },
+            {
+              path: 'orders',
+              name: '訂單',
+              component: () => import('../views/admin/admin-orders.vue')
+            },
+            {
+              path: 'activities',
+              name: '活動',
+              component: () => import('../views/admin/admin-activities.vue')
+            }
+          ]
         },
         {
           path: 'analyze',

@@ -119,9 +119,9 @@
   </div>
 </template>
 <script>
-import PostOrdersModal from '../components/PostOrdersModal.vue'
+import PostOrdersModal from '@/components/PostOrdersModal.vue'
 import { mapState, mapActions } from 'pinia'
-import { ordersStore, toThousand } from '../stores/index.js'
+import { ordersStore, toThousand } from '@/stores/index.js'
 const { VITE_BASEURL } = import.meta.env
 
 export default {

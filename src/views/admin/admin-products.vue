@@ -120,11 +120,16 @@
   </section>
 </template>
 <script>
-import PostProductsModal from './PostProductsModal.vue'
-import CoursesCard from '../components/CoursesCard.vue'
-import DiscountToggle from './DiscountToggle.vue'
+import PostProductsModal from '@/components/PostProductsModal.vue'
+import CoursesCard from '@/components/CoursesCard.vue'
+import DiscountToggle from '@/components/DiscountToggle.vue'
 import { mapState, mapActions } from 'pinia'
-import { productsStore, ordersStore, discountStore,toThousand } from '../stores/index.js'
+import {
+  productsStore,
+  ordersStore,
+  discountStore,
+  toThousand
+} from '@/stores/index.js'
 const { VITE_BASEURL } = import.meta.env
 export default {
   data() {

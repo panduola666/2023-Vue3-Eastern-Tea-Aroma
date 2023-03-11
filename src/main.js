@@ -1,20 +1,14 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import App from './App.vue'
+import router from './router'
 
-// https://www.npmjs.com/package/vue-sweetalert2
-import VueSweetalert2 from 'vue-sweetalert2'
-import 'sweetalert2/dist/sweetalert2.min.css'
-const options = {
-  confirmButtonColor: '#4c7866',
-  cancelButtonColor: '#727272',
-  confirmButtonText: '確定',
-  cancelButtonText: '取消'
-}
+// tailWind
+import './index.css'
 
 // 日曆套件
 import VCalendar from 'v-calendar'
 
-// https://www.npmjs.com/package/vue-axios
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
@@ -35,7 +29,17 @@ import {
   confirmed
 } from '@vee-validate/rules'
 import { localize, setLocale } from '@vee-validate/i18n'
-import zh_TW from '@vee-validate/i18n/dist/locale/zh_TW.json'
+import zhTw from '@vee-validate/i18n/dist/locale/zh_TW.json'
+
+import VueSweetalert2 from 'vue-sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
+const options = {
+  confirmButtonColor: '#4c7866',
+  cancelButtonColor: '#727272',
+  confirmButtonText: '確定',
+  cancelButtonText: '取消'
+}
+
 defineRule('required', required)
 defineRule('email', email)
 defineRule('min', min)
@@ -44,17 +48,11 @@ defineRule('numeric', numeric) // 必數字
 defineRule('confirmed', confirmed) // 字串全等
 configure({
   generateMessage: localize({
-    zh_TW
+    zh_TW: zhTw
   }),
   validateOnInput: true
 })
 setLocale('zh_TW')
-
-import App from './App.vue'
-import router from './router'
-
-// tailWind
-import './index.css'
 
 const app = createApp(App)
 
