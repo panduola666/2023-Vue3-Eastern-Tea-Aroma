@@ -20,14 +20,7 @@ import CKEditor from '@ckeditor/ckeditor5-vue'
 
 // vee-validate 表單驗證+配置
 import { Field, Form, ErrorMessage, defineRule, configure } from 'vee-validate'
-import {
-  required,
-  email,
-  min,
-  length,
-  numeric,
-  confirmed
-} from '@vee-validate/rules'
+import { required, email, length, numeric } from '@vee-validate/rules'
 import { localize, setLocale } from '@vee-validate/i18n'
 import zhTw from '@vee-validate/i18n/dist/locale/zh_TW.json'
 
@@ -42,10 +35,8 @@ const options = {
 
 defineRule('required', required)
 defineRule('email', email)
-defineRule('min', min)
 defineRule('length', length)
 defineRule('numeric', numeric) // 必數字
-defineRule('confirmed', confirmed) // 字串全等
 configure({
   generateMessage: localize({
     zh_TW: zhTw

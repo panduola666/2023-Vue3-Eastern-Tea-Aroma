@@ -157,6 +157,14 @@ export default defineStore('userDataStore', {
           }
         }
       }
+      if (password.length < 6) {
+        Swal.fire({
+          icon: 'error',
+          title: '密碼不可低於 6 位數',
+          ...swalColor
+        })
+        return
+      }
       axios
         .post(`${VITE_BASEURL}/users`, data)
         .then(() => {
@@ -167,7 +175,8 @@ export default defineStore('userDataStore', {
           })
         })
         .catch((err) => {
-          if (err.response.data === 'Email already exists') {
+          const { data } = err.response
+          if (data === 'Email already exists') {
             Swal.fire({
               icon: 'error',
               title: '該帳號已註冊',

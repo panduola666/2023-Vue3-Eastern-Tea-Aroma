@@ -21,6 +21,7 @@
         type="button"
         class="absolute bottom-10 -translate-x-1/2 btn-primary text-xl text-gray-01 duration-500 bg-white bg-opacity-30 hover:bg-brand-01 hover:bg-opacity-70"
         @click="() => inputReset('changeImg')"
+        ref="imgChangeBtn"
       >
         {{ imgChange ? '登入' : '註冊' }}
       </button>
@@ -207,11 +208,11 @@ export default {
       } else if (option === 'register') {
         this.register(this.userInput)
         this.imgChange = false
+        this.$refs.imgChangeBtn.focus()
       } else if (option === 'changeImg') {
         this.imgChange = !this.imgChange
       }
-      this.userInput = this.$options.data().userInput
-      this.identifyInput = ''
+      this.userInput.identify = ''
     },
     randomNum(min, max) {
       return Math.floor(Math.random() * (max - min) + min)
