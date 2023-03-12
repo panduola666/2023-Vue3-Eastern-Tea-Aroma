@@ -44,7 +44,7 @@
           >
             <li>
               <router-link
-                to="/admin/manage?current=商品管理"
+                to="/admin/manage/products"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 :class="{
                   'font-semibold': this.$route.query.current === '商品管理'
@@ -54,7 +54,7 @@
             </li>
             <li>
               <router-link
-                to="/admin/manage?current=訂單管理"
+                to="/admin/manage/orders"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 :class="{
                   'font-semibold': this.$route.query.current === '訂單管理'
@@ -64,7 +64,7 @@
             </li>
             <li>
               <router-link
-                to="/admin/manage?current=活動管理"
+                to="/admin/manage/activities"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 :class="{
                   'font-semibold': this.$route.query.current === '活動管理'
@@ -122,7 +122,7 @@
             </li>
             <li>
               <router-link
-                to="/admin/manage?current=商品管理"
+                to="/admin/manage/products"
                 class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                 :class="{
                   'font-semibold': this.$route.path === '/admin/manage'

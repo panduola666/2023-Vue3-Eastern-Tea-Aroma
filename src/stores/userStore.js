@@ -34,7 +34,7 @@ export default defineStore('userDataStore', {
         .get(
           `${VITE_BASEURL}/660/users/${sessionStorage.getItem(
             'userId'
-          )}?_expand=avatar`
+          )}?_expand=avatar&_embed=orders`
         )
         .then((res) => {
           loading.closeLoading()

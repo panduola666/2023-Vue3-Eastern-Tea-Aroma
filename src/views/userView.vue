@@ -58,10 +58,15 @@
             帳號
             <span class="text-gray-01">{{ user.email }}</span>
             <span
-              id="userLevel"
-              class="text-base text-end relative group cursor-default text-brand-01 font-medium font-self"
+              v-if="user.isAdmin"
+              class="text-base text-end cursor-default text-brand-01 font-medium font-self"
+              >茶家</span
             >
-              茶友
+            <span
+              class="text-base text-end relative group cursor-default text-brand-01 font-medium font-self"
+              v-else
+            >
+              {{ ordersPrice >= 20000 ? '茶士' : '茶友' }}
               <span
                 class="absolute bg-brand-01 text-white bg-opacity-75 min-w-max px-4 py-2 top-full lg:left-0 right-0 group-hover:block hidden"
                 >累積消費滿 20,000 將升級為茶士 (VIP)</span
@@ -194,6 +199,22 @@ export default {
         name: this.user.name,
         tel: this.user.tel
       }
+    },
+    ordersPrice() {
+      let total = 0
+      this.user.orders.forEach((order) => {
+        const { scale, type } = order.discount
+        order.cart.forEach((cart) => {
+          if (cart.isDiscount) {
+            type === 'money'
+              ? (total += cart.totalPrice - scale)
+              : (total += Math.round(cart.totalPrice * scale))
+          } else {
+            total += cart.totalPrice
+          }
+        })
+      })
+      return total
     }
   },
   methods: {

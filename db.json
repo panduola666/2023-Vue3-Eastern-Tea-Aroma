@@ -474,7 +474,7 @@
     },
     {
       "userId": 1,
-      "isCancel": false,
+      "isCancel": true,
       "buyerInfo": {
         "name": "dqwdq",
         "tel": "23",
@@ -509,7 +509,7 @@
       ],
       "trackingNumber": "",
       "created": 1678094916663,
-      "finish": false,
+      "finish": true,
       "id": 5
     }
   ],

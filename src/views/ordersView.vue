@@ -1,9 +1,9 @@
 <template>
-  <main class="wrap">
+  <main class="wrap min-h-[50vh]">
     <teleport to="title">訂單資訊</teleport>
     <h2 class="text-3xl font-black font-self text-brand-02">訂單資訊</h2>
     <table
-      v-for="order in orders.sort((a, b) => b.id - a.id)"
+      v-for="order in myOrders.sort((a, b) => b.id - a.id)"
       :key="order.id"
       class="w-full table-fixed h-20 text-center border border-brand-05 overflow-scroll bg-white bg-opacity-20 my-4"
     >
@@ -85,7 +85,10 @@
       <tfoot>
         <tr>
           <td class="pt-3">{{ order.cart.length }}件商品</td>
-          <td class="pt-3 font-bold text-brand-02">
+          <td class="pt-3 font-bold text-brand-02" v-if="order.isCancel">
+            已取消
+          </td>
+          <td class="pt-3 font-bold text-brand-02" v-else>
             {{ order.trackingNumber ? '已出貨' : '未出貨' }}
           </td>
           <td class="flex justify-center pt-3">
@@ -109,7 +112,12 @@ import { mapState, mapActions } from 'pinia'
 import { ordersStore, toThousand } from '../stores/index.js'
 export default {
   computed: {
-    ...mapState(ordersStore, ['orders'])
+    ...mapState(ordersStore, ['orders']),
+    myOrders() {
+      return this.orders.filter(
+        (order) => order.userId === +sessionStorage.getItem('userId')
+      )
+    }
   },
   methods: {
     ...mapActions(ordersStore, ['getOrdersData']),
