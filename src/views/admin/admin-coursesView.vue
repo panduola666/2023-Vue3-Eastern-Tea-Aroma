@@ -224,7 +224,9 @@
         </template>
       </template>
     </ul>
-    <p v-else class="flex items-center justify-around text-3xl h-[35vh]">無販售課程</p>
+    <p v-else class="flex items-center justify-around text-3xl h-[35vh]">
+      無販售課程
+    </p>
   </main>
 </template>
 <script>

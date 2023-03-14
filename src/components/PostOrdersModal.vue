@@ -58,10 +58,12 @@
           <p>原價</p>
           <p class="line-through text-gray-02">
             {{
-              toThousand(orderData.cart.reduce(
-                (total, product) => (total += product.totalPrice),
-                0
-              ))
+              toThousand(
+                orderData.cart.reduce(
+                  (total, product) => (total += product.totalPrice),
+                  0
+                )
+              )
             }}
           </p>
           <p>折扣碼</p>

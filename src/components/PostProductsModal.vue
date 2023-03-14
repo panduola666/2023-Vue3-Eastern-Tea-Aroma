@@ -327,7 +327,7 @@ export default {
       'pushNewGroup'
     ]),
     finishFn() {
-      const { type, group, name, price, totalNumber, content, isDiscount } =
+      const { type, group, name, price, totalNumber, content } =
         this.currentData
       if (this.imageStyle === '本地圖片') {
         this.currentData.coverUrl = this.imgUrl

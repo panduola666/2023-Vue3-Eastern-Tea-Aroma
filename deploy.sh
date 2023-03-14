@@ -18,7 +18,7 @@
     git init
     git checkout -B main
     git add -A
-    git commit -m 'login 畫面優化'
+    git commit -m 'user 等級修復,我的訂單修復'
 
     # if you are deploying to https://panduola666.github.io
     # git push -f git@github.com:panduola666/panduola666.github.io.git main

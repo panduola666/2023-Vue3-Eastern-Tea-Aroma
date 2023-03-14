@@ -3,7 +3,7 @@
     <slot name="modal-btn">按鈕</slot>
   </span>
   <TransitionRoot appear :show="isOpen" as="template">
-    <Dialog as="div" @close="closeModal" class="relative z-10">
+    <myDialog as="div" @close="closeModal" class="relative z-10">
       <TransitionChild
         as="template"
         enter="duration-300 ease-out"
@@ -71,7 +71,7 @@
           </TransitionChild>
         </div>
       </div>
-    </Dialog>
+    </myDialog>
   </TransitionRoot>
 </template>
 
@@ -114,7 +114,7 @@ export default {
   components: {
     TransitionRoot,
     TransitionChild,
-    Dialog,
+    myDialog: Dialog,
     DialogPanel,
     DialogTitle
   }
