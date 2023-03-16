@@ -12,7 +12,7 @@ export default defineStore('productsStore', {
       const loading = vueLoadingStore()
       loading.openLoading()
       axios.get(`${VITE_BASEURL}/products`).then((res) => {
-        loading.closeLoading()
+        if (loading.isLoading) loading.closeLoading()
         this.allProducts = res.data
       })
     },
@@ -27,7 +27,7 @@ export default defineStore('productsStore', {
           }`
         )
         .then((res) => {
-          loading.closeLoading()
+          if (loading.isLoading) loading.closeLoading()
           this.products = res.data
         })
     },

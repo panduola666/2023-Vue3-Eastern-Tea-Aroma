@@ -1,12 +1,12 @@
 <template>
   <div>
     <loading
-      :active="isLoading"
+      v-model:active="isLoading"
       :is-full-page="true"
-      :lock-scroll="true"
       :can-cancel="true"
       :on-cancel="closeLoading"
-    ></loading>
+    >
+    </loading>
     <router-view></router-view>
   </div>
 </template>

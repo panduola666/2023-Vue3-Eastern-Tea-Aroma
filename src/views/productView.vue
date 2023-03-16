@@ -1,8 +1,8 @@
 <template>
-  <teleport to="title">{{ currentProduct.name }}</teleport>
   <main class="wrap" v-if="currentProduct">
+    <teleport to="title">{{ currentProduct.name }}</teleport>
     <p
-      class="flex items-center justify-end text-gray-02 hover:text-gray-01"
+      class="flex items-center justify-end text-gray-02 hover:text-gray-01 cursor-pointer"
       @click="() => this.$router.go(-1)"
     >
       <svg

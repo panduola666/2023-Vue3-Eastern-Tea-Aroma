@@ -19,7 +19,7 @@ export default defineStore('userDataStore', {
       const loading = vueLoadingStore()
       loading.openLoading()
       axios.get(`${VITE_BASEURL}/users`).then((res) => {
-        loading.closeLoading()
+        if (loading.isLoading) loading.closeLoading()
         this.allUser = res.data
       })
     },
@@ -37,7 +37,7 @@ export default defineStore('userDataStore', {
           )}?_expand=avatar&_embed=orders`
         )
         .then((res) => {
-          loading.closeLoading()
+          if (loading.isLoading) loading.closeLoading()
           this.isLogin = true
           this.user = res.data
           if (router.currentRoute.value.fullPath === '/login' && this.user.id) {

@@ -8,7 +8,7 @@
       "tel": "",
       "isAdmin": true,
       "shoppingCart": {
-        "discount": "",
+        "discount": "accac",
         "cart": {
           "products": [],
           "courses": [
@@ -16,8 +16,8 @@
               "courseDateId": 2,
               "courseId": 1,
               "price": 3000,
-              "number": 2,
-              "totalPrice": 6000,
+              "number": 3,
+              "totalPrice": 9000,
               "isDiscount": true
             }
           ]
@@ -169,7 +169,7 @@
       "savedUsersId": [
         1
       ],
-      "isDiscount": true,
+      "isDiscount": false,
       "created": 1677772800000
     },
     {
@@ -178,7 +178,7 @@
       "total": 20,
       "userId": 1,
       "savedUsersId": [],
-      "isDiscount": true,
+      "isDiscount": false,
       "created": 1678117379857,
       "courseId": 3,
       "id": 4
@@ -189,7 +189,7 @@
       "total": 10,
       "userId": 1,
       "savedUsersId": [],
-      "isDiscount": true,
+      "isDiscount": false,
       "created": 1678123667312,
       "courseId": 4,
       "id": 5
@@ -200,7 +200,7 @@
       "total": 20,
       "userId": 1,
       "savedUsersId": [],
-      "isDiscount": true,
+      "isDiscount": false,
       "created": 1678123805174,
       "courseId": 5,
       "id": 6
@@ -238,7 +238,7 @@
       "coverUrl": "https://images.unsplash.com/photo-1543060895-03f57478a710?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTF8fHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
       "totalNumber": 30,
       "content": "<p>高山烏龍茶，泛指種植、製造於海拔1000公尺以上茶區之茶葉，因高山茶葉生長較慢、茶葉中的苦澀成份降低，口感也會比較圓潤，近年來取代平地烏龍茶，高山烏龍茶漸漸成為台灣茶的主流。</p><p>&nbsp;</p><p>高山烏龍茶會受到歡迎，主要是因其口感清新、甘甜。因種於高山，茶葉生長慢，導致茶葉中的苦澀成份少、甜度高。此外不同產區的高山茶葉，會有其獨特的「山頭韻」，也就是不同山頭生產的茶葉會有不同的味道，這也是高山烏龍茶受歡迎的主因。</p>",
-      "isDiscount": false
+      "isDiscount": true
     },
     {
       "id": 3,

@@ -10,7 +10,6 @@
           >
         </template>
       </TotalPrice>
-      <button type="button" class="btn-outline mb-4" v-if="cartNumber">清空購物車</button>
       <div class="flex items-center gap-3" v-if="!cartNumber">
         <img
           src="https://cdn-icons-png.flaticon.com/512/3648/3648756.png"

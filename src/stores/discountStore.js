@@ -12,7 +12,7 @@ export default defineStore('discountStore', {
       const loading = vueLoadingStore()
       loading.openLoading()
       axios.get(`${VITE_BASEURL}/discount`).then((res) => {
-        loading.closeLoading()
+        if (loading.isLoading) loading.closeLoading()
         this.discountData = res.data
       })
     }

@@ -20,8 +20,8 @@ export default defineStore('activitiesStore', {
       const loading = vueLoadingStore()
       loading.openLoading()
       axios.get(`${VITE_BASEURL}/activities/${id}`).then((res) => {
-        loading.closeLoading()
         this.activity = res.data
+        if (loading.isLoading) loading.closeLoading()
       })
     }
   }

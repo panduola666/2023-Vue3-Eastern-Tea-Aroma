@@ -16,7 +16,7 @@ export default defineStore('coursesStore', {
       const res = await axios.get(
         `${VITE_BASEURL}/courses?_expand=user&_embed=courseDates`
       )
-      loading.closeLoading()
+      if (loading.isLoading) loading.closeLoading()
       this.courses = res.data
     },
     async getCurrent(courseDateId, isNew = false) {
@@ -44,7 +44,7 @@ export default defineStore('coursesStore', {
         const courseDate = await axios.get(
           `${VITE_BASEURL}/courseDates/${courseDateId}?_expand=course&_expand=user`
         )
-        loading.closeLoading()
+        if (loading.isLoading) loading.closeLoading()
         this.currentCourse = courseDate.data
       } catch (err) {
         if (err.response.status === 404) {

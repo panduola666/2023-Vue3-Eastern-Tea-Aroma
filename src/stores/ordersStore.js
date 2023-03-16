@@ -11,7 +11,7 @@ export default defineStore('ordersStore', {
       const loading = vueLoadingStore()
       loading.openLoading()
       axios.get(`${VITE_BASEURL}/orders?_expand=user`).then((res) => {
-        loading.closeLoading()
+        if (loading.isLoading) loading.closeLoading()
         this.orders = res.data
       })
     }
