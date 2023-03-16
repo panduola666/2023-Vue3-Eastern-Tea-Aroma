@@ -49,7 +49,7 @@
         </button>
       </div>
     </form>
-    <ul class="flex flex-col gap-5 min-h-[5rem]">
+    <ul class="flex flex-col gap-5 min-h-[6rem]">
       <template v-if="isUserSearch">
         <li
           class="text-2xl text-gray-01 md:tracking-widest text-center"
