@@ -202,7 +202,7 @@ export default {
     },
     ordersPrice() {
       let total = 0
-      this.user.orders.forEach((order) => {
+      this.user.orders?.forEach((order) => {
         const { scale, type } = order.discount
         order.cart.forEach((cart) => {
           if (cart.isDiscount) {
@@ -219,7 +219,7 @@ export default {
   },
   methods: {
     ...mapActions(userStore, ['overLogin']),
-
+    ...mapActions(userStore, ['getUserData']),
     changeBtnText(e) {
       if (e.target.textContent.trim() === '編輯') {
         e.target.textContent = '確認'
@@ -347,7 +347,6 @@ export default {
         showCancelButton: true,
         reverseButtons: true
       })
-      console.log(value)
       if (!value) {
         this.postImg = false
         return
