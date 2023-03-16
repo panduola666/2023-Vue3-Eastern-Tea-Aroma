@@ -12,7 +12,7 @@
       <template #modal-body>
         <div class="flex flex-col-reverse lg:flex-row gap-3">
           <div
-            class="flex flex-col gap-3 lg:w-96 lg:h-full h-[75vh] overflow-x-hidden px-3"
+            class="flex flex-col flex-shrink-0 gap-3 lg:w-96 lg:h-full h-[75vh] overflow-x-hidden px-3"
           >
             <p class="font-semibold">
               * 封面

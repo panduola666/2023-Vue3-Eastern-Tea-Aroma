@@ -237,19 +237,63 @@
       "price": 200,
       "coverUrl": "https://images.unsplash.com/photo-1543060895-03f57478a710?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTF8fHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
       "totalNumber": 30,
-      "content": "<p>高山烏龍茶，泛指種植、製造於海拔1000公尺以上茶區之茶葉，因高山茶葉生長較慢、茶葉中的苦澀成份降低，口感也會比較圓潤，近年來取代平地烏龍茶，高山烏龍茶漸漸成為台灣茶的主流。</p>",
+      "content": "<p>高山烏龍茶，泛指種植、製造於海拔1000公尺以上茶區之茶葉，因高山茶葉生長較慢、茶葉中的苦澀成份降低，口感也會比較圓潤，近年來取代平地烏龍茶，高山烏龍茶漸漸成為台灣茶的主流。</p><p>&nbsp;</p><p>高山烏龍茶會受到歡迎，主要是因其口感清新、甘甜。因種於高山，茶葉生長慢，導致茶葉中的苦澀成份少、甜度高。此外不同產區的高山茶葉，會有其獨特的「山頭韻」，也就是不同山頭生產的茶葉會有不同的味道，這也是高山烏龍茶受歡迎的主因。</p>",
       "isDiscount": false
     },
     {
       "id": 3,
       "type": "紫砂壺",
       "group": "茶壺",
-      "name": "黑色高梨壺",
-      "price": 100,
+      "name": "棕色高梨壺",
+      "price": 260,
       "coverUrl": "https://images.unsplash.com/photo-1558160074-4d7d8bdf4256?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nzd8fHRlYXBvdHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
       "totalNumber": 30,
-      "content": "<p>高山烏龍茶會受到歡迎，主要是因其口感清新、甘甜。因種於高山，茶葉生長慢，導致茶葉中的苦澀成份少、甜度高。此外不同產區的高山茶葉，會有其獨特的「山頭韻」，也就是不同山頭生產的茶葉會有不同的味道，這也是高山烏龍茶受歡迎的主因。</p>",
+      "content": "<p>紫砂壺是陶器茶具的佼佼者，早在北宋初期就已“成名”造型簡練大方，色調淳樸古雅的特點，外形有似竹結、蓮藕、松段和仿商周古銅器形狀的，明代大為流行。</p><p>&nbsp;</p><p>由於成陶火溫在1000-1200攝氏度，質地致密，既不滲漏，又有肉眼看不見的氣孔，能吸附茶汁，長時間使用，紫砂壺的顏色會變得越來越自然，而在壺內泡著的茶會滲進壺體內，使壺蘊含茶味。</p>",
       "isDiscount": false
+    },
+    {
+      "coverUrl": "https://images.unsplash.com/photo-1577016029703-cc22a7c0c28c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTN8fHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
+      "type": "紫砂壺",
+      "group": "茶具組",
+      "name": "梨花茶具組",
+      "price": 600,
+      "totalNumber": 15,
+      "content": "<p>梨花茶具組的茶壺和茶杯都採用優質的陶瓷材質製作，色澤柔和，手感舒適。茶壺的設計獨具匠心，以梨花為靈感，造型優美，花紋細膩，讓人不禁愛不釋手。而茶杯則以淺碗的設計，更好的展現茶葉的色澤和香氣。</p><p>&nbsp;</p><p>梨花茶具組不僅實用，而且也是一件藝術品。它的設計優雅、精緻，不僅適合自用，還是送禮的不二之選。如果你想在品茶時享受優雅的氛圍，梨花茶具組絕對是你不可錯過的選擇。</p>",
+      "isDiscount": false,
+      "id": 4
+    },
+    {
+      "coverUrl": "https://images.unsplash.com/photo-1578504654620-e66ad8bb1c25?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjQ2fHx0ZWF8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+      "type": "紫砂壺",
+      "group": "茶壺",
+      "name": "紫泥西施壺",
+      "price": 300,
+      "totalNumber": 10,
+      "content": "<p>紫砂壺，是一種源自中國傳統文化的陶瓷茶具，也是中國茶文化的重要代表之一。紫砂壺因其獨特的材質和精湛的工藝，在國內外茶文化界享有極高的聲譽。</p><p>&nbsp;</p><p>紫砂壺的材質是一種由紫泥燒制而成的陶瓷，因其原料中含有大量的鐵、鈦等礦物質，所以呈現出独特的紫色或棕紅色。而紫泥具有透氣性和適度的吸水性，使得茶湯能夠充分地與壺體接觸，提高茶湯的香氣和滋味，令人愛不釋手。</p><p>&nbsp;</p><p>使用紫砂壺泡茶，需要先用熱水將茶壺燙一燙，然後將茶葉放入壺中，用熱水沖泡，讓茶葉的香氣充分釋放出來。每泡一次茶之後，還需要將茶壺倒空，清洗乾淨，以便下一次使用。</p>",
+      "isDiscount": false,
+      "id": 5
+    },
+    {
+      "coverUrl": "https://images.unsplash.com/photo-1609321979677-66f6f757b31d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjUxfHx0ZWF8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+      "type": "陶瓷杯",
+      "group": "茶杯",
+      "name": "白陶茶杯 6 入組",
+      "price": 350,
+      "totalNumber": 18,
+      "content": "<p>手工白陶瓷茶杯以素雅自然為主題，杯子的設計簡單，以素淨無華的白色為主色調，展現了一種優雅、清新的風格，因由手工製作而成，每個杯子都經過精細打磨，保留了手工製作的自然瑕疵，增加了杯子的自然感。</p>",
+      "isDiscount": false,
+      "id": 6
+    },
+    {
+      "coverUrl": "https://images.unsplash.com/photo-1574948740506-1e6278b50607?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzAzfHx0ZWF8ZW58MHx8MHx8&w=1000&q=80",
+      "type": "紫砂壺",
+      "group": "茶壺",
+      "name": "綠意陶瓷壺",
+      "price": 500,
+      "totalNumber": 5,
+      "content": "<p>紫砂壺有著其他茶器所沒有的壹大特質：雙重氣孔結構，氣孔微細，密度高。用以泡茶不失原味“色香味皆蘊”，使“茶葉越發醇郁芳沁”。 紫砂壺中的壹些微量元素對人體健康十分有益，紫砂富含天然鐵質，有調節人體內分泌及血脂、血糖、膽固醇含量，降肝火，幫助胃功能過濾尿毒等功效。而茶葉中本身就含有大量保健因子能控制糖份被身體吸收，紫砂壺則是將茶的這壹好處發揮到極致。</p>",
+      "isDiscount": false,
+      "id": 7
     }
   ],
   "activities": [
