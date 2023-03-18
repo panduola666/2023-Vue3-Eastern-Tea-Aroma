@@ -49,7 +49,7 @@
         </button>
       </div>
     </form>
-    <ul class="flex flex-col gap-5 min-h-[6rem]">
+    <ul class="flex flex-col gap-5 min-h-[7rem] justify-center">
       <template v-if="isUserSearch">
         <li
           class="text-2xl text-gray-01 md:tracking-widest text-center"
@@ -260,6 +260,7 @@ export default {
       return courseDate.savedUsersId.includes(+sessionStorage.getItem('userId'))
     },
     userSearch() {
+      this.finalSearch = []
       this.isUserSearch = true
       const courses = JSON.parse(JSON.stringify(this.courses))
       const keyWordSearch = courses.filter((course) =>
@@ -268,12 +269,16 @@ export default {
       this.finalSearch = keyWordSearch.filter((item) => item.length !== 0)
       if (this.search.weeks.length) {
         const finalSearch = keyWordSearch.map((item) => {
-          const weekFilter = item.courseDates.filter((date) =>
-            this.search.weeks.includes(this.weekText(date.start)) ? date : ''
-          )
+          const weekFilter = item.courseDates.filter((date) => {
+            return date.end > new Date() &&
+              this.search.weeks.includes(this.weekText(date.start))
+              ? date
+              : ''
+          })
           item.courseDates = weekFilter
           return item
         })
+        console.log(finalSearch)
         this.finalSearch = finalSearch.filter((item) => item.length !== 0)
       }
     }

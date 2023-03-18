@@ -18,7 +18,7 @@
     git init
     git checkout -B main
     git add -A
-    git commit -m '用戶專區BUG修復'
+    git commit -m '修復課程查詢BUG'
 
     # if you are deploying to https://panduola666.github.io
     # git push -f git@github.com:panduola666/panduola666.github.io.git main

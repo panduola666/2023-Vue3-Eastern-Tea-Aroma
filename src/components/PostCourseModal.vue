@@ -449,8 +449,10 @@ export default {
         const courseDatesData = {
           end: new Date(day + endTime).getTime(),
           start: new Date(day + startTime).getTime(),
-          total
+          total,
+          courseId
         }
+        console.log(this.editorData);
         this.$http
           .patch(`${VITE_BASEURL}/courseDates/${id}`, courseDatesData)
           .then(() => {

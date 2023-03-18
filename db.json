@@ -10,7 +10,15 @@
       "shoppingCart": {
         "discount": "accac",
         "cart": {
-          "products": [],
+          "products": [
+            {
+              "productId": 2,
+              "price": 200,
+              "number": 2,
+              "totalPrice": 400,
+              "isDiscount": true
+            }
+          ],
           "courses": [
             {
               "courseDateId": 2,
@@ -173,8 +181,8 @@
       "created": 1677772800000
     },
     {
-      "end": 1678863600000,
-      "start": 1678856400000,
+      "end": 1679863600000,
+      "start": 1679856400000,
       "total": 20,
       "userId": 1,
       "savedUsersId": [],
@@ -184,8 +192,8 @@
       "id": 4
     },
     {
-      "end": 1678789800000,
-      "start": 1678784400000,
+      "end": 1679789800000,
+      "start": 1679784400000,
       "total": 10,
       "userId": 1,
       "savedUsersId": [],
@@ -215,6 +223,17 @@
       "created": 1678205797536,
       "courseId": 4,
       "id": 7
+    },
+    {
+      "end": 1679490000000,
+      "start": 1679479200000,
+      "total": 13,
+      "userId": 1,
+      "savedUsersId": [],
+      "isDiscount": false,
+      "created": 1679155430644,
+      "courseId": 2,
+      "id": 8
     }
   ],
   "products": [
