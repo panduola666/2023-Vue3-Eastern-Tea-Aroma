@@ -143,6 +143,7 @@ export default {
       const reserves = []
       const final = []
       this.orders.forEach((order) => {
+        if (order.isCancel) return
         if (order.userId === +sessionStorage.getItem('userId')) {
           order.cart.forEach((product) => {
             if (product.courseDateId) {

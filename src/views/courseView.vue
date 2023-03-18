@@ -65,12 +65,11 @@
           "
           @click="() => addToCart('courses', currentCourse)"
         >
-          {{
-            currentCourse.total - remainingNumber <= 0 ||
-            currentCourse.start < new Date()
-              ? '預約已滿 / 已結束'
-              : '加入購物車'
-          }}
+          <span v-if="currentCourse.start < new Date()">已結束</span>
+          <span v-else-if="currentCourse.total - remainingNumber <= 0"
+            >預約已滿</span
+          >
+          <span v-else>加入購物車</span>
         </button>
       </section>
     </div>
