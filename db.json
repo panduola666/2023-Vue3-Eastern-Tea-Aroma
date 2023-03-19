@@ -29,11 +29,11 @@
           "products": [],
           "courses": [
             {
-              "courseDateId": 2,
-              "courseId": 1,
-              "price": 3000,
-              "number": 2,
-              "totalPrice": 6000,
+              "courseDateId": 9,
+              "courseId": 4,
+              "price": 2000,
+              "number": 1,
+              "totalPrice": 2000,
               "isDiscount": true
             }
           ]
@@ -44,8 +44,8 @@
   ],
   "discount": {
     "code": "abc",
-    "type": "percentage",
-    "scale": "0.95",
+    "type": "money",
+    "scale": 200,
     "end": 1680278399000
   },
   "courses": [
@@ -105,7 +105,12 @@
       "coverUrl": "https://images.unsplash.com/photo-1551540827-6c8ae1aaedbb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
       "price": 2000,
       "title": "鍋煮香料奶茶學",
-      "scores": [],
+      "scores": [
+        {
+          "score": 4,
+          "userId": 2
+        }
+      ],
       "userId": 1,
       "id": 4
     },
@@ -143,10 +148,7 @@
       "start": 1679479200000,
       "end": 1679482800000,
       "total": 30,
-      "savedUsersId": [
-        1,
-        2
-      ],
+      "savedUsersId": [],
       "isDiscount": true,
       "created": 1677513600000
     },
@@ -157,9 +159,7 @@
       "start": 1678510800000,
       "end": 1678516200000,
       "total": 15,
-      "savedUsersId": [
-        1
-      ],
+      "savedUsersId": [],
       "isDiscount": false,
       "created": 1677772800000
     },
@@ -219,12 +219,14 @@
       "id": 8
     },
     {
-      "end": 1679988600000,
-      "start": 1679983200000,
-      "total": 10,
+      "end": 1680001200000,
+      "start": 1679997600000,
+      "total": 20,
       "userId": 1,
-      "savedUsersId": [],
-      "isDiscount": false,
+      "savedUsersId": [
+        2
+      ],
+      "isDiscount": true,
       "created": 1679156871174,
       "courseId": 4,
       "id": 9
@@ -234,7 +236,9 @@
       "start": 1679382000000,
       "total": 20,
       "userId": 1,
-      "savedUsersId": [],
+      "savedUsersId": [
+        2
+      ],
       "isDiscount": false,
       "created": 1679165721435,
       "courseId": 1,
@@ -262,7 +266,7 @@
       "coverUrl": "https://images.unsplash.com/photo-1543060895-03f57478a710?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTF8fHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
       "totalNumber": 30,
       "content": "<p>高山烏龍茶，泛指種植、製造於海拔1000公尺以上茶區之茶葉，因高山茶葉生長較慢、茶葉中的苦澀成份降低，口感也會比較圓潤，近年來取代平地烏龍茶，高山烏龍茶漸漸成為台灣茶的主流。</p><p>&nbsp;</p><p>高山烏龍茶會受到歡迎，主要是因其口感清新、甘甜。因種於高山，茶葉生長慢，導致茶葉中的苦澀成份少、甜度高。此外不同產區的高山茶葉，會有其獨特的「山頭韻」，也就是不同山頭生產的茶葉會有不同的味道，這也是高山烏龍茶受歡迎的主因。</p>",
-      "isDiscount": true
+      "isDiscount": false
     },
     {
       "id": 3,
@@ -359,7 +363,7 @@
       "created": 1679932800000,
       "finish": true,
       "isCancel": false,
-      "trackingNumber": "vdw",
+      "trackingNumber": "1111",
       "id": 1,
       "userId": 2,
       "buyerInfo": {
@@ -464,7 +468,7 @@
     },
     {
       "userId": 2,
-      "isCancel": false,
+      "isCancel": true,
       "buyerInfo": {
         "name": "d",
         "tel": "231",
@@ -498,12 +502,12 @@
       ],
       "trackingNumber": "",
       "created": 1677773823142,
-      "finish": false,
+      "finish": true,
       "id": 3
     },
     {
       "userId": 2,
-      "finish": false,
+      "finish": true,
       "isCancel": false,
       "buyerInfo": {
         "name": "dwqdqd",
@@ -536,9 +540,68 @@
           "productId": 2
         }
       ],
-      "trackingNumber": "",
+      "trackingNumber": "ww",
       "created": 1677773874470,
       "id": 4
+    },
+    {
+      "userId": 2,
+      "buyerInfo": {
+        "name": "2ewqe",
+        "tel": "321",
+        "method": "自取",
+        "address": "",
+        "payMethods": {
+          "choose": "貨到付款",
+          "cardNumber": "",
+          "cardTime": [
+            "",
+            ""
+          ],
+          "cardCode": ""
+        }
+      },
+      "discount": {
+        "code": "",
+        "type": "",
+        "scale": ""
+      },
+      "cart": [
+        {
+          "type": "紫砂壺",
+          "name": "綠意陶瓷壺",
+          "price": 500,
+          "number": 2,
+          "totalPrice": 1000,
+          "isDiscount": false,
+          "productId": 7
+        },
+        {
+          "name": "茶葉的風味鑑賞學",
+          "start": 1679479200000,
+          "end": 1679482800000,
+          "price": 3000,
+          "number": 2,
+          "totalPrice": 6000,
+          "isDiscount": true,
+          "courseDateId": 2
+        },
+        {
+          "name": "鍋煮香料奶茶學",
+          "start": 1679983200000,
+          "end": 1679988600000,
+          "price": 2000,
+          "number": 1,
+          "totalPrice": 2000,
+          "isDiscount": false,
+          "courseDateId": 9
+        }
+      ],
+      "trackingNumber": "",
+      "created": 1679206694816,
+      "finish": false,
+      "isCancel": false,
+      "id": 5
     }
   ],
   "avatars": [
