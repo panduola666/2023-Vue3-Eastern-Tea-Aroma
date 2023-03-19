@@ -452,7 +452,6 @@ export default {
           total,
           courseId
         }
-        console.log(this.editorData);
         this.$http
           .patch(`${VITE_BASEURL}/courseDates/${id}`, courseDatesData)
           .then(() => {

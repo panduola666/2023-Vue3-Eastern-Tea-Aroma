@@ -278,7 +278,6 @@ export default {
           item.courseDates = weekFilter
           return item
         })
-        console.log(finalSearch)
         this.finalSearch = finalSearch.filter((item) => item.length !== 0)
       }
     }

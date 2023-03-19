@@ -8,27 +8,10 @@
       "tel": "",
       "isAdmin": true,
       "shoppingCart": {
-        "discount": "accac",
+        "discount": "",
         "cart": {
-          "products": [
-            {
-              "productId": 2,
-              "price": 200,
-              "number": 2,
-              "totalPrice": 400,
-              "isDiscount": true
-            }
-          ],
-          "courses": [
-            {
-              "courseDateId": 2,
-              "courseId": 1,
-              "price": 3000,
-              "number": 3,
-              "totalPrice": 9000,
-              "isDiscount": true
-            }
-          ]
+          "products": [],
+          "courses": []
         }
       },
       "id": 1
@@ -36,8 +19,8 @@
     {
       "email": "user@gmail.com",
       "password": "$2a$10$1NktAqc61akAxpYRtwwapuKt8xpVsvtgAE3A3uRPOj71WdwdPWPx.",
-      "name": "客戶",
-      "avatarId": 2,
+      "name": "客戶1",
+      "avatarId": 1,
       "tel": "213",
       "isAdmin": false,
       "shoppingCart": {
@@ -49,8 +32,8 @@
               "courseDateId": 2,
               "courseId": 1,
               "price": 3000,
-              "number": 1,
-              "totalPrice": 3000,
+              "number": 2,
+              "totalPrice": 6000,
               "isDiscount": true
             }
           ]
@@ -60,10 +43,10 @@
     }
   ],
   "discount": {
-    "code": "accac",
+    "code": "abc",
     "type": "percentage",
     "scale": "0.95",
-    "end": 1678550399000
+    "end": 1680278399000
   },
   "courses": [
     {
@@ -79,8 +62,8 @@
       "userId": 1,
       "scores": [
         {
-          "userId": 2,
-          "score": 3
+          "score": 4,
+          "userId": 1
         }
       ],
       "price": 3000
@@ -230,7 +213,7 @@
       "total": 13,
       "userId": 1,
       "savedUsersId": [],
-      "isDiscount": false,
+      "isDiscount": true,
       "created": 1679155430644,
       "courseId": 2,
       "id": 8
@@ -238,13 +221,24 @@
     {
       "end": 1679988600000,
       "start": 1679983200000,
-      "total": 0,
+      "total": 10,
       "userId": 1,
       "savedUsersId": [],
       "isDiscount": false,
       "created": 1679156871174,
       "courseId": 4,
       "id": 9
+    },
+    {
+      "end": 1679389200000,
+      "start": 1679382000000,
+      "total": 20,
+      "userId": 1,
+      "savedUsersId": [],
+      "isDiscount": false,
+      "created": 1679165721435,
+      "courseId": 1,
+      "id": 10
     }
   ],
   "products": [
@@ -585,6 +579,46 @@
       "created": 1678094916663,
       "finish": true,
       "id": 5
+    },
+    {
+      "userId": 1,
+      "buyerInfo": {
+        "name": "s",
+        "tel": "23",
+        "method": "自取",
+        "address": "",
+        "payMethods": {
+          "choose": "貨到付款",
+          "cardNumber": "",
+          "cardTime": [
+            "",
+            ""
+          ],
+          "cardCode": ""
+        }
+      },
+      "discount": {
+        "code": "",
+        "type": "",
+        "scale": ""
+      },
+      "cart": [
+        {
+          "name": "茶葉的風味鑑賞學",
+          "start": 1679479200000,
+          "end": 1679482800000,
+          "price": 3000,
+          "number": 3,
+          "totalPrice": 9000,
+          "isDiscount": true,
+          "courseDateId": 2
+        }
+      ],
+      "trackingNumber": "",
+      "created": 1679204416088,
+      "finish": false,
+      "isCancel": false,
+      "id": 6
     }
   ],
   "avatars": [

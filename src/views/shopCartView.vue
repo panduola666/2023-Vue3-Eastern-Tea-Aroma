@@ -324,7 +324,6 @@ export default {
     this.getUserData()
     this.getAllProducts()
     this.getCoursesData()
-    console.log(this.isLogin)
   },
   components: {
     TotalPrice

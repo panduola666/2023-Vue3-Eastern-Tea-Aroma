@@ -109,7 +109,10 @@
               v-for="date in course.courseDates"
               :key="date.id + date.courseId"
             >
-              <tr class="hover:bg-gray-03 hover:bg-opacity-30">
+              <tr
+                class="hover:bg-gray-03 hover:bg-opacity-30"
+                v-if="date.end > new Date()"
+              >
                 <td class="p-3">{{ course.title }}</td>
                 <td>
                   {{ $date(date.start).format('YYYY-MM-DD HH:mm') }} ~
