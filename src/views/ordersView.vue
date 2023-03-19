@@ -2,6 +2,9 @@
   <main class="wrap min-h-[50vh]">
     <teleport to="title">訂單資訊</teleport>
     <h2 class="text-3xl font-black font-self text-brand-02">訂單資訊</h2>
+    <p v-if="!myOrders.length" class="text-3xl pt-[20vh] text-center">
+      當前沒有訂單
+    </p>
     <table
       v-for="order in myOrders.sort((a, b) => b.id - a.id)"
       :key="order.id"
