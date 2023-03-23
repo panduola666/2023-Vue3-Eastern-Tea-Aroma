@@ -13,7 +13,7 @@
           :key="item.name + item.path"
         >
           <router-link
-            :to="{ name: item.name }"
+            :to="{ name: item.path }"
             class="btn-outline w-full block outline-none"
             :class="{
               'bg-brand-02 text-white border-brand-02':

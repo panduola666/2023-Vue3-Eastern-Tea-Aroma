@@ -1,6 +1,6 @@
 <template>
   <div class="text-end">
-    <PostActivitiesModal :is-new="true">
+    <PostActivitiesModal :is-new="true" @click="() => (currentId = 0)">
       <template #btn-content>
         <button type="button" class="btn-primary lg:px-10 py-2 text-lg">
           新增活動
@@ -66,13 +66,13 @@
               >
                 查看活動
               </router-link>
-              <PostActivitiesModal :is-new="false">
+              <PostActivitiesModal
+                :is-new="false"
+                :activity-id="currentId"
+                @click="() => (currentId = activity.id)"
+              >
                 <template #btn-content>
-                  <button
-                    type="button"
-                    class="btn-outline py-1 px-2"
-                    @click="() => getCurrentActivity(activity.id)"
-                  >
+                  <button type="button" class="btn-outline py-1 px-2">
                     編輯
                   </button>
                 </template>
@@ -92,14 +92,16 @@ import { activitiesStore } from '@/stores/index.js'
 const { VITE_BASEURL } = import.meta.env
 
 export default {
+  data() {
+    return {
+      currentId: 0
+    }
+  },
   computed: {
     ...mapState(activitiesStore, ['activities'])
   },
   methods: {
-    ...mapActions(activitiesStore, [
-      'getAllActivitiesData',
-      'getCurrentActivity'
-    ]),
+    ...mapActions(activitiesStore, ['getAllActivitiesData']),
     async deleteActivity(id) {
       const { isConfirmed } = await this.$swal.fire({
         title: '是否刪除該活動',

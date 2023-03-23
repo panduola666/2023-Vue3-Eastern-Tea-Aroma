@@ -1,8 +1,14 @@
 <template>
   <div>
-    <DialogModal :finish-fn="finishFn" :cancel-fn="cancelFn">
+    <DialogModal
+      :finish-fn="finishFn"
+      :cancel-fn="cancelFn"
+      :is-finish="isFinish"
+    >
       <template #modal-btn>
-        <slot name="btn-content">按鈕</slot>
+        <div @click="() => (isFinish = false)">
+          <slot name="btn-content">按鈕</slot>
+        </div>
       </template>
       <template #modal-header>
         <h3 class="text-xl font-self">新增折扣碼</h3>
@@ -47,6 +53,7 @@
                     class="flex items-center border border-gray-01 shadow-lg h-full"
                   >
                     <button
+                      type="button"
                       class="p-2 bg-brand-01 bg-opacity-10 border-r border-gray-01 hover:bg-opacity-30 focus:bg-brand-02 focus:outline-none group h-full"
                       @click="() => togglePopover()"
                     >
@@ -114,7 +121,11 @@
                 <td>
                   {{ editorData.type === 'money' ? '實際金額' : '百分比' }}
                 </td>
-                <td :class="{ 'text-red-500': date < new Date().getTime() }">
+                <td
+                  :class="{
+                    'text-red-500': editorData.end < new Date().getTime()
+                  }"
+                >
                   {{ $date(editorData.end).format('YYYY-MM-DD') }}
                 </td>
                 <td>
@@ -160,7 +171,8 @@ export default {
   },
   data() {
     return {
-      editorData: {}
+      editorData: {},
+      isFinish: false
     }
   },
   computed: {
@@ -176,24 +188,44 @@ export default {
     ...mapActions(coursesStore, ['getCoursesData']),
     async finishFn() {
       const { code, type, scale, end } = this.editorData
-      if (!code || !type || !scale || !end) {
+      // 基本驗證
+      if (!code) {
         this.$swal.fire({
           icon: 'error',
-          title: '內容未填寫完成',
+          title: '折扣碼 未填寫',
           showConfirmButton: false,
           timer: 1500
         })
         return
       }
-      if (type === 'money' && scale > 200) {
+      if (!type) {
         this.$swal.fire({
           icon: 'error',
-          title: '現金折扣最多 200 元',
+          title: '請選擇 折扣方式',
           showConfirmButton: false,
           timer: 1500
         })
         return
       }
+      if (!scale || scale <= 0) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '折扣額度 未填寫',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+      if (end < new Date()) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '截止日期 不可小於今日',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+
       if (end < new Date()) {
         this.$swal.fire({
           icon: 'error',
@@ -212,30 +244,22 @@ export default {
       const day = new Date(end).getDate()
       this.editorData.end = new Date(year, month, day, 23, 59, 59).getTime()
       this.allProducts.forEach((product) => {
-        if (
-          (type === 'money'
-            ? product.price - scale
-            : Math.round(product.price * scale)) <= 0
-        ) {
-          this.$http
-            .patch(`${VITE_BASEURL}/products/${product.id}`, {
-              isDiscount: false
-            })
-            .then(() => this.getAllProducts())
+        if (type === 'money' && product.price - scale <= 0) {
+          product.isDiscount = false
+          if (product.isDiscount) return
+          this.$http.patch(`${VITE_BASEURL}/products/${product.id}`, {
+            isDiscount: false
+          })
         }
       })
       this.courses.forEach((course) => {
-        if (
-          (type === 'money'
-            ? course.price - scale
-            : Math.round(course.price * scale)) <= 0
-        ) {
+        if (type === 'money' && course.price - scale <= 0) {
           course.courseDates.forEach((date) => {
-            this.$http
-              .patch(`${VITE_BASEURL}/courseDates/${date.id}`, {
-                isDiscount: false
-              })
-              .then(() => this.getCoursesData())
+            date.isDiscount = false
+            if (course.isDiscount) return
+            this.$http.patch(`${VITE_BASEURL}/courseDates/${date.id}`, {
+              isDiscount: false
+            })
           })
         }
       })
@@ -244,13 +268,14 @@ export default {
         .then(() => {
           this.$swal.fire({
             icon: 'success',
-            title: '折扣碼新增成功',
+            title: '折扣碼修改成功',
             showConfirmButton: false,
             timer: 1500
           })
           this.editorData = { ...this.discountData }
           this.getDiscountData()
         })
+      this.isFinish = true
     },
     cancelFn() {
       this.editorData = { ...this.discountData }

@@ -1,8 +1,10 @@
 <template>
   <div>
-    <DialogModal :finish-fn="finishFn">
+    <DialogModal :finish-fn="finishFn" :is-finish="isFinish">
       <template #modal-btn>
-        <slot name="btn-content">按鈕</slot>
+        <div @click="() => (isFinish = false)">
+          <slot name="btn-content">按鈕</slot>
+        </div>
       </template>
       <template #modal-header>
         <h3 class="text-xl font-self">
@@ -60,7 +62,7 @@
                 type="text"
                 name="imgUrl"
                 id="imgUrl"
-                v-model="editorData.coverUrl"
+                v-model.trim="editorData.coverUrl"
                 class="border border-gray-01 p-2 w-full"
                 placeholder="請輸入圖片網址..."
                 aria-label="雲端圖片輸入框"
@@ -114,7 +116,7 @@
                     id="addNewCourse"
                     class="border border-gray-01 p-2 w-full"
                     placeholder="請輸入課程名稱..."
-                    v-model="newCourseTitle"
+                    v-model.trim="newCourseTitle"
                   />
                   <button
                     type="button"
@@ -137,8 +139,9 @@
                   <template v-slot="{ inputValue, togglePopover }">
                     <div class="flex items-center">
                       <button
+                        type="button"
                         class="p-2 bg-brand-01 bg-opacity-10 border border-brand-01 hover:bg-opacity-30 rounded-l focus:bg-brand-02 focus:border-brand-02 focus:outline-none group"
-                        @click="togglePopover()"
+                        @click="() => togglePopover()"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -311,6 +314,9 @@ export default {
     isNew: {
       typeof: Boolean,
       required: true
+    },
+    dateId: {
+      typeof: Number
     }
   },
   data() {
@@ -319,11 +325,12 @@ export default {
       coursesOptions: {},
       editorData: {},
       imageStyle: '雲端圖片',
-      isImgurLogin: sessionStorage.getItem('first_token') !== 'null'
+      isImgurLogin: sessionStorage.getItem('first_token') !== 'null',
+      isFinish: false
     }
   },
   computed: {
-    ...mapState(coursesStore, ['currentCourse', 'courses']),
+    ...mapState(coursesStore, ['courses', 'currentCourse']),
     ...mapState(updatedImgStore, ['imgUrl'])
   },
   components: {
@@ -335,7 +342,7 @@ export default {
       'getFirstToken',
       'clearImgUrl'
     ]),
-    ...mapActions(coursesStore, ['getCoursesData']),
+    ...mapActions(coursesStore, ['getCoursesData', 'getCurrent']),
     finishFn() {
       const {
         contents,
@@ -364,21 +371,35 @@ export default {
         })
         return
       }
+      // 基本驗證
+      if (title === '') {
+        this.$swal.fire({
+          icon: 'error',
+          title: '請選擇課程',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+      if (this.editorData.coverUrl === '') {
+        this.$swal.fire({
+          icon: 'error',
+          title: '請選擇課程封面',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+      if (this.editorData.price <= 0) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '課程售價不得為 0',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
       if (this.isNew) {
-        // 基本驗證
-        if (
-          price <= 0 ||
-          title.trim() === '' ||
-          this.editorData.coverUrl === ''
-        ) {
-          this.$swal.fire({
-            icon: 'error',
-            title: '內容未填寫完成',
-            showConfirmButton: false,
-            timer: 1500
-          })
-          return
-        }
         // 新增
         const coursesData = {
           contents,
@@ -425,7 +446,7 @@ export default {
                   ...courseDatesData,
                   courseId: res.data.id
                 })
-                .then((res) => {
+                .then(() => {
                   this.$swal.fire({
                     icon: 'success',
                     title: '課程新增成功',
@@ -439,7 +460,6 @@ export default {
       } else {
         // 編輯
         const { id } = this.editorData
-
         const coursesData = {
           contents,
           coverUrl: this.editorData.coverUrl,
@@ -471,6 +491,8 @@ export default {
           })
       }
       this.clearImgUrl()
+      this.$emit('update:date-id', 0)
+      this.isFinish = true
     },
     addNewCourse() {
       this.coursesOptions[this.newCourseTitle]
@@ -506,6 +528,9 @@ export default {
     }
   },
   watch: {
+    dateId(id) {
+      this.getCurrent(id)
+    },
     currentCourse() {
       if (!this.currentCourse.id) {
         this.editorData = this.currentCourse

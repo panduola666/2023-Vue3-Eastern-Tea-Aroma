@@ -13,7 +13,7 @@
     ></article>
     <img
       :src="activity.coverUrl"
-      alt="activity.title"
+      :alt="activity.title"
       class="w-full max-h-96 object-cover"
     />
     <p class="mt-10 pt-3 border-t-2 border-brand-02">更多活動</p>
@@ -24,10 +24,11 @@
           v-if="index < 5 && activity.id !== +this.$route.params.id"
         >
           <router-link
-            to=""
+            :to="`/activity/${activity.id}`"
             class="hover:text-gray-01 underline underline-offset-2 hover:bg-brand-03 hover:bg-opacity-20"
           >
             {{ activity.title }}
+            ( {{ modeUrl + activity.id }} )
           </router-link>
         </li>
       </template>
@@ -37,9 +38,15 @@
 <script>
 import { mapState, mapActions } from 'pinia'
 import { activitiesStore } from '../stores/index.js'
+const { MODE } = import.meta.env
 export default {
   computed: {
-    ...mapState(activitiesStore, ['activity', 'activities'])
+    ...mapState(activitiesStore, ['activity', 'activities']),
+    modeUrl() {
+      return MODE === 'production'
+        ? 'https://panduola666.github.io/2023-Vue3-Eastern-Tea-Aroma/#/activity/'
+        : 'http://127.0.0.1:5173/#/activity/'
+    }
   },
   methods: {
     ...mapActions(activitiesStore, [

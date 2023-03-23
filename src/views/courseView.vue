@@ -73,7 +73,7 @@
         </button>
       </section>
     </div>
-    <DiscountInfo v-if="currentCourse.isDiscount"></DiscountInfo>
+    <DiscountInfo v-if="currentCourse.isDiscount" />
     <article
       class="text-brand-05 lg:text-lg font-medium leading-8 tracking-wider mt-10"
     >
@@ -115,14 +115,15 @@
                 - {{ $date(courseDate.start).format('HH:mm') }}~{{
                   $date(courseDate.end).format('HH:mm')
                 }}
-                ／ 價格: {{ toThousand(course.price) }} 元</span
-              >
+                ／ 價格: {{ toThousand(course.price) }} 元 (
+                {{ modeUrl + courseDate.id }} )
+              </span>
             </router-link>
           </li>
         </template>
       </template>
     </ol>
-    <CourseList class="border-t-2 border-line mt-10 pt-5"></CourseList>
+    <CourseList class="border-t-2 border-line mt-10 pt-5" />
   </main>
 </template>
 <script>
@@ -135,7 +136,7 @@ import {
   toThousand
 } from '../stores/index.js'
 import { mapState, mapActions } from 'pinia'
-
+const { MODE } = import.meta.env
 export default {
   computed: {
     ...mapState(coursesStore, ['currentCourse', 'courses']),
@@ -168,6 +169,11 @@ export default {
           +sessionStorage.getItem('userId')
         )
       )
+    },
+    modeUrl() {
+      return MODE === 'production'
+        ? 'https://panduola666.github.io/2023-Vue3-Eastern-Tea-Aroma/#/course/'
+        : 'http://127.0.0.1:5173/#/course/'
     }
   },
   methods: {

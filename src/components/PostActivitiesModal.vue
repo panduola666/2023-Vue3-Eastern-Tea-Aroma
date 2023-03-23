@@ -1,8 +1,14 @@
 <template>
   <div>
-    <DialogModal :finish-fn="finishFn" :cancel-fn="cancelFn">
+    <DialogModal
+      :finish-fn="finishFn"
+      :cancel-fn="cancelFn"
+      :is-finish="isFinish"
+    >
       <template #modal-btn>
-        <slot name="btn-content">按鈕</slot>
+        <div @click="() => (isFinish = false)">
+          <slot name="btn-content">按鈕</slot>
+        </div>
       </template>
       <template #modal-header>
         <h2 class="text-xl font-black font-self text-brand-02">
@@ -140,6 +146,9 @@ export default {
     isNew: {
       typeof: Boolean,
       required: true
+    },
+    activityId: {
+      typeof: Number
     }
   },
   data: () => ({
@@ -155,7 +164,8 @@ export default {
       placeholder: '請輸入活動內容...',
       toolbar: ['bold', 'italic', 'blockQuote', '|', 'undo', 'redo']
     },
-    isImgurLogin: sessionStorage.getItem('first_token') !== 'null'
+    isImgurLogin: sessionStorage.getItem('first_token') !== 'null',
+    isFinish: false
   }),
   computed: {
     ...mapState(updatedImgStore, ['imgUrl']),
@@ -163,7 +173,10 @@ export default {
   },
   methods: {
     ...mapActions(updatedImgStore, ['postFinal']),
-    ...mapActions(activitiesStore, ['getAllActivitiesData']),
+    ...mapActions(activitiesStore, [
+      'getAllActivitiesData',
+      'getCurrentActivity'
+    ]),
     finishFn() {
       const { content, title } = this.activitiesData
       if (this.imageStyle === '本地圖片') {
@@ -178,15 +191,35 @@ export default {
         })
         return
       }
-      if (!content | !title | !this.activitiesData.coverUrl) {
+      // 基本驗證
+      if (!title) {
         this.$swal.fire({
           icon: 'error',
-          title: '內容未填寫完成',
+          title: '活動標題 未填寫',
           showConfirmButton: false,
           timer: 1500
         })
         return
       }
+      if (!this.activitiesData.coverUrl) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '請選擇活動封面',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+      if (!content) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '活動內容 未填寫',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+
       if (this.isNew) {
         // 新增
         this.activitiesData.created = new Date().getTime()
@@ -219,6 +252,7 @@ export default {
             this.getAllActivitiesData()
           })
       }
+      this.isFinish = true
     },
     cancelFn() {
       this.activitiesData = this.$options.data().activitiesData
@@ -231,6 +265,9 @@ export default {
         this.activitiesData = { ...this.activity }
       },
       deep: true
+    },
+    activityId(id) {
+      this.getCurrentActivity(id)
     }
   },
   components: {

@@ -7,22 +7,40 @@ const { VITE_BASEURL } = import.meta.env
 export default defineStore('coursesStore', {
   state: () => ({
     courses: [],
-    currentCourse: {}
+    currentCourse: {},
+    dates: []
   }),
   actions: {
     async getCoursesData() {
       const loading = vueLoadingStore()
       loading.openLoading()
-      const res = await axios.get(
-        `${VITE_BASEURL}/courses?_expand=user&_embed=courseDates`
-      )
-      if (loading.isLoading) loading.closeLoading()
-      this.courses = res.data
+      try {
+        const res = await axios.get(
+          `${VITE_BASEURL}/courses?_expand=user&_embed=courseDates`
+        )
+        if (loading.isLoading) loading.closeLoading()
+        this.courses = res.data
+      } catch (err) {
+        loading.closeLoading()
+      }
+    },
+    async getDates() {
+      const loading = vueLoadingStore()
+      try {
+        const res = await axios.get(
+          `${VITE_BASEURL}/courseDates?_expand=course`
+        )
+        if (loading.isLoading) loading.closeLoading()
+        this.dates = res.data
+      } catch (err) {
+        loading.closeLoading()
+      }
     },
     async getCurrent(courseDateId, isNew = false) {
       const updatedImg = updatedImgStore()
+      const loading = vueLoadingStore()
       updatedImg.imgUrl = ''
-      if (isNew) {
+      if (isNew || courseDateId <= 0) {
         this.currentCourse = {
           title: '',
           coverUrl: '',
@@ -39,7 +57,6 @@ export default defineStore('coursesStore', {
         return
       }
       try {
-        const loading = vueLoadingStore()
         loading.openLoading()
         const courseDate = await axios.get(
           `${VITE_BASEURL}/courseDates/${courseDateId}?_expand=course&_expand=user`
@@ -58,7 +75,7 @@ export default defineStore('coursesStore', {
           })
           return
         }
-        console.log(err)
+        loading.closeLoading()
       }
     },
     patchSaved(courseDate) {

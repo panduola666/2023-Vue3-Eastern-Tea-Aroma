@@ -6,15 +6,15 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      component: () => import('../views/frontLayout.vue'),
+      component: () => import('../views/FrontLayout.vue'),
       children: [
         {
           path: '',
-          component: () => import('../views/indexView.vue')
+          component: () => import('../views/IndexView.vue')
         },
         {
           path: 'login',
-          component: () => import('../views/loginView.vue')
+          component: () => import('../views/LoginView.vue')
         },
         {
           path: 'user',
@@ -22,45 +22,45 @@ const router = createRouter({
             {
               path: '',
               name: '會員首頁',
-              component: () => import('../views/userView.vue')
+              component: () => import('../views/UserView.vue')
             },
             {
               path: 'orders',
-              name: '訂單詳情',
-              component: () => import('../views/ordersView.vue')
+              name: 'orders',
+              component: () => import('../views/OrdersView.vue')
             },
             {
               path: 'collects',
-              name: '收藏項目',
-              component: () => import('../views/collectsView.vue')
+              name: 'collects',
+              component: () => import('../views/CollectsView.vue')
             },
             {
               path: 'reserve',
-              name: '課程預約',
-              component: () => import('../views/reserveView.vue')
+              name: 'reserve',
+              component: () => import('../views/ReserveView.vue')
             }
           ]
         },
         {
           path: 'courses',
-          component: () => import('../views/coursesView.vue')
+          component: () => import('../views/CoursesView.vue')
         },
         {
           path: 'course/:id',
-          component: () => import('../views/courseView.vue')
+          component: () => import('../views/CourseView.vue')
         },
         {
           path: 'shoppingMall',
           name: 'shoppingMall',
-          component: () => import('../views/shoppingMallView.vue')
+          component: () => import('../views/ShoppingMallView.vue')
         },
         {
           path: 'product/:id',
-          component: () => import('../views/productView.vue')
+          component: () => import('../views/ProductView.vue')
         },
         {
           path: 'activity/:id',
-          component: () => import('../views/activityView.vue')
+          component: () => import('../views/ActivityView.vue')
         },
         {
           path: 'shopCart',
@@ -68,75 +68,75 @@ const router = createRouter({
             {
               path: '',
               name: 'shopCart',
-              component: () => import('../views/shopCartView.vue')
+              component: () => import('../views/ShopCartView.vue')
             },
             {
               path: 'info',
               name: 'buyerInfo',
-              component: () => import('../views/buyerInfoView.vue')
+              component: () => import('../views/BuyerInfoView.vue')
             }
           ]
         },
         {
           path: 'knowledge',
-          component: () => import('../views/knowledgeView.vue')
+          component: () => import('../views/KnowledgeView.vue')
         }
       ]
     },
     {
       path: '/admin',
-      component: () => import('../views/admin/backstageLayout.vue'),
+      component: () => import('../views/admin/BackstageLayout.vue'),
       children: [
         {
           path: '',
-          name: '課程列表',
-          component: () => import('../views/admin/admin-coursesView.vue')
+          name: 'admin-courses',
+          component: () => import('../views/admin/Admin-coursesView.vue')
         },
         {
           path: 'user',
-          component: () => import('../views/userView.vue')
+          component: () => import('../views/UserView.vue')
         },
         {
           path: 'discount',
-          name: '折扣碼',
-          component: () => import('../views/admin/admin-discountsView.vue')
+          name: 'admin-discounts',
+          component: () => import('../views/admin/Admin-discountsView.vue')
         },
         {
           path: 'manage',
-          component: () => import('../views/admin/manageLayout.vue'),
+          component: () => import('../views/admin/ManageLayout.vue'),
           children: [
             {
               path: 'products',
-              name: '商品',
-              component: () => import('../views/admin/admin-products.vue')
+              name: 'products',
+              component: () => import('../views/admin/Admin-products.vue')
             },
             {
               path: 'orders',
-              name: '訂單',
-              component: () => import('../views/admin/admin-orders.vue')
+              name: 'orders',
+              component: () => import('../views/admin/Admin-orders.vue')
             },
             {
               path: 'activities',
-              name: '活動',
-              component: () => import('../views/admin/admin-activities.vue')
+              name: 'activities',
+              component: () => import('../views/admin/Admin-activities.vue')
             }
           ]
         },
         {
           path: 'analyze',
-          name: '數據分析',
-          component: () => import('../views/admin/admin-analyzeView.vue')
+          name: 'admin-analyze',
+          component: () => import('../views/admin/Admin-analyzeView.vue')
         }
       ]
     },
     {
       path: '/:pathMatch(.*)*',
-      component: () => import('../views/frontLayout.vue'),
-      children: [{ path: '', component: () => import('../views/notFound.vue') }]
+      component: () => import('../views/FrontLayout.vue'),
+      children: [{ path: '', component: () => import('../views/NotFound.vue') }]
     }
-  ]
-})
-router.afterEach(() => {
-  window.scrollTo(0, 0)
+  ],
+  scrollBehavior() {
+    return { top: 0 }
+  }
 })
 export default router

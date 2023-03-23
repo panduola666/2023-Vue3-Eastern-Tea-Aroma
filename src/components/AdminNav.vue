@@ -12,7 +12,7 @@
           class="text-xl leading-[30px] pb-[10px] pt-[18px] hover:text-brand-01"
         >
           <router-link
-            :to="{ name: '課程列表' }"
+            :to="{ name: 'admin-courses' }"
             :class="{ 'font-semibold': this.$route.path === '/admin' }"
             >課程列表</router-link
           >
@@ -21,7 +21,7 @@
           class="text-xl leading-[30px] pb-[10px] pt-[18px] hover:text-brand-01"
         >
           <router-link
-            :to="{ name: '折扣碼' }"
+            :to="{ name: 'admin-discounts' }"
             :class="{ 'font-semibold': this.$route.path === '/admin/discount' }"
             >折扣碼</router-link
           >
@@ -78,7 +78,7 @@
           class="text-xl leading-[30px] pb-[10px] pt-[18px] hover:text-brand-01"
         >
           <router-link
-            :to="{ name: '數據分析' }"
+            :to="{ name: 'admin-analyze' }"
             :class="{ 'font-semibold': this.$route.path === '/admin/analyze' }"
           >
             數據分析

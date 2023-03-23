@@ -43,7 +43,7 @@
     }
   ],
   "discount": {
-    "code": "abc",
+    "code": "ee",
     "type": "money",
     "scale": 200,
     "end": 1680278399000
@@ -60,12 +60,7 @@
         "建立自己的品位，足夠的知識亦可在人際交流上擁有更多話題"
       ],
       "userId": 1,
-      "scores": [
-        {
-          "score": 4,
-          "userId": 1
-        }
-      ],
+      "scores": [],
       "price": 3000
     },
     {
@@ -78,7 +73,12 @@
         "體驗不同茶葉間口感的區分"
       ],
       "userId": 1,
-      "scores": [],
+      "scores": [
+        {
+          "score": 3,
+          "userId": 1
+        }
+      ],
       "price": 2500,
       "id": 2
     },
@@ -105,12 +105,7 @@
       "coverUrl": "https://images.unsplash.com/photo-1551540827-6c8ae1aaedbb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
       "price": 2000,
       "title": "鍋煮香料奶茶學",
-      "scores": [
-        {
-          "score": 4,
-          "userId": 2
-        }
-      ],
+      "scores": [],
       "userId": 1,
       "id": 4
     },
@@ -127,6 +122,17 @@
       "scores": [],
       "userId": 1,
       "id": 5
+    },
+    {
+      "contents": [
+        ""
+      ],
+      "coverUrl": "dqw",
+      "price": 0,
+      "title": "dwq",
+      "scores": [],
+      "userId": 1,
+      "id": 6
     }
   ],
   "courseDates": [
@@ -138,7 +144,7 @@
       "end": 1675063800000,
       "total": 30,
       "savedUsersId": [],
-      "isDiscount": true,
+      "isDiscount": false,
       "created": 1674835200000
     },
     {
@@ -149,19 +155,8 @@
       "end": 1679482800000,
       "total": 30,
       "savedUsersId": [],
-      "isDiscount": true,
-      "created": 1677513600000
-    },
-    {
-      "id": 3,
-      "courseId": 2,
-      "userId": 1,
-      "start": 1678510800000,
-      "end": 1678516200000,
-      "total": 15,
-      "savedUsersId": [],
       "isDiscount": false,
-      "created": 1677772800000
+      "created": 1677513600000
     },
     {
       "end": 1679913000000,
@@ -171,19 +166,8 @@
       "savedUsersId": [],
       "isDiscount": false,
       "created": 1678117379857,
-      "courseId": 3,
+      "courseId": 1,
       "id": 4
-    },
-    {
-      "end": 1679819400000,
-      "start": 1679814000000,
-      "total": 10,
-      "userId": 1,
-      "savedUsersId": [],
-      "isDiscount": false,
-      "created": 1678123667312,
-      "courseId": 4,
-      "id": 5
     },
     {
       "end": 1678165200000,
@@ -208,41 +192,26 @@
       "id": 7
     },
     {
-      "end": 1679490000000,
-      "start": 1679479200000,
-      "total": 13,
+      "end": 1678780800000,
+      "start": 1678770000000,
+      "total": 0,
       "userId": 1,
       "savedUsersId": [],
-      "isDiscount": true,
-      "created": 1679155430644,
-      "courseId": 2,
+      "isDiscount": false,
+      "created": 1679588635800,
+      "courseId": 1,
       "id": 8
     },
     {
-      "end": 1680001200000,
-      "start": 1679997600000,
-      "total": 20,
+      "end": 1679634000000,
+      "start": 1679634000000,
+      "total": 32,
       "userId": 1,
-      "savedUsersId": [
-        2
-      ],
-      "isDiscount": true,
-      "created": 1679156871174,
+      "savedUsersId": [],
+      "isDiscount": false,
+      "created": 1679588665595,
       "courseId": 4,
       "id": 9
-    },
-    {
-      "end": 1679389200000,
-      "start": 1679382000000,
-      "total": 20,
-      "userId": 1,
-      "savedUsersId": [
-        2
-      ],
-      "isDiscount": false,
-      "created": 1679165721435,
-      "courseId": 1,
-      "id": 10
     }
   ],
   "products": [
@@ -320,7 +289,7 @@
       "price": 500,
       "totalNumber": 5,
       "content": "<p>紫砂壺有著其他茶器所沒有的壹大特質：雙重氣孔結構，氣孔微細，密度高。用以泡茶不失原味“色香味皆蘊”，使“茶葉越發醇郁芳沁”。 紫砂壺中的壹些微量元素對人體健康十分有益，紫砂富含天然鐵質，有調節人體內分泌及血脂、血糖、膽固醇含量，降肝火，幫助胃功能過濾尿毒等功效。而茶葉中本身就含有大量保健因子能控制糖份被身體吸收，紫砂壺則是將茶的這壹好處發揮到極致。</p>",
-      "isDiscount": false,
+      "isDiscount": true,
       "id": 7
     }
   ],
@@ -407,201 +376,6 @@
           "courseDateId": 1
         }
       ]
-    },
-    {
-      "created": 1679587200000,
-      "finish": true,
-      "isCancel": true,
-      "trackingNumber": "",
-      "userId": 2,
-      "buyerInfo": {
-        "name": "1",
-        "tel": "1",
-        "method": "自取",
-        "address": "",
-        "payMethods": {
-          "choose": "貨到付款",
-          "cardNumber": "",
-          "cardTime": [
-            "",
-            ""
-          ],
-          "cardCode": ""
-        }
-      },
-      "discount": {
-        "code": "test123",
-        "type": "money",
-        "scale": 20
-      },
-      "cart": [
-        {
-          "type": "高山烏龍",
-          "name": "阿里山烏龍茶",
-          "price": 700,
-          "number": 1,
-          "totalPrice": 700,
-          "isDiscount": true,
-          "productId": 1
-        },
-        {
-          "type": "紫砂壺",
-          "name": "黑色高梨壺",
-          "price": 100,
-          "number": 1,
-          "totalPrice": 100,
-          "isDiscount": false,
-          "productId": 3
-        },
-        {
-          "name": "茶葉的風味鑑賞學",
-          "start": 1679479200000,
-          "end": 1679482800000,
-          "price": 3000,
-          "number": 1,
-          "totalPrice": 3000,
-          "isDiscount": true,
-          "courseDateId": 2
-        }
-      ],
-      "id": 2
-    },
-    {
-      "userId": 2,
-      "isCancel": true,
-      "buyerInfo": {
-        "name": "d",
-        "tel": "231",
-        "method": "自取",
-        "address": "",
-        "payMethods": {
-          "choose": "貨到付款",
-          "cardNumber": "",
-          "cardTime": [
-            "",
-            ""
-          ],
-          "cardCode": ""
-        }
-      },
-      "discount": {
-        "code": "",
-        "type": "",
-        "scale": ""
-      },
-      "cart": [
-        {
-          "type": "高山烏龍",
-          "name": "杉林溪烏龍茶",
-          "price": 200,
-          "number": 3,
-          "totalPrice": 600,
-          "isDiscount": false,
-          "productId": 2
-        }
-      ],
-      "trackingNumber": "",
-      "created": 1677773823142,
-      "finish": true,
-      "id": 3
-    },
-    {
-      "userId": 2,
-      "finish": true,
-      "isCancel": false,
-      "buyerInfo": {
-        "name": "dwqdqd",
-        "tel": "32",
-        "method": "自取",
-        "address": "",
-        "payMethods": {
-          "choose": "貨到付款",
-          "cardNumber": "",
-          "cardTime": [
-            "",
-            ""
-          ],
-          "cardCode": ""
-        }
-      },
-      "discount": {
-        "code": "",
-        "type": "",
-        "scale": ""
-      },
-      "cart": [
-        {
-          "type": "高山烏龍",
-          "name": "杉林溪烏龍茶",
-          "price": 200,
-          "number": 1,
-          "totalPrice": 200,
-          "isDiscount": false,
-          "productId": 2
-        }
-      ],
-      "trackingNumber": "ww",
-      "created": 1677773874470,
-      "id": 4
-    },
-    {
-      "userId": 2,
-      "buyerInfo": {
-        "name": "2ewqe",
-        "tel": "321",
-        "method": "自取",
-        "address": "",
-        "payMethods": {
-          "choose": "貨到付款",
-          "cardNumber": "",
-          "cardTime": [
-            "",
-            ""
-          ],
-          "cardCode": ""
-        }
-      },
-      "discount": {
-        "code": "",
-        "type": "",
-        "scale": ""
-      },
-      "cart": [
-        {
-          "type": "紫砂壺",
-          "name": "綠意陶瓷壺",
-          "price": 500,
-          "number": 2,
-          "totalPrice": 1000,
-          "isDiscount": false,
-          "productId": 7
-        },
-        {
-          "name": "茶葉的風味鑑賞學",
-          "start": 1679479200000,
-          "end": 1679482800000,
-          "price": 3000,
-          "number": 2,
-          "totalPrice": 6000,
-          "isDiscount": true,
-          "courseDateId": 2
-        },
-        {
-          "name": "鍋煮香料奶茶學",
-          "start": 1679983200000,
-          "end": 1679988600000,
-          "price": 2000,
-          "number": 1,
-          "totalPrice": 2000,
-          "isDiscount": false,
-          "courseDateId": 9
-        }
-      ],
-      "trackingNumber": "",
-      "created": 1679206694816,
-      "finish": false,
-      "isCancel": false,
-      "id": 5
     }
   ],
   "avatars": [

@@ -5,9 +5,8 @@
       :is-full-page="true"
       :can-cancel="true"
       :on-cancel="closeLoading"
-    >
-    </loading>
-    <router-view></router-view>
+    />
+    <router-view />
   </div>
 </template>
 <script>

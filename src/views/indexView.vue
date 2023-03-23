@@ -3,7 +3,7 @@
   <div class="lg:mb-[120px]">
     <teleport to="title">東方茶香</teleport>
     <!-- BANNER -->
-    <bannerSwiper></bannerSwiper>
+    <bannerSwiper />
     <div
       class="xl:w-[70%] lg:w-[80%] w-[90%] mx-auto bg-brand-06 mt-20 transition-all relative h-[478px] hidden lg:flex"
       @mouseleave="() => checked = false"
@@ -91,16 +91,14 @@
         class="w-full h-[282px] object-cover"
       />
     </div>
-    <course-list class="wrap mb-0 mt-14"></course-list>
-    <activity-list></activity-list>
+    <course-list class="wrap mb-0 mt-14" />
+    <activity-list />
   </div>
 </template>
 <script>
 import bannerSwiper from '../components/BannerSwiper.vue'
 import courseList from '../components/CourseList.vue'
 import activityList from '../components/ActivityList.vue'
-// import { mapActions,mapState } from 'pinia'
-// import { userStore } from '../stores/index.js'
 
 export default {
   data() {

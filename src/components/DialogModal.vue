@@ -91,6 +91,10 @@ export default {
     },
     cancelFn: {
       type: Function
+    },
+    isFinish: {
+      type: Boolean,
+      required: true
     }
   },
   data() {
@@ -100,8 +104,10 @@ export default {
   },
   methods: {
     finish() {
-      this.isOpen = false
       this.finishFn && this.finishFn()
+      if (this.isFinish) {
+        this.isOpen = false
+      }
     },
     closeModal() {
       this.isOpen = false
@@ -109,6 +115,13 @@ export default {
     },
     openModal() {
       this.isOpen = true
+    }
+  },
+  watch: {
+    isFinish() {
+      if (this.isFinish) {
+        this.isOpen = false
+      }
     }
   },
   components: {

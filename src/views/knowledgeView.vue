@@ -45,7 +45,7 @@
       </p>
       <img
         src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/teaBook.jpg?raw=true"
-        alt=""
+        alt="茶經"
         class="object-cover w-full"
       />
     </article>

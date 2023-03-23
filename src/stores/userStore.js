@@ -18,13 +18,17 @@ export default defineStore('userDataStore', {
     getAllUser() {
       const loading = vueLoadingStore()
       loading.openLoading()
-      axios.get(`${VITE_BASEURL}/users`).then((res) => {
-        if (loading.isLoading) loading.closeLoading()
-        this.allUser = res.data
-      })
+      axios
+        .get(`${VITE_BASEURL}/users`)
+        .then((res) => {
+          if (loading.isLoading) loading.closeLoading()
+          this.allUser = res.data
+        })
+        .catch(() => {
+          loading.closeLoading()
+        })
     },
     getUserData() {
-      // 必登入情況
       const loading = vueLoadingStore()
       loading.openLoading()
       axios.defaults.headers.common.Authorization = `Bearer ${sessionStorage.getItem(
@@ -36,7 +40,7 @@ export default defineStore('userDataStore', {
             'userId'
           )}?_expand=avatar&_embed=orders`
         )
-        .then((res) => {
+        .then(async (res) => {
           if (loading.isLoading) loading.closeLoading()
           this.isLogin = true
           this.user = res.data
@@ -47,12 +51,22 @@ export default defineStore('userDataStore', {
             router.currentRoute.value.fullPath.startsWith('/admin') &&
             !this.user.isAdmin
           ) {
-            router.push('/')
+            const res = await Swal.fire({
+              icon: 'error',
+              title: '僅講師登入',
+              showConfirmButton: false,
+              timer: 1500,
+              allowOutsideClick: false
+            })
+            if (res.isDismissed) {
+              router.push('/')
+            }
           }
         })
         .catch((err) => {
+          loading.closeLoading()
           sessionStorage.clear()
-          console.log(err.response)
+          console.log(err)
           this.isLogin = false
           if (
             !this.isLogin &&
@@ -270,6 +284,5 @@ export default defineStore('userDataStore', {
           })
         })
     }
-  },
-  getters: {}
+  }
 })

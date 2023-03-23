@@ -1,8 +1,14 @@
 <template>
   <div>
-    <DialogModal :finish-fn="finishFn" :cancel-fn="cancelFn">
+    <DialogModal
+      :finish-fn="finishFn"
+      :cancel-fn="cancelFn"
+      :is-finish="isFinish"
+    >
       <template #modal-btn>
-        <slot name="btn-content">按鈕</slot>
+        <div @click="() => (isFinish = false)">
+          <slot name="btn-content">按鈕</slot>
+        </div>
       </template>
       <template #modal-header>
         <h2 class="text-xl font-black font-self text-brand-02">
@@ -314,7 +320,8 @@ export default {
     isNewTypeOpen: false,
     isNewGroupOpen: false,
     newTypeInput: '',
-    newGroupInput: ''
+    newGroupInput: '',
+    isFinish: false
   }),
   computed: {
     ...mapState(updatedImgStore, ['imgUrl'])
@@ -342,15 +349,52 @@ export default {
         })
         return
       }
-      if (!type || !group || !name || !content) {
+      if (this.currentData.coverUrl === '') {
         this.$swal.fire({
           icon: 'error',
-          title: '內容未填寫完成',
+          title: '請選擇商品封面',
           showConfirmButton: false,
           timer: 1500
         })
         return
       }
+      if (!name) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '商品標題 未填寫',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+      if (!group) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '請選擇 商品系列',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+      if (!type) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '請選擇 商品分類',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+      if (!content) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '商品介紹 未填寫',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
+
       if (price < 1 || totalNumber < 1) {
         this.$swal.fire({
           icon: 'error',
@@ -376,7 +420,6 @@ export default {
           })
       } else {
         // 編輯
-        console.log(this.currentData)
         this.$http
           .patch(
             `${VITE_BASEURL}/products/${this.currentData.id}`,
@@ -392,6 +435,7 @@ export default {
             this.getAllProducts()
           })
       }
+      this.isFinish = true
     },
     cancelFn() {
       if (this.isNew) {

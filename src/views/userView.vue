@@ -26,14 +26,18 @@
         id="userChoose"
       >
         <li
-          v-for="(item, index) in ['課程預約', '訂單詳情', '收藏項目']"
-          :key="item + index"
+          v-for="item in [
+            { name: '課程預約', path: 'reserve' },
+            { name: '訂單詳情', path: 'orders' },
+            { name: '收藏項目', path: 'collects' }
+          ]"
+          :key="item.name + item.path"
         >
           <router-link
-            :to="{ name: item }"
+            :to="{ name: item.path }"
             class="block p-4 hover:bg-brand-03 hover:bg-opacity-20 cursor-pointer text-brand-02 text-xl lg:text-3xl"
           >
-            {{ item }}
+            {{ item.name }}
           </router-link>
         </li>
         <li>

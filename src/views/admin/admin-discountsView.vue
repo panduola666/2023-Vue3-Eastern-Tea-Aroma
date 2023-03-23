@@ -9,7 +9,7 @@
         :courses="courses"
       >
         <template #btn-content>
-          <button type="button" class="btn-primary">新增折扣碼</button>
+          <button type="button" class="btn-primary">修改折扣碼</button>
         </template>
       </PostDiscountModal>
     </div>
@@ -84,7 +84,7 @@
                 <input
                   type="checkbox"
                   :name="product.id"
-                  :id="product.id"
+                  :id="'products' + product.id"
                   class="scale-150 cursor-pointer mr-2"
                   v-model.trim="product.isDiscount"
                   @change="
@@ -92,7 +92,7 @@
                   "
                 />
                 <label
-                  :for="product.id"
+                  :for="'products' + product.id"
                   class="cursor-pointer"
                   :class="{
                     'text-red-500': !product.isDiscount,
@@ -145,7 +145,7 @@
                   <input
                     type="checkbox"
                     :name="date.id"
-                    :id="date.id"
+                    :id="'courseDates' + date.id"
                     class="scale-150 cursor-pointer mr-2"
                     v-model.trim="date.isDiscount"
                     @change="
@@ -154,7 +154,7 @@
                     "
                   />
                   <label
-                    :for="date.id"
+                    :for="'courseDates' + date.id"
                     class="cursor-pointer"
                     :class="{
                       'text-red-500': !date.isDiscount,

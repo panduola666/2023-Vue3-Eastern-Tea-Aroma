@@ -68,7 +68,7 @@
             >
               <img
                 src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon-.png?raw=true"
-                alt=""
+                alt="收合"
               />
             </button>
             <p
@@ -88,7 +88,7 @@
             >
               <img
                 src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon+.png?raw=true"
-                alt=""
+                alt="展開"
               />
             </button>
           </div>
@@ -105,7 +105,7 @@
         </div>
       </div>
     </div>
-    <DiscountInfo v-if="currentProduct.isDiscount"></DiscountInfo>
+    <DiscountInfo v-if="currentProduct.isDiscount" />
     <article class="text-brand-05 text-lg font-medium grid gap-4 mt-10">
       <p class="text-2xl font-black font-self">介紹</p>
       <p v-html="currentProduct.content"></p>

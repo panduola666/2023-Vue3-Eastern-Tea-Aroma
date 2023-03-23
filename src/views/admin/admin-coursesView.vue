@@ -33,9 +33,14 @@
       <PostCourseModal :is-new="true">
         <template #btn-content>
           <button
-            typeof="button"
+            type="button"
             class="btn-primary w-full"
-            @click="() => getCurrent(0, true)"
+            @click="
+              () => {
+                dateId = 0
+                getCurrent(0, true)
+              }
+            "
           >
             開新課程
           </button>
@@ -68,12 +73,16 @@
               </template>
               <template #card-header>
                 <h1>{{ course.title }}</h1>
-                <PostCourseModal :is-new="false" class="z-10">
+                <PostCourseModal
+                  :is-new="false"
+                  class="z-10"
+                  :date-id="dateId"
+                  @click="() => (dateId = date.id)"
+                >
                   <template #btn-content>
                     <button
-                      typeof="button"
+                      type="button"
                       class="btn-outline py-2 text-base mb-1"
-                      @click="() => getCurrent(date.id)"
                     >
                       編輯
                     </button>
@@ -108,7 +117,7 @@
                   ></DiscountToggle>
                   <div class="flex flex-col-reverse md:flex-row gap-3">
                     <button
-                      typeof="button"
+                      type="button"
                       class="btn-outline"
                       @click="() => deleteCurrent(date.id)"
                     >
@@ -119,12 +128,15 @@
                       class="btn-outline text-center"
                       >課程詳情</router-link
                     >
-                    <OrderCourseModal :orders="orders" :id="date.id">
+                    <OrderCourseModal
+                      :orders="orders"
+                      :date-id="dateId"
+                      @click="() => (dateId = date.id)"
+                    >
                       <template #btn-content>
                         <button
-                          typeof="button"
+                          type="button"
                           class="btn-primary md:w-max w-full"
-                          @click="() => getCurrent(date.id)"
                         >
                           預約詳情
                         </button>
@@ -158,12 +170,15 @@
               </template>
               <template #card-header>
                 <h1>{{ course.title }}</h1>
-                <PostCourseModal :is-new="false">
+                <PostCourseModal
+                  :is-new="false"
+                  :date-id="dateId"
+                  @click="() => (dateId = date.id)"
+                >
                   <template #btn-content>
                     <button
-                      typeof="button"
+                      type="button"
                       class="btn-outline py-2 text-base mb-1"
-                      @click="() => getCurrent(date.id)"
                     >
                       編輯
                     </button>
@@ -194,7 +209,7 @@
                   ></DiscountToggle>
                   <div class="flex flex-col-reverse md:flex-row gap-3">
                     <button
-                      typeof="button"
+                      type="button"
                       class="btn-outline"
                       @click="() => deleteCurrent(date.id)"
                     >
@@ -205,12 +220,15 @@
                       class="btn-outline text-center"
                       >課程詳情</router-link
                     >
-                    <OrderCourseModal :orders="orders" :id="date.id">
+                    <OrderCourseModal
+                      :orders="orders"
+                      :date-id="dateId"
+                      @click="() => (dateId = date.id)"
+                    >
                       <template #btn-content>
                         <button
-                          typeof="button"
+                          type="button"
                           class="btn-primary md:w-max w-full"
-                          @click="() => getCurrent(date.id)"
                         >
                           預約詳情
                         </button>
@@ -251,11 +269,12 @@ export default {
       isImgurLogin:
         sessionStorage.getItem('imgurId') &&
         sessionStorage.getItem('imgurSecret'),
-      isImgurToken: sessionStorage.getItem('first_token') !== 'null'
+      isImgurToken: sessionStorage.getItem('first_token') !== 'null',
+      dateId: 0
     }
   },
   computed: {
-    ...mapState(coursesStore, ['courses']),
+    ...mapState(coursesStore, ['courses', 'dates']),
     ...mapState(userStore, ['user', 'isLogin']),
     ...mapState(ordersStore, ['orders']),
     ...mapState(discountStore, ['discountData']),
@@ -283,9 +302,12 @@ export default {
     }
   },
   methods: {
+    a() {
+      console.log('a')
+    },
     toThousand,
     ...mapActions(updatedImgStore, ['getFirstToken']),
-    ...mapActions(coursesStore, ['getCoursesData', 'getCurrent']),
+    ...mapActions(coursesStore, ['getCoursesData', 'getCurrent', 'getDates']),
     ...mapActions(userStore, ['getUserData', 'checkLogin']),
     ...mapActions(ordersStore, ['getOrdersData']),
     ...mapActions(discountStore, ['getDiscountData']),
@@ -386,6 +408,7 @@ export default {
   mounted() {
     this.checkLogin()
     this.getCoursesData()
+    this.getDates()
     this.getOrdersData()
     this.getDiscountData()
   },

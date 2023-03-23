@@ -24,7 +24,7 @@
             茶藝課堂
             <img
               src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/Property%201=arrow-down.png?raw=true"
-              alt="展開"
+              alt="下拉選單"
               class="group-hover:-rotate-180 transition"
             />
           </router-link>
@@ -53,7 +53,7 @@
             茶藝用品
             <img
               src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/Property%201=arrow-down.png?raw=true"
-              alt=""
+              alt="展開"
               class="group-hover:-rotate-180 transition"
             />
           </router-link>
@@ -103,14 +103,14 @@
               </li>
               <li>
                 <router-link
-                  :to="{ name: '課程預約' }"
+                  :to="{ name: 'reserve' }"
                   class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                   >課程預約</router-link
                 >
               </li>
               <li>
                 <router-link
-                  :to="{ name: '訂單詳情' }"
+                  :to="{ name: 'orders' }"
                   class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                   >訂單詳情</router-link
                 >
@@ -173,7 +173,7 @@
         </div>
       </div>
     </div>
-    <nav-more-select
+    <navMoreSelect
       v-if="openMore"
       v-model:open="openMore"
       :coursesList="coursesList"
@@ -181,7 +181,7 @@
       :user="user"
       :sign-out="signOut"
       :is-login="isLogin"
-    ></nav-more-select>
+    />
   </nav>
 </template>
 <script>

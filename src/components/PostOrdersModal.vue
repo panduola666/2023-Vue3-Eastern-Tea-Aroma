@@ -1,6 +1,6 @@
 <template>
   <div>
-    <DialogModal>
+    <DialogModal :is-finish="true">
       <template #modal-btn>
         <slot name="btn-content">按鈕</slot>
       </template>

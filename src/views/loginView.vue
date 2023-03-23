@@ -9,7 +9,7 @@
     >
       <img
         src="https://images.unsplash.com/photo-1548323164-ea1cb76539e8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTI3fHx0ZWF8ZW58MHx8MHx8&auto=format&fit=crop&w=300&q=60"
-        alt=""
+        alt="遮罩圖片"
         class="w-full h-full object-cover"
       />
       <p
@@ -134,7 +134,7 @@
             stroke-width="1.5"
             stroke="currentColor"
             class="w-6 h-6 flex-shrink-0 cursor-pointer"
-            @click="passwordType = 'password'"
+            @click="() => (passwordType = 'password')"
             v-else-if="passwordType === 'text'"
           >
             <path
@@ -162,7 +162,7 @@
               :identify-code="identifyCode"
               @click="refreshCode"
               class="cursor-pointer mr-4"
-            ></identify>
+            />
             <p
               class="cursor-pointer text-base underline text-brand-02 hover:text-brand-01"
               @click="refreshCode"

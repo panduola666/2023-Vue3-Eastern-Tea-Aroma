@@ -11,10 +11,15 @@ export default defineStore('productsStore', {
     getAllProducts() {
       const loading = vueLoadingStore()
       loading.openLoading()
-      axios.get(`${VITE_BASEURL}/products`).then((res) => {
-        if (loading.isLoading) loading.closeLoading()
-        this.allProducts = res.data
-      })
+      axios
+        .get(`${VITE_BASEURL}/products`)
+        .then((res) => {
+          if (loading.isLoading) loading.closeLoading()
+          this.allProducts = res.data
+        })
+        .catch(() => {
+          loading.closeLoading()
+        })
     },
     // 產品分頁+分類功能
     getProductsData(group, page) {
@@ -29,6 +34,9 @@ export default defineStore('productsStore', {
         .then((res) => {
           if (loading.isLoading) loading.closeLoading()
           this.products = res.data
+        })
+        .catch(() => {
+          loading.closeLoading()
         })
     },
     pushNewType(inputValue) {
