@@ -18,7 +18,7 @@
     git init
     git checkout -B main
     git add -A
-    git commit -m '訂單畫面修復'
+    git commit -m 'config 加上 /* global process */'
 
     # if you are deploying to https://panduola666.github.io
     # git push -f git@github.com:panduola666/panduola666.github.io.git main
