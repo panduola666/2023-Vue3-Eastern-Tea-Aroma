@@ -145,6 +145,9 @@
           該時段暫無課程
         </li>
       </template>
+      <li v-else-if="!hasCanOrder" class="text-3xl text-center">
+        當前無可預約課程
+      </li>
       <template v-else>
         <template v-for="course in courses" :key="course.id">
           <template
@@ -238,7 +241,18 @@ export default {
   },
   computed: {
     ...mapState(coursesStore, ['courses']),
-    ...mapState(userStore, ['isLogin'])
+    ...mapState(userStore, ['isLogin']),
+    hasCanOrder() {
+      let flag = false
+      this.courses.forEach((course) => {
+        course.courseDates.forEach((date) => {
+          if (date.end > new Date()) {
+            flag = true
+          }
+        })
+      })
+      return flag
+    }
   },
   methods: {
     ...mapActions(coursesStore, ['getCoursesData', 'patchSaved']),
