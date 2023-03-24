@@ -72,9 +72,6 @@ export default {
   props: {
     orders: {
       type: Object
-    },
-    dateId: {
-      typeof: Number
     }
   },
   data() {
@@ -135,11 +132,6 @@ export default {
   },
   methods: {
     ...mapActions(coursesStore, ['getCurrent'])
-  },
-  watch: {
-    dateId(id) {
-      this.getCurrent(id)
-    }
   },
   components: {
     DialogModal

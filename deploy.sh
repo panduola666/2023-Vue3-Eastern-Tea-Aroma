@@ -18,7 +18,7 @@
     git init
     git checkout -B main
     git add -A
-    git commit -m '新增加課程資料,解決課程全部過期默認畫面'
+    git commit -m '減少當前課程重複觸發'
 
     # if you are deploying to https://panduola666.github.io
     # git push -f git@github.com:panduola666/panduola666.github.io.git main

@@ -130,7 +130,6 @@
                     >
                     <OrderCourseModal
                       :orders="orders"
-                      :date-id="dateId"
                       @click="() => (dateId = date.id)"
                     >
                       <template #btn-content>
@@ -222,7 +221,6 @@
                     >
                     <OrderCourseModal
                       :orders="orders"
-                      :date-id="dateId"
                       @click="() => (dateId = date.id)"
                     >
                       <template #btn-content>
@@ -302,9 +300,6 @@ export default {
     }
   },
   methods: {
-    a() {
-      console.log('a')
-    },
     toThousand,
     ...mapActions(updatedImgStore, ['getFirstToken']),
     ...mapActions(coursesStore, ['getCoursesData', 'getCurrent', 'getDates']),
