@@ -153,7 +153,7 @@
           </li>
           <li>
             <router-link
-              :to="{ name: 'orders' }"
+              :to="{ name: 'userOrders' }"
               class="block p-4 pl-8 text-gray-01 hover:bg-brand-03 hover:bg-opacity-20"
               >訂單詳情</router-link
             >

@@ -28,7 +28,7 @@
         <li
           v-for="item in [
             { name: '課程預約', path: 'reserve' },
-            { name: '訂單詳情', path: 'orders' },
+            { name: '訂單詳情', path: 'userOrders' },
             { name: '收藏項目', path: 'collects' }
           ]"
           :key="item.name + item.path"
