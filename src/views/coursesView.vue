@@ -274,6 +274,16 @@ export default {
       return courseDate.savedUsersId.includes(+sessionStorage.getItem('userId'))
     },
     userSearch() {
+      const { weeks, input } = this.search
+      if (!input && !weeks.length) {
+        this.$swal.fire({
+          icon: 'warning',
+          title: '請輸入搜尋訊息',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
       this.finalSearch = []
       this.isUserSearch = true
       const courses = JSON.parse(JSON.stringify(this.courses))
@@ -295,9 +305,6 @@ export default {
         this.finalSearch = finalSearch.filter((item) => item.length !== 0)
       }
     }
-  },
-  mounted() {
-    this.getCoursesData()
   },
   components: {
     CoursesCard

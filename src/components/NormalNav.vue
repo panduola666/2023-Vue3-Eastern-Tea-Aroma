@@ -110,7 +110,7 @@
               </li>
               <li>
                 <router-link
-                  :to="{ name: 'orders' }"
+                  :to="{ name: 'userOrders' }"
                   class="block px-4 py-5 hover:bg-brand-03 hover:bg-opacity-20"
                   >訂單詳情</router-link
                 >
@@ -149,7 +149,9 @@
             </div>
           </router-link>
         </section>
-        <div class="relative flex items-center lg:hidden cursor-pointer">
+        <div
+          class="relative flex items-center lg:hidden cursor-pointer mb-[10px] mt-[18px]"
+        >
           <img
             src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/Property%201=more.png?raw=true"
             alt="more"
@@ -163,7 +165,7 @@
           <img
             src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/Property%201=close@2x.png?raw=true"
             alt="關閉"
-            class="w-[30px] transition-all absolute top-0 left-0 hover:brightness-75 hover:duration-[0s]"
+            class="w-[30px] transition-all absolute hover:brightness-75 hover:duration-[0s]"
             :class="{
               'scale-1': openMore,
               'scale-0': !openMore

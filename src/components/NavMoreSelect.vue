@@ -8,7 +8,7 @@
           @click.prevent="() => $emit('update:open', false)"
           to="/knowledge"
           class="block p-4 text-brand-02 hover:bg-brand-03 hover:bg-opacity-20"
-          >茶學小知識</router-link
+          >茶學資訊</router-link
         >
       </li>
       <li class="flex flex-col">

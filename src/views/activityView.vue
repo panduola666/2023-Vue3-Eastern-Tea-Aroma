@@ -28,7 +28,6 @@
             class="hover:text-gray-01 underline underline-offset-2 hover:bg-brand-03 hover:bg-opacity-20"
           >
             {{ activity.title }}
-            ( {{ modeUrl + activity.id }} )
           </router-link>
         </li>
       </template>
@@ -53,6 +52,11 @@ export default {
       'getCurrentActivity',
       'getAllActivitiesData'
     ])
+  },
+  watch: {
+    '$route.params'({ id }) {
+      this.getCurrentActivity(id)
+    }
   },
   mounted() {
     this.getCurrentActivity(this.$route.params.id)

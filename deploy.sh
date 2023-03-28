@@ -18,7 +18,7 @@
     git init
     git checkout -B main
     git add -A
-    git commit -m '解決會員專區訂單詳情與後台訂單頁面 router name 相同衝突'
+    git commit -m '修改助教批改 bug'
 
     # if you are deploying to https://panduola666.github.io
     # git push -f git@github.com:panduola666/panduola666.github.io.git main

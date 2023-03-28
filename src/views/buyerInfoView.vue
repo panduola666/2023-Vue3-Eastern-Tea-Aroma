@@ -13,7 +13,7 @@
         <label
           for="name"
           class="text-xl text-brand-02 font-self font-semibold mt-4"
-          >購買人</label
+          >* 購買人</label
         >
         <VField
           type="text"
@@ -28,7 +28,7 @@
         <label
           for="tel"
           class="text-xl text-brand-02 font-self font-semibold mt-4"
-          >手機號碼</label
+          >* 手機號碼</label
         >
         <VField
           type="tel"
@@ -69,7 +69,7 @@
         </label>
         <VErrorMessage name="取貨方式" class="text-red-600"></VErrorMessage>
         <form-box v-if="buyerInfo.method === '店家寄件'">
-          <label for="address">地址</label>
+          <label for="address">* 地址</label>
           <VField
             name="地址"
             id="address"
@@ -108,7 +108,7 @@
         >
         <VErrorMessage name="付款方式" class="text-red-600"></VErrorMessage>
         <form-box v-if="buyerInfo.payMethods.choose === '信用卡'">
-          <label for="cardNumber">卡號</label>
+          <label for="cardNumber">* 卡號</label>
           <VField
             type="number"
             name="卡號"
@@ -122,7 +122,7 @@
           <VErrorMessage name="卡號" class="text-red-600"></VErrorMessage>
           <div class="flex flex-col md:flex-row">
             <div class="flex flex-col md:block">
-              <p class="mt-3 md:mt-0">效期</p>
+              <p class="mt-3 md:mt-0">* 效期</p>
               <label for="day"
                 >日期<VField
                   type="number"
@@ -156,7 +156,7 @@
               </p>
             </div>
             <div class="mt-3 md:mt-0">
-              <label for="cardCode">安全碼</label>
+              <label for="cardCode">* 安全碼</label>
               <VField
                 name="安全碼"
                 id="cardCode"

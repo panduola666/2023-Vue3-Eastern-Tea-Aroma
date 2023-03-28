@@ -1,7 +1,9 @@
 <template>
-  <div>
-    <NormalNav />
-    <router-view />
+  <div class="flex flex-col justify-between h-screen">
+    <div>
+      <NormalNav />
+      <router-view />
+    </div>
     <BaseFooter />
   </div>
 </template>

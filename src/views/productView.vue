@@ -52,7 +52,7 @@
         >
           剩餘: {{ currentProduct.totalNumber - soldNumber }}
           <span class="text-2xl text-gray-01"
-            >$ {{ toThousand(currentProduct.price) }}</span
+            >$ {{ toThousand(currentProduct.price) * shoppingNumber }}</span
           >
         </p>
         <div
@@ -61,7 +61,8 @@
           <div class="flex items-center h-10 lg:h-8">
             <button
               type="button"
-              class="btn-outline py-0 px-2 md:px-4 focus:outline-0 flex-shrink-0 h-full"
+              class="btn-outline p-2 md:px-4 focus:outline-0 flex-shrink-0"
+              :disabled="shoppingNumber <= 1"
               @click="
                 () => (shoppingNumber > 1 ? shoppingNumber-- : shoppingNumber)
               "
@@ -72,13 +73,13 @@
               />
             </button>
             <p
-              class="flex items-center justify-around px-2 border-y-2 border-brand-01 bg-opacity-40 bg-white min-w-[100px] w-full h-full"
+              class="flex items-center justify-around p-2 border-y-2 border-brand-01 bg-opacity-40 bg-white min-w-[100px] w-full"
             >
               {{ shoppingNumber }}
             </p>
             <button
               type="button"
-              class="btn-outline py-0 px-2 md:px-4 focus:outline-0 flex-shrink-0 h-full"
+              class="btn-outline p-2 md:px-4 focus:outline-0 flex-shrink-0"
               @click="
                 () =>
                   shoppingNumber < currentProduct.totalNumber - soldNumber
@@ -112,7 +113,7 @@
     </article>
     <p class="text-xl text-gray-02 mt-10">瀏覽紀錄</p>
     <ul class="grid md:grid-cols-4 gap-3 mt-3">
-      <template v-for="(id, index) in productsIdHistory()" :key="id + index">
+      <template v-for="(id, index) in productsIdHistory" :key="id + index">
         <template v-for="(product, index) in allProducts" :key="index">
           <li class="overflow-hidden opacity-80" v-if="product.id === +id">
             <router-link :to="`/product/${product.id}`" class="relative group">
@@ -175,6 +176,10 @@ export default {
         })
       })
       return soldNumber
+    },
+    productsIdHistory() {
+      if (!localStorage.getItem('productsHistory')) return
+      return localStorage.getItem('productsHistory').split(',')
     }
   },
   methods: {
@@ -220,9 +225,6 @@ export default {
         })
       })
       this.history = filterProducts
-    },
-    productsIdHistory() {
-      return localStorage.getItem('productsHistory').split(',')
     }
   },
   watch: {
@@ -235,11 +237,6 @@ export default {
   },
   components: {
     DiscountInfo
-  },
-  mounted() {
-    this.getAllProducts()
-    this.getOrdersData()
-    this.setProductsHistory(this.$route.params.id)
   }
 }
 </script>

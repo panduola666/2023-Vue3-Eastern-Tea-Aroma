@@ -88,41 +88,27 @@
       </ul>
     </article>
     <p class="font-self text-gray-01 mt-16">其他時段</p>
-    <ol class="list-disc list-inside">
-      <template v-for="(course, index) in courses" :key="index">
-        <template
-          v-for="(courseDate, index) in course.courseDates"
-          :key="index"
+    <ol class="list-disc list-inside" v-if="otherTimer.length">
+      <li v-for="courseDate in otherTimer" :key="courseDate.id">
+        <router-link
+          :to="`/course/${courseDate.id}`"
+          class="hover:text-gray-01 underline underline-offset-2 hover:bg-brand-03 hover:bg-opacity-20"
         >
-          <li
-            class="text-gray-02 py-2 px-1"
-            v-if="
-              courseDate.courseId === currentCourse.course?.id &&
-              courseDate.start > new Date() &&
-              courseDate.id !== +this.$route.params.id
-            "
-          >
-            <router-link
-              :to="`/course/${courseDate.id}`"
-              class="hover:text-gray-01 underline underline-offset-2 hover:bg-brand-03 hover:bg-opacity-20"
-            >
-              <span
-                >{{ $date(courseDate.start).format('YYYY-MM-DD') }} /星期{{
-                  ['日', '一', '二', '三', '四', '五', '六'][
-                    $date(courseDate.start).day()
-                  ]
-                }}
-                - {{ $date(courseDate.start).format('HH:mm') }}~{{
-                  $date(courseDate.end).format('HH:mm')
-                }}
-                ／ 價格: {{ toThousand(course.price) }} 元 (
-                {{ modeUrl + courseDate.id }} )
-              </span>
-            </router-link>
-          </li>
-        </template>
-      </template>
+          <span
+            >{{ $date(courseDate.start).format('YYYY-MM-DD') }} /星期{{
+              ['日', '一', '二', '三', '四', '五', '六'][
+                $date(courseDate.start).day()
+              ]
+            }}
+            - {{ $date(courseDate.start).format('HH:mm') }}~{{
+              $date(courseDate.end).format('HH:mm')
+            }}
+            ／ 價格: {{ toThousand(currentCourse.course.price) }} 元
+          </span>
+        </router-link>
+      </li>
     </ol>
+    <p v-else class="mt-3 text-gray-02">其他日期暫無開課</p>
     <CourseList class="border-t-2 border-line mt-10 pt-5" />
   </main>
 </template>
@@ -174,6 +160,21 @@ export default {
       return MODE === 'production'
         ? 'https://panduola666.github.io/2023-Vue3-Eastern-Tea-Aroma/#/course/'
         : 'http://127.0.0.1:5173/#/course/'
+    },
+    otherTimer() {
+      const other = []
+      this.courses.forEach((course) => {
+        course.courseDates.forEach((date) => {
+          if (
+            date.end > new Date() &&
+            date.id !== +this.$route.params.id &&
+            date.courseId === this.currentCourse.course?.id
+          ) {
+            other.push(date)
+          }
+        })
+      })
+      return other
     }
   },
   methods: {

@@ -77,6 +77,7 @@
         <button
           type="button"
           class="btn-outline py-2"
+          :disabled="+this.$route.query.page === 1"
           @click="() => changePages('pre', currentProducts)"
         >
           上一頁
@@ -86,6 +87,10 @@
         <button
           type="button"
           class="btn-outline py-2"
+          :disabled="
+            +this.$route.query.page ===
+            Math.ceil(currentProducts.length / this.limit)
+          "
           @click="() => changePages('next', currentProducts)"
         >
           下一頁
@@ -95,6 +100,7 @@
         <button
           type="button"
           class="btn-outline py-2"
+          :disabled="+this.$route.query.page === 1"
           @click="() => changePages('pre', allProducts)"
         >
           上一頁
@@ -104,6 +110,10 @@
         <button
           type="button"
           class="btn-outline py-2"
+          :disabled="
+            +this.$route.query.page ===
+            Math.ceil(allProducts.length / this.limit)
+          "
           @click="() => changePages('next', allProducts)"
         >
           下一頁

@@ -8,18 +8,23 @@
     <table
       v-for="order in myOrders.sort((a, b) => b.id - a.id)"
       :key="order.id"
-      class="w-full table-fixed h-20 text-center border border-brand-05 overflow-scroll bg-white bg-opacity-20 my-4"
+      class="w-full table-fixed h-20 text-center border border-brand-05 overflow-scroll bg-white bg-opacity-20 my-6"
     >
-      <thead class="bg-brand-01 bg-opacity-50 font-self">
-        <tr>
-          <th class="text-xs sm:text-base py-2">
-            成立日期: {{ $date(order.created).format('YYYY-MM-DD') }}
-          </th>
-          <th class="py-2" colspan="2">
+      <caption>
+        <div class="flex items-center justify-between">
+          <p>成立日期: {{ $date(order.created).format('YYYY-MM-DD') }}</p>
+          <p class="min-w-[200px]">
             物流查詢編號：<span class="sm:text-xl">{{
               order.trackingNumber
             }}</span>
-          </th>
+          </p>
+        </div>
+      </caption>
+      <thead class="bg-brand-01 bg-opacity-50 font-self">
+        <tr>
+          <th class="text-xs sm:text-base py-2">商品</th>
+          <th class="py-2">品項</th>
+          <th>價格</th>
         </tr>
       </thead>
       <tbody class="block w-[300%] max-h-40 overflow-auto cursor-default">

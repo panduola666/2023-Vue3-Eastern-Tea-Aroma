@@ -63,11 +63,11 @@
             <span class="text-gray-01">{{ user.email }}</span>
             <span
               v-if="user.isAdmin"
-              class="text-base text-end cursor-default text-brand-01 font-medium font-self"
+              class="text-base text-end cursor-default text-brand-01 font-medium"
               >茶家</span
             >
             <span
-              class="text-base text-end relative group cursor-default text-brand-01 font-medium font-self"
+              class="text-base text-end relative group cursor-default text-brand-01 font-medium"
               v-else
             >
               {{ ordersPrice >= 20000 ? '茶士' : '茶友' }}
@@ -173,6 +173,7 @@
     <a
       href="/"
       class="block mt-32 p-4 w-full text-xl text-gray-02 text-center hover:bg-brand-03 hover:bg-opacity-20 cursor-pointer"
+      @click="() => signOut()"
     >
       登出
     </a>
@@ -222,8 +223,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(userStore, ['overLogin']),
-    ...mapActions(userStore, ['getUserData']),
+    ...mapActions(userStore, ['overLogin', 'getUserData', 'signOut']),
     changeBtnText(e) {
       if (e.target.textContent.trim() === '編輯') {
         e.target.textContent = '確認'
