@@ -1,5 +1,4 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-// import HomeView from "../views/HomeView.vue";
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -90,7 +89,7 @@ const router = createRouter({
         {
           path: '',
           name: 'admin-courses',
-          component: () => import('../views/admin/Admin-coursesView.vue')
+          component: () => import('../views/admin/Admin-CoursesView.vue')
         },
         {
           path: 'user',
@@ -99,7 +98,7 @@ const router = createRouter({
         {
           path: 'discount',
           name: 'admin-discounts',
-          component: () => import('../views/admin/Admin-discountsView.vue')
+          component: () => import('../views/admin/Admin-DiscountsView.vue')
         },
         {
           path: 'manage',
@@ -108,24 +107,24 @@ const router = createRouter({
             {
               path: 'products',
               name: 'products',
-              component: () => import('../views/admin/Admin-products.vue')
+              component: () => import('../views/admin/Admin-Products.vue')
             },
             {
               path: 'orders',
               name: 'orders',
-              component: () => import('../views/admin/Admin-orders.vue')
+              component: () => import('../views/admin/Admin-Orders.vue')
             },
             {
               path: 'activities',
               name: 'activities',
-              component: () => import('../views/admin/Admin-activities.vue')
+              component: () => import('../views/admin/Admin-Activities.vue')
             }
           ]
         },
         {
           path: 'analyze',
           name: 'admin-analyze',
-          component: () => import('../views/admin/Admin-analyzeView.vue')
+          component: () => import('../views/admin/Admin-AnalyzeView.vue')
         }
       ]
     },

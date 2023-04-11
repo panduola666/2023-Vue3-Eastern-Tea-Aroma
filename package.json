@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "netWort":"",
+    "netWort": "",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
@@ -24,6 +24,7 @@
     "swiper": "^8.4.6",
     "v-calendar": "^3.0.0-alpha.8",
     "vee-validate": "^4.7.4",
+    "vite-plugin-eslint": "^1.8.1",
     "vue": "^3.2.45",
     "vue-axios": "^3.5.2",
     "vue-chartjs": "^5.2.0",

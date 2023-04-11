@@ -330,7 +330,6 @@ export default {
             })
         }
       } catch (err) {
-        console.log(err)
         if (err.response.data === 'Incorrect password') {
           this.$swal.fire({
             icon: 'error',

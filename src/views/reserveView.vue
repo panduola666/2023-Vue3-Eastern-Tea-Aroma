@@ -226,7 +226,12 @@ export default {
       this.$http
         .patch(`${VITE_BASEURL}/courses/${id}`, { scores })
         .then((res) => {
-          console.log(res.data)
+          this.$swal.fire({
+            icon: 'success',
+            title: '評分成功',
+            showConfirmButton: false,
+            timer: 1500
+          })
         })
     }
   },

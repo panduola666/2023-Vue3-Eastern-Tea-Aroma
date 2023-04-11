@@ -105,9 +105,6 @@ export default defineStore('coursesStore', {
         .then(() => {
           this.getCoursesData()
         })
-        .catch((err) => {
-          console.log(err)
-        })
     }
   },
   getters: {}

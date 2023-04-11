@@ -29,8 +29,7 @@ export default defineStore('updatedImgStore', {
           // 只有這裡可以讀網址
           this.imgUrl = res.data.data.link // 圖片網址
         })
-        .catch((err) => {
-          console.log(err)
+        .catch(() => {
           Swal.fire({
             icon: 'error',
             title: '上傳檔案錯誤',
@@ -66,17 +65,12 @@ export default defineStore('updatedImgStore', {
         grant_type: 'authorization_code',
         code
       }
-      axios
-        .post(url, data)
-        .then((response) => {
-          this.access_token = response.data.access_token
-          if (e) {
-            this.postImg(e, this.access_token)
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+      axios.post(url, data).then((response) => {
+        this.access_token = response.data.access_token
+        if (e) {
+          this.postImg(e, this.access_token)
+        }
+      })
     },
     // 這裡是 input file 的進入點
     postFinal(e) {

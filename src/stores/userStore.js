@@ -63,10 +63,9 @@ export default defineStore('userDataStore', {
             }
           }
         })
-        .catch((err) => {
+        .catch(() => {
           loading.closeLoading()
           sessionStorage.clear()
-          console.log(err)
           this.isLogin = false
           if (
             !this.isLogin &&
@@ -105,7 +104,6 @@ export default defineStore('userDataStore', {
           })
           .catch((err) => {
             const { data } = err.response
-            console.log(err)
             if (data === 'Incorrect password') {
               return Swal.fire({
                 icon: 'error',
