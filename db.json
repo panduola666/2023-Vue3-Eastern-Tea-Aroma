@@ -48,38 +48,6 @@
         }
       },
       "id": 2
-    },
-    {
-      "email": "user1@gmail.com",
-      "password": "$2a$10$a7a/add/1NPkbWRlsBMU..5VDm9EgEYz94MMpFm473tENl5/YoFae",
-      "name": "dsw",
-      "avatarId": 3,
-      "tel": "",
-      "isAdmin": false,
-      "shoppingCart": {
-        "discount": "",
-        "cart": {
-          "products": [],
-          "courses": []
-        }
-      },
-      "id": 3
-    },
-    {
-      "email": "user22@gmail.com",
-      "password": "$2a$10$0LO68UbmH8x7ruUM2NuaP.Su9nlPc2i1YbWl1Zg1SSF2lyZHCXVQO",
-      "name": "dsw",
-      "avatarId": 3,
-      "tel": "",
-      "isAdmin": false,
-      "shoppingCart": {
-        "discount": "",
-        "cart": {
-          "products": [],
-          "courses": []
-        }
-      },
-      "id": 4
     }
   ],
   "discount": {

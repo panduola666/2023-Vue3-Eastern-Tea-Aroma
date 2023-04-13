@@ -219,7 +219,7 @@ export default {
         this.login(this.userInput, this.identifyCode, this.AddIdentifyLetter)
       } else if (option === 'register') {
         this.register(this.userInput)
-        this.imgChange = false
+        this.inputReset('changeImg')
       } else if (option === 'changeImg') {
         this.imgChange = !this.imgChange
         this.userInput = this.$options.data().userInput
