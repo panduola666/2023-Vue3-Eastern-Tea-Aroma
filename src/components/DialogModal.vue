@@ -1,7 +1,7 @@
 <template>
-  <span @click="openModal">
+  <div @click="openModal">
     <slot name="modal-btn">按鈕</slot>
-  </span>
+  </div>
   <TransitionRoot appear :show="isOpen" as="template">
     <myDialog as="div" @close="closeModal" class="relative z-10">
       <TransitionChild

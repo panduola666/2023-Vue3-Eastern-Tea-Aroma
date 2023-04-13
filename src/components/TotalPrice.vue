@@ -66,7 +66,6 @@
     </div>
     <div>
       <p class="flex flex-wrap gap-x-2 items-center">
-        <!-- {{ discountData }} -->
         總計
         <span
           v-if="
@@ -152,9 +151,10 @@ export default {
     },
     hasDiscount() {
       let flag = false
-      this.user.shoppingCart?.cart.product?.forEach((item) =>
-        item.isDiscount ? (flag = true) : ''
-      )
+      this.user.shoppingCart?.cart.products?.forEach((item) => {
+        console.log(item)
+        flag = item.isDiscount ? true : ''
+      })
       this.user.shoppingCart?.cart.courses?.forEach((item) =>
         item.isDiscount ? (flag = true) : ''
       )

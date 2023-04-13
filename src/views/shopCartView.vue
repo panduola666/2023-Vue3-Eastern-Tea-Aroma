@@ -1,66 +1,175 @@
 <template>
-  <main>
-    <div class="wrap">
-      <teleport to="title">購買商品</teleport>
-      <h2 class="text-3xl font-black font-self text-brand-02">購買商品</h2>
-      <TotalPrice v-if="cartNumber">
-        <template #default>
-          <router-link :to="{ name: 'buyerInfo' }" class="btn-primary block"
-            >確認購買</router-link
-          >
-        </template>
-      </TotalPrice>
-      <div class="flex items-center gap-3" v-if="!cartNumber">
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/3648/3648756.png"
-          alt="購物車沒有商品"
-        />
-        <div class="flex-grow text-center">
-          <p class="text-4xl mb-3">購物車沒有商品</p>
-          <router-link to="/courses" class="btn-primary inline-block text-xl"
-            >來去選購</router-link
-          >
-        </div>
-      </div>
-      <ul class="grid gap-5 mt-4" v-else>
-        <template
-          v-for="product in allProducts"
-          :key="product.id + product.name"
+  <main class="wrap">
+    <teleport to="title">購買清單</teleport>
+    <ShopStep />
+    <TotalPrice v-if="cartNumber">
+      <template #default>
+        <button
+          type="button"
+          class="btn-primary block"
+          @click="() => listChecked()"
         >
+          確認購買
+        </button>
+      </template>
+    </TotalPrice>
+    <div class="flex items-center gap-3" v-if="!cartNumber">
+      <img
+        src="https://cdn-icons-png.flaticon.com/512/3648/3648756.png"
+        alt="購物車沒有商品"
+      />
+      <div class="flex-grow text-center">
+        <p class="text-4xl mb-3">購物車沒有商品</p>
+        <router-link to="/courses" class="btn-primary inline-block text-xl"
+          >來去選購</router-link
+        >
+      </div>
+    </div>
+    <ul class="grid gap-5 mt-4" v-else>
+      <template v-for="product in allProducts" :key="product.id + product.name">
+        <template
+          v-for="item in user.shoppingCart?.cart.products"
+          :key="'產品' + item.productId"
+        >
+          <li
+            class="grid lg:grid-cols-3 bg-white relative"
+            v-if="product.id === item.productId"
+          >
+            <span
+              class="bg-brand-02 text-white px-3 py-1 absolute z-10"
+              v-if="item.isDiscount"
+              >優惠</span
+            >
+            <img
+              :src="product.coverUrl"
+              :alt="product.name"
+              class="w-full lg:h-[200px] h-48 object-cover"
+            />
+            <div class="lg:col-span-2 p-4 flex flex-col justify-between gap-3">
+              <h1>
+                <router-link
+                  :to="`/product/${product.id}`"
+                  class="truncate text-brand-02 underline hover:text-brand-01 text-2xl font-self font-black"
+                >
+                  {{ product.name }}
+                </router-link>
+              </h1>
+              <div class="flex gap-5 flex-wrap items-center">
+                <label :for="product.name + 'productNumber'">數量</label>
+                <select
+                  :name="product.name + 'productNumber'"
+                  :id="product.name + 'productNumber'"
+                  class="border border-black lg:w-1/4 w-1/2"
+                  :value="item.number"
+                  @change="($event) => changeNumber($event, item)"
+                >
+                  <option :value="i" v-for="i in 20" :key="i">
+                    {{ i }}
+                  </option>
+                </select>
+              </div>
+              <div class="sm:flex flex-wrap items-center justify-between">
+                <div
+                  class="flex items-center"
+                  v-if="
+                    product.isDiscount &&
+                    discountData.end > new Date() &&
+                    this.user.shoppingCart?.discount === discountData.code
+                  "
+                >
+                  <del class="text-gray-02 mr-3"
+                    >$ {{ toThousand(item.number * item.price) }}</del
+                  >
+                  <p v-if="discountData.type === 'money'">
+                    $
+                    {{
+                      toThousand(item.number * item.price - discountData.scale)
+                    }}
+                  </p>
+                  <p v-else>
+                    $
+                    {{
+                      toThousand(item.number * item.price * discountData.scale)
+                    }}
+                  </p>
+                </div>
+                <p
+                  v-else
+                  class="text-lg flex flex-wrap items-center gap-2 whitespace-nowrap"
+                >
+                  $ {{ toThousand(item.number * item.price) }}
+                </p>
+
+                <button
+                  type="button"
+                  class="btn-outline py-1 px-3 float-right mt-2 sm:mt-0"
+                  @click="
+                    () => deleteCart('product', item.productId, product.name)
+                  "
+                >
+                  刪除
+                </button>
+              </div>
+            </div>
+          </li>
+        </template>
+      </template>
+      <template v-for="course in courses" :key="course.id + course.title">
+        <template v-for="date in course.courseDates" :key="date.id + 'date'">
           <template
-            v-for="item in user.shoppingCart?.cart.products"
-            :key="'產品' + item.productId"
+            v-for="item in user.shoppingCart?.cart.courses"
+            :key="'課程' + item.courseDateId"
           >
             <li
+              v-if="
+                course.id === item.courseId && date.id === item.courseDateId
+              "
               class="grid lg:grid-cols-3 bg-white relative"
-              v-if="product.id === item.productId"
             >
               <span
                 class="bg-brand-02 text-white px-3 py-1 absolute z-10"
                 v-if="item.isDiscount"
                 >優惠</span
               >
-              <img
-                :src="product.coverUrl"
-                :alt="product.name"
-                class="w-full lg:h-[200px] h-48 object-cover"
-              />
+              <div class="w-full lg:h-[200px] h-48 relative">
+                <img
+                  :src="course.coverUrl"
+                  :alt="course.title"
+                  class="w-full h-full object-cover"
+                />
+                <span
+                  class="absolute bg-brand-02 bg-opacity-60 text-white py-2 px-4 text-xl top-0 right-0"
+                  >課程
+                </span>
+              </div>
               <div
                 class="lg:col-span-2 p-4 flex flex-col justify-between gap-3"
               >
-                <h1>
+                <h1
+                  class="flex lg:items-center justify-between flex-col-reverse lg:flex-row"
+                >
                   <router-link
-                    :to="`/product/${product.id}`"
+                    :to="`/course/${date.id}`"
                     class="truncate text-brand-02 underline hover:text-brand-01 text-2xl font-self font-black"
                   >
-                    {{ product.name }}
+                    {{ course.title }}
                   </router-link>
+                  <div
+                    class="bg-red-500 text-white py-2 px-3 text-xl font-semibold text-center"
+                    v-if="date.end < Date.now()"
+                  >
+                    課程已結束
+                  </div>
                 </h1>
+                <p class="text-lg">
+                  時間：{{ $date(date.start).format('YYYY-MM-DD HH:mm') }} ~
+                  {{ $date(date.end).format('HH:mm') }}
+                </p>
                 <div class="flex gap-5 flex-wrap items-center">
-                  <label :for="product.name + 'productNumber'">數量</label>
+                  <label :for="course.title + 'courseNumber'">數量</label>
                   <select
-                    :name="product.name + 'productNumber'"
-                    :id="product.name + 'productNumber'"
+                    :name="course.title + 'courseNumber'"
+                    :id="course.title + 'courseNumber'"
                     class="border border-black lg:w-1/4 w-1/2"
                     :value="item.number"
                     @change="($event) => changeNumber($event, item)"
@@ -70,11 +179,11 @@
                     </option>
                   </select>
                 </div>
-                <div class="sm:flex flex-wrap items-center justify-between">
+                <div class="sm:flex flex-wrap justify-between">
                   <div
                     class="flex items-center"
                     v-if="
-                      product.isDiscount &&
+                      date.isDiscount &&
                       discountData.end > new Date() &&
                       this.user.shoppingCart?.discount === discountData.code
                     "
@@ -105,12 +214,12 @@
                   >
                     $ {{ toThousand(item.number * item.price) }}
                   </p>
-
                   <button
                     type="button"
                     class="btn-outline py-1 px-3 float-right mt-2 sm:mt-0"
                     @click="
-                      () => deleteCart('product', item.productId, product.name)
+                      () =>
+                        deleteCart('course', item.courseDateId, course.title)
                     "
                   >
                     刪除
@@ -120,120 +229,13 @@
             </li>
           </template>
         </template>
-        <template v-for="course in courses" :key="course.id + course.title">
-          <template v-for="date in course.courseDates" :key="date.id + 'date'">
-            <template
-              v-for="item in user.shoppingCart?.cart.courses"
-              :key="'課程' + item.courseDateId"
-            >
-              <li
-                v-if="
-                  course.id === item.courseId && date.id === item.courseDateId
-                "
-                class="grid lg:grid-cols-3 bg-white relative"
-              >
-                <span
-                  class="bg-brand-02 text-white px-3 py-1 absolute z-10"
-                  v-if="item.isDiscount"
-                  >優惠</span
-                >
-                <div class="w-full lg:h-[200px] h-48 relative">
-                  <img
-                    :src="course.coverUrl"
-                    :alt="course.title"
-                    class="w-full h-full object-cover"
-                  />
-                  <span
-                    class="absolute bg-brand-02 bg-opacity-60 text-white py-2 px-4 text-xl top-0 right-0"
-                    >課程
-                  </span>
-                </div>
-                <div
-                  class="lg:col-span-2 p-4 flex flex-col justify-between gap-3"
-                >
-                  <h1>
-                    <router-link
-                      :to="`/course/${date.id}`"
-                      class="truncate text-brand-02 underline hover:text-brand-01 text-2xl font-self font-black"
-                    >
-                      {{ course.title }}
-                    </router-link>
-                  </h1>
-                  <p class="text-lg">
-                    時間：{{ $date(date.start).format('YYYY-MM-DD HH:mm') }} ~
-                    {{ $date(date.end).format('HH:mm') }}
-                  </p>
-                  <div class="flex gap-5 flex-wrap items-center">
-                    <label :for="course.title + 'courseNumber'">數量</label>
-                    <select
-                      :name="course.title + 'courseNumber'"
-                      :id="course.title + 'courseNumber'"
-                      class="border border-black lg:w-1/4 w-1/2"
-                      :value="item.number"
-                      @change="($event) => changeNumber($event, item)"
-                    >
-                      <option :value="i" v-for="i in 20" :key="i">
-                        {{ i }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="sm:flex flex-wrap justify-between">
-                    <div
-                      class="flex items-center"
-                      v-if="
-                        date.isDiscount &&
-                        discountData.end > new Date() &&
-                        this.user.shoppingCart?.discount === discountData.code
-                      "
-                    >
-                      <del class="text-gray-02 mr-3"
-                        >$ {{ toThousand(item.number * item.price) }}</del
-                      >
-                      <p v-if="discountData.type === 'money'">
-                        $
-                        {{
-                          toThousand(
-                            item.number * item.price - discountData.scale
-                          )
-                        }}
-                      </p>
-                      <p v-else>
-                        $
-                        {{
-                          toThousand(
-                            item.number * item.price * discountData.scale
-                          )
-                        }}
-                      </p>
-                    </div>
-                    <p
-                      v-else
-                      class="text-lg flex flex-wrap items-center gap-2 whitespace-nowrap"
-                    >
-                      $ {{ toThousand(item.number * item.price) }}
-                    </p>
-                    <button
-                      type="button"
-                      class="btn-outline py-1 px-3 float-right mt-2 sm:mt-0"
-                      @click="
-                        () =>
-                          deleteCart('course', item.courseDateId, course.title)
-                      "
-                    >
-                      刪除
-                    </button>
-                  </div>
-                </div>
-              </li>
-            </template>
-          </template>
-        </template>
-      </ul>
-    </div>
+      </template>
+    </ul>
   </main>
 </template>
 <script>
 import TotalPrice from '../components/TotalPrice.vue'
+import ShopStep from '../components/ShopStep.vue'
 import { mapState, mapActions } from 'pinia'
 import {
   userStore,
@@ -318,6 +320,32 @@ export default {
             this.patchCartAJAX(this.user.shoppingCart)
           }
         })
+    },
+    listChecked() {
+      let hasExpired = false
+      this.user.shoppingCart.cart.courses.forEach((item) => {
+        this.courses.forEach((course) => {
+          if (course.id === item.courseId) {
+            course.courseDates.forEach((date) => {
+              if (date.id === item.courseDateId) {
+                if (hasExpired) return
+                hasExpired = date.end < Date.now()
+              }
+            })
+          }
+        })
+      })
+      if (hasExpired) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '內含過期課程,無法購買',
+          showConfirmButton: false,
+          timer: 1500,
+          allowOutsideClick: false
+        })
+      } else {
+        this.$router.push({ name: 'buyerInfo' })
+      }
     }
   },
   mounted() {
@@ -326,7 +354,8 @@ export default {
     this.getCoursesData()
   },
   components: {
-    TotalPrice
+    TotalPrice,
+    ShopStep
   }
 }
 </script>

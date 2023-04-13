@@ -12,7 +12,7 @@
           class="text-xl leading-[30px] pb-[10px] pt-[18px] hover:text-brand-01"
         >
           <router-link
-            :to="{ name: 'admin-courses' }"
+            :to="{ name: 'adminCourses' }"
             :class="{ 'font-semibold': this.$route.path === '/admin' }"
             >課程列表</router-link
           >
@@ -21,7 +21,7 @@
           class="text-xl leading-[30px] pb-[10px] pt-[18px] hover:text-brand-01"
         >
           <router-link
-            :to="{ name: 'admin-discounts' }"
+            :to="{ name: 'adminDiscounts' }"
             :class="{ 'font-semibold': this.$route.path === '/admin/discount' }"
             >折扣碼</router-link
           >
@@ -78,7 +78,7 @@
           class="text-xl leading-[30px] pb-[10px] pt-[18px] hover:text-brand-01"
         >
           <router-link
-            :to="{ name: 'admin-analyze' }"
+            :to="{ name: 'adminAnalyze' }"
             :class="{ 'font-semibold': this.$route.path === '/admin/analyze' }"
           >
             數據分析

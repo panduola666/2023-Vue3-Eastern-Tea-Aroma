@@ -170,13 +170,13 @@
         </button>
       </form>
     </div>
-    <a
-      href="/"
-      class="block mt-32 p-4 w-full text-xl text-gray-02 text-center hover:bg-brand-03 hover:bg-opacity-20 cursor-pointer"
+    <router-link
+      to="/"
+      class="block mt-32 p-4 w-full text-xl text-gray-02 text-center bg-brand-03 bg-opacity-20 cursor-pointer hover:bg-gray-03 hover:bg-opacity-50"
       @click="() => signOut()"
     >
       登出
-    </a>
+    </router-link>
   </main>
 </template>
 <script>

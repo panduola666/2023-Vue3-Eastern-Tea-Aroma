@@ -16,9 +16,9 @@
           <div
             class="flex flex-col gap-3 lg:w-96 lg:h-full h-[75vh] overflow-x-hidden px-3"
           >
-            <p class="font-semibold">
+            <div class="font-semibold">
               * 封面
-              <span class="float-right text-gray-02 font-normal">
+              <div class="float-right text-gray-02 font-normal">
                 <button
                   type="button"
                   class="mr-2 hover:underline hover:text-gray-01"
@@ -43,8 +43,8 @@
                 >
                   雲端圖片
                 </button>
-              </span>
-            </p>
+              </div>
+            </div>
             <img
               v-if="imageStyle === '本地圖片' && imgUrl"
               :src="imgUrl"
@@ -372,6 +372,16 @@ export default {
         return
       }
       // 基本驗證
+      if (new Date(this.editorData.start).getTime() < Date.now()) {
+        this.$swal.fire({
+          icon: 'error',
+          title: '開課時段錯誤',
+          text: '不可小於今日',
+          showConfirmButton: false,
+          timer: 1500
+        })
+        return
+      }
       if (title === '') {
         this.$swal.fire({
           icon: 'error',
@@ -399,6 +409,7 @@ export default {
         })
         return
       }
+
       if (this.isNew) {
         // 新增
         const coursesData = {

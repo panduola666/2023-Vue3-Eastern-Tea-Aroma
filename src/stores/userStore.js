@@ -202,7 +202,8 @@ export default defineStore('userDataStore', {
         icon: 'success',
         title: '登出成功',
         ...swalColor
-      }).then(() => {
+      }).then((res) => {
+        console.log(res)
         sessionStorage.clear()
         this.isLogin = false
       })

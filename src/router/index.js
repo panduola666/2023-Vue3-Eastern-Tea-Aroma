@@ -73,6 +73,11 @@ const router = createRouter({
               path: 'info',
               name: 'buyerInfo',
               component: () => import('../views/BuyerInfoView.vue')
+            },
+            {
+              path: 'finish',
+              name: 'shoppingFinish',
+              component: () => import('../views/ShoppingFinish.vue')
             }
           ]
         },
@@ -88,7 +93,7 @@ const router = createRouter({
       children: [
         {
           path: '',
-          name: 'admin-courses',
+          name: 'adminCourses',
           component: () => import('../views/admin/Admin-CoursesView.vue')
         },
         {
@@ -97,7 +102,7 @@ const router = createRouter({
         },
         {
           path: 'discount',
-          name: 'admin-discounts',
+          name: 'adminDiscounts',
           component: () => import('../views/admin/Admin-DiscountsView.vue')
         },
         {
@@ -123,7 +128,7 @@ const router = createRouter({
         },
         {
           path: 'analyze',
-          name: 'admin-analyze',
+          name: 'adminAnalyze',
           component: () => import('../views/admin/Admin-AnalyzeView.vue')
         }
       ]

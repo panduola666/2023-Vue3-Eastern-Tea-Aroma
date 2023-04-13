@@ -61,7 +61,7 @@
           <div class="flex items-center h-10 lg:h-8">
             <button
               type="button"
-              class="btn-outline p-2 md:px-4 focus:outline-0 flex-shrink-0"
+              class="btn-outline p-2 md:px-4 focus:outline-0 flex-shrink-0 disabled:border-brand-01 disabled:bg-inherit disabled:grayscale"
               :disabled="shoppingNumber <= 1"
               @click="
                 () => (shoppingNumber > 1 ? shoppingNumber-- : shoppingNumber)
@@ -79,7 +79,10 @@
             </p>
             <button
               type="button"
-              class="btn-outline p-2 md:px-4 focus:outline-0 flex-shrink-0"
+              class="btn-outline p-2 md:px-4 focus:outline-0 flex-shrink-0 disabled:border-brand-01 disabled:bg-inherit disabled:grayscale"
+              :disabled="
+                shoppingNumber === currentProduct.totalNumber - soldNumber
+              "
               @click="
                 () =>
                   shoppingNumber < currentProduct.totalNumber - soldNumber

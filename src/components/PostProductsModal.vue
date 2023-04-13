@@ -122,7 +122,7 @@
                   -
                 </button>
               </p>
-              <p
+              <div
                 class="bg-brand-06 bg-opacity-40 my-2 p-3"
                 v-if="isNewTypeOpen"
               >
@@ -136,7 +136,7 @@
                     v-model="newTypeInput"
                   />
                 </label>
-                <span class="text-end block">
+                <div class="text-end block">
                   <button
                     type="button"
                     class="btn-outline py-1 mt-3 mr-3"
@@ -151,8 +151,8 @@
                   >
                     新增
                   </button>
-                </span>
-              </p>
+                </div>
+              </div>
               <select
                 name="type"
                 id="type"
@@ -189,7 +189,7 @@
                   -
                 </button>
               </p>
-              <p
+              <div
                 class="bg-brand-06 bg-opacity-40 my-2 p-3"
                 v-if="isNewGroupOpen"
               >
@@ -203,7 +203,7 @@
                     v-model="newGroupInput"
                   />
                 </label>
-                <span class="text-end block">
+                <div class="text-end block">
                   <button
                     type="button"
                     class="btn-outline py-1 mt-3 mr-3"
@@ -218,8 +218,8 @@
                   >
                     新增
                   </button>
-                </span>
-              </p>
+                </div>
+              </div>
               <select
                 name="group"
                 id="group"
@@ -394,7 +394,6 @@ export default {
         })
         return
       }
-
       if (price < 1 || totalNumber < 1) {
         this.$swal.fire({
           icon: 'error',

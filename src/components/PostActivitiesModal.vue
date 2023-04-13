@@ -20,9 +20,9 @@
           <div
             class="flex flex-col gap-3 lg:w-96 lg:h-full h-[75vh] overflow-x-hidden px-3 flex-shrink-0"
           >
-            <p class="font-semibold">
+            <div class="font-semibold">
               * 封面
-              <span class="float-right text-gray-02 font-normal">
+              <div class="float-right text-gray-02 font-normal">
                 <button
                   type="button"
                   class="mr-2 hover:underline hover:text-gray-01"
@@ -47,8 +47,8 @@
                 >
                   雲端圖片
                 </button>
-              </span>
-            </p>
+              </div>
+            </div>
             <img
               v-if="imageStyle === '本地圖片' && imgUrl"
               :src="imgUrl"

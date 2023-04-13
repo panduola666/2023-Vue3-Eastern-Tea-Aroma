@@ -1,6 +1,5 @@
 <template>
-  <section>
-    <h1></h1>
+  <div>
     <div
       class="flex lg:flex-row flex-col gap-5 justify-between lg:items-center"
     >
@@ -117,7 +116,7 @@
         </template>
       </li>
     </ul>
-  </section>
+  </div>
 </template>
 <script>
 import PostProductsModal from '@/components/PostProductsModal.vue'

@@ -12,7 +12,7 @@
         >
       </li>
       <li class="flex flex-col">
-        <p
+        <div
           class="p-4 flex justify-between text-brand-02 hover:bg-brand-03 hover:bg-opacity-20 cursor-pointer"
           :class="{ 'more-active': choose.includes('茶藝課堂') }"
           @click="
@@ -23,7 +23,7 @@
           "
         >
           茶藝課堂
-          <span class="relative">
+          <div class="relative">
             <img
               src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon+.png?raw=true"
               alt="展開"
@@ -42,8 +42,8 @@
                 'scale-0': !choose.includes('茶藝課堂')
               }"
             />
-          </span>
-        </p>
+          </div>
+        </div>
         <ul
           v-if="choose.includes('茶藝課堂')"
           @click="() => $emit('update:open', false)"
@@ -60,7 +60,7 @@
         </ul>
       </li>
       <li class="flex flex-col">
-        <p
+        <div
           class="p-4 flex justify-between text-brand-02 hover:bg-brand-03 hover:bg-opacity-20 cursor-pointer"
           :class="{ 'more-active': choose.includes('茶藝用品') }"
           @click="
@@ -71,7 +71,7 @@
           "
         >
           茶藝用品
-          <span class="relative">
+          <div class="relative">
             <img
               src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon+.png?raw=true"
               alt="展開"
@@ -90,8 +90,8 @@
                 'scale-0': !choose.includes('茶藝用品')
               }"
             />
-          </span>
-        </p>
+          </div>
+        </div>
         <ul
           v-if="choose.includes('茶藝用品')"
           @click="() => $emit('update:open', false)"
@@ -106,13 +106,13 @@
         </ul>
       </li>
       <li class="flex flex-col" v-if="isLogin">
-        <p
+        <div
           class="p-4 flex justify-between text-brand-02 hover:bg-brand-03 hover:bg-opacity-20 cursor-pointer"
           :class="{ 'more-active': choose.includes('會員中心') }"
           @click="() => toggleSelected('會員中心')"
         >
           會員中心
-          <span class="relative">
+          <div class="relative">
             <img
               src="https://github.com/panduola666/2023-Vue3-Eastern-Tea-Aroma/blob/main/public/icon+.png?raw=true"
               alt="展開"
@@ -131,8 +131,8 @@
                 'scale-0': !choose.includes('會員中心')
               }"
             />
-          </span>
-        </p>
+          </div>
+        </div>
         <ul
           v-if="choose.includes('會員中心')"
           @click="() => $emit('update:open', false)"

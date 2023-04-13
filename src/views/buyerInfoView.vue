@@ -1,189 +1,184 @@
 <template>
-  <main>
+  <main class="wrap xl:px-24">
     <teleport to="title">確認購買</teleport>
-    <div class="wrap">
-      <h1 class="text-3xl font-black font-self text-brand-02">購買人資訊</h1>
-      <VForm
-        action=""
-        class="flex flex-col text-lg form"
-        v-slot="{ errors }"
-        @submit="checkout"
-        @invalid-submit="onInvalidSubmit"
+    <ShopStep />
+    <h1 class="text-3xl font-black font-self text-brand-02">購買人資訊</h1>
+    <VForm
+      action=""
+      class="flex flex-col text-lg form"
+      v-slot="{ errors }"
+      @submit="checkout"
+      @invalid-submit="onInvalidSubmit"
+    >
+      <label
+        for="name"
+        class="text-xl text-brand-02 font-self font-semibold mt-4"
+        >* 購買人</label
       >
-        <label
-          for="name"
-          class="text-xl text-brand-02 font-self font-semibold mt-4"
-          >* 購買人</label
-        >
-        <VField
-          type="text"
-          name="姓名"
-          id="name"
-          class="px-2 py-1"
-          placeholder="請輸入姓名..."
+      <VField
+        type="text"
+        name="姓名"
+        id="name"
+        class="px-2 py-1"
+        placeholder="請輸入姓名..."
+        rules="required"
+        v-model.trim="buyerInfo.name"
+      />
+      <VErrorMessage name="姓名" class="text-red-600"></VErrorMessage>
+      <label
+        for="tel"
+        class="text-xl text-brand-02 font-self font-semibold mt-4"
+        >* 手機號碼</label
+      >
+      <VField
+        type="tel"
+        name="手機號碼"
+        id="tel"
+        class="px-2 py-1"
+        placeholder="請輸入手機號碼..."
+        rules="required|numeric"
+        v-model.trim="buyerInfo.tel"
+      />
+      <VErrorMessage name="手機號碼" class="text-red-600"></VErrorMessage>
+      <p class="text-xl text-brand-02 font-self font-semibold mt-4">取貨方式</p>
+      <label
+        for="selfPickUp"
+        class="cursor-pointer hover:bg-brand-03 hover:bg-opacity-30"
+        ><VField
+          type="radio"
+          name="取貨方式"
+          id="selfPickUp"
+          value="自取"
+          v-model.trim="buyerInfo.method"
           rules="required"
-          v-model.trim="buyerInfo.name"
+        />自取</label
+      >
+      <label
+        for="storeShipping"
+        class="cursor-pointer hover:bg-brand-03 hover:bg-opacity-30"
+        ><VField
+          type="radio"
+          name="取貨方式"
+          id="storeShipping"
+          value="店家寄件"
         />
-        <VErrorMessage name="姓名" class="text-red-600"></VErrorMessage>
-        <label
-          for="tel"
-          class="text-xl text-brand-02 font-self font-semibold mt-4"
-          >* 手機號碼</label
-        >
+        店家寄件
+      </label>
+      <VErrorMessage name="取貨方式" class="text-red-600"></VErrorMessage>
+      <form-box v-if="buyerInfo.method === '店家寄件'">
+        <label for="address">* 地址</label>
         <VField
-          type="tel"
-          name="手機號碼"
-          id="tel"
+          name="地址"
+          id="address"
+          type="text"
           class="px-2 py-1"
-          placeholder="請輸入手機號碼..."
-          rules="required|numeric"
-          v-model.trim="buyerInfo.tel"
+          placeholder="請輸入寄件地址..."
+          rules="required"
+          v-model.trim="buyerInfo.address"
         />
-        <VErrorMessage name="手機號碼" class="text-red-600"></VErrorMessage>
-        <p class="text-xl text-brand-02 font-self font-semibold mt-4">
-          取貨方式
-        </p>
-        <label
-          for="selfPickUp"
-          class="cursor-pointer hover:bg-brand-03 hover:bg-opacity-30"
-          ><VField
-            type="radio"
-            name="取貨方式"
-            id="selfPickUp"
-            value="自取"
-            v-model.trim="buyerInfo.method"
-            rules="required"
-          />自取</label
-        >
-        <label
-          for="storeShipping"
-          class="cursor-pointer hover:bg-brand-03 hover:bg-opacity-30"
-          ><VField
-            type="radio"
-            name="取貨方式"
-            id="storeShipping"
-            value="店家寄件"
-          />
-          店家寄件
-          <span class="text-gray-02">(運費 100 元，滿 999 即享免運優惠)</span>
-        </label>
-        <VErrorMessage name="取貨方式" class="text-red-600"></VErrorMessage>
-        <form-box v-if="buyerInfo.method === '店家寄件'">
-          <label for="address">* 地址</label>
-          <VField
-            name="地址"
-            id="address"
-            type="text"
-            class="px-2 py-1"
-            placeholder="請輸入寄件地址..."
-            rules="required"
-            v-model.trim="buyerInfo.address"
-          />
-          <VErrorMessage name="地址" class="text-red-600"></VErrorMessage>
-        </form-box>
-        <p class="text-xl text-brand-02 font-self font-semibold mt-4">
-          付款方式
-        </p>
-        <label
-          for="cashOnDelivery"
-          class="cursor-pointer hover:bg-brand-03 hover:bg-opacity-30"
-          ><VField
-            type="radio"
-            name="付款方式"
-            id="cashOnDelivery"
-            v-model.trim="buyerInfo.payMethods.choose"
-            value="貨到付款"
-            rules="required"
-          />貨到付款</label
-        >
-        <label
-          for="creditCard"
-          class="cursor-pointer hover:bg-brand-03 hover:bg-opacity-30"
-          ><VField
-            type="radio"
-            name="付款方式"
-            id="creditCard"
-            value="信用卡"
-          />信用卡</label
-        >
-        <VErrorMessage name="付款方式" class="text-red-600"></VErrorMessage>
-        <form-box v-if="buyerInfo.payMethods.choose === '信用卡'">
-          <label for="cardNumber">* 卡號</label>
-          <VField
-            type="number"
-            name="卡號"
-            id="cardNumber"
-            class="px-2 py-1"
-            placeholder="請輸入卡號..."
-            rules="required|numeric"
-            v-model.trim="buyerInfo.payMethods.cardNumber"
-            onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"
-          />
-          <VErrorMessage name="卡號" class="text-red-600"></VErrorMessage>
-          <div class="flex flex-col md:flex-row">
-            <div class="flex flex-col md:block">
-              <p class="mt-3 md:mt-0">* 效期</p>
-              <label for="day"
-                >日期<VField
-                  type="number"
-                  name="日期"
-                  id="day"
-                  class="md:w-1/3 w-full px-2 py-1 ml-1"
-                  placeholder="DD"
-                  rules="required|numeric|length:2"
-                  v-model.trim="buyerInfo.payMethods.cardTime[0]"
-                  onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"
-              /></label>
-              <span class="mx-2 hidden md:inline-block">/</span>
-              <label for="month"
-                >月份<VField
-                  type="number"
-                  name="月份"
-                  id="month"
-                  class="md:w-1/3 w-full px-2 py-1 ml-1"
-                  placeholder="MM"
-                  rules="required|numeric|length:2"
-                  v-model.trim="buyerInfo.payMethods.cardTime[1]"
-                  onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"
-              /></label>
-              <p>
-                <VErrorMessage name="日期" class="text-red-600"></VErrorMessage>
-                <VErrorMessage
-                  name="月份"
-                  class="text-red-600"
-                  v-if="!errors['日期']"
-                ></VErrorMessage>
-              </p>
-            </div>
-            <div class="mt-3 md:mt-0">
-              <label for="cardCode">* 安全碼</label>
-              <VField
-                name="安全碼"
-                id="cardCode"
+        <VErrorMessage name="地址" class="text-red-600"></VErrorMessage>
+      </form-box>
+      <p class="text-xl text-brand-02 font-self font-semibold mt-4">付款方式</p>
+      <label
+        for="cashOnDelivery"
+        class="cursor-pointer hover:bg-brand-03 hover:bg-opacity-30"
+        ><VField
+          type="radio"
+          name="付款方式"
+          id="cashOnDelivery"
+          v-model.trim="buyerInfo.payMethods.choose"
+          value="貨到付款"
+          rules="required"
+        />貨到付款</label
+      >
+      <label
+        for="creditCard"
+        class="cursor-pointer hover:bg-brand-03 hover:bg-opacity-30"
+        ><VField
+          type="radio"
+          name="付款方式"
+          id="creditCard"
+          value="信用卡"
+        />信用卡</label
+      >
+      <VErrorMessage name="付款方式" class="text-red-600"></VErrorMessage>
+      <form-box v-if="buyerInfo.payMethods.choose === '信用卡'">
+        <label for="cardNumber">* 卡號</label>
+        <VField
+          type="number"
+          name="卡號"
+          id="cardNumber"
+          class="px-2 py-1"
+          placeholder="請輸入卡號..."
+          rules="required|numeric"
+          v-model.trim="buyerInfo.payMethods.cardNumber"
+          onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"
+        />
+        <VErrorMessage name="卡號" class="text-red-600"></VErrorMessage>
+        <div class="flex flex-col md:flex-row">
+          <div class="flex flex-col md:block">
+            <p class="mt-3 md:mt-0">* 效期</p>
+            <label for="day"
+              >日期<VField
                 type="number"
-                class="w-full px-2 py-1"
-                placeholder="請輸入安全碼..."
-                v-model.trim="buyerInfo.payMethods.cardCode"
+                name="日期"
+                id="day"
+                class="md:w-1/3 w-full px-2 py-1 ml-1"
+                placeholder="DD"
+                rules="required|numeric|length:2"
+                v-model.trim="buyerInfo.payMethods.cardTime[0]"
                 onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"
-                rules="required|numeric|length:3"
-              />
-              <VErrorMessage name="安全碼" class="text-red-600"></VErrorMessage>
-            </div>
+            /></label>
+            <span class="mx-2 hidden md:inline-block">/</span>
+            <label for="month"
+              >月份<VField
+                type="number"
+                name="月份"
+                id="month"
+                class="md:w-1/3 w-full px-2 py-1 ml-1"
+                placeholder="MM"
+                rules="required|numeric|length:2"
+                v-model.trim="buyerInfo.payMethods.cardTime[1]"
+                onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"
+            /></label>
+            <p>
+              <VErrorMessage name="日期" class="text-red-600"></VErrorMessage>
+              <VErrorMessage
+                name="月份"
+                class="text-red-600"
+                v-if="!errors['日期']"
+              ></VErrorMessage>
+            </p>
           </div>
-        </form-box>
-        <total-price class="mt-10">
-          <template #default>
-            <button type="submit" class="btn-primary w-full">結帳</button>
-          </template>
-        </total-price>
-      </VForm>
-    </div>
+          <div class="mt-3 md:mt-0">
+            <label for="cardCode">* 安全碼</label>
+            <VField
+              name="安全碼"
+              id="cardCode"
+              type="number"
+              class="w-full px-2 py-1"
+              placeholder="請輸入安全碼..."
+              v-model.trim="buyerInfo.payMethods.cardCode"
+              onkeypress="return (/[\d]/.test(String.fromCharCode(event.keyCode)))"
+              rules="required|numeric|length:3"
+            />
+            <VErrorMessage name="安全碼" class="text-red-600"></VErrorMessage>
+          </div>
+        </div>
+      </form-box>
+      <total-price class="mt-10">
+        <template #default>
+          <button type="submit" class="btn-primary w-full">結帳</button>
+        </template>
+      </total-price>
+    </VForm>
   </main>
 </template>
 <script>
 import { mapActions, mapState } from 'pinia'
 import TotalPrice from '../components/TotalPrice.vue'
 import FormBox from '../components/FormBox.vue'
+import ShopStep from '../components/ShopStep.vue'
 import {
   userStore,
   discountStore,
@@ -317,7 +312,7 @@ export default {
           })
         })
         .then((res) => {
-          if (res.isDismissed) this.$router.push('/')
+          if (res.isDismissed) this.$router.push('/shopCart/finish')
         })
     },
     onInvalidSubmit({ errors }) {
@@ -327,7 +322,8 @@ export default {
   },
   components: {
     TotalPrice,
-    FormBox
+    FormBox,
+    ShopStep
   },
   mounted() {
     this.getCoursesData()
