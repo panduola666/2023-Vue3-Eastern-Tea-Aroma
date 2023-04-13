@@ -18,7 +18,7 @@
     git init
     git checkout -B main
     git add -A
-    git commit -m '修改助教批改 bug'
+    git commit -m '修改註冊完時,登入資訊自動代入 bug'
 
     # if you are deploying to https://panduola666.github.io
     # git push -f git@github.com:panduola666/panduola666.github.io.git main

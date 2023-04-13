@@ -8,17 +8,9 @@
       "tel": "",
       "isAdmin": true,
       "shoppingCart": {
-        "discount": "accac",
+        "discount": "",
         "cart": {
-          "products": [
-            {
-              "productId": 2,
-              "price": 200,
-              "number": 1,
-              "totalPrice": 200,
-              "isDiscount": true
-            }
-          ],
+          "products": [],
           "courses": []
         }
       },
@@ -94,7 +86,12 @@
       "coverUrl": "https://images.unsplash.com/photo-1631682477691-9021a9218860?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTY2fHx0ZWF8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
       "price": 2000,
       "title": "茶席基礎入門",
-      "scores": [],
+      "scores": [
+        {
+          "score": 5,
+          "userId": 1
+        }
+      ],
       "userId": 1,
       "id": 3
     },
@@ -108,7 +105,16 @@
       "coverUrl": "https://images.unsplash.com/photo-1551540827-6c8ae1aaedbb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
       "price": 2000,
       "title": "鍋煮香料奶茶學",
-      "scores": [],
+      "scores": [
+        {
+          "score": 2,
+          "userId": 1
+        },
+        {
+          "score": 3,
+          "userId": 2
+        }
+      ],
       "userId": 1,
       "id": 4
     },
@@ -730,6 +736,45 @@
       "finish": false,
       "isCancel": false,
       "id": 8
+    },
+    {
+      "userId": 1,
+      "buyerInfo": {
+        "name": "E12",
+        "tel": "1",
+        "method": "自取",
+        "address": "",
+        "payMethods": {
+          "choose": "貨到付款",
+          "cardNumber": "",
+          "cardTime": [
+            "",
+            ""
+          ],
+          "cardCode": ""
+        }
+      },
+      "discount": {
+        "code": "accac",
+        "type": "percentage",
+        "scale": "0.95"
+      },
+      "cart": [
+        {
+          "type": "紫砂壺",
+          "name": "紫泥西施壺",
+          "price": 300,
+          "number": 1,
+          "totalPrice": 300,
+          "isDiscount": false,
+          "productId": 5
+        }
+      ],
+      "trackingNumber": "",
+      "created": 1681380728417,
+      "finish": false,
+      "isCancel": false,
+      "id": 9
     }
   ],
   "avatars": [

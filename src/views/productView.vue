@@ -50,7 +50,7 @@
         <p
           class="flex flex-wrap gap-2 justify-between text-gray-02 items-center text-lg"
         >
-          剩餘: {{ currentProduct.totalNumber - soldNumber }}
+          剩餘: {{ currentProduct.totalNumber - soldNumber($route.params.id) }}
           <span class="text-2xl text-gray-01"
             >$ {{ toThousand(currentProduct.price) * shoppingNumber }}</span
           >
@@ -81,11 +81,13 @@
               type="button"
               class="btn-outline p-2 md:px-4 focus:outline-0 flex-shrink-0 disabled:border-brand-01 disabled:bg-inherit disabled:grayscale"
               :disabled="
-                shoppingNumber === currentProduct.totalNumber - soldNumber
+                shoppingNumber ===
+                currentProduct.totalNumber - soldNumber($route.params.id)
               "
               @click="
                 () =>
-                  shoppingNumber < currentProduct.totalNumber - soldNumber
+                  shoppingNumber <
+                  currentProduct.totalNumber - soldNumber($route.params.id)
                     ? shoppingNumber++
                     : ''
               "
@@ -99,11 +101,15 @@
           <button
             type="button"
             class="btn-primary py-2 px-4 text-xl"
-            :disabled="!(currentProduct.totalNumber - soldNumber)"
+            :disabled="
+              !(currentProduct.totalNumber - soldNumber($route.params.id))
+            "
             @click="() => addToCart('products', currentProduct, shoppingNumber)"
           >
             {{
-              currentProduct.totalNumber - soldNumber ? '加入購物車' : '已售完'
+              currentProduct.totalNumber - soldNumber($route.params.id)
+                ? '加入購物車'
+                : '已售完'
             }}
           </button>
         </div>
@@ -114,6 +120,35 @@
       <p class="text-2xl font-black font-self">介紹</p>
       <p v-html="currentProduct.content"></p>
     </article>
+    <p class="text-brand-05 text-xl font-black font-self mt-10">同類商品比較</p>
+    <table
+      class="w-full divide-y divide-gray-01 border border-gray-01 table-fixed"
+    >
+      <thead>
+        <tr class="bg-brand-01 bg-opacity-50">
+          <th class="py-2">名稱</th>
+          <th>系列</th>
+          <th>價格</th>
+          <th>銷量</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white bg-opacity-30 text-center divide-y divide-gray-01">
+        <template v-for="(item, index) in allProducts" :key="index">
+          <tr v-if="item.group === currentProduct.group">
+            <td class="py-2">
+              <router-link
+                :to="`/product/${item.id}`"
+                class="underline text-brand-02 hover:text-brand-01"
+                >{{ item.name }}</router-link
+              >
+            </td>
+            <td>{{ item.type }}</td>
+            <td>{{ item.price }}</td>
+            <td>{{ soldNumber(item.id) }}</td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
     <p class="text-xl text-gray-02 mt-10">瀏覽紀錄</p>
     <ul class="grid md:grid-cols-4 gap-3 mt-3">
       <template v-for="(id, index) in productsIdHistory" :key="id + index">
@@ -149,7 +184,8 @@ import {
 export default {
   data() {
     return {
-      shoppingNumber: 1
+      shoppingNumber: 1,
+      productsIdHistory: []
     }
   },
   computed: {
@@ -164,8 +200,10 @@ export default {
         this.notFound()
       }
       return this.allProducts[index]
-    },
-    soldNumber() {
+    }
+  },
+  methods: {
+    soldNumber(id) {
       const totalProductsOrder = []
       this.orders.forEach((item) => {
         totalProductsOrder.push(item.cart)
@@ -173,19 +211,18 @@ export default {
       let soldNumber = 0
       totalProductsOrder.forEach((cart) => {
         cart.forEach((order) => {
-          if (order.productId && order.productId === +this.$route.params.id) {
+          if (order.productId && order.productId === id) {
             soldNumber += order.number
           }
         })
       })
       return soldNumber
     },
-    productsIdHistory() {
-      if (!localStorage.getItem('productsHistory')) return
-      return localStorage.getItem('productsHistory').split(',')
-    }
-  },
-  methods: {
+    // productsIdHistory() {
+    //   if (!localStorage.getItem('productsHistory')) return
+    //   console.log(localStorage.getItem('productsHistory'))
+    //   return localStorage.getItem('productsHistory').split(',')
+    // },
     ...mapActions(productsStore, ['getAllProducts']),
     ...mapActions(ordersStore, ['getOrdersData']),
     ...mapActions(userStore, ['addToCart']),
@@ -218,25 +255,30 @@ export default {
       } else {
         localStorage.setItem('productsHistory', id)
       }
-    },
-    historyData() {
-      const ids = localStorage.getItem('productsHistory').split(',')
-      const filterProducts = []
-      this.allProducts.forEach((product) => {
-        ids.forEach((id) => {
-          if (product.id === +id) filterProducts.push(product)
-        })
-      })
-      this.history = filterProducts
+      this.productsIdHistory = localStorage.getItem('productsHistory')
     }
+    // historyData() {
+    //   const ids = localStorage.getItem('productsHistory').split(',')
+    //   const filterProducts = []
+    //   this.allProducts.forEach((product) => {
+    //     ids.forEach((id) => {
+    //       if (product.id === +id) filterProducts.push(product)
+    //     })
+    //   })
+    //   this.history = filterProducts
+    // }
   },
   watch: {
     '$route.params.id'(id) {
+      console.log(id)
       const index = this.allProducts.findIndex((product) => product.id === +id)
       if (index !== -1) {
         this.setProductsHistory(id)
       }
     }
+  },
+  mounted() {
+    this.setProductsHistory(this.$route.params.id)
   },
   components: {
     DiscountInfo
