@@ -1,5 +1,5 @@
 <template>
-  <div class="text-end">
+  <div class="flex justify-end">
     <PostActivitiesModal :is-new="true" @click="() => (currentId = 0)">
       <template #btn-content>
         <button type="button" class="btn-primary lg:px-10 py-2 text-lg">

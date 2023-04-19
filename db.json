@@ -105,16 +105,7 @@
       "coverUrl": "https://images.unsplash.com/photo-1551540827-6c8ae1aaedbb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fHRlYXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60",
       "price": 2000,
       "title": "鍋煮香料奶茶學",
-      "scores": [
-        {
-          "score": 2,
-          "userId": 1
-        },
-        {
-          "score": 3,
-          "userId": 2
-        }
-      ],
+      "scores": [],
       "userId": 1,
       "id": 4
     },
@@ -267,6 +258,17 @@
       "created": 1681369051925,
       "courseId": 1,
       "id": 13
+    },
+    {
+      "end": 1682661600000,
+      "start": 1682658000000,
+      "total": 10,
+      "userId": 1,
+      "savedUsersId": [],
+      "isDiscount": false,
+      "created": 1681931056760,
+      "courseId": 4,
+      "id": 14
     }
   ],
   "products": [
